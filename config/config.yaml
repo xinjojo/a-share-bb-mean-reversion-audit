@@ -1,0 +1,418 @@
+# =============================================================================
+# A股单股布林带均值回归策略 — 全局配置
+# 策略名称：A股单股 BB Lower Mean Reversion
+# 所有参数集中在此文件，代码中不应硬编码任何魔法数字
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 1. 项目路径
+# -----------------------------------------------------------------------------
+project:
+  root_dir: "."
+  data_dir: "./data"
+  raw_dir: "./data/raw"
+  processed_dir: "./data/processed"
+  validation_dir: "./data/validation"
+  results_dir: "./results"
+  trades_dir: "./results/trades"
+  reports_dir: "./results/reports"
+  figures_dir: "./results/figures"
+
+# -----------------------------------------------------------------------------
+# 2. 数据源配置
+# -----------------------------------------------------------------------------
+data_source:
+  # 主数据源：tushare / akshare / baostock
+  primary: "tushare"
+  # 备用数据源（主数据源失败时使用）
+  backup: "akshare"
+
+  tushare:
+    # Tushare Pro token
+    # 注意：不要将含 token 的 config.yaml 提交到公开仓库
+    token: "YOUR_TUSHARE_TOKEN"
+    # 基础积分即可获取：daily, adj_factor, stock_basic, trade_cal
+    # 2000积分以上可获取：pro_bar(复权行情), daily_basic, suspend, 财务数据
+    # 本策略核心需求：daily(含amount) + adj_factor + stock_basic + trade_cal
+    # 基础积分即可满足
+
+  akshare:
+    # 完全免费，无token
+    # 注意：爬虫源，上游网站改版可能导致接口break
+    timeout: 30
+    retry: 3
+
+# -----------------------------------------------------------------------------
+# 3. 回测区间
+# -----------------------------------------------------------------------------
+backtest:
+  # 第一阶段：小范围验证（2020-2024）
+  start_date: "2020-01-01"
+  end_date: "2024-12-31"
+
+  # 第二阶段：完整历史（验证通过后使用）
+  # start_date: "2015-01-01"
+  # end_date: "2024-12-31"
+
+  # 初始资金（元）
+  initial_cash: 1000000.0
+
+  # 执行模式：
+  #   "close"     — 当天收盘价作为理论成交价（第一版）
+  #   "next_open" — 收盘产生信号，下一交易日开盘买入（严格版）
+  execution_mode: "close"
+
+  # 基准指数
+  benchmark:
+    - "000300.SH"  # 沪深300
+    - "000905.SH"  # 中证500
+
+# -----------------------------------------------------------------------------
+# 4. 策略核心参数
+# -----------------------------------------------------------------------------
+strategy:
+  # 策略名称
+  name: "BB_Lower_Mean_Reversion_Top1"
+
+  # 成交额排名：选择 Top N
+  # 第一版严格使用 Top 1，不要自行修改
+  top_n: 1
+
+  # 布林带参数
+  bollinger:
+    period: 20           # 移动平均周期
+    std_multiplier: 2.0  # 标准差倍数
+    # Lower = MA(Close, 20) - 2.0 * Std(Close, 20)
+    # 买入信号：Close < Lower
+
+  # 仓位设计
+  position:
+    # 最多分几层（包含第一次建仓）
+    max_levels: 5
+    # 每层资金比例
+    level_ratio: 0.20    # 20%
+    # 第1次买入：20%，第2次：40%，...，第5次：100%
+    # 注意：不是"初始20% + 5次加仓"，而是总共最多5次，每次20%
+
+  # 止盈
+  take_profit:
+    enabled: true
+    # 止盈比例（基于加权平均成本）
+    ratio: 0.015         # 1.5%
+    # 止盈目标价 = average_cost * (1 + ratio)
+    # 触发条件：当日 High >= target_price（盘中触发）
+    # 成交假设：sell_price = target_price
+    # 注意：日线数据无法知道盘中实际触发时间，这是日线级近似
+    # 精度等级：APPROXIMATION
+
+  # 止损（参数化模块）
+  stop_loss:
+    # 止损模式：
+    #   "disabled"        — 不启用止损
+    #   "fixed_percent"   — 固定百分比止损（基于加权平均成本）
+    #   "ATR"             — ATR止损（需额外计算ATR）
+    #   "close_below_MA"  — 收盘价跌破均线止损
+    #   "fixed_price"     — 固定价格止损
+    mode: "fixed_percent"
+
+    # fixed_percent 模式参数
+    fixed_percent:
+      ratio: 0.10        # -10%（基于加权平均成本，后续做参数敏感性分析）
+      # 止损价 = average_cost * (1 - ratio)
+      # 触发条件：当日 Low <= stop_price
+
+    # ATR 模式参数
+    atr:
+      period: 14
+      multiplier: 2.0
+      # 止损价 = average_cost - ATR * multiplier
+
+    # close_below_MA 模式参数
+    close_below_ma:
+      period: 20
+      # 触发条件：Close < MA(Close, period)
+
+    # 精度等级：APPROXIMATION（日线无法知道盘中触发顺序）
+
+  # 同日止盈与止损冲突处理
+  same_bar_conflict:
+    # 当同一交易日 High >= take_profit 且 Low <= stop_loss 时：
+    # 仅凭日线OHLC无法知道盘中哪个先发生
+    # 策略：
+    #   "conservative"      — 假设止损先触发（更悲观，卖出全部可卖持仓）
+    #   "optimistic"        — 假设止盈先触发（更乐观）
+    #   "ignore"            — 不处理，按固定顺序（先止盈后止损）
+    #   "intraday_required" — 标记为需要分钟数据，日线跳过该笔交易
+    policy: "conservative"
+
+  # 止盈后当天重新买入
+  reentry_after_take_profit:
+    enabled: false
+    # 同一天：盘中止盈卖出 → 收盘后若 Close < BB Lower → 重新买入第1层20%
+    # 重新买入后层数从第1层重新计算
+    # 注意：必须遵守T+1，当天重新买入的股票当天不能再卖
+    # 当前设置为false：止盈后当天不再操作，下一交易日重新扫描
+
+  # 止损后重新买入
+  reentry_after_stop_loss:
+    enabled: false
+    # 止损后是否允许当天/后续重新买入
+    # 默认关闭，止损后需等待新的交易日重新扫描
+
+# -----------------------------------------------------------------------------
+# 5. 股票池过滤
+# -----------------------------------------------------------------------------
+stock_universe:
+  # 排除 ST / *ST
+  exclude_st: true
+  exclude_star_st: true
+
+  # 新股过滤：上市满多少个交易日后才允许进入股票池
+  # 全面注册制后，新股前5个交易日无涨跌幅限制，价格波动极大
+  # 前1-2个月通常处于价值回归期，成交额异常放大
+  # 默认60个交易日（约3个月），代码中必须参数化
+  min_listing_days: 60
+
+  # 排除停牌股
+  exclude_suspended: true
+
+  # 排除北交所（可选，北交所涨跌幅30%，流动性差异大）
+  exclude_bse: true
+
+  # 股票池范围：
+  #   "all"          — 全部A股（沪深主板+创业板+科创板）
+  #   "main_board"   — 仅沪深主板（60/00开头）
+  #   "exclude_star" — 排除科创板（688开头）
+  scope: "all"
+
+# -----------------------------------------------------------------------------
+# 6. A股交易规则
+# -----------------------------------------------------------------------------
+trading_rules:
+  # T+1：当天买入当天不可卖
+  t_plus_one: true
+
+  # 最小买入单位：100股
+  min_lot_size: 100
+  # 买入数量必须是100的整数倍
+  # 如果20%目标仓位不足以买100股：不执行该笔交易
+
+  # 涨跌停
+  price_limit:
+    enabled: true
+    # 各板块涨跌幅限制（2023全面注册制后）
+    # 注意：2026年7月新规调整了主板ST涨跌幅，代码中需根据日期动态判断
+    main_board: 0.10        # 沪深主板 ±10%
+    gem: 0.20                # 创业板 ±20%
+    star: 0.20               # 科创板 ±20%
+    bse: 0.30                # 北交所 ±30%
+    # ST/*ST 涨跌幅（2026年7月前主板ST为±5%，之后为±10%）
+    st_main_board_before_202607: 0.05
+    st_main_board_after_202607: 0.10
+    st_gem: 0.20
+    st_star: 0.20
+
+    # 新股上市前5个交易日：无涨跌幅限制
+    new_stock_no_limit_days: 5
+
+    # 涨跌停成交假设（保守）：
+    #   买入时：若当日涨停（High == limit_up），假设买不进，跳过该笔买入
+    #   卖出时：若当日跌停（Low == limit_down），假设卖不出，持有到下一交易日
+    # 精度等级：APPROXIMATION（涨停不代表一定买不进，跌停不代表一定卖不出）
+    conservative_fill: true
+
+  # 停牌
+  suspension:
+    enabled: true
+    # 停牌日不允许交易
+    # 停牌判断：当日无行情数据（OHLCV为空）
+
+# -----------------------------------------------------------------------------
+# 7. 交易费用模型（2025-2026最新标准）
+# -----------------------------------------------------------------------------
+fees:
+  # 佣金：买卖双向
+  commission:
+    rate: 0.00025          # 万2.5（可与券商协商，常见万1-万3）
+    min: 5.0                # 单笔最低5元（主板/创业板，北交所无此限制）
+    # 佣金 = max(成交金额 × rate, min)
+    # 注意：全佣 vs 净佣——全佣包含经手费+证管费，净佣不含
+    # 此处rate假设为全佣费率
+
+  # 印花税：仅卖出时收取（2023年8月28日减半征收）
+  stamp_tax:
+    rate: 0.0005            # 万5（卖出单边）
+    # 印花税 = 成交金额 × rate（仅卖出）
+
+  # 过户费：买卖双向（2024年起沪深统一）
+  transfer_fee:
+    rate: 0.00001           # 万0.1
+    # 过户费 = 成交金额 × rate（买卖双向）
+    # 注意：2024年前深市免过户费，回测历史数据时需根据日期动态调整
+
+  # 滑点
+  slippage:
+    enabled: true
+    mode: "percent"         # "percent" / "fixed"
+    rate: 0.0001            # 万1（百分比模式）
+    fixed: 0.01             # 0.01元（固定价差模式）
+    # 买入：成交价 = 信号价 × (1 + rate)  或  信号价 + fixed
+    # 卖出：成交价 = 信号价 × (1 - rate)  或  信号价 - fixed
+    # 精度等级：APPROXIMATION（无法模拟真实订单簿冲击）
+
+# -----------------------------------------------------------------------------
+# 8. 复权策略（关键设计决策，禁止混用）
+# -----------------------------------------------------------------------------
+adjustment:
+  # 策略指标计算（BB带）使用：后复权价格
+  # 实际交易价格使用：不复权价格
+  # 回测收益计算使用：不复权价格 + 分红再投资
+  # 涨跌停价格计算使用：不复权价格
+  #
+  # 原因：
+  #   前复权价格会随未来分红调整历史价格 → 引入未来函数
+  #   后复权价格 = 不复权价格 × adj_factor，历史价格固定 → 无未来函数
+  #   绝不使用接口内的前复权数据（如tushare pro_bar的qfq模式）
+  #
+  # 复权因子来源：tushare adj_factor 接口（独立下载）
+  # 后复权价格 = close_raw × adj_factor
+  indicator_price: "hfq"       # 后复权（用于BB指标计算）
+  trade_price: "raw"           # 不复权（用于实际交易）
+  return_calc: "raw"           # 不复权 + 分红再投资
+
+# -----------------------------------------------------------------------------
+# 9. 参数敏感性分析（第一版跑通后执行）
+# -----------------------------------------------------------------------------
+parameter_sweep:
+  # 布林带参数
+  bollinger_period: [10, 20, 30]
+  bollinger_std: [1.5, 2.0, 2.5, 3.0]
+
+  # 止盈
+  take_profit_ratio: [0.005, 0.010, 0.015, 0.020, 0.030, 0.050]
+
+  # 止损
+  stop_loss_mode: ["disabled", "fixed_percent"]
+  stop_loss_percent: [0.03, 0.05, 0.07, 0.10, 0.15]
+
+  # 仓位层数
+  max_levels: [1, 2, 3, 4, 5]
+
+  # 成交额排名
+  top_n: [1, 3, 5, 10]
+
+  # 注意：不允许把整个历史区间直接拿来寻找最佳参数
+  # 必须严格区分：
+  #   Training:   2020-01-01 ~ 2022-12-31
+  #   Validation: 2023-01-01 ~ 2023-12-31
+  #   Out-of-Sample: 2024-01-01 ~ 2024-12-31
+  # 最终再滚动 Walk-Forward
+
+# -----------------------------------------------------------------------------
+# 10. Walk-Forward 配置
+# -----------------------------------------------------------------------------
+walk_forward:
+  enabled: false  # 第一版关闭，参数敏感性分析通过后启用
+  train_window: 730    # 训练窗口（交易日，约3年）
+  val_window: 252      # 验证窗口（交易日，约1年）
+  test_window: 252     # 样本外测试窗口（交易日，约1年）
+  step_size: 252       # 滚动步长（交易日）
+
+# -----------------------------------------------------------------------------
+# 11. 输出配置
+# -----------------------------------------------------------------------------
+output:
+  # 交易日志格式
+  trade_log_format: "csv"   # "csv" / "json" / "both"
+
+  # 每笔交易保存的字段（详见策略文档第二十七节）
+  trade_log_fields:
+    - "date"
+    - "symbol"
+    - "action"           # BUY / SELL
+    - "price"
+    - "shares"
+    - "amount"
+    - "position_level"   # 当前第几层（1-5）
+    - "average_cost"
+    - "take_profit_price"
+    - "stop_loss_price"
+    - "cash_before"
+    - "cash_after"
+    - "position_before"
+    - "position_after"
+    - "commission"
+    - "stamp_tax"
+    - "transfer_fee"
+    - "slippage"
+    - "reason"
+    # reason 取值：
+    #   INITIAL_ENTRY
+    #   ADD_POSITION
+    #   TAKE_PROFIT
+    #   STOP_LOSS
+    #   REENTRY_AFTER_TAKE_PROFIT
+    #   REENTRY_AFTER_STOP_LOSS
+
+  # 核心绩效指标（详见策略文档第二十五节）
+  performance_metrics:
+    - "total_return"           # 累计收益率
+    - "annual_return"          # 年化收益率
+    - "max_drawdown"           # 最大回撤
+    - "annual_volatility"      # 年化波动率
+    - "sharpe_ratio"           # Sharpe
+    - "sortino_ratio"          # Sortino
+    - "calmar_ratio"           # Calmar
+    - "win_rate"               # 胜率
+    - "avg_profit"             # 平均盈利
+    - "avg_loss"               # 平均亏损
+    - "profit_loss_ratio"      # 盈亏比
+    - "profit_factor"          # Profit Factor
+    - "total_trades"           # 交易次数
+    - "avg_holding_days"       # 平均持仓天数
+    - "max_holding_days"       # 最大持仓天数
+    - "max_consecutive_losses" # 最大连续亏损
+    - "max_cash_usage"         # 最大资金占用
+    - "max_position"           # 最大仓位
+    - "total_commission"       # 手续费总额
+    - "total_stamp_tax"        # 印花税总额
+    - "total_transfer_fee"     # 过户费总额
+    - "total_slippage"         # 滑点损失
+
+# -----------------------------------------------------------------------------
+# 12. 基准策略（用于归因分析）
+# -----------------------------------------------------------------------------
+benchmarks:
+  - name: "沪深300买入持有"
+    type: "buy_and_hold"
+    symbol: "000300.SH"
+
+  - name: "中证500买入持有"
+    type: "buy_and_hold"
+    symbol: "000905.SH"
+
+  - name: "Top1_BB_仅首次建仓"
+    type: "strategy_variant"
+    # 只允许第一次20%建仓，不允许加仓
+    max_levels: 1
+
+  - name: "Top1_BB_完整5层"
+    type: "strategy_variant"
+    # 完整策略：5层 × 20%，无止损
+    max_levels: 5
+    stop_loss_mode: "disabled"
+
+  - name: "Top1_BB_完整5层_止损"
+    type: "strategy_variant"
+    # 完整策略 + 止损
+    max_levels: 5
+    stop_loss_mode: "fixed_percent"
+    stop_loss_percent: 0.05
+
+# =============================================================================
+# 配置结束
+# 注意：所有无法精确模拟的地方在代码中必须标注：
+#   EXACT         — 精确模拟
+#   APPROXIMATION — 近似模拟（需注明假设）
+#   UNSUPPORTED   — 不支持（需注明替代方案或风险）
+# =============================================================================

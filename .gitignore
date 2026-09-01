@@ -1,0 +1,16 @@
+# 数据文件（体积大，不入库）
+*.parquet
+*.pkl
+*.db
+*.sqlite
+data/
+raw/
+
+# 压缩包/缓存
+*.zip
+__pycache__/
+*.pyc
+.DS_Store
+
+# 敏感
+download.txt

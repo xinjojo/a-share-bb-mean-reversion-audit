@@ -1,0 +1,9 @@
+constraints,mode,etf,total_pct,trades,win_rate,max_dd,sharpe
+OFF,close,ON,226.5,39,82.1,-37.6,1.16
+OFF,close,OFF,114.8,39,82.1,-16.8,0.92
+OFF,next_open,ON,233.0,39,82.1,-37.2,1.18
+OFF,next_open,OFF,118.6,39,82.1,-16.4,0.96
+ON,close,ON,226.5,39,82.1,-37.6,1.16
+ON,close,OFF,114.8,39,82.1,-16.8,0.92
+ON,next_open,ON,233.0,39,82.1,-37.2,1.18
+ON,next_open,OFF,118.6,39,82.1,-16.4,0.96

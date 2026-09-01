@@ -50,7 +50,13 @@ def prepare_fast(limit_down_mode='old', bb_window=20, bb_std=2.0):
     days = all_days
     # 每日数据
     D = {}
+    # 涨停判定 (correct口径): 主板10%, ST5%, 创业板/科创板20%(创业板2020-08-24前10%)
     for d, g in df.groupby('date'):
+        is_chi = g['ts_code'].str.startswith(('688', '689'))
+        is_gem = g['ts_code'].str.startswith('30')
+        gem_pct = np.where(g['date'] >= '2020-08-24', 0.20, 0.10)
+        pct = np.where(is_chi, 0.20, np.where(is_gem, gem_pct, np.where(g['is_st'], 0.05, 0.10)))
+        limit_up_px = (g['pre_close'] * (1 + pct)).round(2)
         D[d] = dict(
             ts=g['ts_code'].to_numpy(),
             close=g['close'].to_numpy(), open_=g['open'].to_numpy(),
@@ -58,6 +64,9 @@ def prepare_fast(limit_down_mode='old', bb_window=20, bb_std=2.0):
             bb_lower=g['bb_lower'].to_numpy(), bb_upper=g['bb_upper'].to_numpy(),
             amount=g['amount'].to_numpy(), is_limit=g['is_limit_down'].to_numpy(),
             is_st=g['is_st'].to_numpy(), adj=g['adj_factor'].to_numpy(),
+            pre_close=g['pre_close'].to_numpy(),
+            is_limit_up=(g['close'] >= limit_up_px).to_numpy(),
+            one_word=((g['open'] == g['high']) & (g['high'] == g['low']) & (g['low'] == g['close'])).to_numpy(),
         )
         D[d]['pos'] = {tc: j for j, tc in enumerate(D[d]['ts'])}
     # ETF numpy 化
@@ -74,7 +83,7 @@ def prepare_fast(limit_down_mode='old', bb_window=20, bb_std=2.0):
 def run_fast(days, D, etf_idx, etf_px, etf_nav, listing=None, top_n=10, max_levels=5, level_cash=200_000,
              time_stop_days=None, etf_enabled=True, etf_min_cash=5_000, etf_ratio=1.0,
              min_listing_days=60, initial_cash=1_000_000, execution_mode='close',
-             slippage_bp=0, stamp_tax_mode='flat'):
+             slippage_bp=0, stamp_tax_mode='flat', execution_constraints=False):
     slip = slippage_bp / 10000.0
     n_days = len(days)
     if listing is None:
@@ -161,7 +170,8 @@ def run_fast(days, D, etf_idx, etf_px, etf_nav, listing=None, top_n=10, max_leve
                 last_close[pos['ts_code']] = close
                 hold_days = i - pos['entry_day_idx']
                 bb_up = dd['bb_upper'][j]
-                if not np.isnan(bb_up) and hold_days >= 1 and dd['high_adj'][j] >= bb_up:
+                sellable = not (execution_constraints and dd['is_limit'][j])
+                if not np.isnan(bb_up) and hold_days >= 1 and dd['high_adj'][j] >= bb_up and sellable:
                     sell_price = (bb_up / dd['adj'][j]) * (1 - slip)
                     amt = sell_price * pos['shares']
                     sr = stamp_rate(d)
@@ -178,7 +188,7 @@ def run_fast(days, D, etf_idx, etf_px, etf_nav, listing=None, top_n=10, max_leve
                     pos = None
                     round_no += 1
                     sold_today = True
-                elif time_stop_days is not None and hold_days >= time_stop_days:
+                elif time_stop_days is not None and hold_days >= time_stop_days and sellable:
                     sell_price = close * (1 - slip)
                     amt = sell_price * pos['shares']
                     sr = stamp_rate(d)
@@ -196,7 +206,8 @@ def run_fast(days, D, etf_idx, etf_px, etf_nav, listing=None, top_n=10, max_leve
                     round_no += 1
                     sold_today = True
                 elif (not np.isnan(dd['bb_lower'][j]) and dd['close_adj'][j] < dd['bb_lower'][j]
-                      and not dd['is_limit'][j] and pos['levels'] < max_levels):
+                      and not dd['is_limit'][j] and pos['levels'] < max_levels
+                      and not (execution_constraints and dd['is_limit_up'][j] and dd['one_word'][j])):
                     if execution_mode == 'next_open':
                         pending_add = pos['ts_code']
                     else:
@@ -232,7 +243,8 @@ def run_fast(days, D, etf_idx, etf_px, etf_nav, listing=None, top_n=10, max_leve
                 for k in order:
                     j = cand_idx[k]
                     if (not np.isnan(dd['bb_lower'][j]) and dd['close_adj'][j] < dd['bb_lower'][j]
-                            and not dd['is_limit'][j]):
+                            and not dd['is_limit'][j]
+                            and not (execution_constraints and dd['is_limit_up'][j] and dd['one_word'][j])):
                         chosen = j
                         break
                 if chosen is not None:

@@ -1,0 +1,12 @@
+version,execution,slippage_bp,stamp,limit,total_return,annual_return,max_dd,sharpe,trade_count,win_rate,profit_factor
+A_当前_close_0bp,close,0,flat,old,226.48,20.33,-36.73,1.16,39,82.1,5.98
+B_next_open_0bp,next_open,0,flat,old,233.03,20.71,-36.25,1.18,39,82.1,6.95
+C_close_1bp,close,1,flat,old,225.7,20.29,-36.73,1.16,39,79.5,5.93
+C_close_2bp,close,2,flat,old,225.02,20.25,-36.75,1.15,39,79.5,5.88
+C_close_3bp,close,3,flat,old,224.37,20.21,-36.76,1.15,39,79.5,5.84
+C_close_5bp,close,5,flat,old,223.02,20.13,-36.8,1.15,39,79.5,5.75
+C_close_10bp,close,10,flat,old,219.64,19.93,-36.87,1.14,39,79.5,5.53
+D_historical_stamp,close,0,historical,old,225.45,20.27,-36.77,1.16,39,82.1,5.91
+E_correct_limit_close,close,0,flat,correct,236.69,20.9,-37.56,1.19,39,82.1,6.3
+E_correct_limit_nextopen,next_open,0,flat,correct,244.5,21.39,-36.86,1.21,39,82.1,7.34
+E_correct_limit_slip10,close,10,flat,correct,229.64,20.52,-37.69,1.17,39,82.1,6.05

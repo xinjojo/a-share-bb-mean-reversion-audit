@@ -1,0 +1,2 @@
+label,n_event_days,mean_daily,median_daily,pos_day_rate,hac_t,hac_p,hac_ci_lo,hac_ci_hi
+SECONDARY_DYN,1496,3.887710693862466,4.082702326215788,81.35026737967914,14.10137709738109,0.0,3.3473441107019033,4.428077277023029

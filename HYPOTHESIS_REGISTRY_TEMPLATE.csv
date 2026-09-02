@@ -1,12 +1,12 @@
-# HYPOTHESIS_REGISTRY_TEMPLATE — 预注册模板（非结果）
+# HYPOTHESIS_REGISTRY_TEMPLATE — 预注册模板（v3，封板版）
 # 说明：
-#   - 本文件仅为格式模板。正式运行 Discovery 之前，按下方表头逐行预注册 hypothesis_id，保存为 HYPOTHESIS_REGISTRY.csv。
-#   - 字段定义见 REGIME_RESEARCH_PLAN.md §8。
-#   - PRIMARY FAMILY 共 104 个（趋势24 + 宽度24 + 波动32 + 流动性24，粒度=维度×维度档×超跌档×forward，单维度检验，不跨维度组合）。
-#   - family: PRIMARY / SECONDARY（两族分开注册、分开 FDR，禁止事后混用）。
-#   - outcome_type: otc(open[T+1]->close[T+N]) 为 PRIMARY OUTCOME；oto(open[T+1]->open[T+1+N]) 为 SECONDARY OUTCOME。
-#   - benchmark: 全样本同档位均值 / 同期指数 / 0。discovery_test: t_HAC / FDR / permutation 等检验方式（预注册时填写，运行后不得追加）。
-#   - 运行 Discovery 后禁止新增 hypothesis_id 再假装属于原 FDR family。
-# 以下为一行格式占位（PH 前缀，非研究结果），正式注册时逐行替换为真实预注册行。
-hypothesis_id,family,regime_dimension,regime_variable,regime_definition,threshold,oversold_feature,oversold_threshold,forward_horizon,outcome_type,benchmark,discovery_test
-PH-0001,PRIMARY,TREND,ALL_A_INDEX,20d_return_sign,UP,BB_zscore,-2.0,5D,otc,all_same_band_mean,t_HAC
+#   - 本文件为格式模板；正式文件 HYPOTHESIS_REGISTRY.csv 已生成 104 行 PRIMARY（见同目录），每行字段唯一确定。
+#   - PRIMARY benchmark 唯一冻结为 same_oversold_unconditional（同一 oversold bin、不区分 Regime 的 Discovery 区间日级截面平均 causal_otc[N]）。
+#   - oversold 为互斥 bins: B1=-2.0<z<=-1.5, B2=-2.5<z<=-2.0, B3=-3.0<z<=-2.5, B4=z<=-3.0（BB_zscore=(close_adj-MA20)/std20, ddof=1, min_periods=20, 右对齐）。
+#   - regime 公式/阈值/信息集已在 REGIME_RESEARCH_PLAN.md v3 §8 全部写死（TREND ±3% / BREADTH 30-70% / VOLATILITY trailing252,min100,WARMUP / LIQUIDITY 0.8-1.2）。
+#   - outcome_type: otc(open[T+1]->close[T+N]) 为 PRIMARY OUTCOME。family: PRIMARY/SECONDARY（SECONDARY 单独注册、单独 FDR）。
+#   - 禁止出现 "/"、"任选"、"候选"、"x待定"、"历史分位但无lookback" 等未冻结字段。
+#   - 运行 Discovery 后禁止新增 hypothesis 再假装属于原 FDR family。
+# 以下为一行格式占位（PH 前缀，非研究结果）。
+hypothesis_id,family,regime_dimension,regime_variable,regime_formula,regime_bin,oversold_feature,oversold_bin,oversold_range,forward_horizon,outcome_type,benchmark,test,fdr_family
+PH-0001,PRIMARY,TREND,ret20,ret20=idx[T]除以idx[T-20]后减1; idx=全A等权净值; UP=ret20>+0.03; SIDEWAYS=-0.03<=ret20<=+0.03; DOWN=ret20<-0.03; 信息集=T日收盘含T,UP,BB_zscore,B1,-2.0<z<=-1.5,5D,otc,same_oversold_unconditional,t_HAC+FDR(BH)_q005+block_bootstrap,PRIMARY

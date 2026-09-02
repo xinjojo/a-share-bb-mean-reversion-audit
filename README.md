@@ -1,114 +1,115 @@
 # A股 BB 均值回归策略 · 研究级回测与审计仓库
 
-> 成交额TopN + 布林带(20,2)下轨均值回归 + 5层分批建仓 + 布林上轨止盈 + 标普500ETF现金管理
-> 回测区间：2020-01-02 ~ 2026-08-25 · 全市场 5725 只 A 股 · 7,731,551 行日线
-> **⚠️ 重要更正（2026-09-02 第五轮红队审计）**：本仓库早期结果（含 K=3 +354.9%）基于「当日盘中用当日收盘才确定的上轨止盈」的同Bar未来信息，**已确认 INVALID**。严格可交易版本 STRICT_V1 见 [REDTEAM_ROUND5_STRICT.md](REDTEAM_ROUND5_STRICT.md)：累计 +52.3%~+84.1%，其中股票纯收益 close 口径为负、next_open 口径 +29.2%，收益主要来自 ETF 现金管理与 2025 单年；最终评级 C（Weak evidence）。
+> 成交额TopN + 布林带(20,2)下轨均值回归 + 5层分批建仓 + 布林上轨止盈 + 标普500ETF(513500)现金管理
+> 回测区间：2020-01-02 ~ 2026-08-25 · 全市场 5765 只 A 股 · 7,731,551 行日线
 > 本仓库用于外部审计（含 ChatGPT 红队审计），**不含任何真实 Token / 密钥 / 个人账号信息**。
 
 ---
 
-## 一、当前冻结策略（2026-08 版）
+## ⚠️ 最终结论（2026-09-02 · Round5.1 结案）
 
-**每日收盘后**（A股收盘集合竞价成交，`execution_mode=close`）：
+**原始 +354.9% 回测结果因发现同Bar未来信息、ETF执行时序错误以及PIT股票状态/上市时间问题而失效。**
 
-1. **股票池**：当日全 A 股中，剔除 ST/*ST、新股（上市<60个交易日）、跌停股（`close ≤ pre_close×0.905`）后，按**当日成交额 amount 从大到小**取前 `Top N`。
-2. **买入信号**：TopN 中收盘**后复权价** `close_adj < 布林下轨(20,2)` → 按收盘价买入第 1 层（每层固定 20 万，100 股整数倍；不足 100 股则不买）。
-3. **加仓**：持仓期间，后续交易日再次 `close_adj < bb_lower` 且非跌停 → 加一层（最多 `max_levels=5` 层，100% 仓位）。
-4. **止盈**：持仓 T+1 后，盘中**后复权最高价 `high_adj ≥ 布林上轨`** → 全部卖出（成交价=上轨，日线近似，标注 APPROXIMATION）。
-5. **多持仓（可选 K=1~8）**：同时最多持 K 只股票；任一持仓止盈当日不再新买任何股票；K 只共享 100 万资金池。
-6. **资金永远满仓**：股票+ETF 恒≈100%。空仓或持仓期剩余现金均买入**标普500ETF(513500)**；出现股票机会时**先卖ETF筹钱、再买股票**（`ensure_cash`）。
-7. **费用**：佣金 0.025%（最低5元）、印花税 0.05% 卖出（2023-08-28 前 0.1%）、过户费 0.001%、可配滑点。
+修复全部已知问题后的严格因果版本（STRICT_V2）**未发现稳定、可重复的股票Alpha** —— 评级 **D / No evidence**：
 
-**关键交易规则（全部严格模拟）**：T+1（买入当日不可卖）、100股最小单位、涨跌停过滤、停牌不交易、ST 排除（参数化）、上市满60日、后复权信号（分红送转连续）。
+- 股票策略自身（剥离 ETF 现金管理）：STRICT_V2_A（T-1上轨盘中退出）+5.2%、STRICT_V2_B（收盘确认T+1 open退出）+23.4%，**均低于同期直接满仓持有标普500ETF 的 +26.6%**；
+- OOS 不稳定：A 的股票腿 Test(2024-2026) = **-11.2%**，B 的股票腿 Train(2020-2023) = **-5.4%**；
+- 组合正收益（A +45%、B +74%）来自股票/ETF 动态配置 + 复利交互，而非股票 Alpha。
 
----
+详细过程见 [REDTEAM_ROUND5_STRICT.md](REDTEAM_ROUND5_STRICT.md) 与 [REDTEAM_ROUND51_STRICT.md](REDTEAM_ROUND51_STRICT.md)。
 
-## 二、最新核心结果（2026-09-02 更新）
-
-### 1. 多持仓并行（正式引擎 `run_fast_multi`，资金永远满仓版）
-
-| 同时持仓 K | 组合累计 | 年化 | 最大回撤 | Sharpe | 交易笔数 | 胜率 |
-|---|---|---|---|---|---|---|
-| K=1 现状 | 226.3% | 20.3% | -37.7% | 0.92 | 39 | 79.5% |
-| K=2 | 278.0% | 23.1% | -29.5% | 0.96 | 68 | 72.1% |
-| **K=3（最优）** | **354.9%** | **26.7%** | -29.5% | **1.07** | 103 | 73.8% |
-| K=4 | 259.5% | 22.2% | -29.5% | 0.90 | 120 | 67.5% |
-| K=5 | 247.1% | 21.5% | -32.8% | 0.87 | 129 | 68.2% |
-| K=8 | 238.6% | 21.0% | -33.4% | 0.86 | 132 | 67.4% |
-
-**K=3 分年（含未来信息口径，非严格可交易；严格口径见第五轮报告）**：2020 +41.2 / 2021 +24.2 / 2022 -2.8 / 2023 +49.8 / 2024 +38.4 / 2025 +19.8 / 2026 +7.4（%）。**注意：并非七年全正**——2022 为负；且修复未来函数后严格口径下 2022/2023/2024 连续三年为负、收益高度依赖 2025 单年（见 REDTEAM_ROUND5_STRICT.md）。
-
-> 验证：K=1 与单持仓正式引擎 `run_fast` **逐笔 0 差异**（39笔完全一致），证明多持仓引擎与正式引擎等价。
-
-### 2. 全市场单股回测：持仓期最大回撤 + 卖出后走势（95,615 笔）
-
-- **持仓期最大回撤**（每笔入场→平仓，最低价口径，影线计浮亏）：均值 **-9.70%**、中位数 **-6.55%**、p10=-22.85%、p5=-30.74%、最小-98.93%。
-- **按层数**：1层平均回撤-3.5%/收益+10.5%/胜率95%；5层回撤-18.7%/收益**-2.8%**/胜率45% —— **加仓越多回撤越深、5层平均亏损**。
-- **按持仓天数**：≤20天胜率99%+；21-50天收益+4.1%；**>50天平均-7.9%、胜率25.6%**（支持时间止损）。
-- **卖出后20日"卖飞"**：卖出后最高超过卖出价的比例 **91.2%**；卖出后20日内最高相对成本>10%占64.5%、>30%占20.3% —— **上轨止盈存在显著"卖飞"**（有提高收益空间）；但同时 58.4% 曾跌破成本（卖飞与回吐并存）。
-
-详见 `RESULTS_LATEST.md` 与 `results/drawdown_summary_export.csv`。
+> **这不等于"均值回归在A股不存在"，也不等于"所有BB类策略无效"**，仅表示当前这个具体策略假设（TopN + BB(20,2) + 分层加仓）没有通过红队验证。后续研究方向见 `REGIME_RESEARCH_PLAN.md`（市场状态 × 超跌程度 → 条件收益矩阵，先研究规律、不先写策略）。
 
 ---
 
-## 三、复现
+## 一、结案状态
+
+- 旧策略参数**已冻结**，禁止继续针对 2020-2026 历史数据调参：Top10 / BB(20,2) / K=3 / max_levels=5 / level_cash=20万。
+- 回测不可违反规则见 [BACKTEST_INVARIANTS.md](BACKTEST_INVARIANTS.md)；自动测试见 `tests/test_backtest_invariants.py`（28 项，全部 PASS）。
+- 本仓库完整保留研究演化与全部 negative results：BASELINE → Round1..5 → Round5.1 → STRICT_V2 → D/No evidence。
+
+---
+
+## 二、研究演化与关键发现
+
+| 阶段 | 结果 | 结论 |
+|---|---|---|
+| 原始（K=3 + ETF满仓） | +354.9% | **INVALID**：含同Bar未来信息（当日盘中用当日收盘才确定的上轨止盈）、ETF open 时间倒流、PIT 状态/上市时间问题 |
+| Round5 STRICT_V1 | close +52~62%、next_open +84% | 仍含 ETF open 倒流 + listing bug → **作废** |
+| Round5.1 STRICT_V2（全部修复） | 组合 A +45.1% / B +74.4%；纯股票 A +5.2% / B +23.4% | **无独立股票 Alpha**：纯股票跑输 ETF buy&hold（+26.6%） |
+
+**每个 bug 如何被发现**：见各轮 REDTEAM 报告。
+- P0 同Bar未来信息：`experiment_fast.py:554` high[T] vs bb_upper[T]（含 close[T]）→ 修复后 383%→45-74%
+- ETF 时序：`round5_audit.py:110` 单一 etf_trade_px → 事件驱动 ensure_cash_open/rebalance_close
+- PIT ST：`prepare_fast:20-25` 快照 name → `pit_st_daily.parquet`（差异 46.6万股票日/683只）
+- 上市日：切片首日误当上市日 → 2020 前 60 日候选 0→21.2万（完整交易日历 1990 起）
+
+---
+
+## 三、当前冻结的 STRICT_V2（唯一可交易口径）
+
+买入：T 日收盘后确认信号（Top10 成交额、非ST、上市满60交易日、跌破布林下轨、非跌停）→ **T+1 开盘买入**（100股整数倍，每层20万，最多5层，K=3 共享100万；ETF 于 T+1 开盘筹资）。
+退出（两种可交易策略，**不得合并**）：
+- **A**：T 日盘中 high 触及 **T-1 收盘已确定**的布林上轨 → 按已知上轨成交（日线近似）
+- **B**：T 日收盘确认 close ≥ 上轨 → **T+1 开盘卖出**
+
+费用：佣金 0.025%（最低5元）、印花税 0.1%→0.05%（2023-08-28 前后）、过户费 0.001%、10bp 双腿滑点、T+1、100股、涨跌停/停牌过滤。
+
+---
+
+## 四、复现
 
 ```bash
-# 1. 合并 K 线分片（首次）
-python3 data/kline/merge_kline.py   # 输出 combined_daily.parquet
+# 1. 全部不变量测试 (28项, 必须 PASS)
+python3 tests/test_backtest_invariants.py
 
-# 2. 多持仓回测（K=1~8 对比，资金永远满仓）
+# 2. STRICT_V2 (Round5.1 引擎)
 python3 -c "
-import experiment_fast as ef
-days,D,etf_idx,epx,enav,df,listing = ef.prepare_fast()
-for K in [1,2,3,4,5,8]:
-    eq,tr = ef.run_fast_multi(days,D,etf_idx,epx,enav,listing=listing, K=K)
-    print(K, eq['equity'].ffill().iloc[-1]/1e6-1)
+import sys; sys.path.insert(0,'.')
+from round51_audit import prepare_v51, run_fast_multi_v51, full_stats
+days,D,etf_idx,epx,eopx,enav,fel,off = prepare_v51(limit_down_mode='correct', st_mode='pit')
+for mode, tag in [('prev','A'),('close_confirm_next','B')]:
+    eq,tr,ac = run_fast_multi_v51(days,D,etf_idx,epx,eopx,enav,fel,off,K=3, exit_bb_mode=mode, open_fill='limit_conservative')
+    print(tag, full_stats(eq,tr))
 "
 
-# 3. 全市场单股回测：持仓期回撤 + 卖出后走势
-python3 analyze_drawdown_postexit.py   # 输出 results/drawdown_postexit_per_trade.csv
+# 3. 历史基线 (含未来信息, 仅供对照): experiment_fast.py run_fast_multi
 ```
 
 ---
 
-## 四、K 线数据
+## 五、数据
 
 - 来源：Tushare Pro（付费方案B）
-- 口径：**后复权价 = close × adj_factor**（信号与收益均用后复权保证连续；实际现金流用实际价）
-- `amount` 单位为**千元**；`is_limit_down` 按 `close ≤ pre_close×0.905` 判定；`is_red` 为当日涨跌标记
-- 按年份拆分 7 个 parquet（每个 <100MB，规避 GitHub 单文件限制），见 `data/kline/` 与 `KLINE_DATA.md`
-- **注意**：数据源为 Tushare 当前快照，退市股票部分缺失 → 存在 **survivorship bias**（详见 AUDIT_GUIDE.md）
+- `data/combined_daily.parquet`：2020-01-02~2026-08-25，5765只，7,731,551行（open/high/low/close/volume/amount/adj_factor/pre_close；`amount`单位=**千元**）
+- `data/raw/stock_basic.parquet`（当前快照 name/list_date/delist_date）、`data/raw/trade_cal_full.parquet`（1990起完整交易日历）、`data/raw/namechange_full.parquet`（PIT ST 源）、`data/pit_st_daily.parquet`（PIT 状态）、`data/etf_513500_merged.parquet`（场内 OHLCV）
+- **⚠️ Survivorship bias**：数据为当前快照，2020 后退市股缺失 15 只（`NEED_EXTERNAL_DATA`），**所有结论含 survivorship bias 成分**，详见 AUDIT_GUIDE.md
 
 ---
 
-## 五、文件结构
+## 六、目录
 
 ```
-├── README.md                     # 本文件
-├── AUDIT_GUIDE.md                # 审计指引（策略逻辑、代码调用链、规则口径）
-├── CALLCHAIN.md                  # 代码调用链追踪
-├── REDTEAM_ROUND*.md             # 四轮红队审计记录
-├── TRADING_SYSTEM_STEPBYSTEP.md  # 完整交易系统逐步说明
-├── RESULTS_LATEST.md             # 本轮最新结果汇总
-├── KLINE_DATA.md                 # K线数据 schema / 口径 / 合并方法
-├── experiment_fast.py            # 正式引擎（含 run_fast / run_fast_multi）
-├── analyze_drawdown_postexit.py  # 全市场持仓期回撤+卖出后走势分析
-├── bb_lower_upper_full_market.py # 全市场单股回测（下轨买/上轨卖）
-├── etf_live_backtest.py          # ETF 现金管理回测
-├── engine/  data_loader/  config/  backtest/  analysis/
-├── data/kline/                   # K线分片 parquet（2020-2026）
-└── results/                      # 回测结果 CSV/PNG
+├── README.md                     # 本文件（结案结论）
+├── BACKTEST_INVARIANTS.md        # 回测不可违反规则清单
+├── REGIME_RESEARCH_PLAN.md       # 下一阶段：市场状态×超跌程度研究设计
+├── REDTEAM_ROUND*.md             # 五轮红队审计记录（含 Round5.1）
+├── AUDIT_GUIDE.md / CALLCHAIN.md / KLINE_DATA.md
+├── round51/                      # STRICT_V2 引擎与运行脚本
+├── round5/                       # Round5 反事实实验
+├── tests/test_backtest_invariants.py  # 不变量自动测试 (28项)
+├── data/                         # PIT ST / 完整日历 / K线分片
+└── results/                      # 全部结果 CSV / JSON / PNG（含 negative results）
 ```
 
 ---
 
-## 六、审计状态
+## 七、审计状态
 
-已完成 4 轮外部红队审计（结论：原始 +226.5% 在更真实规则下保留≈97%，评级 **A/Strong evidence**，但未达实盘资格）：
-- Round1：代码层审计（未来函数/T+1/复权/跌停/费用等）
-- Round2：六项反事实验证（PIT复权/9.5%跌停/执行时点/滑点/印花税/幸存者偏差）
-- Round3：统计稳健性（删Top3赢家仍+74.6%、参数非尖峰、7年正收益、OOS 2024-26 年化25.6%）
-- Round4：实盘准备度（真实成本压力、成交约束、PIT股票池、permutation检验、未来盲测）
+已完成 5 轮外部红队审计（Round5 + Round5.1）：
+- Round1-2：代码审计 + 六项反事实验证
+- Round3-4：统计稳健性（曾误评 A，后被 P0 推翻）
+- Round5：P0 同Bar未来信息确认 INVALID；STRICT_V1 首次全部修复 → C
+- Round5.1：PIT ST / listing / ETF 时序 / open_fill 修复 → **STRICT_V2 → D / No evidence**
 
-**本轮新增发现**：①多持仓 K=3 + 永远满仓 → 354.9%（年化26.7%、Sharpe 1.07）；②95,615笔持仓期回撤中位数-6.55%、5层加仓回撤最深且平均亏损；③止盈在布林上轨存在显著"卖飞"（91.2%卖出后继续走高）。
+旧 +354.9% 及四轮 A 评级**均已正式归档为 INVALID**。本项目最有价值的部分是 negative result：完整记录了每一个 bug 如何被发现、修复后收益如何变化。

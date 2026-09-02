@@ -1,9 +1,11 @@
-# 数据文件（体积大，不入库）
+# 数据文件（体积大，不入库；K线分片 data/kline/ 除外，供审计核实）
 *.parquet
 *.pkl
 *.db
 *.sqlite
-data/
+data/*
+!data/kline/
+!data/kline/*.parquet
 raw/
 
 # 压缩包/缓存

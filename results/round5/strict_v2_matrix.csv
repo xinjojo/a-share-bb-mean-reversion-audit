@@ -1,0 +1,14 @@
+version,exit,open_fill,st,total,ann,mdd,sharpe,trades,wr,stock_pnl,note
+STRICT_V2_A_optimistic_pit,prev,optimistic,pit,45.12,5.83,-40.55,0.349,100.0,68.0,184870.0,
+STRICT_V2_A_limit_conservative_pit,prev,limit_conservative,pit,45.12,5.83,-40.55,0.349,100.0,68.0,184870.0,
+STRICT_V2_B_optimistic_pit,close_confirm_next,optimistic,pit,74.43,8.83,-39.23,0.457,73.0,63.01,150366.0,
+STRICT_V2_B_limit_conservative_pit,close_confirm_next,limit_conservative,pit,74.43,8.83,-39.23,0.457,73.0,63.01,150366.0,
+STRICT_V2_A_optimistic_snapshot,prev,optimistic,snapshot,57.53,7.16,-40.03,0.402,101.0,70.3,262296.0,
+STRICT_V2_A_limit_conservative_snapshot,prev,limit_conservative,snapshot,57.53,7.16,-40.03,0.402,101.0,70.3,262296.0,
+STRICT_V2_B_optimistic_snapshot,close_confirm_next,optimistic,snapshot,76.31,9.01,-38.38,0.468,75.0,65.33,245282.0,
+STRICT_V2_B_limit_conservative_snapshot,close_confirm_next,limit_conservative,snapshot,76.31,9.01,-38.38,0.468,75.0,65.33,245282.0,
+STRICT_V2_A_optimistic_stock_only,prev,optimistic,pit,5.15,0.77,-39.86,0.158,100.0,70.0,51549.0,
+STRICT_V2_A_limit_conservative_stock_only,prev,limit_conservative,pit,5.15,0.77,-39.86,0.158,100.0,70.0,51549.0,
+STRICT_V2_B_optimistic_stock_only,close_confirm_next,optimistic,pit,23.4,3.25,-39.86,0.253,72.0,62.5,234042.0,
+STRICT_V2_B_limit_conservative_stock_only,close_confirm_next,limit_conservative,pit,23.4,3.25,-39.86,0.253,72.0,62.5,234042.0,
+ETF_BUYHOLD,,,,26.59,,,,,,,close 2.129->2.695

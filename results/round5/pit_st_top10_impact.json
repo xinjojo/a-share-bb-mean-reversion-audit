@@ -1,0 +1,10 @@
+{
+  "total_trading_days": 1615,
+  "top10_diff_days": 64,
+  "top10_bb_signal_diff_days": 4,
+  "top10_bb_signal_diff_rows": 4,
+  "snapshot_top10_symbols": 539,
+  "pit_top10_symbols": 553,
+  "strict_v2_b_buys": 170,
+  "strict_v2_b_affected_buys": 3
+}

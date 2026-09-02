@@ -25,7 +25,8 @@ def run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, first_e
                             slippage_bp=10, stamp_tax_mode='historical',
                             exit_bb_mode='dynamic_touch',
                             open_fill=OPEN_FILL_DEFAULT,
-                            tick_mode='conservative',   # 'conservative'(ceil,主) | 'optimistic' | 'none'
+                            tick_mode='conservative',   # 'conservative'(ceil,主) | 'optimistic'(INVALID_DIAGNOSTIC) | 'none'
+                            limit_slip_order='ref_first',  # 'ref_first'=先市价可达性(主) | 'slip_first'=旧:先滑点再判跌停
                             etf_enabled=True, etf_min_cash=5_000,
                             add_gap_days=1, day_range=None, record_actions=False):
     """事件驱动引擎, 买入 T收盘信号->T+1 open; 退出 STRICT_C 盘中动态 touch."""
@@ -274,11 +275,18 @@ def run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, first_e
                 if not trig:
                     continue   # 未触碰
                 if open_adj >= threshold * adjT:
-                    sell_price = dd['open_'][j] * (1 - slip)   # gap-through, open 已是合法tick
+                    ref = dd['open_'][j]     # gap-through: 市价=open (已是合法tick)
                 else:
-                    sell_price = sell_ref * (1 - slip)
-                if sell_price <= dd['limit_down_px'][j]:
-                    continue   # 跌停卖不出, 顺延
+                    ref = sell_ref            # touch: 市价=legal_trigger (合法tick)
+                # FINAL MINOR FIX 2: 市场可达性判断(参考市价) 与 滑点成本 分离
+                if limit_slip_order == 'ref_first':
+                    if ref <= dd['limit_down_px'][j]:
+                        continue   # 市价≤跌停价, 按涨跌停规则无法卖出, 顺延
+                    sell_price = ref * (1 - slip)   # 滑点只在现金流上应用
+                else:  # 'slip_first' 旧口径: 先乘滑点再判跌停
+                    sell_price = ref * (1 - slip)
+                    if sell_price <= dd['limit_down_px'][j]:
+                        continue
                 sell_pos(pos, d, j, sell_price, 'TAKE_PROFIT_DYN')
 
         # ============ CLOSE 时点 ============

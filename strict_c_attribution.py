@@ -35,7 +35,8 @@ for name, fn in [
     ('STRICT_C', lambda: run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, fie, off,
         K=3, top_n=10, max_levels=5, level_cash=200_000, initial_cash=1_000_000,
         slippage_bp=10, stamp_tax_mode='historical', exit_bb_mode='dynamic_touch',
-        open_fill='limit_conservative', etf_enabled=False, day_range=rng)),
+        open_fill='limit_conservative', tick_mode='conservative',
+        etf_enabled=False, day_range=rng)),
 ]:
     eq, tr, _ = fn()
     st = full_stats(eq, tr)
@@ -48,10 +49,11 @@ res['STRICT_C']['tr'].to_csv(os.path.join(ROOT, 'results', 'round5', 'strict_c_p
 res['STRICT_C']['eq'].to_csv(os.path.join(ROOT, 'results', 'round5', 'strict_c_pure_equity.csv'), index=False)
 
 print('\n================ 组合 vs 纯股票 (STRICT_C) ================')
-eqc, trc, _ = run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, fie, off,
+eqc, trc, _, _ = run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, fie, off,
     K=3, top_n=10, max_levels=5, level_cash=200_000, initial_cash=1_000_000,
     slippage_bp=10, stamp_tax_mode='historical', exit_bb_mode='dynamic_touch',
-    open_fill='limit_conservative', etf_enabled=True, day_range=rng)
+    open_fill='limit_conservative', tick_mode='conservative',
+    etf_enabled=True, day_range=rng)
 stc = full_stats(eqc, trc)
 print(f'[COMBO STRICT_C] total={stc["total"]:.2f}% ann={stc["ann"]:.2f}% mdd={stc["mdd"]:.2f}% '
       f'sharpe={stc["sharpe"]:.2f} trades={stc["n"]} wr={stc["wr"]:.1f}% stock_pnl={trc["pnl"].sum():,.0f}')

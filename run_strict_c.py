@@ -25,6 +25,7 @@ def run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, first_e
                             slippage_bp=10, stamp_tax_mode='historical',
                             exit_bb_mode='dynamic_touch',
                             open_fill=OPEN_FILL_DEFAULT,
+                            tick_mode='conservative',   # 'conservative'(ceil,主) | 'optimistic' | 'none'
                             etf_enabled=True, etf_min_cash=5_000,
                             add_gap_days=1, day_range=None, record_actions=False):
     """事件驱动引擎, 买入 T收盘信号->T+1 open; 退出 STRICT_C 盘中动态 touch."""
@@ -37,10 +38,12 @@ def run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, first_e
     actions = []
     round_no = 0
     last_close = {}
-    raw_hist = {}          # tc -> deque(最近 close_raw, maxlen=19) 截至 T-1
+    raw_hist = {}          # tc -> deque(最近19日 close_adj[k]=close_raw*adj_factor[k], maxlen=19) 截至 T-1
+    raw_hist_raw = {}      # tc -> deque(同一批19日 close_raw) 同步
     pending_buy = []
     pending_add = {}
     pending_sell = set()
+    p0_audit = []          # 每次 exit-evaluation 的记录
 
     def ensure_cash_open(need):
         nonlocal cash, etf_sh
@@ -117,16 +120,18 @@ def run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, first_e
         round_no += 1
 
     def init_raw_hist(tc, i):
-        """买入时用历史补齐前19日 close_raw"""
-        hist = deque()
+        """买入时用历史补齐前19日 close_adj (各日自己复权因子) 与 close_raw"""
+        hist = deque(); hist_r = deque()
         for k in range(1, 20):
             if i - k < 0:
                 break
             dk = days[i - k]
             jk = D[dk]['pos'].get(tc)
             if jk is not None:
-                hist.appendleft(float(D[dk]['close'][jk]))
+                hist.appendleft(float(D[dk]['close_adj'][jk]))
+                hist_r.appendleft(float(D[dk]['close'][jk]))
         raw_hist[tc] = deque(hist, 19)
+        raw_hist_raw[tc] = deque(hist_r, 19)
 
     for i, d in enumerate(days):
         if day_range is not None:
@@ -210,7 +215,7 @@ def run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, first_e
                         held.add(pb['ts_code'])
                 pending_buy = [x for x in pending_buy if x['ts_code'] != pb['ts_code']]
 
-        # ============ 盘中退出: STRICT_C 动态 touch ============
+        # ============ 盘中退出: STRICT_C 动态 touch (P0 修正: 各日自己复权因子) ============
         if exit_bb_mode == 'dynamic_touch':
             for pos in list(positions):
                 j = dd['pos'].get(pos['ts_code'])
@@ -221,19 +226,57 @@ def run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, first_e
                 hist = raw_hist.get(pos['ts_code'])
                 if hist is None or len(hist) < 19:
                     continue
-                adj = dd['adj'][j]
-                x = np.array(list(hist)[-19:], dtype=float) * adj   # T 日口径
-                Pstar_adj = analytic_Pstar(x)
+                adjT = dd['adj'][j]
+                x_correct = np.array(list(hist)[-19:], dtype=float)   # close_adj[k]=close_raw*adj_factor[k]
+                Pstar_adj = analytic_Pstar(x_correct)
                 if Pstar_adj is None or not np.isfinite(Pstar_adj):
                     continue
-                high_adj = dd['high_adj'][j]
-                if high_adj < Pstar_adj:
-                    continue   # 未触碰
-                open_adj = dd['open_'][j] * adj
-                if open_adj >= Pstar_adj:
-                    sell_price = dd['open_'][j] * (1 - slip)   # gap-through
+                Pstar_raw = Pstar_adj / adjT
+                # P0 审计: 真实old口径(同一批最近19有效日 close_raw*adj[T]) vs 修正(各日adj)
+                tc = pos['ts_code']
+                hist_r = raw_hist_raw.get(tc)
+                old_trigger = False
+                if hist_r is not None and len(hist_r) >= 19:
+                    x_old = np.array(list(hist_r)[-19:], dtype=float) * adjT
+                    _po = analytic_Pstar(x_old)
+                    if _po is not None and np.isfinite(_po):
+                        Pstar_old_raw = _po / adjT
+                        old_trigger = dd['high_adj'][j] >= _po
+                    else:
+                        Pstar_old_raw = np.nan
                 else:
-                    sell_price = (Pstar_adj / adj) * (1 - slip)
+                    Pstar_old_raw = np.nan
+                # 窗口内 adj 是否与 T 日一致 (同一批有效日)
+                adj_vals = []
+                for _k in range(1, 20):
+                    if i - _k < 0 or tc not in D[days[i - _k]]['pos']:
+                        continue
+                    adj_vals.append(float(D[days[i - _k]]['adj'][D[days[i - _k]]['pos'][tc]]))
+                adj_changed = (len(adj_vals) >= 19 and any(abs(a - adjT) > 1e-12 for a in adj_vals))
+
+                high_adj = dd['high_adj'][j]
+                open_adj = dd['open_'][j] * adjT
+                # tick 处理
+                if tick_mode == 'conservative':
+                    threshold = np.ceil(Pstar_raw / 0.01) * 0.01
+                    sell_ref = threshold
+                elif tick_mode == 'optimistic':
+                    threshold = Pstar_raw
+                    sell_ref = np.ceil(Pstar_raw / 0.01) * 0.01
+                else:
+                    threshold = Pstar_raw
+                    sell_ref = Pstar_raw
+                trig = dd['high_adj'][j] >= threshold * adjT
+                p0_audit.append(dict(ts_code=pos['ts_code'], date=str(d.date()),
+                                     adj_changed=bool(adj_changed),
+                                     pstar_old=Pstar_old_raw, pstar_correct=Pstar_raw,
+                                     old_trigger=bool(old_trigger), corr_trigger=bool(trig)))
+                if not trig:
+                    continue   # 未触碰
+                if open_adj >= threshold * adjT:
+                    sell_price = dd['open_'][j] * (1 - slip)   # gap-through, open 已是合法tick
+                else:
+                    sell_price = sell_ref * (1 - slip)
                 if sell_price <= dd['limit_down_px'][j]:
                     continue   # 跌停卖不出, 顺延
                 sell_pos(pos, d, j, sell_price, 'TAKE_PROFIT_DYN')
@@ -247,7 +290,8 @@ def run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, first_e
                 continue
             close = dd['close'][j]
             last_close[pos['ts_code']] = close
-            raw_hist.setdefault(pos['ts_code'], deque([], 19)).append(float(close))
+            raw_hist.setdefault(pos['ts_code'], deque([], 19)).append(float(dd['close_adj'][j]))
+            raw_hist_raw.setdefault(pos['ts_code'], deque([], 19)).append(float(close))
             hold_days = i - pos['entry_day_idx']
             bb_lo = dd['bb_lower'][j]
             if (not np.isnan(bb_lo) and dd['close_adj'][j] < bb_lo
@@ -322,7 +366,8 @@ def run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, first_e
     eq = pd.DataFrame(equity_curve)
     tr = pd.DataFrame(trades)
     ac = pd.DataFrame(actions) if actions else pd.DataFrame()
-    return eq, tr, ac
+    pa = pd.DataFrame(p0_audit) if p0_audit else pd.DataFrame()
+    return eq, tr, ac, pa
 
 
 def match_trigger_diff(tr_invalid, tr_c, tol_days=2):
@@ -425,7 +470,7 @@ if __name__ == '__main__':
 
     # ===== 4) STRICT_C (dynamic touch) =====
     if mode in ('all', 'c'):
-        eqC, trC, acC = run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav,
+        eqC, trC, acC, paC = run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav,
                                                 first_eligible_i, offset, K=3, top_n=10, max_levels=5,
                                                 level_cash=200_000, initial_cash=1_000_000,
                                                 slippage_bp=10, stamp_tax_mode='historical',

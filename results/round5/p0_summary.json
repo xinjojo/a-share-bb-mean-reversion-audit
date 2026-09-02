@@ -1,0 +1,14 @@
+{
+  "V0_CURRENT_K3_close": {
+    "total": 383.62,
+    "mdd": -45.43,
+    "sharpe": 0.681,
+    "stock_pnl": 2020726.0
+  },
+  "V1_PREVBB_K3_close": {
+    "total": 125.78,
+    "mdd": -45.69,
+    "sharpe": 0.57,
+    "stock_pnl": 470468.0
+  }
+}

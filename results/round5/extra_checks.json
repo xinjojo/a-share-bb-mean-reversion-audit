@@ -1,0 +1,70 @@
+{
+  "dup_rows": 0,
+  "final_settle_t1_violation": 0,
+  "final_settle_hold_days": [
+    40,
+    36,
+    5
+  ],
+  "final_settle_synced": true,
+  "data_last_date": "2026-08-25 00:00:00",
+  "yearly_returns": [
+    [
+      2020,
+      41.28
+    ],
+    [
+      2021,
+      23.51
+    ],
+    [
+      2022,
+      -1.67
+    ],
+    [
+      2023,
+      47.81
+    ],
+    [
+      2024,
+      32.9
+    ],
+    [
+      2025,
+      27.03
+    ],
+    [
+      2026,
+      12.45
+    ]
+  ],
+  "correct_limitdown": {
+    "total": 328.7,
+    "n": 100,
+    "wr": 73.0
+  },
+  "order_sensitivity": [
+    {
+      "order": "original",
+      "total": 383.62,
+      "stock_pnl": 2020726.0
+    },
+    {
+      "order": "oversold",
+      "total": 376.37,
+      "stock_pnl": 1977214.0
+    },
+    {
+      "order": "amount",
+      "total": 395.75,
+      "stock_pnl": 2068923.0
+    },
+    {
+      "order": "random_100",
+      "total_mean": 391.02,
+      "total_min": 375.03,
+      "total_max": 409.89,
+      "total_std": 10.06
+    }
+  ]
+}

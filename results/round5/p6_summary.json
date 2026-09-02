@@ -1,0 +1,26 @@
+{
+  "n_all": 292,
+  "n_entry": 103,
+  "n_add": 189,
+  "ALL": {
+    "impact_median_pct": 0.0039,
+    "impact_p95_pct": 0.0124,
+    "impact_max_pct": 0.0281,
+    "impact_all_lt_0_05pct": true,
+    "day_amt_median": 4802840498.0
+  },
+  "ENTRY": {
+    "impact_median_pct": 0.0033,
+    "impact_p95_pct": 0.007,
+    "impact_max_pct": 0.01,
+    "impact_all_lt_0_05pct": true,
+    "day_amt_median": 5953320023.0
+  },
+  "ADD": {
+    "impact_median_pct": 0.0045,
+    "impact_p95_pct": 0.0134,
+    "impact_max_pct": 0.0281,
+    "impact_all_lt_0_05pct": true,
+    "day_amt_median": 4240478259.0
+  }
+}

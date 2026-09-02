@@ -1,0 +1,30 @@
+{
+  "max_levels_4": {
+    "max_levels": 4,
+    "total": 312.45,
+    "ann": 24.81,
+    "mdd": -45.43,
+    "sharpe": 0.657,
+    "trades": 104,
+    "wr": 73.08,
+    "stock_pnl": 1644391.0,
+    "n_level5_trades": 0
+  },
+  "max_levels_5": {
+    "max_levels": 5,
+    "total": 383.62,
+    "ann": 27.96,
+    "mdd": -45.43,
+    "sharpe": 0.681,
+    "trades": 103,
+    "wr": 75.73,
+    "stock_pnl": 2020726.0,
+    "n_level5_trades": 19
+  },
+  "l5_marginal": {
+    "n_l5_trades": 19,
+    "stock_pnl_diff": 376335.0,
+    "total_pp_diff": 71.17,
+    "mdd_pp_diff": 0.0
+  }
+}

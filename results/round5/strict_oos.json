@@ -1,0 +1,115 @@
+[
+  {
+    "version": "STRICT_V1",
+    "total": 62.62,
+    "ann": 7.9,
+    "mdd": -65.56,
+    "sharpe": 0.511,
+    "trades": 63,
+    "wr": 63.49,
+    "stock_pnl": 260402.0
+  },
+  {
+    "version": "STRICT_V1_train",
+    "total": -3.15,
+    "ann": -0.83,
+    "mdd": -55.32,
+    "sharpe": 0.401,
+    "trades": 40,
+    "wr": 65.0,
+    "stock_pnl": -34622.0
+  },
+  {
+    "version": "STRICT_V1_test",
+    "total": 71.53,
+    "ann": 23.63,
+    "mdd": -44.78,
+    "sharpe": 0.67,
+    "trades": 26,
+    "wr": 61.54,
+    "stock_pnl": 273582.0
+  },
+  {
+    "version": "STRICT_V1_full",
+    "total": 84.06,
+    "ann": 10.01,
+    "mdd": -40.05,
+    "sharpe": 0.449,
+    "trades": 74,
+    "wr": 64.86,
+    "stock_pnl": 267730.0
+  },
+  {
+    "version": "STRICT_V1_full_train",
+    "total": 2.73,
+    "ann": 0.7,
+    "mdd": -40.05,
+    "sharpe": 0.1,
+    "trades": 48,
+    "wr": 68.75,
+    "stock_pnl": -7911.0
+  },
+  {
+    "version": "STRICT_V1_full_test",
+    "total": 76.12,
+    "ann": 24.92,
+    "mdd": -24.5,
+    "sharpe": 0.95,
+    "trades": 28,
+    "wr": 60.71,
+    "stock_pnl": 234826.0
+  },
+  {
+    "version": "STRICT_V1_stock_only",
+    "total": -12.98,
+    "ann": -2.15,
+    "mdd": -74.26,
+    "sharpe": 0.498,
+    "trades": 58,
+    "wr": 56.9,
+    "stock_pnl": -129778.0
+  },
+  {
+    "version": "STRICT_V1_nextopen_stock_only",
+    "total": 29.22,
+    "ann": 4.09,
+    "mdd": -37.98,
+    "sharpe": 0.246,
+    "trades": 74,
+    "wr": 66.22,
+    "stock_pnl": 292250.0
+  },
+  {
+    "version": "yearly",
+    "detail": [
+      {
+        "year": 2020,
+        "ret": 41.3
+      },
+      {
+        "year": 2021,
+        "ret": 16.15
+      },
+      {
+        "year": 2022,
+        "ret": -12.98
+      },
+      {
+        "year": 2023,
+        "ret": -33.08
+      },
+      {
+        "year": 2024,
+        "ret": -3.46
+      },
+      {
+        "year": 2025,
+        "ret": 79.44
+      },
+      {
+        "year": 2026,
+        "ret": 1.14
+      }
+    ]
+  }
+]

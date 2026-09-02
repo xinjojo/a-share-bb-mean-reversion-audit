@@ -1,0 +1,61 @@
+{
+  "n": 103,
+  "overlap_pairs": 150,
+  "max_concurrent": 3,
+  "uniq_entry_days": 99,
+  "multi_entry_days": 4,
+  "entry_gap_median": 12.0,
+  "cluster_3d": 80,
+  "cluster_5d": 74,
+  "cluster_10d": 60,
+  "boot_trade_p_pos": 100.0,
+  "boot_block_p_pos": 100.0,
+  "boot_cluster_p_pos": 100.0,
+  "k_walkforward": [
+    {
+      "K": 1,
+      "train_total": 102.24,
+      "train_sharpe": 0.705,
+      "test_total": 77.17,
+      "test_sharpe": 0.679
+    },
+    {
+      "K": 2,
+      "train_total": 114.1,
+      "train_sharpe": 0.622,
+      "test_total": 101.86,
+      "test_sharpe": 0.74
+    },
+    {
+      "K": 3,
+      "train_total": 155.29,
+      "train_sharpe": 0.693,
+      "test_total": 94.54,
+      "test_sharpe": 0.731
+    },
+    {
+      "K": 4,
+      "train_total": 81.81,
+      "train_sharpe": 0.645,
+      "test_total": 100.58,
+      "test_sharpe": 0.754
+    },
+    {
+      "K": 5,
+      "train_total": 77.45,
+      "train_sharpe": 0.73,
+      "test_total": 100.3,
+      "test_sharpe": 0.756
+    },
+    {
+      "K": 8,
+      "train_total": 72.18,
+      "train_sharpe": 0.725,
+      "test_total": 97.64,
+      "test_sharpe": 0.753
+    }
+  ],
+  "train_best_K": 3,
+  "train_best_K_test": 94.54,
+  "K3_test": 94.54
+}

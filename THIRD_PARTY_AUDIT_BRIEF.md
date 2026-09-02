@@ -277,18 +277,19 @@ threshold may be changed after Discovery.
 ## 10. CURRENT RESEARCH STATUS
 
 - **First generation:** archived; final executable reference `STRICT_C_EXECUTABLE_TICK`; rating D (see §6).
-- **Regime Discovery Phase 1** (Discovery 2020-2022) was run once, then the external auditor rejected the first
-  statistical implementation and required a correction pass (warmup history, NaN→WARMUP, BH FDR fix, benchmark
-  uncertainty, real-calendar block bootstrap, structured permutations, naming). The correction pass was implemented and
-  committed (`fa58758`). As of this brief, the **correction has been submitted but not yet accepted** by the external
-  auditor.
+- **Regime Discovery Phase 1** (Discovery 2020-2022) was run once. The first implementation was later superseded
+  (its statistical implementation was not accepted), and a correction implementation was subsequently submitted
+  (commit `fa58758`). As of this brief, the **correction has been submitted but not yet accepted**.
 - Therefore:
   > **REGIME DISCOVERY PHASE 1: UNDER AUDIT / NOT YET ACCEPTED**
-- The earlier Phase-1 v1 result ("0 FDR significant") is a **PRELIMINARY / SUPERSEDED RESULT**; it must not be cited
-  as the final accepted conclusion. The corrected matrix (`results/regime_discovery_matrix_v2.csv`) is the pending
-  result; its headline counts as submitted: VALID 60 / INSUFFICIENT 44 / FDR-significant 3 (all negative, LIQUIDITY
-  NORMAL) / none of the 104 passing all of HAC+FDR+bootstrap+both structured permutations simultaneously.
-  These numbers are **submitted, not yet accepted**; the third party should re-derive them.
+- A corrected Phase-1 implementation and result matrix exist in the repository
+  (`regime_discovery_corrected.py`, `cross_check_phase1.py`, `results/regime_discovery_matrix_v2.csv`).
+  They have been submitted but are **not** accepted. The third-party auditor may inspect or re-derive them after
+  independently reviewing the research design and implementation.
+- The earlier Phase-1 v1 result (e.g. its FDR significance counts in `REGIME_DISCOVERY_PHASE1.md` and
+  `results/regime_discovery_matrix.csv`) is a **PRELIMINARY / SUPERSEDED RESULT**; it must not be cited as the final
+  accepted conclusion.
+- **Validation (2023-2024): NOT OPENED.**
 
 ---
 

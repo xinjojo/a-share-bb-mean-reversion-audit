@@ -28,8 +28,10 @@ def run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, first_e
                             tick_mode='conservative',   # 'conservative'(ceil,主) | 'optimistic'(INVALID_DIAGNOSTIC) | 'none'
                             limit_slip_order='ref_first',  # 'ref_first'=先市价可达性(主) | 'slip_first'=旧:先滑点再判跌停
                             etf_enabled=True, etf_min_cash=5_000,
-                            add_gap_days=1, day_range=None, record_actions=False):
-    """事件驱动引擎, 买入 T收盘信号->T+1 open; 退出 STRICT_C 盘中动态 touch."""
+                            add_gap_days=1, day_range=None, record_actions=False,
+                            flow_sink=None):
+    """事件驱动引擎, 买入 T收盘信号->T+1 open; 退出 STRICT_C 盘中动态 touch.
+    flow_sink: 可选 list, 若传入则追加资金流水 dict(只读审计埋点, 策略逻辑零改动)."""
     slip = slippage_bp / 10000.0
     cash = initial_cash
     positions = []
@@ -63,6 +65,9 @@ def run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, first_e
             fee = max(amt * COMMISSION_RATE, MIN_COMMISSION)
             etf_sh -= sell_qty
             cash += amt - fee
+            if flow_sink is not None:
+                flow_sink.append(dict(date=str(d.date()), leg='etf', action='sell',
+                                      gross=amt, fee=fee, net=amt - fee, shares=sell_qty, px=eopx))
 
     def rebalance_close():
         nonlocal cash, etf_sh
@@ -81,6 +86,9 @@ def run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, first_e
             if amt + fee <= cash - reserve - etf_min_cash:
                 cash -= amt + fee
                 etf_sh += qty
+                if flow_sink is not None:
+                    flow_sink.append(dict(date=str(d.date()), leg='etf', action='buy',
+                                          gross=amt, fee=fee, net=-(amt + fee), shares=qty, px=epx))
 
     def find_pos(tc):
         return next((p for p in positions if p['ts_code'] == tc), None)
@@ -119,6 +127,9 @@ def run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, first_e
         cash += proceeds
         positions.remove(pos)
         round_no += 1
+        if flow_sink is not None:
+            flow_sink.append(dict(date=str(d.date()), leg='stock', action='sell',
+                                  gross=amt, fee=fee, net=proceeds, shares=pos['shares'], px=price))
 
     def init_raw_hist(tc, i):
         """买入时用历史补齐前19日 close_adj (各日自己复权因子) 与 close_raw"""
@@ -184,6 +195,9 @@ def run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, first_e
                         pos['levels'] += 1
                         pos['last_add_i'] = i
                         rec_action(d, j, 'ADD_POSITION', pos['levels'], buy_price, qty, amt, pos['avg_cost'], i - pos['entry_day_idx'], tc=tc)
+                        if flow_sink is not None:
+                            flow_sink.append(dict(date=str(d.date()), leg='stock', action='buy',
+                                                  gross=amt, fee=fee, net=-(amt + fee), shares=qty, px=buy_price))
                 pending_add.pop(tc, None)
         if pending_buy:
             held = {p['ts_code'] for p in positions}
@@ -214,6 +228,9 @@ def run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, first_e
                         init_raw_hist(pb['ts_code'], i)
                         rec_action(d, j, 'INITIAL_ENTRY', 1, buy_price, qty, amt, npos['avg_cost'], 0, tc=npos['ts_code'])
                         held.add(pb['ts_code'])
+                        if flow_sink is not None:
+                            flow_sink.append(dict(date=str(d.date()), leg='stock', action='buy',
+                                                  gross=amt, fee=fee, net=-(amt + fee), shares=qty, px=buy_price))
                 pending_buy = [x for x in pending_buy if x['ts_code'] != pb['ts_code']]
 
         # ============ 盘中退出: STRICT_C 动态 touch (P0 修正: 各日自己复权因子) ============
@@ -359,11 +376,17 @@ def run_fast_multi_strict_c(days, D, etf_idx, etf_px, etf_open, etf_nav, first_e
             cash += proceeds
             positions.remove(pos)
             round_no += 1
+            if flow_sink is not None:
+                flow_sink.append(dict(date=str(d.date()), leg='stock', action='settle',
+                                      gross=amt, fee=fee, net=proceeds, shares=pos['shares'], px=sell_price))
     if etf_sh > 0 and not np.isnan(epx):
         amt = etf_sh * epx * (1 - slip)
         fee = max(amt * COMMISSION_RATE, MIN_COMMISSION)
         cash += amt - fee
         etf_sh = 0
+        if flow_sink is not None:
+            flow_sink.append(dict(date=str(d.date()), leg='etf', action='settle',
+                                  gross=amt, fee=fee, net=amt - fee, shares=0, px=epx * (1 - slip)))
     if equity_curve:
         equity_curve[-1]['equity'] = cash
         equity_curve[-1]['cash'] = cash

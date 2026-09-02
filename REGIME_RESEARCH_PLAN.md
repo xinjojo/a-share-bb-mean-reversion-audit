@@ -1,16 +1,17 @@
-# REGIME_RESEARCH_PLAN — 市场状态 × 超跌程度 → 条件收益研究设计
+# REGIME_RESEARCH_PLAN — 市场状态 × 超跌程度 → 条件收益研究设计（v2，外部预审修订版）
 
-> 状态：**设计稿，未开始执行**。本阶段不调参、不产生交易策略、不输出"最佳策略"。
-> 目标：先回答"均值回归的 Alpha 在什么市场条件下存在、如何证明它不是数据挖掘出来的"，通过外部审计后再进入第二代策略开发。
-> 依据：旧策略（TopN+BB(20,2)+分层加仓）经五轮红队审计后评级 **D/No evidence** —— 单一固定超跌策略在全样本无稳定 Alpha，故转向 Regime 条件研究。
+> 状态：**设计稿 v2，未开始执行**。本阶段不调参、不产生交易策略、不输出"最佳策略"。
+> 本版已按外部审计预审意见（CONDITIONAL PASS）修正 4 个方法论问题：
+> P0 前瞻收益起点改为因果口径；P1 2025-2026 改名 Retrospective Confirmation；P2 假设家族预注册（PRIMARY/SECONDARY 分层）；P3 Permutation 保持市场结构。
+> 预审通过后方可进入 **REGIME DISCOVERY — Phase 1**。
 
 ---
 
 ## 0. 研究问题（唯一问题）
 
-> 在 A 股市场，当一只股票进入不同程度的"超跌状态"后，其未来 1D/3D/5D/10D/20D 收益分布，**在哪些市场 Regime（趋势/宽度/波动/情绪/流动性 × 超跌类型）下显著为正、在哪些 Regime 下为负或无效？**
+> 在 A 股市场，当一只股票进入不同程度的"超跌状态"后，其未来收益分布，**在哪些市场 Regime（趋势/宽度/波动/流动性 × 超跌类型）下显著为正、在哪些 Regime 下为负或无效？**
 
-这不是在找一个"能赚钱的策略"，而是在绘制一张 **条件 Alpha 矩阵（REGIME_ALPHA_MATRIX）**，回答 Alpha 的存在性边界。
+本阶段只绘制 **REGIME_ALPHA_MATRIX**（条件 Alpha 矩阵），不找"能赚钱的策略"。
 
 ---
 
@@ -18,190 +19,212 @@
 
 ### 1.1 核心数据（已有）
 - `data/combined_daily.parquet`：2020-01-02 ~ 2026-08-25，全 A 日线（open/high/low/close/volume/amount/adj_factor/pre_close），amount 单位=千元
-- `data/pit_st_daily.parquet`：PIT ST 状态（namechange 重建）
+- `data/pit_st_daily.parquet`：PIT ST 状态
 - `data/raw/stock_basic.parquet`：list_date / delist_date / 当前 name
 - `data/raw/trade_cal_full.parquet`：1990 起完整交易日历
 - `data/etf_513500_merged.parquet`：场内 OHLCV
 
-### 1.2 必须补齐（新增需求）
+### 1.2 必须补齐
 | 数据 | 用途 | 状态 |
 |---|---|---|
-| **历史退市股日线**（2020 后退市的约 15+ 只） | 消除 survivorship bias | ❌ NEED_EXTERNAL_DATA（Tushare `delist` + 逐只 daily） |
-| 指数历史（沪深300 000300 / 中证500 000905 / 中证1000 000852 / 全A） | Regime 趋势/波动定义 | ⏳ 待下载（Tushare index_daily） |
-| 每日涨跌停家数、连板高度、炸板率 | 情绪 Regime | ⏳ 由日线派生（涨停=close≥limit_up_px）或 Tushare `limit_list_d` |
-| 个股 PIT 上市日（≥60 交易日） | 股票池资格 | ✅ 已有 `first_eligible_i` 逻辑 |
-| 个股退市日 | 股票池资格 / 剔除退市后 | ⏳ 待下载 |
+| 历史退市股日线（2020 后约 15+ 只） | 消除 survivorship bias | ❌ NEED_EXTERNAL_DATA |
+| 指数历史（沪深300/中证500/中证1000/全A） | Regime 趋势/波动/宽度 | ⏳ 待下载 |
+| 每日涨跌停家数、连板高度、炸板率 | 情绪（SECONDARY） | ⏳ 由日线派生 |
+| 个股退市日 | 资格/剔除退市后 | ⏳ 待下载 |
 
 ### 1.3 数据质量门槛
-- 复权：信号与特征用后复权 `close_adj = close × adj_factor`（PIT 已验证与逐日除权因子口径 signal_diff=0）；未来若换数据源必须重做 PIT 复权验证
-- 单位：amount 统一千元；vol 手；价格元
-- 全区间交易日对齐：以 `trade_cal_full` 为准
+- 信号/特征用后复权 `close_adj = close × adj_factor`（PIT 已验证 signal_diff=0）
+- **前瞻收益亦用后复权**（`open_adj`、`close_adj`），保证跨除权除息连续
+- 全区间交易日对齐 `trade_cal_full`
 
 ---
 
-## 2. PIT 要求（强制）
+## 2. PIT 要求（强制，同 v1）
 
-研究样本中每一个"超跌事件"在 T 日构造时，**只允许使用 T 日及之前可知的信息**：
-
-| 信息 | PIT 处理 |
-|---|---|
-| ST/\*ST 状态 | `pit_st_daily.parquet`（is_st_pit），禁止用当前 name |
-| 上市资格（≥60 交易日） | list_date + 完整日历（`first_eligible_i`） |
-| 退市 | 仅保留上市→退市区间内的行；退市信息不得反向用于历史 |
-| 涨跌停制度 | PIT ST 派生 5%/10%/20%/30% 档位 |
-| 指数 / Regime 标签 | 必须用 T 日及之前数据计算（rolling 右对齐），禁止 center 平滑 |
-| 超跌特征 | 全部 rolling 右对齐（T-19..T 等） |
-
-**Regime 标签特别要求**：任何 Regime 分类（如"牛市/熊市"）只能用 T 日及之前的信息判定，禁止事后划分区间再回溯打标（否则本身即未来函数）。
+所有"超跌事件"在 T 日构造时只允许 T 日及之前可知的信息：PIT ST（`pit_st_daily`）、上市满 60 交易日（list_date+完整日历）、退市区间截断、涨跌停制度（PIT ST 派生）、Regime 标签 rolling 右对齐（禁止事后打标/中心平滑）。
 
 ---
 
-## 3. Regime 定义候选（A-F）
-
-> 每个 Regime 变量给出**候选定义**，进入研究后先做定义稳健性检查（见 §9），不预设唯一值。
+## 3. Regime 定义候选（A-F，同 v1，但 PRIMARY/SECONDARY 分层见 §8）
 
 ### A. 指数趋势
-- 标的：沪深300 / 中证500 / 中证1000 / 全A（等权或成交额加权指数，自建）
-- 定义：`MA20/MA60` 排列、`close > MA20 > MA60`（多头）、指数 20 日收益、DMA（价格-MA）
-- 状态候选：上涨 / 震荡 / 下跌（按趋势强度分档，如 20 日收益 > +x% / |.| ≤ x% / < -x%，x 在 0~5% 内扫描作稳健性）
+- 指数：全A（成交额加权自建）**（PRIMARY）**；沪深300/中证500/中证1000/等权全A（SECONDARY）
+- 定义：`close > MA20 > MA60` 排列、指数 20 日收益、DMA
+- 状态：上涨 / 震荡 / 下跌（20 日收益阈值，稳健性 ±20% 扰动）
 
-### B. 市场宽度
-- MA20 以上股票占比、MA60 以上占比、上涨股票占比（pct_chg>0）、创新高/新低比例（20日）
+### B. 市场宽度（PRIMARY：MA20 above ratio）
+- MA20 以上股票占比（**PRIMARY**）；MA60 以上占比、上涨占比、创新高/新低比例（SECONDARY）
 - 状态：高位（>70%）/ 中位 / 低位（<30%）
 
-### C. 市场波动率
-- 全A指数 20 日 realized vol（日收益 std×√245），或 VIX 类（历史波动分位数）
-- 状态：低波 / 正常 / 高波 / 极端波（按历史分位数 20/60/90 分档）
+### C. 市场波动率（PRIMARY：20D realized vol）
+- 全A 指数 20 日 realized vol（日收益 std×√245）（**PRIMARY**）；VIX 类/分位（SECONDARY）
+- 状态：低 / 正常 / 高 / 极端（历史分位 20/60/90 切）
 
-### D. 市场情绪
-- 每日涨停家数、跌停家数、连板高度、炸板率、成交额环比
-- 状态：冰点 / 正常 / 亢奋（按分位数）
+### D. 市场情绪（SECONDARY）
+- 涨停家数、跌停家数、连板高度、炸板率、成交额环比；状态：冰点 / 正常 / 亢奋
 
-### E. 流动性
-- 全市场成交额（亿元）、成交额 20 日趋势、缩量/放量
+### E. 流动性（PRIMARY：全A成交额）
+- 全市场成交额、成交额 20 日趋势（**PRIMARY**）；缩量/放量细化（SECONDARY）
 - 状态：地量 / 正常 / 天量
 
-### F. 超跌类型（个股层面）
-- 正常回调（5日跌幅 3-10%）
-- 快速恐慌下跌（3日跌幅 >15%）
-- 连续阴跌（连跌≥5日、累计跌幅 10-20%）
-- 系统性股灾（同期全市场指数同跌，个股 β 高）
-- 个股独立暴跌（市场平稳、个股急跌，α 驱动）
-- 分类用 T 日之前的信息（自身收益 + 市场收益分解）派生
+### F. 超跌类型（SECONDARY，用于归因解释，不做 primary 假设）
+- 正常回调 / 快速恐慌下跌 / 连续阴跌 / 系统性股灾 / 个股独立暴跌
 
 ---
 
-## 4. 超跌特征（个体特征向量）
+## 4. 超跌特征（PRIMARY / SECONDARY）
 
-> 不预设 BB(20,2) 为"策略"；BB 只作为超跌程度的一种刻画。以下特征全部在 T 日收盘后计算：
-
-- `distance_to_MA20`、`distance_to_MA60`：`(close - MA_n)/MA_n`
-- `BB_zscore`：`(close - MA20)/std20`（含 20/40 双窗口）
-- `RSI(14)`
-- `N日收益`：N ∈ {3,5,10,20}
-- `N日最大回撤`：N ∈ {5,10,20}
-- `ATR(14)/close`
-- `realized_volatility(20)`
-- `volume_change`：今日量 / MA5量、MA10量
-- `amount_rank`：当日成交额在全市场的分位（研究成交额档位差异）
-
-超跌状态定义：以 `BB_zscore` 为主（≤ -1.5 / -2 / -2.5 / -3），同时按 `distance_to_MA20`、`N日收益` 分档交叉验证。
+- **PRIMARY OVERSOLD FEATURE：BB_zscore = (close - MA20)/std20**（`rolling(20).mean()`/`.std()`，ddof=1，右对齐），档位：≤ -1.5 / -2.0 / -2.5 / -3.0（4 档）
+- SECONDARY：distance_to_MA20/MA60、RSI(14)、N日收益、N日最大回撤、ATR(14)/close、realized_vol(20)、volume_change、amount_rank
 
 ---
 
-## 5. Forward Return 定义
+## 5. Forward Return 定义（v2，P0 修正）
 
-- 前瞻收益：`fwd_r[N] = close_adj[T+N] / close_adj[T] - 1`，N ∈ {1,3,5,10,20}
-- **只用后复权收盘价**（避免盘中不可知信息）
-- 样本事件：每个（T，股票）若 T 日处于某超跌档位且非停牌、非跌停、上市满 60 日 → 记为一个"超跌事件"（观测）
-- 剔除：T 日涨停无法买入不算可交易观测？——本阶段是**统计研究**（不是回测），观测池 = 全部满足条件的（T，股票）；是否可交易在后续策略化时再约束
+> **原则：超跌信号在 T 日收盘后确定，最早可交易价格从 T+1 open 开始。**
+
+### 5.1 DESCRIPTIVE_RETURN（仅描述，非主指标）
+```
+desc_r[N] = close_adj[T+N] / close_adj[T] - 1
+```
+**明确标注 `NON_TRADABLE_REFERENCE`**：因为它隐含"15:00 知道信号→按 15:00 close 成交"。仅用于描述价格路径，不进入 Alpha 显著性检验。
+
+### 5.2 CAUSAL_RETURN（主指标，v2 新增）
+- **PRIMARY OUTCOME（预注册）**：
+  ```
+  causal_otc[N] = close_adj[T+N] / open_adj[T+1] - 1     # open→close, N∈{5,10}
+  ```
+  信号在 T close 后确定 → 从 **T+1 open** 起算收益 → T+N close 结算。
+- **SECONDARY OUTCOME**：
+  ```
+  causal_oto[N] = open_adj[T+1+N] / open_adj[T+1] - 1    # open→open, N∈{5,10}
+  ```
+  作为对照（不受 T+N 收盘跳空影响）。
+
+### 5.3 T+1 无法交易处理
+- 若 T+1 停牌、一字涨停（买不进）等：**单独标记 `NOT_TRADABLE` 分组**（含 stock-days 数与占比），不偷删。
+- 主统计保留全部观测（含 NOT_TRADABLE）作为"描述性全部样本"；另报"可交易子样本"（剔除 T+1 无法买入），两者**分别报告**，禁止只保留可成交赢家。
 
 ---
 
-## 6. 样本独立性处理（防假独立）
+## 6. 样本独立性处理（同 v1）
 
-旧策略教训（Round5 P5）：同一市场急跌窗口会产生大量高度相关事件，直接按 trade 独立做 bootstrap 会虚增显著性。
-
-本研究的观测是"（T，股票）"，存在三重相关：
-1. **同日多股**：同一 Regime 日，数千只股票同时超跌 → 同日观测聚合为"日级截面"后按日独立
-2. **跨日重叠**：同一股票连续多日超跌，5/10/20 日前瞻窗口重叠 → 按股票聚类（cluster），或用不重叠子采样
-3. **Regime 同质性**：同一 Regime 持续多日 → 按"Regime 持续段"作为独立块做 block bootstrap
-
-**默认设计**：
-- 主统计：以 **（日期，超跌档位）截面均值** 为观测单位（每天一个均值 → 日级时间序列，解决同日相关）
-- 显著性：Newey-West HAC t 统计量（自相关校正）+ 按股票聚类的 cluster-robust 标准误
-- Bootstrap：日级 block bootstrap（block=Regime 段长），三种口径（普通/block/event-cluster）**必须全部报告**，不得只挑显著的一种
+- 主统计：以（日期, 超跌档位）截面均值为观测单位（日级时间序列，解决同日相关）
+- 显著性：Newey-West HAC + 按股票 cluster-robust 标准误
+- Bootstrap：日级 block / event-cluster / Regime-block 三种全部报告
 
 ---
 
-## 7. 样本划分（防止第二次数据挖掘）
+## 7. 样本划分（v2，P1 修正：改名 + 冻结未来）
 
-| 阶段 | 区间 | 用途 |
+| 阶段 | 区间 | 用途 | 性质 |
+|---|---|---|---|
+| **Discovery** | 2020-01-01 ~ 2022-12-31 | 生成 Alpha Matrix，形成假设 | 探索 |
+| **Validation** | 2023-01-01 ~ 2024-12-31 | 只验证预注册假设 | 复现检验 |
+| **Retrospective Confirmation** | 2025-01-01 ~ 2026-08-25 | 只回答"历史第三阶段是否继续维持" | **不再叫 OOS**（旧策略已观察过） |
+| **FUTURE_OOS（真正未看数据）** | **2026-09-01 onward**（或未来累计 6-12 个月新数据 / paper trading） | 最终泛化证明 | pristine OOS |
+
+**硬规则**：
+- 2025-2026 参与了旧策略观察 → 只作 Retrospective Confirmation，**不得**用作未来策略的最终泛化证明
+- 进入策略开发后，**2020-2026 全部正式成为 development history**；任何参数/Regime 选择只要看过这些数据，其任何部分都不再是 pristine OOS
+- 真正策略证据只来自 FUTURE_OOS / paper trading / forward test
+
+---
+
+## 8. Multiple Testing 预注册（v2，P2 修正）
+
+### 8.1 HYPOTHESIS_REGISTRY（强制预注册）
+正式运行前生成 `HYPOTHESIS_REGISTRY.csv`（模板见同目录文件），每行一个 `hypothesis_id`，字段：
+```
+hypothesis_id, family(PRIMARY/SECONDARY), regime_dimension, regime_variable,
+regime_definition, threshold, oversold_feature, oversold_threshold,
+forward_horizon, outcome_type(otc/oto), benchmark, discovery_test
+```
+**运行 Discovery 后禁止新增 hypothesis_id 再假装属于原 FDR family。**
+
+### 8.2 PRIMARY FAMILY（预注册，先验证最核心问题）
+| 维度 | 变量（固定一种） | 档数 |
 |---|---|---|
-| **Discovery** | 2020-01-01 ~ 2022-12-31 | 探索 Regime×超跌 的条件收益模式，形成假设（**只允许在这段上"看"数据**） |
-| **Validation** | 2023-01-01 ~ 2024-12-31 | 检验 Discovery 形成的假设是否在第二段成立（预注册：不在 V 上调"最强组合"） |
-| **Final OOS** | 2025-01-01 ~ 2026-08-25 | 最终样本外确认 |
+| 市场趋势 | 全A（成交额加权自建指数），20日收益档 | 3（涨/震荡/跌） |
+| 市场宽度 | MA20 above ratio | 3（高/中/低） |
+| 市场波动 | 全A 20D realized volatility | 4（低/正常/高/极端） |
+| 市场流动性 | 全A 成交额 | 3（地量/正常/天量） |
+| 超跌 | **BB_zscore** | 4（-1.5/-2/-2.5/-3） |
+| 前瞻 | **5D / 10D**（open→close） | 2 |
 
-**重要声明**：2025-2026 旧策略已观察过（且收益集中在 2025），因此 Final OOS 严格上并非 pristine，**报告必须称 `retrospective holdout`**，不得称"未观察 OOS"。真正最终验证依赖未来数据 / paper trading / 完全未参与设计的第三方数据。
+**Primary hypothesis 粒度 =（维度 × 维度档位 × 超跌档 × forward）**，单维度检验（不跨维度笛卡尔组合）。
+- 趋势 1×3×4×2 = 24
+- 宽度 1×3×4×2 = 24
+- 波动 1×4×4×2 = 32
+- 流动性 1×3×4×2 = 24
+**PRIMARY 合计 = 104 个 hypothesis**（详见 §12）。
 
-**预注册纪律**：
-- Discovery 阶段发现的"高 Alpha 格"必须先写成假设清单（含阈值），再在 V/OOS 上验证
-- 禁止"先在 OOS 看哪些格显著，再回头调整 Discovery 定义"的反馈回路
+### 8.3 SECONDARY FAMILY（分开注册、分开报告、单独 FDR）
+其他指数（300/500/1000/等权全A）、MA60 distance、RSI、ATR、N日收益/回撤、情绪（涨停/跌停/连板）、更多 forward（1D/3D/20D）、T+1 可交易子样本、NOT_TRADABLE 描述等。
+**不得与 Primary 混在一个 FDR family，不得事后把 Secondary 亮点升格为 Primary。**
 
----
-
-## 8. 显著性检验与 Multiple-Testing Correction
-
-### 8.1 单格检验
-- 原假设：该（Regime, 超跌档）的 fwd_r 均值 = 0（或 ≤ 基准：全样本同档位均值 / 同期指数均值）
-- 检验：日级截面均值 t 检验（HAC 标准误）→ 报告 t、p、效应量（平均 fwd_r、胜率、与基准差异）
-
-### 8.2 多重比较校正（必须）
-- 设计会产生大量格：约 6 Regime 维度 × 每维度 3-4 档 × 超跌 4 档 × forward N 5 档 ≈ 数百至上千次检验
-- **必须**做：
-  - **FDR（Benjamini-Hochberg）**：控制错误发现率 q=0.05（主）
-  - **Bonferroni**：保守上限（参考）
-  - **Permutation / 真实零分布**：打乱（日期，股票）配对，得到无 Alpha 假设下的收益分布，检验真实观察是否落在尾部（对"幸存者偏差 + 多重比较 + 时间相关"联合更稳健）
-- **判定标准**：一个 Regime×超跌格要"成立"，必须 Discovery 显著（FDR q<0.05）**且** Validation 复现（方向一致、效应量不塌缩）**且** OOS 不反转
-
-### 8.3 效应量底线
-- 只看 p 值不够；要求平均 fwd_r 显著超过同档位全样本均值 / 同期指数，且 95% CI 不含 0
+### 8.4 显著性判定
+- 单格：日级截面均值 t 检验（HAC），报告 t、p、mean/median excess、win rate、95% CI
+- 多重比较：**PRIMARY 内部 FDR(BH) q=0.05**（主）+ Bonferroni（参考）；SECONDARY 单独 FDR
+- 同时要求 Discovery 显著 **且** Validation 复现（方向一致、效应量不塌缩）**且** Confirmation 不反转，才进入候选
 
 ---
 
-## 9. 定义稳健性检查（Regime 定义敏感性）
+## 9. Permutation / Null 分布（v2，P3 修正：保持市场结构）
 
-- 每个 Regime 的**分档阈值**（如趋势 x%、波动分位数切点）做 ±20% 扰动，观察结论是否翻转
-- 若某个 Alpha 格只在极窄阈值下成立 → 判为不稳健，排除
-- 超跌档位（BB_zscore 切点）同理
+> 主 null 必须保留时间与横截面结构，禁止以完全随机打乱（date, stock）为主 null（它会破坏同日相关/波动聚集/共同冲击，构造过于容易战胜的假零分布）。
+
+| Null | 设计 | 保持的结构 |
+|---|---|---|
+| **NULL_A（主）** | 日级 block / circular block permutation（按日块整体重排） | 同日横截面结构、波动聚集、Regime 时序 |
+| **NULL_B** | 同日内对"超跌标签/股票"做受约束置换 | 当天市场状态与收益横截面 |
+| **NULL_C** | Regime 持续段 block permutation | Regime 持续性 |
+| 完全随机 permutation | 仅作辅助参考 | — |
+
+最终显著性**必须同时**考虑：HAC + block bootstrap + FDR；不因某一种显著就判成立。
 
 ---
 
-## 10. 最终产出：REGIME_ALPHA_MATRIX
+## 10. 效应量门槛（v2 修改：不用年化折算）
+
+- 保留 `独立日数 ≥ 150`
+- **效应量主口径**（不用 5D/10D 年化折算，避免重叠收益年化夸大）：
+  - `mean excess return` / `median excess return` / `win rate` / `95% CI`
+  - `effect / transaction cost` 比（成本模型复用 BACKTEST_INVARIANTS R11）
+  - 示例：5D 平均超额 +0.8%，成本约 0.15% → effect/cost ≈ 5.3×
+
+---
+
+## 11. 最终研究流程（v2，STEP 0-7）
 
 ```
-市场Regime    | 超跌档位 | N  | 观测(独立日) | 平均fwd_r | 胜率 |  vs全样本 | FDR q | V复现 | OOS | 稳健性
-牛市+低波     | -2σ      | 5  | ...         | ...       | ...  | ...      | ...   | ✓/✗  | ✓/✗ | ✓/✗
-牛市+高波     | -2σ      | 5  | ...         | ...       | ...  | ...      | ...   | ...  | ... | ...
-震荡+低波     | -2σ      | 5  | ...         | ...       | ...  | ...      | ...   | ...  | ... | ...
-...（完整笛卡尔积）
+STEP 0   冻结 HYPOTHESIS_REGISTRY（PRIMARY 104 + SECONDARY 预注册）
+STEP 1   只看 Discovery 2020-2022 → 生成 Discovery Alpha Matrix
+STEP 2   冻结 Discovery 产生的假设（禁止改 Regime定义/阈值/forward/超跌定义）
+STEP 3   打开 Validation 2023-2024 → 只验证预注册假设
+STEP 4   仅 Discovery+Validation 均成立的假设，才打开 Confirmation 2025-2026
+STEP 5   Confirmation 只回答"第三阶段是否继续维持"，不可再调任何规则
+STEP 6   三阶段均成立 → 进入策略工程阶段；此时 2020-2026 全部成为 development data
+STEP 7   真正策略证据来自 FUTURE_OOS（2026-09-01 onward）/ paper trading / forward test
 ```
 
 ---
 
-## 11. 进入策略开发阶段的准入条件（全部满足才允许）
+## 12. 预计 PRIMARY hypothesis 总数
 
-1. REGIME_ALPHA_MATRIX 中至少一个（Regime × 超跌 × forward）格在 **Discovery FDR 显著 + Validation 复现 + OOS 不反转 + 阈值稳健** 四项全部通过；
-2. 该格的独立日数 ≥ 150（约半年以上有效观测），效应量（年化折算）≥ 可覆盖交易成本的明确倍数（成本模型复用 BACKTEST_INVARIANTS R11）；
-3. 通过 BACKTEST_INVARIANTS.md 全部 28 项自动测试；
-4. 研究设计与结论由**外部审计员预审通过**后方可进入第二代策略原型（策略化时再引入可成交性、仓位、K 等约束，且不得用本矩阵之外的参数）。
-5. 任何"在 Validation/OOS 上看到再回去改 Discovery"的行为 = 数据挖掘，一票否决。
+**104**，构成（单维度 × 档位 × 超跌档 × forward，不跨维度组合）：
+- 趋势（1 指数 × 3 档）× 4 超跌 × 2 forward = 24
+- 宽度（1 指标 × 3 档）× 4 超跌 × 2 forward = 24
+- 波动（1 指标 × 4 档）× 4 超跌 × 2 forward = 32
+- 流动性（1 指标 × 3 档）× 4 超跌 × 2 forward = 24
+
+（SECONDARY 数量不预统计，单独注册、单独 FDR。）
 
 ---
 
-## 12. 明确不做的（本轮边界）
-
-- ❌ 不调 BB 参数、不找"最佳超跌阈值"
-- ❌ 不构造可交易策略、不做组合回测
-- ❌ 不在全样本上直接检验（必须 Discovery → Validation → OOS）
+## 13. 明确不做的（本轮边界，同 v1）
+- ❌ 不调 BB 参数 / 不找最佳超跌阈值
+- ❌ 不构造可交易策略 / 不做组合回测
+- ❌ 不在全样本上直接检验（必须 Discovery → Validation → Confirmation）
 - ❌ 不把"某年某格赚钱"当作 Alpha 证据
+- ❌ 不以完全随机 permutation 作为主 null

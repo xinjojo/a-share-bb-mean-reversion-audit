@@ -1,0 +1,12 @@
+# HYPOTHESIS_REGISTRY_TEMPLATE — 预注册模板（非结果）
+# 说明：
+#   - 本文件仅为格式模板。正式运行 Discovery 之前，按下方表头逐行预注册 hypothesis_id，保存为 HYPOTHESIS_REGISTRY.csv。
+#   - 字段定义见 REGIME_RESEARCH_PLAN.md §8。
+#   - PRIMARY FAMILY 共 104 个（趋势24 + 宽度24 + 波动32 + 流动性24，粒度=维度×维度档×超跌档×forward，单维度检验，不跨维度组合）。
+#   - family: PRIMARY / SECONDARY（两族分开注册、分开 FDR，禁止事后混用）。
+#   - outcome_type: otc(open[T+1]->close[T+N]) 为 PRIMARY OUTCOME；oto(open[T+1]->open[T+1+N]) 为 SECONDARY OUTCOME。
+#   - benchmark: 全样本同档位均值 / 同期指数 / 0。discovery_test: t_HAC / FDR / permutation 等检验方式（预注册时填写，运行后不得追加）。
+#   - 运行 Discovery 后禁止新增 hypothesis_id 再假装属于原 FDR family。
+# 以下为一行格式占位（PH 前缀，非研究结果），正式注册时逐行替换为真实预注册行。
+hypothesis_id,family,regime_dimension,regime_variable,regime_definition,threshold,oversold_feature,oversold_threshold,forward_horizon,outcome_type,benchmark,discovery_test
+PH-0001,PRIMARY,TREND,ALL_A_INDEX,20d_return_sign,UP,BB_zscore,-2.0,5D,otc,all_same_band_mean,t_HAC

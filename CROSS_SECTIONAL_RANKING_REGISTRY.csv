@@ -1,0 +1,18 @@
+id,family,name,exact_formula,info_time,expected_direction,primary_test,gate,status
+F01,OVERSOLD_DEPTH,BB_Z,"BB_Z = (close_adj - MA20)/SD20; MA20/SD20 = 20-trading-day rolling mean/std of close_adj (ddof=1), identical to frozen BB(20,2) construction; evaluated at signal_date close",T_close,UNKNOWN,"daily cross-sectional Spearman IC of predictor vs final simple_return_pct among same-day signals (>=5); mean IC, Newey-West mean t, block bootstrap CI; BH FDR m=17","A BH q<.05; B |mean daily IC|>=0.03; C pairwise rank accuracy>=53%; D TopK(K=3) selection lift>=+0.5pp; E block-bootstrap K3 lift 95% CI>0; F 2020/2021/2022 at least 2/3 same direction and no clearly-reverse year",PREREGISTERED
+F02,OVERSOLD_DEPTH,BB_LOWER_DISTANCE,"BB_LOWER_DISTANCE = close_adj / (MA20 - 2*SD20) - 1 (distance above BB lower, negative = deeper oversold)",T_close,UNKNOWN,"same as F01",same as F01,PREREGISTERED
+F03,SHORT_PRICE_SHOCK,RET1,"RET1 = close/pre_close - 1 (T-day raw return)",T_close,UNKNOWN,same as F01,same as F01,PREREGISTERED
+F04,SHORT_PRICE_SHOCK,RET3,"RET3 = close_adj[t]/close_adj[t-3] - 1 (3-trading-day cumulative adjusted return)",T_close,UNKNOWN,same as F01,same as F01,PREREGISTERED
+F05,SHORT_PRICE_SHOCK,RET5,"RET5 = close_adj[t]/close_adj[t-5] - 1 (5-trading-day cumulative adjusted return)",T_close,UNKNOWN,same as F01,same as F01,PREREGISTERED
+F06,REVERSAL_CONTEXT,RET20,"RET20 = close_adj[t]/close_adj[t-20] - 1 (20-trading-day cumulative adjusted return)",T_close,UNKNOWN,same as F01,same as F01,PREREGISTERED
+F07,REVERSAL_CONTEXT,DIST_MA20,"DIST_MA20 = close_adj/MA20 - 1",T_close,UNKNOWN,same as F01,same as F01,PREREGISTERED
+F08,VOLATILITY,STOCK_RV20,"STOCK_RV20 = std of daily raw returns over past 20 trading days (ddof=1), evaluated at T",T_close,UNKNOWN,same as F01,same as F01,PREREGISTERED
+F09,VOLATILITY,ATR20_PCT,"ATR20_PCT = ATR20/close; TR = max(high-low, |high-pre_close|, |low-pre_close|); ATR20 = 20-trading-day mean of TR",T_close,UNKNOWN,same as F01,same as F01,PREREGISTERED
+F10,LIQUIDITY,AMOUNT,"AMOUNT = log(amount) at T (T-day turnover in raw data unit, log scale; monotonic transform does not affect rank IC)",T_close,UNKNOWN,same as F01,same as F01,PREREGISTERED
+F11,LIQUIDITY,AMOUNT_RATIO20,"AMOUNT_RATIO20 = amount / MA20(amount) (T-day turnover vs its own 20d mean)",T_close,UNKNOWN,same as F01,same as F01,PREREGISTERED
+F12,CANDLE,CLOSE_LOCATION,"CLOSE_LOCATION = (close-low)/(high-low), NaN if high==low (close near day high = weak stabilization hypothesis)",T_close,POSITIVE,same as F01,same as F01,PREREGISTERED
+F13,CANDLE,INTRADAY_RANGE,"INTRADAY_RANGE = (high-low)/pre_close",T_close,UNKNOWN,same as F01,same as F01,PREREGISTERED
+F14,CANDLE,GAP,"GAP = open/pre_close - 1",T_close,UNKNOWN,same as F01,same as F01,PREREGISTERED
+F15,MARKET_RELATIVE,REL_RET1,"REL_RET1 = RET1 - AllA_EW_ret1; AllA_EW = equal-weight index of PIT-eligible non-ST A-shares; AllA_EW_retk = AllA_EW_level[t]/AllA_EW_level[t-k]-1",T_close,POSITIVE,same as F01,same as F01,PREREGISTERED
+F16,MARKET_RELATIVE,REL_RET5,"REL_RET5 = RET5 - AllA_EW_ret5 (5d relative strength)",T_close,POSITIVE,same as F01,same as F01,PREREGISTERED
+F17,MARKET_RELATIVE,REL_RET20,"REL_RET20 = RET20 - AllA_EW_ret20 (20d relative strength)",T_close,POSITIVE,same as F01,same as F01,PREREGISTERED

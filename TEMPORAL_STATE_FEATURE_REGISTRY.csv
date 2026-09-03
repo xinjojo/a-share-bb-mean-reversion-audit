@@ -1,0 +1,28 @@
+feature_id,family,name,formula,window,expected_direction,primary_horizon,primary_test,status
+F01,TREND,ALL_A_EW_RET20,"All-A EW index = equal-weight mean of PIT-eligible non-ST stock daily returns (close/pre_close-1) on each trading day; compounded over past 20 trading days: prod(1+mean_ret)-1",20 trading days,POSITIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F02,TREND,ALL_A_EW_RET60,"All-A EW index 60-trading-day compounded return (same index as F01)",60 trading days,POSITIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F03,TREND,CSI300_RET20,"Official CSI300 index close ret over past 20 trading days (index_000300.parquet, no NA)",20 trading days,POSITIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F04,TREND,CSI1000_RET20,"Official CSI1000 index close ret over past 20 trading days (index_000852.parquet, no NA)",20 trading days,POSITIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F05,TREND,ALL_A_DISTANCE_MA20,"All-A EW index level (compounded from index daily returns, base 1.0 at 2020-01-02) / its MA20 - 1",20 trading days,POSITIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F06,TREND,ALL_A_MA20_SLOPE,"MA20(All-A EW index level) today / MA20 5 trading days ago - 1",20/5 trading days,POSITIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F07,BREADTH,BREADTH_MA20,"Fraction of PIT-eligible non-ST stocks (listed>=60 trading days, valid quote today) with close_adj > MA20(close_adj)",20 trading days,POSITIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F08,BREADTH,BREADTH_UP1D,"Fraction of PIT-eligible non-ST stocks with close > pre_close today",1 day,POSITIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F09,BREADTH,BREADTH_NEWLOW20,"Fraction of PIT-eligible non-ST stocks with close_adj <= min(close_adj over past 20 trading days incl today)",20 trading days,NEGATIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F10,BREADTH,BREADTH_BELOW_BB,"Fraction of PIT-eligible non-ST stocks with close_adj < BB(20,2) lower (MA20 - 2*std20, ddof=1, same def as frozen engine)",20 trading days,NEGATIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F11,VOLATILITY,ALL_A_RV20,"Std of daily All-A EW index returns over past 20 trading days",20 trading days,UNKNOWN,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F12,VOLATILITY,ALL_A_RV60,"Std of daily All-A EW index returns over past 60 trading days",60 trading days,UNKNOWN,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F13,VOLATILITY,CROSS_SECTION_RET_STD,"Cross-sectional std of PIT-eligible non-ST stock daily returns today",1 day,UNKNOWN,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F14,VOLATILITY,DOWN_VOL_SHARE,"Fraction of PIT-eligible non-ST stocks with daily return <= -5% today",1 day,UNKNOWN,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F15,LIQUIDITY,MARKET_AMOUNT_RATIO20,"Today total market amount (sum of PIT-eligible non-ST amount) / mean of past 20 trading days' total amount",20 trading days,POSITIVE_WEAK,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F16,LIQUIDITY,MARKET_AMOUNT_Z60,"(Today total market amount - mean(past 60 trading days)) / std(past 60); NaN until 60d history",60 trading days,POSITIVE_WEAK,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F17,LIQUIDITY,MEDIAN_STOCK_AMOUNT_RATIO20,"Median over PIT-eligible non-ST stocks of (stock amount today / stock MA20 amount)",20 trading days,POSITIVE_WEAK,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F18,STRESS,LIMIT_DOWN_SHARE,"Fraction of PIT-eligible non-ST stocks with close <= limit_down_px (limit-down per frozen engine rule: pre_close*(1-pct), pct=0.20/0.10/0.05)",1 day,NEGATIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F19,STRESS,DROP5_SHARE,"Fraction of PIT-eligible non-ST stocks with daily return <= -5%",1 day,NEGATIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F20,STRESS,DROP7_SHARE,"Fraction of PIT-eligible non-ST stocks with daily return <= -7%",1 day,NEGATIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F21,STRESS,CROSS_SECTION_P10_RET,"10th percentile of PIT-eligible non-ST stock daily returns today",1 day,POSITIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F22,CROWDING,N_OVERSOLD_SIGNALS,"Number of frozen SECONDARY episodes with signal_date = t (== count of oversold signals that day, from frozen fullmarket_episode_metrics)",1 day,NEGATIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F23,CROWDING,OVERSOLD_SIGNAL_SHARE,"F22 / PIT-eligible non-ST universe size on day t",1 day,NEGATIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F24,CROWDING,N_OVERSOLD_Z60,"z-score of F22 over past 60 trading days (strict past window [t-60,t-1]); NaN until 60d",60 trading days,NEGATIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F25,MRH,MRH_20_REALIZED,"Mean over last 20 completed-episode signal-days of per-signal-day mean realized episode return; only episodes with exit_date <= t (PIT, no future info)",20 signal days,POSITIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F26,MRH,MRH_60_REALIZED,"Same as F25 over last 60 completed-episode signal-days",60 signal days,POSITIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED
+F27,MRH,MRH_WIN20_REALIZED,"Mean over last 20 completed-episode signal-days of per-signal-day realized win rate (return>0); only episodes with exit_date <= t",20 signal days,POSITIVE,Y20,Spearman_IC + HAC_lag20 + BH_m27,PREREGISTERED

@@ -112,6 +112,7 @@ STRICT_C ──► 独立重放 A ──► 全市场 89k A ──► 时间聚�
 | 市场门控为何失败？ | `[research/market_state/MARKET_STATE_GATE_T3.md](research/market_state/MARKET_STATE_GATE_T3.md)` | C — NO USEFUL PORTFOLIO GATE | CLOSED |
 | 横截面排序有无验证？ | `[research/ranking/CROSS_SECTIONAL_RANKING_P2_VALIDATION.md](research/ranking/CROSS_SECTIONAL_RANKING_P2_VALIDATION.md)` | B — PARTIAL（ATR20_PCT 唯一 full pass） | ACCEPTED |
 | ATR 为何未改善真实组合？ | `[research/portfolio/ATR_SLOT_ALLOCATION_P3.md](research/portfolio/ATR_SLOT_ALLOCATION_P3.md)` + `[research/portfolio/SLOT_CONTENTION_PATH_AUDIT.md](research/portfolio/SLOT_CONTENTION_PATH_AUDIT.md)` | C（组合路径依赖主导） | CLOSED |
+| 固定价格止损是否有效？ | `[research/execution/STOP_LOSS_SEMANTICS_S0.md](research/execution/STOP_LOSS_SEMANTICS_S0.md)`（adjusted-space 复权语义修复 + 配对推断） | Fixed price stop: **ACCEPTED NEGATIVE RESULT**（11 档均有害） | ACCEPTED |
 | 2025–2026 是否被打开？ | — | 否（UNTOUCHED） | CLOSED |
 
 ---
@@ -122,7 +123,7 @@ STRICT_C ──► 独立重放 A ──► 全市场 89k A ──► 时间聚�
 README.md            ← 你在这里：项目现状（第一屏）
 [CURRENT_STATUS.md](CURRENT_STATUS.md)    ← 所有研究结论的冻结总表（含 INVALID/SUPERSEDED 分类）
 [RESEARCH_MAP.md](RESEARCH_MAP.md)      ← 研究链地图（每个阶段 → 唯一 canonical 报告）
-[REPO_INVENTORY.csv](REPO_INVENTORY.csv)   ← 全仓库 620 个文件的分类清单（status / canonical / 落点）
+[REPO_INVENTORY.csv](REPO_INVENTORY.csv)   ← 全仓库 621 个文件的分类清单（status / canonical / 落点）
 [MIGRATION_MAP.csv](MIGRATION_MAP.csv)    ← 468 个文件的迁移映射（旧路径 → 新路径）
 CANONICAL_ARTIFACT_INTEGRITY.csv ← 迁移前后 canonical 文件 SHA256 校验（ALL UNCHANGED）
 DUPLICATE_FILE_AUDIT.csv         ← 字节级重复文件审计

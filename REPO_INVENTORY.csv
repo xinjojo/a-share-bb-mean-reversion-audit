@@ -619,3 +619,4 @@ results/evidence/s0/s0_eventday.csv,file,s0,result,ACTIVE,FALSE,,primary,results
 results/evidence/s0/s0_bootstrap.csv,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 block bootstrap
 results/evidence/s0/s0_invariants.json,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 invariants I1-I7
 results/evidence/s0/s0_summary.json,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 summary + classification
+results/evidence/s0/s0_delta_block_bootstrap.csv,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0.1 paired delta block bootstrap (primary inference)

@@ -14,7 +14,8 @@
     "I4_tplus1": true,
     "I5_costs_unchanged": true,
     "I6_no_2025_read": true,
-    "I7_old_replication_exact": true
+    "I7_dev_comparable_old_replication_exact": true,
+    "I8_boundary_contamination_isolated": true
   },
   "adj_net_by_threshold": {
     "-10.0": -2.6921451420662685,
@@ -30,6 +31,7 @@
     "-40.0": -0.847947933136906
   },
   "positive_stable_thresholds": [],
+  "paired_delta_11_upper_ci_neg": true,
   "classification": "A",
   "all_adjusted_below_baseline": true,
   "any_adjusted_above_baseline": false,

@@ -54,7 +54,7 @@ P4 Architecture Ablation ──► D TESTED BOTTLENECK (ACCEPTED DIAGNOSTIC)
 P4.1 Marginal Admission ──► B CAPITAL/PATH DILUTION DOMINANT (DEVELOPMENT DIAGNOSTIC, 待外审)
    │
    ▼
-S0 Stop-Loss Semantics ──► A OLD PHASE-A CONCLUSION ROBUST (Fixed Stop 语义修复, 待外审)
+S0 Stop-Loss Semantics ──► A OLD PHASE-A CONCLUSION ROBUST (ACCEPTED)
    │
    ▼
 ★ CURRENT: Portfolio Architecture（组合架构瓶颈，研究暂停，等待外部审计）★
@@ -94,15 +94,15 @@ S0 Stop-Loss Semantics ──► A OLD PHASE-A CONCLUSION ROBUST (Fixed Stop 语
 - **Canonical:** `[research/execution/STOP_LOSS_COUNTERFACTUAL_PHASE_A.md](research/execution/STOP_LOSS_COUNTERFACTUAL_PHASE_A.md)`
 - **源码:** `research/execution/stop_loss_counterfactual_phase_a.py`
 - **结果数据:** `results/evidence/stopA/`
-- **状态:** **PROVISIONAL / SEMANTICS ISSUE** — raw first-entry stop vs adjusted-space 问题未正式关闭，**不得误标 ACCEPTED**；结论为 `C — NO USEFUL STOP`
-- **下游（S0 语义修复）：** `research/execution/STOP_LOSS_SEMANTICS_S0.md`（adjusted-space 复刻后结论仍为 A——固定止损仍无用；Phase A 语义问题由此闭环，但 S0 待外审，Phase A 保持 PROVISIONAL）
+- **状态:** **SUPERSEDED BY S0** — raw first-entry stop 的复权语义问题由 S0 adjusted-space 修复闭环；Phase A 原结论为 `C — NO USEFUL STOP`，S0（ACCEPTED）确认其方向性结论在正确语义下仍成立
+- **下游（S0 语义修复）：** `research/execution/STOP_LOSS_SEMANTICS_S0.md`
 
 ### 5a. S0 Stop-Loss Semantics Remediation
 - **Canonical:** `[research/execution/STOP_LOSS_SEMANTICS_S0.md](research/execution/STOP_LOSS_SEMANTICS_S0.md)`
 - **源码:** `research/execution/stop_loss_semantics_s0.py`
 - **Registry:** `research/execution/registries/STOP_LOSS_SEMANTICS_S0_REGISTRY.csv`（SHA256 `7e8416fd...`，pre-reg `b352f77`）
 - **结果数据:** `results/evidence/s0/`
-- **状态:** **A — OLD PHASE-A CONCLUSION ROBUST TO SEMANTICS FIX**（DEVELOPMENT DIAGNOSTIC，待外审）— dev n=61,828；factor_changed 12.12%；11 档 adjusted 全低于 baseline（事件日 delta HAC CI 全 <0）；I1–I7 全 PASS；2025+ 未读
+- **状态:** **A — OLD PHASE-A CONCLUSION ROBUST TO ADJUSTED-SPACE SEMANTICS FIX**（**ACCEPTED**，S0.1 外审通过）— dev n=61,828；factor_changed 12.12%；11 档 adjusted 全低于 baseline；**S0.1 paired delta block-bootstrap 11/11 档 95% CI 上界 <0**（`s0_delta_block_bootstrap.csv`）；I1–I8 全 PASS；2025+ 未读
 
 ### 6. Temporal Clustering T1
 - **Canonical:** `[research/market_state/TEMPORAL_CLUSTERING_PHASE_T1.md](research/market_state/TEMPORAL_CLUSTERING_PHASE_T1.md)`

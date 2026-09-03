@@ -459,6 +459,36 @@ def ed_inference(cf_ret, sd, delta=None):
     return out
 
 
+def paired_delta_block_bootstrap(cf_ret, ret0, sd, L=21, B=2000, seed=0):
+    """S0.1: PAIRED event-day delta = day_adj_mean - day_baseline_mean (SAME event day),
+    then moving/block bootstrap (L=21, B>=2000) over the complete event-day delta series.
+
+    This is the preregistered primary inference for 'adjusted fixed stop vs no-stop'.
+    NOT a bootstrap of the adjusted-stop level (that is s0_bootstrap.csv, descriptive only).
+    """
+    df = pd.DataFrame({'sd': pd.to_datetime(sd), 'adj': cf_ret, 'base': ret0})
+    g = df.groupby('sd')
+    day_adj = g['adj'].mean().to_numpy()
+    day_base = g['base'].mean().to_numpy()
+    delta = day_adj - day_base                      # paired same-event-day difference
+    point = float(delta.mean())
+    rng = np.random.default_rng(seed); n = len(delta)
+    nblocks = int(np.ceil(n / L)); bl = []
+    for _ in range(B):
+        idx = []
+        for _b in range(nblocks):
+            s = rng.integers(0, n - L + 1) if n - L + 1 > 0 else 0
+            idx.extend(range(s, min(s + L, n)))
+        idx = np.array(idx[:n])
+        bl.append(delta[idx].mean())
+    bl = np.array(bl)
+    return dict(n_event_days=int(len(delta)), delta_point=float(point),
+                bootstrap_mean=float(bl.mean()),
+                ci_lo=float(np.percentile(bl, 2.5)), ci_hi=float(np.percentile(bl, 97.5)),
+                p_delta_ge_0=float((bl >= 0).mean()),
+                block_length=L, B=B)
+
+
 def summ_df(d, cf_col='cf_ret'):
     r = d[cf_col]
     cf_pnl = d['cost'] * d[cf_col] / 100.0
@@ -885,6 +915,25 @@ def main():
     bs_df.to_csv(os.path.join(OUT, 's0_bootstrap.csv'), index=False)
 
     # ============================================================
+    # 14b) S0.1: PAIRED delta block bootstrap (primary inference)
+    #      day_delta = day_adj_mean - day_baseline_mean (SAME event day),
+    #      moving/block bootstrap L=21, B=2000 over the complete day_delta series.
+    # ============================================================
+    db_rows = []
+    for stop in STOPS:
+        a = res_adj[(stop, 'STOP_FIRST')]
+        infb = paired_delta_block_bootstrap(a['cf_ret'].values, a['ret0'].values, a['signal_date'].values)
+        infb['stop_pct'] = stop
+        db_rows.append(infb)
+    db_df = pd.DataFrame(db_rows)
+    db_df.to_csv(os.path.join(OUT, 's0_delta_block_bootstrap.csv'), index=False)
+    print('[S0.1] paired delta block bootstrap (adj minus baseline, same event day):', flush=True)
+    print(db_df[['stop_pct', 'n_event_days', 'delta_point', 'bootstrap_mean', 'ci_lo', 'ci_hi',
+                 'p_delta_ge_0', 'block_length', 'B']].to_string(index=False), flush=True)
+    delta_11_neg = bool((db_df['ci_hi'] < 0).all())
+    print(f'  S0.1 gate: all 11 thresholds paired-block-bootstrap 95% CI upper < 0 => {delta_11_neg}', flush=True)
+
+    # ============================================================
     # 15) invariants
     # ============================================================
     inv = {}
@@ -902,8 +951,14 @@ def main():
     inv['I5_costs_unchanged'] = bool((res_old[(-20.0, 'STOP_FIRST')]['cost'] == res_adj[(-20.0, 'STOP_FIRST')]['cost']).all())
     # I6: 2025+ never read
     inv['I6_no_2025_read'] = True   # enforced by MAX_READ_I + dev-only universe
-    # I7: old Phase A replication exact
-    inv['I7_old_replication_exact'] = bool(old_parity_pass)
+    # I7 (S0.1 wording): DEV-COMPARABLE old engine parity exact.
+    #   NOTE: old canonical is FULL-sample; a dev-key episode may depend on 2025 prices
+    #   (boundary contamination). 'exact' here means: within the dev-comparable window,
+    #   every true engine mismatch is zero (boundary-contaminated canonical rows excluded+disclosed).
+    inv['I7_dev_comparable_old_replication_exact'] = bool(old_parity_pass)
+    # I8 (S0.1): boundary contamination fully isolated — the only parity deviations are
+    #   canonical rows that used post-2024 prices (002789.SZ -25%), no true engine mismatch remains.
+    inv['I8_boundary_contamination_isolated'] = bool(tot_boundary >= 1 and tot_true == 0)
     with open(os.path.join(OUT, 's0_invariants.json'), 'w') as f:
         json.dump(inv, f, indent=2, default=str)
     print('[S0] invariants:', json.dumps(inv, indent=2), flush=True)
@@ -935,6 +990,8 @@ def main():
         if inf['delta_daily_mean'] > 0 and inf.get('delta_hac_ci_lo', np.nan) > 0:
             positive_stable.append(float(stop))
     summary['positive_stable_thresholds'] = positive_stable
+    # S0.1 gate: A requires all 11 paired-delta block-bootstrap upper CI < 0
+    summary['paired_delta_11_upper_ci_neg'] = bool(delta_11_neg)
     # direction check: all adjusted means below baseline?
     all_adj_below_base = bool((summ_df_out['adj_mean'] < summ_df_out['base_mean']).all())
     any_adj_above_base = bool((summ_df_out['adj_mean'] > summ_df_out['base_mean']).any())
@@ -944,8 +1001,10 @@ def main():
         cls = 'D'
     elif positive_stable:
         cls = 'C'
-    elif all_adj_below_base:
+    elif all_adj_below_base and delta_11_neg:
         cls = 'A'
+    elif all_adj_below_base:
+        cls = 'B'
     elif max_adj_old_diff > 0.1:
         cls = 'B'
     else:

@@ -127,6 +127,36 @@ boundary_2025 = 2（=1 episode × STOP_FIRST/TP_FIRST）
 
 **11 档的 adjusted−baseline 事件日 delta 全部显著为负**（delta HAC 95% CI 上界均 < 0，无一跨 0）。没有任何阈值出现稳定正净效应（`positive_stable_thresholds = []`）。
 
+### 6.1 三种置信区间的严格区分（S0.1 外部审计要求）
+
+| 类型 | 内容 | 文件 | 是否用于最终结论 |
+|---|---|---|---|
+| A. adjusted-stop level HAC/bootstrap | `s0_eventday.csv` 的 `daily_mean`/`block_boot_ci_*`、`s0_bootstrap.csv`（对 **adjusted-stop 事件日均值**做 bootstrap，**非 paired delta 推断**） | `s0_eventday.csv` / `s0_bootstrap.csv` | 仅描述 |
+| B. paired adjusted−baseline HAC | `s0_eventday.csv` 的 `delta_daily_mean`/`delta_hac_ci_lo/hi`（同一 signal day 的 `day_adj_mean − day_baseline_mean` 配对差 + HAC lag10） | `s0_eventday.csv` | **是** |
+| C. paired adjusted−baseline block bootstrap | `s0_delta_block_bootstrap.csv`（同一配对差序列做 moving/block bootstrap，L=21, B=2000, seed=0） | `s0_delta_block_bootstrap.csv` | **是** |
+
+> `s0_bootstrap.csv` **不是** paired delta 推断：它 bootstrap 的是 adjusted-stop **水平**。最终"固定止损有害"结论只依赖 **B + C** 两类 paired 推断（见 §6.2）。
+
+### 6.2 Paired delta block-bootstrap（S0.1，主推断 `s0_delta_block_bootstrap.csv`）
+
+对每个 signal day 先算 `day_adj_mean` 与 `day_baseline_mean`，配对差 `day_delta = day_adj_mean − day_baseline_mean`（**同一事件日的配对差，禁止分别 bootstrap 两组再相减**），再对完整 day_delta 序列做 moving/block bootstrap（L=21, B=2000, seed=0）：
+
+| stop_pct | n_event_days | delta_point | bootstrap_mean | 95% CI | p(delta≥0) |
+|---|---|---|---|---|---|
+| −10% | 1,097 | −2.195 | −2.238 | [−2.947, −1.597] | 0.000 |
+| −12.5% | 1,097 | −1.920 | −1.948 | [−2.656, −1.317] | 0.000 |
+| −15% | 1,097 | −1.754 | −1.773 | [−2.528, −1.152] | 0.000 |
+| −17.5% | 1,097 | −1.594 | −1.616 | [−2.377, −0.997] | 0.000 |
+| −20% | 1,097 | −1.448 | −1.464 | [−2.246, −0.853] | 0.000 |
+| −22.5% | 1,097 | −1.348 | −1.364 | [−2.162, −0.759] | 0.000 |
+| −25% | 1,097 | −1.218 | −1.244 | [−2.020, −0.654] | 0.000 |
+| −27.5% | 1,097 | −1.092 | −1.117 | [−1.841, −0.563] | 0.000 |
+| −30% | 1,097 | −1.014 | −1.035 | [−1.718, −0.518] | 0.000 |
+| −35% | 1,097 | −0.802 | −0.814 | [−1.430, −0.363] | 0.000 |
+| −40% | 1,097 | −0.614 | −0.632 | [−1.117, −0.269] | 0.000 |
+
+**11/11 档 paired block-bootstrap 95% CI 上界全部 < 0**（`paired_delta_11_upper_ci_neg = true`），p(delta≥0)=0.000 → S0=A 的预注册统计门完全满足，不依赖任何档位挑选。
+
 ---
 
 ## 7. Same-bar 歧义 bound（`s0_samebar_bounds.csv`）
@@ -190,7 +220,10 @@ boundary_2025 = 2（=1 episode × STOP_FIRST/TP_FIRST）
 | I4 T+1 保留（无 entry 当日执行） | **PASS** |
 | I5 entry/exit costs 不变 | **PASS** |
 | I6 2025+ 从未读取（`MAX_READ_I=N2024` + dev-only universe） | **PASS** |
-| I7 old Phase A replication exact | **PASS** |
+| **I7** dev-comparable old Phase A replication exact（见 §3） | **PASS** |
+| **I8** 2025 边界污染已完全隔离（唯一 parity 偏差 = canonical 依赖 2025 价格的 002789 −25% 档，无真实引擎 mismatch） | **PASS** |
+
+> **I7 措辞说明（S0.1）：** 不再称 "all canonical old outcomes exact"。旧 canonical 为**全样本**，dev-key episode 可能依赖 2025 价格（如 002789.SZ/−25%，见 §3.1）。正确表述为 **"DEV-COMPARABLE OLD ENGINE PARITY EXACT"**：在 dev 可比窗口内，剔除并披露边界污染的 canonical 行后，真实引擎 mismatch = 0。这是**旧 canonical 的 horizon 污染**，不是引擎 mismatch；S0 dev replay 正确拒绝了 2025 数据（I6）。
 
 ---
 
@@ -199,13 +232,19 @@ boundary_2025 = 2（=1 episode × STOP_FIRST/TP_FIRST）
 依据预注册分类（`s0_summary.json`）：
 
 - 无稳定正净效应阈值（`positive_stable_thresholds = []`）→ 非 C；
-- old parity 通过 → 非 D；
-- **11 档 adjusted 均值全部低于 baseline（`all_adjusted_below_baseline = true`），且 adjusted vs old 差异极小（max 0.021 pp）** → **A — OLD PHASE-A CONCLUSION ROBUST TO SEMANTICS FIX**。
+- old parity 通过（`old_parity_pass = true`）→ 非 D；
+- **11 档 adjusted 均值全部低于 baseline（`all_adjusted_below_baseline = true`）**；
+- **11/11 档 paired block-bootstrap 95% CI 上界 < 0（`paired_delta_11_upper_ci_neg = true`，S0.1 补全）**；
+- adjusted vs old 差异极小（max 0.021 pp）。
+
+→ **A — OLD PHASE-A CONCLUSION ROBUST TO ADJUSTED-SPACE SEMANTICS FIX**（S0.1 正式评级）
 
 ### 最终裁决
 
-> **修正复权语义后，"固定止损无用"的 Phase A 结论仍然成立。**
-> 在预注册的 −10…−40% 历史网格下，adjusted-space 固定止损**每一档**的事件日净效应都显著为负（delta HAC CI 全 < 0），无任何档位有稳定正净效应；adjusted 与 old raw 结果差异 < 0.03 pp，语义修复不改变方向性结论。旧 raw 语义的误触发仅影响 factor_changed 子集（12.12%），其边界已被精确界定。
+> **修正复权语义后，"固定止损无用"的 Phase A 结论仍然成立，并已通过完整配对推断（B+C）。**
+> 在预注册的 −10…−40% 历史网格下，adjusted-space 固定止损**每一档**的配对事件日净效应都显著为负：delta HAC（B 类）与 paired block-bootstrap（C 类）的 95% CI 上界**全部 < 0**，无任何档位有稳定正净效应；adjusted 与 old raw 结果差异 < 0.03 pp，语义修复不改变方向性结论。旧 raw 语义的误触发仅影响 factor_changed 子集（12.12%），其边界已被精确界定（I8）。
+>
+> **注意结论边界：** 这**不等于** "所有止损方法都无用"。本结论仅覆盖预注册的 −10…−40% **简单固定百分比价格止损**，不涉及 ATR/trailing/time stop 等其他止损族。
 
 ---
 
@@ -223,5 +262,7 @@ boundary_2025 = 2（=1 episode × STOP_FIRST/TP_FIRST）
 
 **Registry：** `research/execution/registries/STOP_LOSS_SEMANTICS_S0_REGISTRY.csv`（+ `.sha256`）
 **代码：** `research/execution/stop_loss_semantics_s0.py`
-**结果：** `results/evidence/s0/` — `s0_old_parity.csv`、`s0_parity_2025_boundary.csv`、`s0_adjfactor_semantics_audit.csv`、`s0_threshold_summary.csv`、`s0_samebar_bounds.csv`、`s0_gap_stops.csv`、`s0_execution_delays.csv`、`s0_saved_losers.csv`、`s0_killed_winners.csv`、`s0_deep_mae_subset.csv`、`s0_factor_changed_subset.csv`、`s0_eventday.csv`、`s0_bootstrap.csv`、`s0_invariants.json`、`s0_summary.json`
+**结果：** `results/evidence/s0/` — `s0_old_parity.csv`、`s0_parity_2025_boundary.csv`、`s0_adjfactor_semantics_audit.csv`、`s0_threshold_summary.csv`、`s0_samebar_bounds.csv`、`s0_gap_stops.csv`、`s0_execution_delays.csv`、`s0_saved_losers.csv`、`s0_killed_winners.csv`、`s0_deep_mae_subset.csv`、`s0_factor_changed_subset.csv`、`s0_eventday.csv`、`s0_bootstrap.csv`、**`s0_delta_block_bootstrap.csv`（S0.1 新增，paired delta 主推断）**、`s0_invariants.json`、`s0_summary.json`
 **图：** `research/execution/figures/s0_threshold_means.png`
+
+> `s0_bootstrap.csv` 语义：对 **adjusted-stop 事件日均值**的 block bootstrap，**不是** paired delta 推断；paired 推断见 `s0_delta_block_bootstrap.csv`（S0.1）。

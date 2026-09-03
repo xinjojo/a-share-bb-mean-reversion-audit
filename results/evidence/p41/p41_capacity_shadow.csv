@@ -1,0 +1,8 @@
+metric,value
+pnl delta (A1 - A0),-305233.92
+extra executed trades,47.0
+extra slot-days,2057.0
+extra capital-days,16937795.0
+shadow pnl per extra trade,-6494.34
+shadow pnl per extra slot-day,-148.39
+shadow pnl per extra capital-day,-0.018021

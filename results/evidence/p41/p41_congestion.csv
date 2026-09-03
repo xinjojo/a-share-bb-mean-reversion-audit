@@ -1,0 +1,4 @@
+metric,bucket,days
+queueable_candidates,1,1142
+queueable_candidates,2,55
+queueable_candidates,3+,15

@@ -1,0 +1,8 @@
+metric,value
+COMMON n,65.0
+mean delta_pnl,-1032.55
+median delta_pnl,0.0
+mean delta_levels,-0.446
+mean delta_hold,0.0
+same_exit_share,1.0
+same_levels_share,0.615

@@ -48,6 +48,12 @@ P3 ATR Slot Allocation ──► C NO USEFUL PORTFOLIO RANKING (CLOSED · FAIL)
 P3.1 Slot Contention ──► C BOTH (ACCEPTED DIAGNOSTIC)
    │
    ▼
+P4 Architecture Ablation ──► D TESTED BOTTLENECK (ACCEPTED DIAGNOSTIC)
+   │
+   ▼
+P4.1 Marginal Admission ──► C BOTH (DEVELOPMENT DIAGNOSTIC, 待外审)
+   │
+   ▼
 ★ CURRENT: Portfolio Architecture（组合架构瓶颈，研究暂停，等待外部审计）★
 ```
 
@@ -154,9 +160,18 @@ P3.1 Slot Contention ──► C BOTH (ACCEPTED DIAGNOSTIC)
 - **状态:** **ACCEPTED DIAGNOSTIC（外审通过）** — **D — TESTED ARCHITECTURE BOTTLENECK NOT EXPLAINED BY SIMPLE K/LAYER REMOVAL**（2020–2024 PURE STOCK 10bp 结构消融：A0 +30.30% / A1 K=999 −0.23% / A2 ML=1 −5.84% / A3 −29.27%。**K=3 是实际容量瓶颈（candidate 530 / blocked_K 336），但在当前历史样本与组合规则下同时表现为保护性的 admission constraint / implicit capacity filter**；A2 同批股票纯路径差异即可 ±50 万；A0 parity 精确通过。边界：仅测试极端消融 K 3→999、levels 5→1，未搜索 architecture space）
 - **关键发现:** 解除 K 槽位（A1）→ 接入更差信号（新增 58 笔均值 −2,045）+ 资金稀释 → 收益崩盘；移除加仓（A2）→ 同一批股票、entry-level Jaccard 0.96，但 NEVER_RECONVERGED → 收益转负。真正局限在更深层（单笔信号边缘 + 路径依赖 + 深 MAE 长持仓占用），P4 禁止修改 exit。
 
+### 14b. P4.1 Marginal Admission / Capacity Shadow-Price Audit
+- **Canonical:** `[research/portfolio/MARGINAL_ADMISSION_P41.md](research/portfolio/MARGINAL_ADMISSION_P41.md)`
+- **源码:** `research/portfolio/marginal_admission_p41.py`
+- **Registry:** `research/portfolio/registries/MARGINAL_ADMISSION_P41_REGISTRY.csv`（SHA256 `6efc564f...3d6efed`）
+- **结果数据:** `results/evidence/p41/`
+- **状态:** **DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH）** — **C — BOTH**（A1_ONLY 58 笔独立 quality +3.28%/win 68.8% 仍为正，但实际 PnL −118,610；COMMON 65 笔同 key 在 A1 少赚 67,116（赢家稀释>深亏减少）；A1_ONLY 深 MAE 率 40.6% vs COMMON 18.8%，最差几笔独立 return −18%~−22%、MAE −37%~−55% 本就被坏信号标记；PnL bridge residual=0.00 精确闭合）
+- **关键发现:** **H1（边际信号更差）+ H3（资本/路径稀释）= both**。A1_ONLY 实际亏损集中在少数 deep-MAE 长持仓（4 笔 < −50k 合计 −308,226，其余 54 笔 +189,616）；同一批 COMMON 交易在 A1 中赢家被稀释 > 深亏减少。容量影子成本：每额外 1 笔 ≈ −6,494 元、每额外 slot-day ≈ −148 元。P4 结论保持不变。
+
 ### 15. ★ CURRENT: Portfolio Architecture（组合架构）
 - **状态:** 研究**暂停**。当前唯一活跃问题是：有限 K=3 slots + 长持仓 + 多层占位/路径依赖的组合架构如何提升资金效率。
 - **P4 进展（2026-09-03，ACCEPTED DIAGNOSTIC，外审通过）:** 结构性消融显示 K=3 是实际容量瓶颈，但在当前历史样本与组合规则下同时表现为保护性的 admission constraint（解除任一约束组合均大幅恶化）；完全移除多层加仓（5→1 层）在测试路径下有害（不断言 5 层最优）。瓶颈在更深层。下一步必须等待外部审计决定；2025–2026 Confirmation 继续 CLOSED。
+- **P4.1 进展（2026-09-03，DEVELOPMENT DIAGNOSTIC，待外审）:** 解除 K 的恶化 = **C — BOTH**——边际信号本身更差（深 MAE 率 2.2×、最差几笔独立就深亏）+ 共享资本/路径稀释（同一批交易赢家被稀释、COMMON 少赚 67k）；A1_ONLY 独立整体仍为正但实际 PnL −118,610。待外审后决定是否更新 README CURRENT TRUTH。
 
 ---
 
@@ -172,6 +187,7 @@ P3.1 Slot Contention ──► C BOTH (ACCEPTED DIAGNOSTIC)
 | ATR Slot Allocation Registry | `research/portfolio/registries/` | P3 registry commit |
 | Market State Gate Registry | `research/market_state/registries/` | T3 registry commit |
 | Portfolio Architecture P4 Registry | `research/portfolio/registries/` | `70588a7`（P4-A） |
+| Marginal Admission P4.1 Registry | `research/portfolio/registries/` | `c6c2865`（P4.1-A） |
 
 ---
 

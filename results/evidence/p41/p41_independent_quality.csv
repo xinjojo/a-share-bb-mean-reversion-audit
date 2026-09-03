@@ -1,0 +1,5 @@
+arch,group,n,n_covered,cov_pct,ind_mean,ind_median,ind_win,pf
+A0,COMMON,65,48,73.8,4.11,4.1,79.2,3.171
+A0,A0_ONLY,11,5,45.5,-1.97,-4.04,40.0,0.613
+A1,COMMON,65,48,73.8,4.11,4.1,79.2,3.171
+A1,A1_ONLY,58,32,55.2,3.28,6.29,68.8,1.997

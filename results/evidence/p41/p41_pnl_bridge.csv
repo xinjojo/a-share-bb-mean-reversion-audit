@@ -1,0 +1,10 @@
+component,value
+A0 stock pnl,302950.94
+COMMON A0 pnl,183442.6
+COMMON A1 pnl,116326.54
+COMMON delta,-67116.06
+A0_ONLY pnl,119508.34
+A1_ONLY pnl,-118609.52
+A1 stock pnl (recomputed),-2282.99
+A0_ONLY contribution to bridge (A1 - A0),-119508.34
+residual (A1 - comm - a1only),0.0

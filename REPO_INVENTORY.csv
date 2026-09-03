@@ -578,3 +578,24 @@ results/evidence/p4/p4_full_block_ledger.csv,file,p4,result,ACTIVE,FALSE,,primar
 results/evidence/p4/p4_blocked_episode_outcomes.csv,file,p4,result,ACTIVE,FALSE,,primary,results/evidence/p4/p4_blocked_episode_outcomes.csv,blocked candidate outcome coverage 27.2%
 results/evidence/p4/p4_blocked_opportunities.csv,file,p4,result,ACTIVE,FALSE,,primary,results/evidence/p4/p4_blocked_opportunities.csv,blocked K/held per arch
 results/evidence/p4/p4_interaction_decomposition.csv,file,p4,result,ACTIVE,FALSE,,primary,results/evidence/p4/p4_interaction_decomposition.csv,slot/layer/interaction decomposition
+research/portfolio/MARGINAL_ADMISSION_P41.md,file,p4.1,report,ACTIVE,TRUE,,primary,research/portfolio/MARGINAL_ADMISSION_P41.md,CANONICAL P4.1; C BOTH (marginal admission / capacity shadow-price); WAITING EXTERNAL AUDIT
+research/portfolio/marginal_admission_p41.py,file,p4.1,code,ACTIVE,FALSE,,primary,research/portfolio/marginal_admission_p41.py,P4.1 script (preregistered; registry SHA 6efc564f)
+research/portfolio/registries/MARGINAL_ADMISSION_P41_REGISTRY.csv,file,p4.1,registry,ACTIVE,FALSE,,registry,research/portfolio/registries/MARGINAL_ADMISSION_P41_REGISTRY.csv,P4.1 preregistration
+research/portfolio/registries/MARGINAL_ADMISSION_P41_REGISTRY.sha256,file,p4.1,registry,ACTIVE,FALSE,,registry,research/portfolio/registries/MARGINAL_ADMISSION_P41_REGISTRY.sha256,P4.1 registry SHA256
+results/evidence/p41/p41_trade_groups.csv,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_trade_groups.csv,P4.1 marginal admission audit result
+results/evidence/p41/p41_independent_coverage.csv,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_independent_coverage.csv,P4.1 marginal admission audit result
+results/evidence/p41/p41_independent_quality.csv,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_independent_quality.csv,P4.1 marginal admission audit result
+results/evidence/p41/p41_independent_eventday.csv,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_independent_eventday.csv,P4.1 marginal admission audit result
+results/evidence/p41/p41_independent_bootstrap.csv,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_independent_bootstrap.csv,P4.1 marginal admission audit result
+results/evidence/p41/p41_admission_state.csv,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_admission_state.csv,P4.1 marginal admission audit result
+results/evidence/p41/p41_marginal_rank.csv,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_marginal_rank.csv,P4.1 marginal admission audit result
+results/evidence/p41/p41_congestion.csv,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_congestion.csv,P4.1 marginal admission audit result
+results/evidence/p41/p41_common_matched.csv,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_common_matched.csv,P4.1 marginal admission audit result
+results/evidence/p41/p41_common_matched_summary.csv,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_common_matched_summary.csv,P4.1 marginal admission audit result
+results/evidence/p41/p41_pnl_bridge.csv,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_pnl_bridge.csv,P4.1 marginal admission audit result
+results/evidence/p41/p41_a1only_actual.csv,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_a1only_actual.csv,P4.1 marginal admission audit result
+results/evidence/p41/p41_temporal_concentration.csv,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_temporal_concentration.csv,P4.1 marginal admission audit result
+results/evidence/p41/p41_market_state_overlay.csv,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_market_state_overlay.csv,P4.1 marginal admission audit result
+results/evidence/p41/p41_mae_holding.csv,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_mae_holding.csv,P4.1 marginal admission audit result
+results/evidence/p41/p41_capacity_shadow.csv,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_capacity_shadow.csv,P4.1 marginal admission audit result
+results/evidence/p41/p41_summary.json,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_summary.json,P4.1 marginal admission audit result

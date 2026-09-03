@@ -1,0 +1,4 @@
+group,n,n_covered,deep_mae_rate,mean_mae,mean_hold_actual,mean_levels,mean_ind_hold,slot_days,total_pnl
+COMMON,65,48,18.8,-12.09,34.7,1.72,32.1,2253.0,116327.0
+A1_ONLY,58,32,40.6,-15.18,42.1,1.66,39.4,2440.0,-118610.0
+A0_ONLY,11,5,40.0,-19.72,34.8,1.55,41.8,383.0,119508.0

@@ -211,6 +211,13 @@ F2 Actionability Value Bound ──► D ACTIONABILITY NEGATIVE (DEVELOPMENT DIA
 - **结果数据:** `results/evidence/f2/`
 - **状态:** **INVALID / P0 — CAPITAL-BASIS MISMATCH（SUPERSEDED FOR INFERENCE BY F2.1）**：baseline ret0 分母含 D20 后 future adds，oracle return 分母只含 anchor 已持资本——不同 shares/资本基准，经济比较无效。历史 D 数字仅作记录，不得作 economic value 结论
 - **关键数字:** O1/O2/O3 eventday Δ −2.28/−5.19/−4.81pp（HAC & calendar boot CI 全显著负）；TP benefit −4.13pp；FP cost −24.6~−30.3pp；confusion grid 28/28 负；break-even FPR 无解；anchor-close 乐观 −1.69pp 仍负。**未设计 predictor/stop/exit。**
+### 14f. F2.1 Matched-Share Actionability / Perfect-Label Fixed-Action Value
+- **Canonical:** `[research/risk/FAILURE_STATE_F21.md](research/risk/FAILURE_STATE_F21.md)`
+- **源码:** `research/risk/failure_state_f21.py`
+- **Registry:** `research/risk/registries/FAILURE_STATE_F21_MATCHED_ACTION_REGISTRY.csv`（SHA256 `12f8311c...`，pre-reg `02c6738`）
+- **结果数据:** `results/evidence/f21/`
+- **状态:** **DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH）** — **B — NARROW POSITIVE ACTIONABILITY**（matched-share 基准修复 F2 P0）
+- **关键数字:** O1 完美标签 D20+1 清仓 +1.45pp（HAC [0.48,2.42] / boot [0.40,2.61] 显著正）；O2/O3 跨 0；TP −0.46pp、FP −17.9~−25.0pp；break-even precision ≥96%（TPR=.5 → break-even FPR 0.080）；natural exit 61,828 replay parity 0 误差；future-add 57.0%。**未设计 predictor/stop/exit。**
 ### 15. ★ CURRENT: Portfolio Architecture（组合架构）
 - **状态:** 研究**暂停**。当前唯一活跃问题是：有限 K=3 slots + 长持仓 + 多层占位/路径依赖的组合架构如何提升资金效率。
 - **P4 进展（2026-09-03，ACCEPTED DIAGNOSTIC，外审通过）:** 结构性消融显示 K=3 是实际容量瓶颈，但在当前历史样本与组合规则下同时表现为保护性的 admission constraint（解除任一约束组合均大幅恶化）；完全移除多层加仓（5→1 层）在测试路径下有害（不断言 5 层最优）。瓶颈在更深层。下一步必须等待外部审计决定；2025–2026 Confirmation 继续 CLOSED。
@@ -234,7 +241,8 @@ F2 Actionability Value Bound ──► D ACTIONABILITY NEGATIVE (DEVELOPMENT DIA
 | S0 Stop-Loss Semantics Registry | `research/execution/registries/` | `b352f77`（S0-A） |
 | F1 Failure-State Registry | `research/risk/registries/` | `1de126b`（F1-A） |
 | F1.1 Inference Remediation Registry | `research/risk/registries/` | `2cecd15`（F1.1-A） |
-| F2 Actionability Value Bound Registry | `research/risk/registries/` | `4e088fb`（F2-A） |
+| F2 Actionability Value Bound Registry | `research/risk/registries/` | `4e088fb`（F2-A，INVALID/P0） |
+| F2.1 Matched-Share Actionability Registry | `research/risk/registries/` | `02c6738`（F2.1-A） |
 
 ---
 

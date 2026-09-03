@@ -1,0 +1,13 @@
+{
+  "I1_S_anchor_identical_both_legs": true,
+  "I2_C_anchor_identical_denominator": true,
+  "I3_natural_exit_price_replay_parity_exact": true,
+  "I4_future_layers_excluded_from_matched_primary_return": true,
+  "I5_early_execution_rules_frozen": true,
+  "I6_fees_slippage_frozen": true,
+  "I7_no_2025_read": true,
+  "I8_registries_unchanged": true,
+  "I9_no_predictor_stop_new_exit": true,
+  "natural_parity_checked": 61828,
+  "natural_parity_bad": 0
+}

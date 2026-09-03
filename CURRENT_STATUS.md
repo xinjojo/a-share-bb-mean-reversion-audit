@@ -30,6 +30,7 @@
 | 14e | F1 Deep-MAE Recoverability / Failure-State Taxonomy | **A — STRONG RECOVERABILITY PREDICTABILITY**（DEVELOPMENT DIAGNOSTIC；D20 锚点 12,590 笔、D30 6,130 笔；**18 个预注册 primary 中 13 个通过完整 gate**：方向一致 + BH q(m=18)<0.05 + 配对 block-bootstrap(L=21,B=2000) CI 排除 0 + D20/D30 同向，覆盖 PRICE_PATH/POSITION/VOLATILITY/RECOVERY/LIQUIDITY 5 family（收敛为约 3 个独立维度：浮亏深度×时长、波动率、量能）；F_CUR_MAE 本身不显著(q=0.123)；R01 Q1 弱市场 D20 恢复率 15.7% vs Q5 3.6%、R05 Q5 压力市场 17.8% vs Q1 4.4%（与 T3 systemic-vs-isolated 呼应）；跌到 −20% 后 ~90% 样本仍会再创新低、一半再跌 ≥7.5pp；实现审计：F_DAYS_SINCE_LOW 因 anchor 定义 degenerate 恒 0（已披露）、F_NLOW10 方向与预注册相反不 pass）。**本阶段仅证明失败/可恢复前瞻可识别，未设计任何 stop/exit** | **SUPERSEDED FOR INFERENCE BY F1.1**（描述性输出继续有效） | `[research/risk/FAILURE_STATE_F1.md](research/risk/FAILURE_STATE_F1.md)` |
 | 14f | F1.1 Failure-State Inference Remediation | **FINAL = A — STRONG RECOVERABILITY PREDICTABILITY**（保守取 CLOSE/TOUCH 两语义较低者；修复三问题：①primary 用全部 anchor dates（D20=752/D30=537，去掉未注册 MIN_DAY_N=5，降为 sensitivity）；②gate 方向/D20-D30 一致性改用 anchor-day day_corr（F_AMT_RATIO20 由此 CLOSE 下 d30_consistent 由 True 改 False，不再误 pass）；③双 recovery 语义 CLOSE/A（9 pass）与 TOUCH/A（11 pass），各 4 family（PRICE_PATH/POSITION/RECOVERY/VOLATILITY）≥2 非冗余；calendar block-bootstrap(L21,B2000,seed0) CI 全排除 0；MIN5 sensitivity 不改方向；D30 strengthening q 计数 0（仅 537 天更稀疏，如实报告，不作为门槛）；sanity A–J 全 PASS） | **ACCEPTED**（R0.4 外审通过；描述性输出在 F1，推断以 F1.1 为准） | `[research/risk/FAILURE_STATE_F11.md](research/risk/FAILURE_STATE_F11.md)` |
 | 14g | F2 Failure-State Actionability / Perfect-Information Value Bound | **INVALID / P0 — CAPITAL-BASIS MISMATCH（SUPERSEDED FOR INFERENCE BY F2.1）**：natural baseline ret0 分母含 D20 后 future adds 全部资本，oracle return 分母只含 anchor 已持资本（不同 shares / 不同资本基准 / 不同未来资本承诺），经济比较无效。原 D 数字仅作历史记录（O1 Δ −2.28pp 等），**不得**作为 action economic value 结论 | INVALID（历史结果保留，不删） | `[research/risk/FAILURE_STATE_F2.md](research/risk/FAILURE_STATE_F2.md)` |
+| 14h | F2.1 Matched-Share Actionability / Perfect-Label Fixed-Action Value | **B — NARROW POSITIVE ACTIONABILITY**（DEVELOPMENT DIAGNOSTIC，待外审；修复 F2 P0 capital-basis mismatch：matched-share 基准 S_anchor/C_anchor，61,828 natural exit 执行价 replay parity 0 误差；D20 n=12,590/752 days，future-add 57.0%→F2 分母污染平均 +4.77pp；O1 完美最终-loser 标签 D20+1 清仓 **+1.45pp**（HAC [0.48,2.42] / boot [0.40,2.61] 显著正），O2 −0.34pp、O3 −0.09pp（跨 0）；TP matched benefit −0.46pp（近中性）、FP 误杀成本 −17.9~−25.0pp；grid TPR=.5/FPR=.2 +0.19（CI [−0.06,+0.44] 跨 0）；break-even FPR 0.040/0.080/0.120/0.160（需 ≥96% precision）；资本释放 36.8 天/笔 + future-add 资本 21.69 亿 avoided；D30 O1 −0.87pp 跨 0、O2/O3 显著负） | DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH） | `[research/risk/FAILURE_STATE_F21.md](research/risk/FAILURE_STATE_F21.md)` |
 | 15 | 2025–2026 Confirmation | **UNTOUCHED / CLOSED**（全程未读取任何 2025–2026 的 episode outcome / portfolio / feature） | CLOSED | — |
 
 ---
@@ -97,6 +98,8 @@ F_DAYS_SINCE_FIRST_D10（−0.322）、F_DIST_MA20（−0.317）；F_CUR_MAE 单
 **F2 进展（2026-09-03，INVALID / P0 — CAPITAL-BASIS MISMATCH，SUPERSEDED FOR INFERENCE BY F2.1）：** 外部审计冻结 P0：F2 的 O1/O2/O3 delta、TP benefit、FP cost、break-even frontier 全部存在 **capital-basis mismatch**——natural baseline ret0（final PnL / FINAL TOTAL COST，分母含 D20 后 future adds）与 oracle return（early-exit PnL / ANCHOR TOTAL COST，仅 layers ≤ anchor）比较了不同 shares、不同资本基准、不同未来资本承诺，**不得解释为 action economic value**。原 **D — ACTIONABILITY NEGATIVE** 结论作废（历史文件保留，顶部加 INVALID 标注；不写入 README CURRENT TRUTH）。正确经济比较在 F2.1（matched-share basis）进行。
 
 
+**F2.1 进展（2026-09-03，DEVELOPMENT DIAGNOSTIC，待外审）：** 修复 F2 P0（capital-basis mismatch）后，matched-share 基准下结论**反转**：O1 完美最终-loser 标签 D20+1 首个可执行 open 全仓清仓 **+1.45pp（显著正）**，O2/O3 接近 0（跨 0）；TP 正确退出 mean −0.46pp（近中性）、FP 误杀恢复者 −17.9~−25.0pp；grid TPR=.5/FPR=.2 跨 0 → **B — NARROW POSITIVE ACTIONABILITY**（完美标签有正价值但 break-even 精度 ≥96%、TPR=.5 时 break-even FPR 仅 8%）。61,828 自然退出执行价 replay parity 0 误差；future-add 发生率 57.0%（F2 分母污染平均 4.77pp）。未设计任何 predictor/stop/exit。
+
 **下一步仍须等待外部审计决定**，方可决定是否打开 2025–2026 Confirmation 或进入新的
 研究阶段。
 
@@ -133,6 +136,7 @@ F_DAYS_SINCE_FIRST_D10（−0.322）、F_DIST_MA20（−0.317）；F_CUR_MAE 单
 | F1 Failure-State Registry | `1de126b`（F1-A，结果前 push） | `a052309e6f939796795566d1cd1094e2ec706f53250c231377c64efb315eef14` |
 | F1.1 Inference Remediation Registry | `2cecd15`（F1.1-A，结果前 push） | `aacb2146308abd155401c1231209b7cab14e1bc44c50e6f19007ac39582aef91` |
 | F2 Actionability Value Bound Registry | `4e088fb`（F2-A，结果前 push） | `9ed07a575ae65bbda3d63321e676431231d00548bb8977fb443764163b85642a` |
+| F2.1 Matched-Share Actionability Registry | `02c6738`（F2.1-A，结果前 push） | `12f8311c52df76ca6fc10cb7f5f43a95bae4e1c9a9dc1f5880bfdcee60357787` |
 
 ---
 

@@ -81,6 +81,7 @@ def replay_record_dev(days, D, first_eligible_i, offset, top10_only, day_range):
         ep = dict(episode_id=episode_seq[0], ts_code=tc, signal_date=p['signal_date'],
                   entry_date=p['entry_date'], entry_i=p['entry_i'], entry_exec_raw=p['entry_exec_raw'],
                   exit_i=i, exit_date=str(d.date()), exit_type=exit_type,
+                  exit_exec_price=price,   # instrument-only: actual fill incl. slippage (float64), no semantics change
                   levels_used=p['levels'], total_cost=p['total_cost'], pnl=pnl,
                   simple_return_pct=pnl / p['total_cost'] * 100,
                   layers=np.array(p['layers'], dtype=np.float32), rows=rows,

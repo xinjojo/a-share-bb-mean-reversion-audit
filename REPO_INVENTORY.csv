@@ -642,3 +642,23 @@ results/evidence/f2/f2_oracle_summary.csv,csv,F2,result,ACTIVE,Y,,high,results/e
 results/evidence/f2/f2_precision_recall.csv,csv,F2,result,ACTIVE,N,,medium,results/evidence/f2/,
 results/evidence/f2/f2_summary.json,json,F2,result,ACTIVE,Y,,high,results/evidence/f2/,
 results/evidence/f2/f2_tp_benefit.csv,csv,F2,result,ACTIVE,N,,medium,results/evidence/f2/,
+research/risk/registries/FAILURE_STATE_F21_MATCHED_ACTION_REGISTRY.csv,csv,F2.1,registry,ACTIVE,Y,,high,research/risk/registries/,"F2.1-A prereg, SHA 12f8311c..."
+research/risk/registries/FAILURE_STATE_F21_MATCHED_ACTION_REGISTRY.sha256,sha256,F2.1,registry,ACTIVE,Y,,high,research/risk/registries/,
+research/risk/failure_state_f21.py,py,F2.1,code,ACTIVE,Y,,infra,research/risk/,matched-share actionability
+research/risk/FAILURE_STATE_F21.md,md,F2.1,report,ACTIVE,Y,,high,research/risk/,"F2.1 canonical report, B classification"
+results/evidence/f21/f21_break_even_frontier.csv,csv,F2.1,result,ACTIVE,N,,medium,results/evidence/f21/,
+results/evidence/f21/f21_calendar_bootstrap.csv,csv,F2.1,result,ACTIVE,N,,medium,results/evidence/f21/,
+results/evidence/f21/f21_capital_release.csv,csv,F2.1,result,ACTIVE,N,,medium,results/evidence/f21/,
+results/evidence/f21/f21_confusion_value_grid.csv,csv,F2.1,result,ACTIVE,N,,high,results/evidence/f21/,
+results/evidence/f21/f21_episode_matched.csv,csv,F2.1,result,ACTIVE,N,,medium,results/evidence/f21/,
+results/evidence/f21/f21_eventday.csv,csv,F2.1,result,ACTIVE,N,,medium,results/evidence/f21/,
+results/evidence/f21/f21_fixed_action_summary.csv,csv,F2.1,result,ACTIVE,Y,,high,results/evidence/f21/,
+results/evidence/f21/f21_fp_cost.csv,csv,F2.1,result,ACTIVE,N,,medium,results/evidence/f21/,
+results/evidence/f21/f21_future_add_incidence.csv,csv,F2.1,result,ACTIVE,N,,medium,results/evidence/f21/,
+results/evidence/f21/f21_invariants.json,json,F2.1,result,ACTIVE,N,,medium,results/evidence/f21/,
+results/evidence/f21/f21_layer_subset.csv,csv,F2.1,result,ACTIVE,N,,medium,results/evidence/f21/,
+results/evidence/f21/f21_market_state.csv,csv,F2.1,result,ACTIVE,N,,medium,results/evidence/f21/,
+results/evidence/f21/f21_natural_exit_parity.csv,csv,F2.1,result,ACTIVE,N,,high,results/evidence/f21/,
+results/evidence/f21/f21_old_vs_corrected_basis.csv,csv,F2.1,result,ACTIVE,N,,medium,results/evidence/f21/,
+results/evidence/f21/f21_summary.json,json,F2.1,result,ACTIVE,Y,,high,results/evidence/f21/,
+results/evidence/f21/f21_tp_benefit.csv,csv,F2.1,result,ACTIVE,N,,medium,results/evidence/f21/,

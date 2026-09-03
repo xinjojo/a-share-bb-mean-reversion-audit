@@ -1,0 +1,32 @@
+phase,F3
+title,Failure-State Predictor Feasibility
+status,PREREGISTERED (F3-A) — DEVELOPMENT DIAGNOSTIC / WAITING EXTERNAL AUDIT
+sample,2020-2024 Development only; 2025-2026 CLOSED
+primary_anchor,D20 (threshold=0.20 anchors, 12590 episodes, 752 anchor days)
+label,O1_FAILURE = (frozen natural final_return <= 0) ; 1=failure 0=recovery
+label_source,results/evidence/f1/f1_anchor_episodes.csv (frozen F1.1 features)
+economic_constants,FROZEN from F2.3 (ACCEPTED B): A=+1.4485803535pp B=-2.6832617657pp; point break-even FPR 0.13496/0.26993/0.40489/0.53986; precision 0.76190; calendar-safe FPR 0/0.05/0.10/0.10
+feature_universe,F1.1 frozen primary features ONLY (17): F_DAYS_SINCE_ENTRY F_DAYS_SINCE_FIRST_D10 F_DIST_MA20 F_DIST_LBB F_RET3 F_RET5 F_RET20 F_REB3 F_REB5 F_NLOW10 F_AMT_RATIO20 F_ATR20_PCT F_INTRADAY_RANGE F_RV20 F_DAYS_UNDERWATER F_DIST_AVGCOST F_CUR_MAE
+excluded_features,F_DAYS_SINCE_LOW (degenerate) ; R01_RET60/R05_LDS (secondary overlay only) ; F_LAYER_COUNT/layer_count (secondary overlay only)
+family_representatives,PREREGISTERED 4 non-redundant dimensions: PATH_DURATION=F_DAYS_UNDERWATER ; TREND=F_RET20 ; RECOVERY=F_REB5 ; VOLATILITY=F_INTRADAY_RANGE
+models,M0=logistic(failure ~ z(F_DAYS_UNDERWATER)) ; M1=logistic(failure ~ z(F_DAYS_UNDERWATER)+z(F_RET20)+z(F_REB5)+z(F_INTRADAY_RANGE))
+model_constraints,linear logistic only; L2 penalty C=1.0; solver lbfgs; no interaction/polynomial/spline/tree/boosting/RF/NN; no feature selection; no hyperparameter scan; no L1 path
+missing_handling,per-train-fold feature median imputation; standardization per-train-fold mean/std; validation/test uses train statistics only
+evaluation,expanding-window chronological folds ONLY (no random CV): F1 train 2020 test 2021 ; F2 train 2020-2021 test 2022 ; F3 train 2020-2022 test 2023 ; F4 train 2020-2023 test 2024
+threshold_derivation,on TRAIN fold only; three fixed operating targets: T50=train TPR closest to .50 ; T75=closest to .75 ; T90=closest to .90; ties -> higher threshold (more conservative/higher precision); thresholds frozen and applied to next-year test; never optimized on test FPR
+primary_metrics,per fold/test-year/model/target: TPR FPR precision specificity predicted-positive-rate; ROC-AUC and PR-AUC diagnostic only
+economic_mapping,PointExpectedValue = TPR*1.4485803535 + FPR*(-2.6832617657) (frozen point mapping, no re-estimation)
+point_econ_pass,PointExpectedValue > 0
+safe_region_gates,FIXED feasibility gates (no post-hoc interpolation): T50 requires TPR>=0.45 AND FPR<=0.05 ; T75 requires TPR>=0.70 AND FPR<=0.10 ; T90 requires TPR>=0.85 AND FPR<=0.10
+stable_safe,>=3 of 4 test folds SAFE_REGION_PASS AND 2023 PASS AND 2024 PASS
+stable_point,>=3 of 4 test folds PointExpectedValue>0 AND 2023>0 AND 2024>0
+oof_aggregate,strictly out-of-fold 2021-2024 concatenation; AUC/PR-AUC/TPR/FPR/precision/point EV per model-target; does NOT substitute fold stability gate
+d30_transfer,SECONDARY only: each fold's D20-trained model applied to same test-year D30 anchors (no retrain); AUC + TPR/FPR; not in primary classification
+calibration,descriptive only: 5 fixed probability bins 0-.2/.2-.4/.4-.6/.6-.8/.8-1; predicted mean vs actual failure rate; no calibration fitting
+coefficient_report,per-fold standardized coefficients; sign stability descriptive only (expectation from F1.1: DAYS_UNDERWATER positive; RET20 negative; REB5 negative; INTRADAY_RANGE negative failure coefficient)
+anchor_day_clustering,per-anchor-day predicted failure rate / actual failure rate / confusion counts (descriptive; no future leakage into training)
+market_overlay,secondary descriptive only: OOF predictions by frozen R01 quintile and R05 state; FPR/FNR; NO market gate
+classification,A=at least one model-target STABLE_SAFE (deployable-CANDIDATE feasibility, NOT a deployable strategy) ; B=at least one STABLE_POINT but no STABLE_SAFE ; C=predictive relationship exists but no STABLE_POINT ; D=no stable prospective predictor value
+hard_leakage_checks,I1 features anchor-time only ; I2 imputer train-only ; I3 scaler train-only ; I4 thresholds train-only ; I5 test year never in fit/threshold ; I6 chronological folds exact ; I7 no 2025+ read ; I8 F1/F1.1/F2/F2.1/F2.2/F2.3 registry SHA unchanged ; I9 M1 only 4 frozen features ; I10 M0 only DAYS_UNDERWATER ; I11 no hyperparameter scan ; I12 economic A/B constants frozen
+prereg_commit,F3-A (before any model outcome)
+deliverables,research/risk/failure_state_f3.py ; research/risk/FAILURE_STATE_F3.md ; results/evidence/f3/ (12 files)

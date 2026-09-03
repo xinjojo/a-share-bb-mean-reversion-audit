@@ -1,0 +1,2 @@
+feature_id,n_episodes,n_signal_days,pooled_spearman,direction,direction_match
+F09,95,82,0.18255879059350505,POSITIVE,True

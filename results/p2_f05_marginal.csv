@@ -1,0 +1,2 @@
+feature_id,status,direction,n_days,mean_ic,hac_t,raw_p,pairwise_acc,K3_lift_pp,K3_ci_lo,K3_ci_hi,note
+F05,MARGINAL_DISCOVERY_SENSITIVITY,NEGATIVE,388,-0.08512546610220616,-3.5236773548653586,0.000425602157099636,53.32052276384178,1.0169738083268212,-0.04185166934094875,2.261588916184157,NOT in BH m=5; NOT in classification; cannot rescue failures; cannot be added to main model later based on validation

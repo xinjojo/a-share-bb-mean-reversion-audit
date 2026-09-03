@@ -1,0 +1,2 @@
+count,mean_amount,median_amount,amount_P5,amount_P10,amount_P50,amount_P90,amount_P95,layer_pct_of_amount_P5,layer_pct_of_amount_P10,layer_pct_of_amount_P50,layer_pct_of_amount_P90,layer_pct_of_amount_P95,pct_trades_amount_lt_400k,pct_trades_amount_lt_200k
+55,507679.0,245237.0,55812.0,84932.0,245237.0,771910.0,1857786.0,358.3,235.5,81.6,25.9,10.8,63.6,43.6

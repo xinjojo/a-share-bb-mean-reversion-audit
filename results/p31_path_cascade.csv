@@ -1,0 +1,3 @@
+signal_date,first_holding_diff,reconverged_day,never_reconverged,b0_events_60d,b1_events_60d,b0_trades_entered_60d,b1_trades_entered_60d,eq_div_7d,eq_div_20d,eq_div_60d
+2021-05-24,2021-05-24,,True,21,12,7,4,-30815.222688530106,-84562.8943957903,-231397.92007671052
+2021-11-16,2021-11-17,,True,14,11,4,3,-352846.00962915085,-371946.73461427074,-397815.750857751

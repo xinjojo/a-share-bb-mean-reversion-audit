@@ -94,11 +94,27 @@ path differences and subsequent slot availability (blocked-by-K 336→350).
 
 ## 4. Frozen-episode contested diagnostic (B0 slot-state anchored)
 
-On the 7 contested days (k=1): ATR top-1 mean vs baseline top-1 mean — 2021-05-24 +3.54 vs
-−18.72; 2021-11-16 +7.94 vs −22.23; 2021-12-20 +6.47 vs +1.84 (ATR better). Where ATR
-changed the pick it was wrong more often and with far larger losses; pairwise accuracy NaN
-(<5 valid pairs/day). **The positive pooled ATR IC (+0.134) does not survive the contested
-tail** — on the days where the K=3 portfolio must choose, ATR-priority picks were worse.
+On the 7 contested days (k=1), comparing the frozen mean return of the candidates chosen by
+each rule on those days (CSV-authoritative `p3_contested_signal_diagnostic.csv` values —
+baseline = amount-priority pick, ATR = ATR-priority pick):
+
+| signal_date | baseline_topk_mean | atr_topk_mean | diff (ATR−baseline) |
+|---|---|---|---|
+| 2020-03-16 | +4.612 | +4.612 | 0.000 |
+| 2021-01-29 | +2.678 | +2.678 | 0.000 |
+| 2021-05-24 | **+3.543** | **−18.715** | −22.258 |
+| 2021-11-16 | **+7.942** | **−22.230** | −30.172 |
+| 2021-12-01 | +6.472 | +6.472 | 0.000 |
+| 2021-12-20 | **−14.233** | **+1.838** | +16.070 |
+| 2024-05-28 | +4.477 | +4.477 | 0.000 |
+
+Where ATR actually changed the pick (2021-05-24, 2021-11-16, 2021-12-20) it was wrong 2/3
+times and with far larger magnitude; on the two days with non-zero diff favoring ATR
+(2021-12-20) the margin was +16.1pp. pairwise accuracy is NaN (<5 valid pairs/day).
+**The positive pooled ATR IC (+0.134) does not survive the contested tail** — on the days
+where the K=3 portfolio must choose, ATR-priority picks were worse on a large-loss basis.
+(Note: this contested sample is extremely sparse — 7 days over 2020–2024 — see
+`P3_MECHANISM_CORRECTION_NOTE.md`; no claim of a systematic "contested-tail reversal".)
 
 ## 5. Blocked opportunities & capital efficiency
 

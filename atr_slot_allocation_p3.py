@@ -60,10 +60,20 @@ def run_fast_multi_strict_c_atr(days, D, etf_idx, etf_px, etf_open, etf_nav, fir
                                 add_gap_days=1, day_range=None, record_actions=False,
                                 flow_sink=None,
                                 entry_rank_mode='amount_top10', atr_lookup=None,
-                                ledger=None, cand_log=None):
+                                ledger=None, cand_log=None,
+                                day_log=None, exec_log=None, forced_first=None):
     """entry_rank_mode: 'amount_top10' (B0 frozen) | 'atr_top10' (B1) | 'atr_all' (B2).
     ledger: list of {sig_date, ts_code, state} for all enumerated oversold candidates.
-    cand_log: list of {sig_date, ts_code, amount, amount_rank, atr20_pct} for oversold candidates."""
+    cand_log: list of {sig_date, ts_code, amount, amount_rank, atr20_pct} for oversold candidates.
+    P3.1 PURELY-ADDITIVE diagnostics (no decision change when None):
+      day_log:  per signal-day contention funnel record {date, all_eligible, oversold_all,
+                top10_oversold, held_conflicts, pending_conflicts, available_slots,
+                queueable_candidates} for the Top10-by-amount universe (B0/B1 semantics).
+      exec_log: per pending-buy open attempt {sig_date, ts_code, attempt_date, outcome}
+                (EXECUTED / CARRY_LIMITUP / MISSING / DROPPED_K_HELD / NO_LOT / NO_CASH).
+      forced_first: {str(sig_date): [ts_code,...]} — reorders that day's candidate priority
+                so the listed stocks queue first (used by P3.1 leave-one-swap attribution).
+    """
     slip = slippage_bp / 10000.0
     cash = initial_cash
     positions = []
@@ -234,14 +244,25 @@ def run_fast_multi_strict_c_atr(days, D, etf_idx, etf_px, etf_open, etf_nav, fir
         if pending_buy:
             held = {p['ts_code'] for p in positions}
             for pb in list(pending_buy):
+                erec = dict(sig_date=pb.get('sig_date'), ts_code=pb['ts_code'],
+                            attempt_date=str(d.date())) if exec_log is not None else None
                 if len(positions) >= K or pb['ts_code'] in held:
+                    if erec is not None:
+                        erec['outcome'] = 'DROPPED_K_HELD'
+                        exec_log.append(erec)
                     pending_buy = [x for x in pending_buy if x['ts_code'] != pb['ts_code']]
                     continue
                 j = dd['pos'].get(pb['ts_code'])
                 if j is None:
+                    if erec is not None:
+                        erec['outcome'] = 'MISSING'
+                        exec_log.append(erec)
                     pending_buy = [x for x in pending_buy if x['ts_code'] != pb['ts_code']]
                     continue
                 if open_fill == 'limit_conservative' and dd['open_'][j] >= dd['limit_up_px'][j]:
+                    if erec is not None:
+                        erec['outcome'] = 'CARRY_LIMITUP'
+                        exec_log.append(erec)
                     continue
                 ensure_cash_open(level_cash)
                 buy_price = dd['open_'][j] * (1 + slip)
@@ -264,6 +285,16 @@ def run_fast_multi_strict_c_atr(days, D, etf_idx, etf_px, etf_open, etf_nav, fir
                         if flow_sink is not None:
                             flow_sink.append(dict(date=str(d.date()), leg='stock', action='buy',
                                                   gross=amt, fee=fee, net=-(amt + fee), shares=qty, px=buy_price))
+                        if erec is not None:
+                            erec['outcome'] = 'EXECUTED'
+                            exec_log.append(erec)
+                    elif erec is not None:
+                        erec['outcome'] = 'NO_CASH'
+                        exec_log.append(erec)
+                else:
+                    if erec is not None:
+                        erec['outcome'] = 'NO_LOT'
+                        exec_log.append(erec)
                 pending_buy = [x for x in pending_buy if x['ts_code'] != pb['ts_code']]
 
         # ============ 盘中退出: STRICT_C 动态 touch ============
@@ -347,6 +378,33 @@ def run_fast_multi_strict_c_atr(days, D, etf_idx, etf_px, etf_open, etf_nav, fir
                 raise ValueError(entry_rank_mode)
             amt_rank = np.empty(len(cand_idx), dtype=int)
             amt_rank[np.argsort(-amt)] = np.arange(1, len(cand_idx) + 1)
+            # ---- P3.1 forced_first override (additive; reorders candidate priority) ----
+            if forced_first is not None and str(d.date()) in forced_first:
+                ff = [c for c in forced_first[str(d.date())]]
+                kmap = {dd['ts'][cand_idx[int(k)]]: int(k) for k in order}
+                ff_k = [kmap[tc] for tc in ff if tc in kmap]
+                rest = [k for k in order if int(k) not in ff_k]
+                order = np.array(ff_k + list(rest), dtype=int)
+            # ---- P3.1 contention funnel (additive; Top10-by-amount universe, B0/B1) ----
+            if day_log is not None:
+                bb_o = ((~np.isnan(dd['bb_lower'][cand_idx]))
+                        & (dd['close_adj'][cand_idx] < dd['bb_lower'][cand_idx])
+                        & (~dd['is_limit'][cand_idx]))
+                top_amt = np.argsort(-amt)[:top_n]
+                top_ov = [int(k) for k in top_amt if bb_o[k]]
+                heldset = {p['ts_code'] for p in positions} | pending_sell
+                pendset = {x['ts_code'] for x in pending_buy}
+                day_log.append(dict(
+                    date=str(d.date()),
+                    all_eligible=int(len(cand_idx)),
+                    oversold_all=int(bb_o.sum()),
+                    top10_oversold=len(top_ov),
+                    held_conflicts=sum(1 for k in top_ov if dd['ts'][cand_idx[k]] in heldset),
+                    pending_conflicts=sum(1 for k in top_ov if dd['ts'][cand_idx[k]] in pendset),
+                    available_slots=max(0, K - len(positions) - len(pending_buy)),
+                    queueable_candidates=sum(1 for k in top_ov
+                                             if (dd['ts'][cand_idx[k]] not in heldset)
+                                             and (dd['ts'][cand_idx[k]] not in pendset))))
             held = {p['ts_code'] for p in positions} | pending_sell
             pending_set = {x['ts_code'] for x in pending_buy}
             for k in order:

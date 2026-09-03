@@ -1,0 +1,17 @@
+{
+  "feature_id": "R05",
+  "feature": "LIMIT_DOWN_SHARE",
+  "column": "limit_down",
+  "basis": "2020-01-01..2022-12-31 Discovery Y20-valid days (dropna)",
+  "unique_values": 680,
+  "zero_share_pct": 5.082417582417582,
+  "quantiles": {
+    "Q20": 0.0007032348804500703,
+    "Q40": 0.0013238019592268996,
+    "Q60": 0.0022593764121102574,
+    "Q80": 0.0044705224923162895
+  },
+  "decision": "continuous quintile (not heavy-zero; 0-vs->0 binary rejected as degenerate)",
+  "low_stress_definition": "R05 <= Discovery Q20",
+  "note": "Frozen before Confirmation. Not recomputed from 2023-2024."
+}

@@ -1,0 +1,15 @@
+{
+  "feature_id": "R01",
+  "feature": "ALL_A_EW_RET60",
+  "column": "ret60_ea",
+  "basis": "2020-01-01..2022-12-31 Discovery Y20-valid signal days with finite feature",
+  "n_days": 616,
+  "quantiles": {
+    "Q20": -4.700457275255376,
+    "Q40": -0.557761557869696,
+    "Q60": 4.877382517508266,
+    "Q80": 9.989866281447757
+  },
+  "nan_policy": "NaN R01 treated as NOT strong market (gate not applied); NaN excluded from cutpoint estimation",
+  "note": "Fixed Discovery cutpoints, identical to T2-R validation (dropna). Not recomputed from 2023-2024."
+}

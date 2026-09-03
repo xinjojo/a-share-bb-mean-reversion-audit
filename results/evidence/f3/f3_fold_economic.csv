@@ -1,0 +1,7 @@
+model,target,safe_pass_count,safe_pass_years,point_pass_count,point_pass_years,stable_safe,stable_point
+M0,T50,0,[],1,[2024],False,False
+M0,T75,0,[],1,[2024],False,False
+M0,T90,0,[],0,[],False,False
+M1,T50,0,[],1,[2024],False,False
+M1,T75,0,[],1,[2024],False,False
+M1,T90,0,[],1,[2024],False,False

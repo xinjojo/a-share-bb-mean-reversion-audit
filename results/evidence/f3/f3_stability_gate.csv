@@ -1,0 +1,7 @@
+model,target,stable_safe,stable_point
+M0,T50,False,False
+M0,T75,False,False
+M0,T90,False,False
+M1,T50,False,False
+M1,T75,False,False
+M1,T90,False,False

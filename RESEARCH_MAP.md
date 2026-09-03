@@ -232,6 +232,13 @@ F2 Actionability Value Bound ──► D ACTIONABILITY NEGATIVE (DEVELOPMENT DIA
 - **结果数据:** `results/evidence/f23/`
 - **状态:** **ACCEPTED（经 R0.8 外部审计正式关闭）** — policy-value 历史采样推断完成，FINAL **B — NARROW POSITIVE ACTIONABILITY**
 - **关键数字:** V_d=t·A_d+f·B_d 确定性；O1 parity PASS（HAC [0.48,2.42] / CAL [0.40,2.61]）；**calendar-safe frontier 0.00/0.05/0.10/0.10**（HAC 一致）；.75/.30、1.00/.30 在 sampling 下跨 0；randomization interval 仅 reference。未设计 predictor/stop/exit/timing。
+### 14i. F3 Failure-State Predictor Feasibility
+- **Canonical:** `[research/risk/FAILURE_STATE_F3.md](research/risk/FAILURE_STATE_F3.md)`
+- **源码:** `research/risk/failure_state_f3.py`
+- **Registry:** `research/risk/registries/FAILURE_STATE_F3_PREDICTOR_REGISTRY.csv`（SHA256 `803e1524...`，pre-reg `e7b390b`）
+- **结果数据:** `results/evidence/f3/`
+- **状态:** **DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH）** — classification **C — PREDICTIVE BUT ECONOMICALLY INSUFFICIENT**
+- **关键数字:** OOF M1 AUC 0.720 / PR-AUC 0.786；STABLE_SAFE/STABLE_POINT **0/6**；EV 正仅 2024；test FPR 0.12–0.64 vs calendar-safe ≤0.05–0.10；系数 3/4 方向稳定；D30 transfer AUC 0.584–0.807。无调参/无新特征/无 gate。
 ### 15. ★ CURRENT: Portfolio Architecture（组合架构）
 - **状态:** 研究**暂停**。当前唯一活跃问题是：有限 K=3 slots + 长持仓 + 多层占位/路径依赖的组合架构如何提升资金效率。
 - **P4 进展（2026-09-03，ACCEPTED DIAGNOSTIC，外审通过）:** 结构性消融显示 K=3 是实际容量瓶颈，但在当前历史样本与组合规则下同时表现为保护性的 admission constraint（解除任一约束组合均大幅恶化）；完全移除多层加仓（5→1 层）在测试路径下有害（不断言 5 层最优）。瓶颈在更深层。下一步必须等待外部审计决定；2025–2026 Confirmation 继续 CLOSED。
@@ -259,6 +266,7 @@ F2 Actionability Value Bound ──► D ACTIONABILITY NEGATIVE (DEVELOPMENT DIA
 | F2.1 Matched-Share Actionability Registry | `research/risk/registries/` | `02c6738`（F2.1-A） |
 | F2.2 Break-Even Precision Registry | `research/risk/registries/` | `a829298`（F2.2-A） |
 | F2.3 Policy-Value Inference Registry | `research/risk/registries/` | `73b9c19`（F2.3-A） |
+| F3 Predictor Feasibility Registry | `research/risk/registries/` | `e7b390b`（F3-A） |
 
 ---
 

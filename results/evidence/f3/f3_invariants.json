@@ -1,0 +1,18 @@
+{
+  "I1_features_anchor_time_only": true,
+  "I2_imputer_train_only": true,
+  "I3_scaler_train_only": true,
+  "I4_thresholds_train_only": true,
+  "I5_test_year_never_in_fit": true,
+  "I6_chronological_folds_exact": true,
+  "I7_no_2025_read": true,
+  "I8_prior_registry_shas_unchanged": true,
+  "I9_M1_only_four_frozen_features": true,
+  "I10_M0_only_days_underwater": true,
+  "I11_no_hyperparameter_scan": true,
+  "I12_economic_constants_frozen": true,
+  "classification": "C",
+  "stable_safe": [],
+  "stable_point": [],
+  "registry_sha": "803e15245746a90d542de1bd18889686dacf6e926b3ac931717c68335db2a032"
+}

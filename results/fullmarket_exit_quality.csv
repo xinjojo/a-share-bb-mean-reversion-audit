@@ -1,0 +1,14 @@
+metric,value
+n_profitable,69151.0
+post5D_mfe_gt3pct,40.09316180657974
+post5D_mfe_gt5pct,28.405589708394785
+post10D_mfe_gt5pct,40.18787611918391
+post20D_mfe_gt10pct,33.713567095724216
+post40D_mfe_gt15pct,34.0791301360656
+capture_ratio_close_median,0.9811060193632406
+capture_ratio_intraday_median,0.8715069652818133
+giveback_median,1.9645196910487428
+giveback_mean,3.93121882100434
+mfe60_median,11.482720178372352
+mae60_median,-10.444525619502283
+peak_retrace60_median,18.21282401091405

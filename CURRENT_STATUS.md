@@ -24,7 +24,7 @@
 | 12 | P2 Ranking Validation | **B — PARTIAL VALIDATION**（唯一 full pass：V04/F09 ATR20_PCT，POS；Val daily CS IC≈+0.134, BH q≈1.6e-8, pairwise 55.23%, K3 lift +1.426pp） | ACCEPTED | `[research/ranking/CROSS_SECTIONAL_RANKING_P2_VALIDATION.md](research/ranking/CROSS_SECTIONAL_RANKING_P2_VALIDATION.md)` |
 | 13 | P3 ATR Slot Allocation | **C — NO USEFUL PORTFOLIO RANKING**（dev 2020–2024 PURE STOCK 10bp：B0 +30.30% / B1 −18.66%；B2 NON-DEPLOYABLE） | CLOSED | `[research/portfolio/ATR_SLOT_ALLOCATION_P3.md](research/portfolio/ATR_SLOT_ALLOCATION_P3.md)` |
 | 14 | P3.1 Slot Contention | **C — BOTH**（ranking-actionable 仅 16/1212=1.32%；K=3 saturation 是主瓶颈；少数选择差异被 path dependence 放大） | ACCEPTED DIAGNOSTIC | `[research/portfolio/SLOT_CONTENTION_PATH_AUDIT.md](research/portfolio/SLOT_CONTENTION_PATH_AUDIT.md)` |
-| 14b | P4 Portfolio Architecture Causal Decomposition | **D — ARCHITECTURE BOTTLENECK NOT EXPLAINED BY K/LAYERS**（结构消融 2020–2024 PURE STOCK 10bp：A0 +30.30% / A1 K=999 −0.23% / A2 ML=1 −5.84% / A3 −29.27%。**K=3 与 max_levels=5 不是瓶颈，而是产生正收益的必要结构约束**；解除任一约束均大幅恶化；A2 同批股票纯路径差异即可 ±50 万；A0 parity 精确通过） | DEVELOPMENT DIAGNOSTIC（待外部审计，未写入 README CURRENT TRUTH） | `[research/portfolio/PORTFOLIO_ARCHITECTURE_P4.md](research/portfolio/PORTFOLIO_ARCHITECTURE_P4.md)` |
+| 14b | P4 Portfolio Architecture Causal Decomposition | **D — TESTED ARCHITECTURE BOTTLENECK NOT EXPLAINED BY SIMPLE K/LAYER REMOVAL**（结构消融 2020–2024 PURE STOCK 10bp：A0 +30.30% / A1 K=999 −0.23% / A2 ML=1 −5.84% / A3 −29.27%。**K=3 是实际容量瓶颈（candidate 530 / blocked_K 336），但在当前历史样本与组合规则下同时表现为保护性的 admission constraint / implicit capacity filter**；解除任一约束均大幅恶化；A2 同批股票纯路径差异即可 ±50 万；A0 parity 精确通过。边界：P4 仅测试极端消融 K 3→999、levels 5→1，未搜索 architecture space，不构成"K/layer 结构不重要"的全局断言） | ACCEPTED DIAGNOSTIC（外审通过） | `[research/portfolio/PORTFOLIO_ARCHITECTURE_P4.md](research/portfolio/PORTFOLIO_ARCHITECTURE_P4.md)` |
 | 15 | 2025–2026 Confirmation | **UNTOUCHED / CLOSED**（全程未读取任何 2025–2026 的 episode outcome / portfolio / feature） | CLOSED | — |
 
 ---
@@ -37,11 +37,12 @@
 
 （中文：当前主要瓶颈似乎是组合架构——有限 K=3 slots + 长持仓 + 多层占位/路径依赖，而非缺乏信号级 edge。）
 
-**P4 进展（2026-09-03，DEVELOPMENT DIAGNOSTIC，待外部审计）：** 结构性消融显示，
-K=3 槽位限制与 max_levels=5 多层加仓**不是**需要解除的瓶颈——解除任一约束均使组合大幅
-恶化（A1 −0.23% / A2 −5.84% / A3 −29.27% vs A0 +30.30%）。A0 的架构约束是当前组合
-产生正收益的必要结构；真正局限在更深层：单笔信号边缘 + 极端路径依赖 + 少数深 MAE 长持仓
-的占用结构（P4 禁止修改 exit，未给对策建议）。
+**P4 进展（2026-09-03，ACCEPTED DIAGNOSTIC，外审通过）：** 结构性消融显示，K=3 是实际
+容量瓶颈（binding capacity constraint），但在当前历史样本与组合规则下同时表现为保护性的
+admission constraint / implicit capacity filter——解除任一约束均使组合大幅恶化
+（A1 −0.23% / A2 −5.84% / A3 −29.27% vs A0 +30.30%）。完全移除多层加仓（5→1 层）在测试
+路径下有害（不断言 5 层最优、不断言全市场必要）。真正局限在更深层：单笔信号边缘 +
+极端路径依赖 + 少数深 MAE 长持仓的占用结构（P4 禁止修改 exit，未给对策建议）。
 
 **下一步仍须等待外部审计决定**，方可决定是否打开 2025–2026 Confirmation 或进入新的
 研究阶段。

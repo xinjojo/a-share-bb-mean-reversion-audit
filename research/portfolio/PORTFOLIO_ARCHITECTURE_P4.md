@@ -1,6 +1,6 @@
 # PHASE P4 — PORTFOLIO ARCHITECTURE CAUSAL DECOMPOSITION
 
-**状态：DEVELOPMENT / PORTFOLIO-CONSTRUCTION DIAGNOSTIC（结果待外部审计，未写入 README CURRENT TRUTH）**
+**状态：ACCEPTED DIAGNOSTIC（外审通过：IMPLEMENTATION PASS / PREREGISTRATION PASS / A0 PARITY PASS；未写入 README CURRENT TRUTH）**
 
 ## 研究问题
 
@@ -67,8 +67,10 @@ stock pnl）。任何消融差异因此是纯架构效应。
 | PnL/slot-day | 114.88 | −0.49 | −21.96 | −52.77 |
 | cash-constrained days | 33.4% | 54.1% | 0.0% | 55.0% |
 
-**反直觉核心事实：解除任一架构约束，组合收益均大幅恶化。A0 的 K=3 + 5 层加仓不是
-"需要解除的瓶颈"，而是当前架构中产生正收益的必要结构。**
+**反直觉核心事实：解除任一架构约束，组合收益均大幅恶化。K=3 是实际容量瓶颈
+（binding capacity constraint，candidate 530 / blocked_K 336），但在当前历史样本
+和当前组合规则下，这个瓶颈同时表现出保护性的 admission constraint /
+implicit capacity filter（A0 的 K=3 + 5 层加仓在测试路径上是产生正收益的结构）。**
 
 ## Causal decomposition（历史结构反事实，非严格因果）
 
@@ -85,9 +87,13 @@ stock pnl）。任何消融差异因此是纯架构效应。
   更差 + 资金被稀释 + 加仓被摊薄（avg layers 2.08→1.69），组合从 +30% 崩到 ~0%。
 - **LAYER EFFECT（A2−A0）显著为负**：移除多层加仓后，**同一批 44 只股票、entry-level
   Jaccard 0.96**，但路径完全不同（NEVER_RECONVERGED），每笔均值从 A0 的 +3,986 降到 −298。
-  多层加仓是这个均值回归策略的核心资金引擎——它通过摊低持仓成本放大深度赢家
-  （A0 最佳 5 笔中 4 笔为 2 层持仓），移除后组合转负。
-- **Interaction 对收益接近零（+7.09pp）**：两个约束的作用近似可加，无实质交互放大。
+  多层加仓（multi-layer averaging-down）在测试路径下是重要的资金机制——它通过摊低持仓
+  成本放大深度赢家（A0 最佳 5 笔中 4 笔为 2 层持仓）。注意措辞边界：P4 只验证
+  “完全移除多层加仓（5→1 层）在测试路径下有害”，**不**断言 5 层最优、也**不**断言
+  多层加仓在全市场范围内必要。
+- **Interaction 对收益为正（+7.09pp）且实质小于两个主效应**：positive and materially
+  smaller than the two main effects; no dominant adverse interaction amplification
+  （无主导的负面交互放大）。
 
 ## 逐年（A0 vs 变体）
 
@@ -164,13 +170,16 @@ A2 的 17 天与 A0 的 16 天接近。**架构松弛不会让未来 ranking 信
 
 ## 机制分类
 
-**D — ARCHITECTURE BOTTLENECK NOT EXPLAINED BY K/LAYERS**
+**D — TESTED ARCHITECTURE BOTTLENECK NOT EXPLAINED BY SIMPLE K/LAYER REMOVAL**
 
-更准确地说：**K=3 与 max_levels=5 不是瓶颈，而是当前组合产生正收益的必要结构约束。**
+重要边界：P4 只测试了两种**极端结构性消融**（K 3→999、levels 5→1），**并未搜索
+architecture space**，因此本结论不构成"K/layer 结构不重要"的全局断言。更准确地说：
+**K=3 是实际容量瓶颈，但在当前历史样本和当前组合规则下，这个瓶颈同时表现出保护性的
+admission constraint（implicit capacity filter）。**
 - 解除 K（A1）→ 接入更差信号 + 稀释资金 → 收益崩盘。
 - 移除加仓（A2）→ 摧毁多层摊低成本引擎 → 收益转负。
 - 双解除（A3）→ 最差。
-- 二者交互对收益近似可加（interaction ≈ +7pp，无实质放大）。
+- 二者交互对收益为正且实质小于两个主效应（interaction ≈ +7pp，无主导负面交互放大）。
 
 因此 P3 中 ATR ranking 无法改善组合的原因**不是** K 槽位或加仓结构阻塞了好的排序机会
 （解除它们反而更糟）。真正的局限在更深层：**单笔信号边缘 + 路径依赖 + 少数深 MAE 长持仓

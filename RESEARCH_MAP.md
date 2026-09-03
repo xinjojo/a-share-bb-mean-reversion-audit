@@ -151,12 +151,12 @@ P3.1 Slot Contention ──► C BOTH (ACCEPTED DIAGNOSTIC)
 - **源码:** `research/portfolio/portfolio_architecture_p4.py`
 - **Registry:** `research/portfolio/registries/PORTFOLIO_ARCHITECTURE_P4_REGISTRY.csv`（SHA256 `5f30974c...8ee6545`）
 - **结果数据:** `results/evidence/p4/`
-- **状态:** **DEVELOPMENT DIAGNOSTIC（待外部审计，未写入 README CURRENT TRUTH）** — **D — ARCHITECTURE BOTTLENECK NOT EXPLAINED BY K/LAYERS**（2020–2024 PURE STOCK 10bp 结构消融：A0 +30.30% / A1 K=999 −0.23% / A2 ML=1 −5.84% / A3 −29.27%。**K=3 与 max_levels=5 不是瓶颈，而是产生正收益的必要结构约束**；A2 同批股票纯路径差异即可 ±50 万；A0 parity 精确通过）
+- **状态:** **ACCEPTED DIAGNOSTIC（外审通过）** — **D — TESTED ARCHITECTURE BOTTLENECK NOT EXPLAINED BY SIMPLE K/LAYER REMOVAL**（2020–2024 PURE STOCK 10bp 结构消融：A0 +30.30% / A1 K=999 −0.23% / A2 ML=1 −5.84% / A3 −29.27%。**K=3 是实际容量瓶颈（candidate 530 / blocked_K 336），但在当前历史样本与组合规则下同时表现为保护性的 admission constraint / implicit capacity filter**；A2 同批股票纯路径差异即可 ±50 万；A0 parity 精确通过。边界：仅测试极端消融 K 3→999、levels 5→1，未搜索 architecture space）
 - **关键发现:** 解除 K 槽位（A1）→ 接入更差信号（新增 58 笔均值 −2,045）+ 资金稀释 → 收益崩盘；移除加仓（A2）→ 同一批股票、entry-level Jaccard 0.96，但 NEVER_RECONVERGED → 收益转负。真正局限在更深层（单笔信号边缘 + 路径依赖 + 深 MAE 长持仓占用），P4 禁止修改 exit。
 
 ### 15. ★ CURRENT: Portfolio Architecture（组合架构）
 - **状态:** 研究**暂停**。当前唯一活跃问题是：有限 K=3 slots + 长持仓 + 多层占位/路径依赖的组合架构如何提升资金效率。
-- **P4 进展（2026-09-03，待外部审计）:** 结构性消融显示 K=3 与 max_levels=5 不是需要解除的瓶颈（解除任一约束组合均大幅恶化）；瓶颈在更深层。下一步必须等待外部审计决定；2025–2026 Confirmation 继续 CLOSED。
+- **P4 进展（2026-09-03，ACCEPTED DIAGNOSTIC，外审通过）:** 结构性消融显示 K=3 是实际容量瓶颈，但在当前历史样本与组合规则下同时表现为保护性的 admission constraint（解除任一约束组合均大幅恶化）；完全移除多层加仓（5→1 层）在测试路径下有害（不断言 5 层最优）。瓶颈在更深层。下一步必须等待外部审计决定；2025–2026 Confirmation 继续 CLOSED。
 
 ---
 

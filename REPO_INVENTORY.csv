@@ -31,7 +31,7 @@ research/portfolio/P3_MECHANISM_CORRECTION_NOTE.md,file,p31,report,ACCEPTED,FALS
 archive/superseded/PATH_DEPENDENCE_ATTRIBUTION.md,file,gateT3,report,SUPERSEDED,FALSE,MARKET_STATE_GATE_T3.md,secondary,archive/superseded/PATH_DEPENDENCE_ATTRIBUTION.md,early T3 path attribution; superseded by gate T3 report
 research/market_state/R01_DISCOVERY_CUTPOINTS.json,file,gateT3,config,ACCEPTED,FALSE,,primary,research/market_state/R01_DISCOVERY_CUTPOINTS.json,frozen R01 (ALL_A_EW_RET60) Discovery quintile cutpoints
 research/market_state/R05_DISCOVERY_CUTPOINTS.json,file,gateT3,config,ACCEPTED,FALSE,,primary,research/market_state/R05_DISCOVERY_CUTPOINTS.json,frozen R05 (LIMIT_DOWN_SHARE) Discovery cutpoints
-README.md,file,governance,doc,ACTIVE,FALSE,,infra,README.md,entry point - rewrite in R0-C
+README.md,file,governance,doc,ACTIVE,FALSE,,infra,README.md,"entry point (CURRENT TRUTH, rewritten in R0-C)"
 archive/superseded/REDTEAM_AUDIT_REPLY.md,file,redteam,report,SUPERSEDED,FALSE,,secondary,archive/superseded/REDTEAM_AUDIT_REPLY.md,early reply doc
 archive/superseded/REDTEAM_ROUND2_EXPERIMENTS.md,file,redteam,report,SUPERSEDED,FALSE,,secondary,archive/superseded/REDTEAM_ROUND2_EXPERIMENTS.md,early redteam round
 archive/superseded/REDTEAM_ROUND3_ALPHA.md,file,redteam,report,SUPERSEDED,FALSE,,secondary,archive/superseded/REDTEAM_ROUND3_ALPHA.md,early redteam round
@@ -544,3 +544,21 @@ MIGRATION_MAP.csv,csv,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,MIG
 REPO_INVENTORY.csv,csv,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,REPO_INVENTORY.csv,R0 governance
 tools/r0_build_inventory.py,other,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,tools/r0_build_inventory.py,R0 governance
 tools/r0_migrate.py,other,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,tools/r0_migrate.py,R0 repository governance
+BROKEN_LINK_AUDIT.md,md,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,BROKEN_LINK_AUDIT.md,R0 repository governance/integrity doc
+CANONICAL_ARTIFACT_INTEGRITY.csv,csv,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,CANONICAL_ARTIFACT_INTEGRITY.csv,R0 repository governance/integrity doc
+CURRENT_STATUS.md,md,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,CURRENT_STATUS.md,R0 repository governance/integrity doc
+DUPLICATE_FILE_AUDIT.csv,csv,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,DUPLICATE_FILE_AUDIT.csv,R0 repository governance/integrity doc
+LARGE_FILES_REPORT.md,md,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,LARGE_FILES_REPORT.md,R0 repository governance/integrity doc
+RESEARCH_MAP.md,md,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,RESEARCH_MAP.md,R0 repository governance/integrity doc
+archive/invalid/README.md,md,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,archive/invalid/README.md,R0 repository governance/integrity doc
+archive/superseded/README.md,md,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,archive/superseded/README.md,R0 repository governance/integrity doc
+results/current/01_strict_c_summary.json,json,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,results/current/01_strict_c_summary.json,R0 current summary (<=15 files)
+results/current/02_independent_primary_summary.csv,csv,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,results/current/02_independent_primary_summary.csv,R0 current summary (<=15 files)
+results/current/03_fullmarket_primary_secondary_compare.csv,csv,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,results/current/03_fullmarket_primary_secondary_compare.csv,R0 current summary (<=15 files)
+results/current/04_temporal_effective_sample_size.csv,csv,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,results/current/04_temporal_effective_sample_size.csv,R0 current summary (<=15 files)
+results/current/05_t2r_master_table.csv,csv,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,results/current/05_t2r_master_table.csv,R0 current summary (<=15 files)
+results/current/06_t3_portfolio_summary.csv,csv,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,results/current/06_t3_portfolio_summary.csv,R0 current summary (<=15 files)
+results/current/07_p11_ranking_master.csv,csv,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,results/current/07_p11_ranking_master.csv,R0 current summary (<=15 files)
+results/current/08_p2_validation_master.csv,csv,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,results/current/08_p2_validation_master.csv,R0 current summary (<=15 files)
+results/current/09_p3_portfolio_summary.csv,csv,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,results/current/09_p3_portfolio_summary.csv,R0 current summary (<=15 files)
+results/current/10_p31_mechanism_summary.json,json,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,results/current/10_p31_mechanism_summary.json,R0 current summary (<=15 files)

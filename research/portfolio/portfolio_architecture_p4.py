@@ -717,18 +717,17 @@ if __name__ == '__main__':
                         common_trades=len(tA0&tV), only_variant=len(tV-tA0), only_A0=len(tA0-tV)))
     pd.DataFrame(pdv).to_csv(os.path.join(OUT, 'p4_path_divergence.csv'), index=False)
 
-    # 8) p4_trade_set_diff.csv
+    # 8) p4_trade_set_diff.csv  (pipe-separated: list fields contain commas, | avoids CSV tokenization issues)
     tset_rows=[]
     base=set(results['A0']['tr']['ts_code'])
     for label in ('A1','A2','A3'):
         tV=set(results[label]['tr']['ts_code'])
         tset_rows.append(dict(arch=label, common=list(base&tV), only_variant=list(tV-base), only_A0=list(base-tV)))
-    import json as _j
     with open(os.path.join(OUT,'p4_trade_set_diff.csv'),'w') as f:
-        f.write('arch,common,only_variant,only_A0\n')
+        f.write('arch|common|only_variant|only_A0\n')
         for r in tset_rows:
-            f.write('{0},"{1}","{2}","{3}"\n'.format(
-                r['arch'], _j.dumps(r['common']), _j.dumps(r['only_variant']), _j.dumps(r['only_A0'])))
+            f.write('{0}|{1}|{2}|{3}\n'.format(
+                r['arch'], ';'.join(r['common']), ';'.join(r['only_variant']), ';'.join(r['only_A0'])))
 
     # 9) p4_deep_mae_occupancy.csv (A0 positions only, descriptive)
     # MAE path info not directly in tr; approximate via frozen episode MAE lookup if available

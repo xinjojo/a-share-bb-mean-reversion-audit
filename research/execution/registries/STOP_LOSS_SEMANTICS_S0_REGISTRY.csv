@@ -1,0 +1,24 @@
+phase,field,value
+S0,title,STOP-LOSS SEMANTICS REMEDIATION - ADJUSTED-SPACE STOP
+S0,objective,Repair Fixed Stop Phase A semantics bug: old raw-space stop compared first_entry_raw*(1+s) against raw OHLC across the holding period, which is semantically wrong across dividend/split/送转/adj_factor changes. New correct stop defined in ADJUSTED PRICE SPACE. Question: does the old Phase A direction ("fixed stops generally hurt strategy") still hold under correct adjusted-space semantics? SEMANTICS REMEDIATION + EXACT REPLICATION only - no stop optimization.
+S0,period,2020-01-01 to 2024-12-31 DEVELOPMENT ONLY (dev episodes: signal_date<=2024-12-31 AND exit_date<=2024-12-31)
+S0,2025_2026,CLOSED - never read. No 2025+ episode outcome / OHLC / feature used for any result.
+S0,frozen_sample,SECONDARY V2A_FROZEN_STRICT from results/evidence/fullmarket/fullmarket_episode_metrics.csv; dev subset only
+S0,frozen_grid,-10.0 / -12.5 / -15.0 / -17.5 / -20.0 / -22.5 / -25.0 / -27.5 / -30.0 / -35.0 / -40.0 (identical to Phase A canonical; NO new thresholds)
+S0,old_semantics,stop_raw = first_entry_raw*(1+stop_pct); compare against raw OHLC across holding period (Phase A buggy semantics - for exact replication only)
+S0,new_semantics,entry_adj = entry_raw * entry_adj_factor; stop_adj = entry_adj*(1+s); holding day d: low_adj_d = low_raw_d*adj_factor_d; trigger when low_adj_d <= stop_adj; if open_adj_d < stop_adj -> gap: use open_raw_d else theoretical stop_raw_d = stop_adj/adj_factor_d; then A-share tick / limit-down / T+1 / suspension / executable semantics identical to frozen STRICT_C
+S0,entry_adj_factor,adj_factor at entry execution day (T+1 open fill day)
+S0,same_bar_ambiguity,if same-day stop and dynamic TP both trigger: report STOP_FIRST / TP_FIRST bounds; primary = STOP_FIRST (Phase A preregistered conservative); TP_FIRST = sensitivity reference
+S0,gap_execution,if open_adj < stop_adj -> fill at open_raw price + frozen slippage/cost; never assume stop price fills
+S0,limit_down_suspension,if stop triggered but not sellable (一字跌停/停牌) -> defer; record trigger_date/first_executable_date/delay_days; never assume immediate fill
+S0,t_plus_1,entry day stop exit forbidden; strict T+1
+S0,execution_rules,identical to frozen STRICT_C: T+1, 100-share lot, PIT ST, listing60, executable tick, dynamic P* TP unchanged, fees/slippage identical
+S0,primary_horizon,N/A (semantics remediation; not a predictive study)
+S0,primary_test,old raw vs new adjusted stop per frozen threshold; old engine exact replication parity first
+S0,old_parity,old raw-stop replication must match historical canonical (results/evidence/stopA/) per threshold: n_stop/mean return/win rate/saved losers/killed winners to exact/rounding parity; else STOP
+S0,deep_mae_subsets,pre-fixed: baseline MAE < -20% and MAE < -30%; descriptive diagnostic only
+S0,eventday_bootstrap,event-day HAC + block bootstrap (L=21, B>=2000) for new adjusted stop vs baseline per threshold
+S0,invariants,I1 factor-unchanged episode: old raw trigger date == new adjusted trigger date within tick tolerance; I2 no-stop baseline unchanged; I3 only stop coordinate semantics changes; I4 T+1 preserved; I5 entry/exit costs unchanged; I6 2025+ never read; I7 old Phase A replication exact. All auto-asserted.
+S0,forbidden,stop threshold scan beyond frozen grid / new threshold / adaptive stop / ATR stop / trailing stop / time stop / profit target change / exit change / ranking / market gate / K/layer change / ML / parameter optimization / picking best stop
+S0,classification,A old Phase A conclusion robust to semantics fix / B material semantics change but no clear useful fixed stop / C old conclusion invalidated (>=1 frozen threshold stable positive net effect) / D unresolved (parity/invariants fail)
+S0,status,PREREGISTERED

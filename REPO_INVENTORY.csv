@@ -673,3 +673,15 @@ results/evidence/f22/f22_mc_analytic_parity.csv,csv,F2.2,result,ACTIVE,N,,high,r
 results/evidence/f22/f22_precision_frontier.csv,csv,F2.2,result,ACTIVE,N,,medium,results/evidence/f22/,
 results/evidence/f22/f22_safe_frontier.csv,csv,F2.2,result,ACTIVE,N,,high,results/evidence/f22/,
 results/evidence/f22/f22_summary.json,json,F2.2,result,ACTIVE,Y,,high,results/evidence/f22/,
+research/risk/registries/FAILURE_STATE_F23_POLICY_VALUE_INFERENCE_REGISTRY.csv,csv,F2.3,registry,ACTIVE,Y,,high,research/risk/registries/,"F2.3-A prereg, SHA c0f4d1d2..."
+research/risk/registries/FAILURE_STATE_F23_POLICY_VALUE_INFERENCE_REGISTRY.sha256,sha256,F2.3,registry,ACTIVE,Y,,high,research/risk/registries/,
+research/risk/failure_state_f23.py,py,F2.3,code,ACTIVE,Y,,infra,research/risk/,calendar-block policy-value inference
+research/risk/FAILURE_STATE_F23.md,md,F2.3,report,ACTIVE,Y,,high,research/risk/,"F2.3 canonical report, classification B"
+results/evidence/f23/f23_grid_calendar_bootstrap.csv,csv,F2.3,result,ACTIVE,N,,high,results/evidence/f23/,
+results/evidence/f23/f23_grid_hac.csv,csv,F2.3,result,ACTIVE,N,,medium,results/evidence/f23/,
+results/evidence/f23/f23_invariants.json,json,F2.3,result,ACTIVE,N,,medium,results/evidence/f23/,
+results/evidence/f23/f23_key_cells.csv,csv,F2.3,result,ACTIVE,Y,,high,results/evidence/f23/,
+results/evidence/f23/f23_policy_day_values.csv,csv,F2.3,result,ACTIVE,N,,medium,results/evidence/f23/,
+results/evidence/f23/f23_randomization_vs_sampling.csv,csv,F2.3,result,ACTIVE,N,,medium,results/evidence/f23/,
+results/evidence/f23/f23_safe_frontier.csv,csv,F2.3,result,ACTIVE,N,,high,results/evidence/f23/,
+results/evidence/f23/f23_summary.json,json,F2.3,result,ACTIVE,Y,,high,results/evidence/f23/,

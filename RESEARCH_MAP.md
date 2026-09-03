@@ -223,8 +223,15 @@ F2 Actionability Value Bound ──► D ACTIONABILITY NEGATIVE (DEVELOPMENT DIA
 - **源码:** `research/risk/failure_state_f22.py`
 - **Registry:** `research/risk/registries/FAILURE_STATE_F22_BREAK_EVEN_REGISTRY.csv`（SHA256 `aff9c429...`，pre-reg `a829298`）
 - **结果数据:** `results/evidence/f22/`
-- **状态:** **POINT BREAK-EVEN/PRECISION ACCEPTED；POLICY-VALUE CI/SAFE FRONTIER WAITING F2.3**（分类 PROVISIONAL B，未写入 README CURRENT TRUTH）
-- **关键数字:** A=+1.4486pp、B=−2.6833pp；point break-even FPR 0.135/0.270/0.405/0.540；break-even precision 0.762（全部 ACCEPTED）。**旧 randomization CI 不再作 primary safe frontier，待 F2.3 用 full-calendar block bootstrap + HAC 重建。**未设计 predictor/stop/exit/timing。
+- **状态:** **POINT BREAK-EVEN/PRECISION ACCEPTED**（F2.3 完成 sampling 推断后 classification 仍 **B**；未写入 README CURRENT TRUTH）
+- **关键数字:** A=+1.4486pp、B=−2.6833pp；point break-even FPR 0.135/0.270/0.405/0.540；break-even precision 0.762（ACCEPTED）。**calendar-safe frontier（F2.3）：0.00/0.05/0.10/0.10；randomization interval 仅 reference。**未设计 predictor/stop/exit/timing。
+### 14h. F2.3 Policy-Value Sampling Inference
+- **Canonical:** `[research/risk/FAILURE_STATE_F23.md](research/risk/FAILURE_STATE_F23.md)`
+- **源码:** `research/risk/failure_state_f23.py`
+- **Registry:** `research/risk/registries/FAILURE_STATE_F23_POLICY_VALUE_INFERENCE_REGISTRY.csv`（SHA256 `c0f4d1d2...`，pre-reg `73b9c19`）
+- **结果数据:** `results/evidence/f23/`
+- **状态:** **DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH）** — policy-value 历史采样推断完成，classification 仍 B
+- **关键数字:** V_d=t·A_d+f·B_d 确定性；O1 parity PASS（HAC [0.48,2.42] / CAL [0.40,2.61]）；**calendar-safe frontier 0.00/0.05/0.10/0.10**（HAC 一致）；.75/.30、1.00/.30 在 sampling 下跨 0；randomization interval 仅 reference。未设计 predictor/stop/exit/timing。
 ### 15. ★ CURRENT: Portfolio Architecture（组合架构）
 - **状态:** 研究**暂停**。当前唯一活跃问题是：有限 K=3 slots + 长持仓 + 多层占位/路径依赖的组合架构如何提升资金效率。
 - **P4 进展（2026-09-03，ACCEPTED DIAGNOSTIC，外审通过）:** 结构性消融显示 K=3 是实际容量瓶颈，但在当前历史样本与组合规则下同时表现为保护性的 admission constraint（解除任一约束组合均大幅恶化）；完全移除多层加仓（5→1 层）在测试路径下有害（不断言 5 层最优）。瓶颈在更深层。下一步必须等待外部审计决定；2025–2026 Confirmation 继续 CLOSED。
@@ -251,6 +258,7 @@ F2 Actionability Value Bound ──► D ACTIONABILITY NEGATIVE (DEVELOPMENT DIA
 | F2 Actionability Value Bound Registry | `research/risk/registries/` | `4e088fb`（F2-A，INVALID/P0） |
 | F2.1 Matched-Share Actionability Registry | `research/risk/registries/` | `02c6738`（F2.1-A） |
 | F2.2 Break-Even Precision Registry | `research/risk/registries/` | `a829298`（F2.2-A） |
+| F2.3 Policy-Value Inference Registry | `research/risk/registries/` | `73b9c19`（F2.3-A） |
 
 ---
 

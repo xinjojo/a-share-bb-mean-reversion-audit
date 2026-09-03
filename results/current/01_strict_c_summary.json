@@ -1,0 +1,79 @@
+[
+  {
+    "version": "V0_BASELINE_oldlimit",
+    "desc": "含未来+old跌停+slip0",
+    "total": 383.62,
+    "ann": 27.96,
+    "mdd": -45.43,
+    "sharpe": 0.681,
+    "trades": 103,
+    "wr": 75.73,
+    "stock_pnl": 2020726.0
+  },
+  {
+    "version": "P0_FIX",
+    "desc": "无未来退出",
+    "total": 110.85,
+    "ann": 12.38,
+    "mdd": -55.27,
+    "sharpe": 0.521,
+    "trades": 65,
+    "wr": 66.15,
+    "stock_pnl": 458358.0
+  },
+  {
+    "version": "P0+CORRECTLD",
+    "desc": "无未来+正确跌停",
+    "total": 82.49,
+    "ann": 9.87,
+    "mdd": -62.72,
+    "sharpe": 0.513,
+    "trades": 64,
+    "wr": 62.5,
+    "stock_pnl": 307917.0
+  },
+  {
+    "version": "STRICT_V1",
+    "desc": "无未来+正确跌停+10bp滑点+一字板约束",
+    "total": 62.62,
+    "ann": 7.9,
+    "mdd": -65.56,
+    "sharpe": 0.511,
+    "trades": 63,
+    "wr": 63.49,
+    "stock_pnl": 260402.0
+  },
+  {
+    "version": "STRICT_V1_histstamp",
+    "desc": "STRICT_V1+历史印花税",
+    "total": 52.28,
+    "ann": 6.8,
+    "mdd": -65.75,
+    "sharpe": 0.504,
+    "trades": 63,
+    "wr": 60.32,
+    "stock_pnl": 142061.0
+  },
+  {
+    "version": "STRICT_V1_nextopen_buy",
+    "desc": "STRICT_V1+买入next_open",
+    "total": 81.85,
+    "ann": 9.81,
+    "mdd": -39.91,
+    "sharpe": 0.443,
+    "trades": 74,
+    "wr": 64.86,
+    "stock_pnl": 243634.0
+  },
+  {
+    "version": "STRICT_V1_full",
+    "desc": "全严格: 无未来+correct跌停+10bp+一字板+next_open+历史印花税",
+    "total": 84.06,
+    "ann": 10.01,
+    "mdd": -40.05,
+    "sharpe": 0.449,
+    "trades": 74,
+    "wr": 64.86,
+    "stock_pnl": 267730.0
+  }
+]

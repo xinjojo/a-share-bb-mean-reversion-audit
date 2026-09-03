@@ -540,3 +540,7 @@ archive/invalid/top10_selection.py,file,original,script,INVALID,FALSE,,invalid,a
 archive/superseded/trade_max_drawdown.py,file,tradepath,script,SUPERSEDED,FALSE,full_market_trade_path_audit.py,secondary,archive/superseded/trade_max_drawdown.py,max drawdown audit
 archive/superseded/trade_path_quality_audit.py,file,tradepath,script,SUPERSEDED,FALSE,full_market_trade_path_audit.py,secondary,archive/superseded/trade_path_quality_audit.py,primary-only path quality audit
 archive/invalid/walk_forward.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/walk_forward.py,original walk-forward (optimistic)
+MIGRATION_MAP.csv,csv,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,MIGRATION_MAP.csv,R0 repository governance
+REPO_INVENTORY.csv,csv,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,REPO_INVENTORY.csv,R0 governance
+tools/r0_build_inventory.py,other,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,tools/r0_build_inventory.py,R0 governance
+tools/r0_migrate.py,other,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,tools/r0_migrate.py,R0 repository governance

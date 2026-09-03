@@ -1,0 +1,174 @@
+# RESEARCH_MAP.md — 研究链地图
+
+> 本文件建立研究链的**唯一入口导航**：每个阶段 → **一个 canonical 报告**（含其源码与结果数据落点）。
+> 旧版本 / 中间版本一律标 `SUPERSEDED` 或 `INVALID`，不以任何方式作为"当前答案"。
+> 状态图例：`ACCEPTED`（结案通过）/ `CLOSED`（验证失败或终止）/ `PROVISIONAL`（暂接受）/ `INVALID`（致命错误）。
+
+---
+
+## 研究链总览
+
+```
+Original +354.9%  (INVALID: same-bar future info)
+   │
+   ▼
+Lookahead / 红队审计 (REDTEAM rounds 1-5)
+   │
+   ▼
+STRICT_C (ACCEPTED)
+   │
+   ▼
+Independent Trade Replay ──► Signal Layer A (ACCEPTED)
+   │
+   ▼
+Full Market ~89k ──► Trade Path 结构 A (ACCEPTED)
+   │
+   ▼
+Temporal Clustering T1 ──► A STRONG (ACCEPTED)
+   │
+   ▼
+Market State T2 ──► reverse-direction discovery (ACCEPTED AS DISCOVERY)
+   │
+   ▼
+T2-R Reverse Validation ──► A STRONG VALIDATION (ACCEPTED)
+   │
+   ▼
+Market Gate T3 ──► C NO USEFUL PORTFOLIO GATE (CLOSED · FAIL)
+   │
+   ▼
+Cross-sectional Ranking P1/P1.1 ──► A Discovery (ACCEPTED)
+   │
+   ▼
+P2 Ranking Validation ──► B Partial (ATR20_PCT 唯一 full pass) (ACCEPTED)
+   │
+   ▼
+P3 ATR Slot Allocation ──► C NO USEFUL PORTFOLIO RANKING (CLOSED · FAIL)
+   │
+   ▼
+P3.1 Slot Contention ──► C BOTH (ACCEPTED DIAGNOSTIC)
+   │
+   ▼
+★ CURRENT: Portfolio Architecture（组合架构瓶颈，研究暂停，等待外部审计）★
+```
+
+---
+
+## 逐阶段入口
+
+### 1. 原策略 / 红队审计
+- **Canonical:** `[archive/superseded/REDTEAM_ROUND5_STRICT.md](archive/superseded/REDTEAM_ROUND5_STRICT.md)`（最终红队结论）
+- **状态:** 原 +354.9% = **INVALID**（`[archive/invalid/RESULTS_LATEST.md](archive/invalid/RESULTS_LATEST.md)`）
+- **原因:** same-bar 未来信息 / ETF open 时序 / PIT 状态 / 上市时间
+- **结果数据:** `archive/invalid/results/`、`archive/invalid/results_exp/`
+
+### 2. STRICT_C
+- **Canonical:** `[research/signal/REDTEAM_ROUND51_STRICT.md](research/signal/REDTEAM_ROUND51_STRICT.md)`
+- **源码:** `src/round51/round51_audit.py`、`src/run_strict_c.py`
+- **结果数据:** `results/evidence/strict_c/round5/`
+- **状态:** **ACCEPTED**（严格因果口径基线）
+
+### 3. Independent Trade Replay（Signal Layer）
+- **Canonical:** `[research/signal/INDEPENDENT_TRADE_REPLAY_V2_AUDIT.md](research/signal/INDEPENDENT_TRADE_REPLAY_V2_AUDIT.md)`
+- **源码:** `research/signal/independent_trade_replay_v2.py`
+- **结果数据:** `results/evidence/independent/`
+- **状态:** **ACCEPTED** — Signal Layer **A**（Primary Top10 n=299: mean≈+4.96%, median≈+5.22%, win≈75.9%）
+- **被取代:** `archive/superseded/INDEPENDENT_TRADE_REPLAY.md`（V1）
+
+### 4. Full Market Trade Path
+- **Canonical:** `[research/trade_path/FULL_MARKET_TRADE_PATH_AUDIT.md](research/trade_path/FULL_MARKET_TRADE_PATH_AUDIT.md)`
+- **源码:** `research/trade_path/full_market_trade_path_audit.py`
+- **结果数据:** `results/evidence/fullmarket/`（含 `fullmarket_episode_metrics.csv` 89,046 行）
+- **状态:** **ACCEPTED** — 全市场 89,046 realized + 124 censored；信号结构 A；MAE 深度与最终交易质量显著相关
+- **被取代:** `archive/superseded/TRADE_PATH_QUALITY_AUDIT.md`
+
+### 5. Fixed Stop Phase A
+- **Canonical:** `[research/execution/STOP_LOSS_COUNTERFACTUAL_PHASE_A.md](research/execution/STOP_LOSS_COUNTERFACTUAL_PHASE_A.md)`
+- **源码:** `research/execution/stop_loss_counterfactual_phase_a.py`
+- **结果数据:** `results/evidence/stopA/`
+- **状态:** **PROVISIONAL / SEMANTICS ISSUE** — raw first-entry stop vs adjusted-space 问题未正式关闭，**不得误标 ACCEPTED**；结论为 `C — NO USEFUL STOP`
+
+### 6. Temporal Clustering T1
+- **Canonical:** `[research/market_state/TEMPORAL_CLUSTERING_PHASE_T1.md](research/market_state/TEMPORAL_CLUSTERING_PHASE_T1.md)`
+- **源码:** `research/market_state/temporal_clustering_phase_t1.py`
+- **结果数据:** `results/evidence/temporal/`
+- **状态:** **ACCEPTED** — **A — STRONG**（runs z≈−11, lag1 ACF≈0.43；盈利/亏损显著按时间成团；有效独立信息量远小于 89k）
+
+### 7. Market State T2（Discovery）
+- **Canonical:** `[research/market_state/MARKET_STATE_PHASE_T2.md](research/market_state/MARKET_STATE_PHASE_T2.md)`
+- **源码:** `research/market_state/market_state_phase_t2.py`（+ `STEP_A_PREREGISTER.py` / `STEP_B_VALIDATE.py`）
+- **Registry:** `research/market_state/registries/TEMPORAL_STATE_FEATURE_REGISTRY.csv`（SHA256 `b686...c8407`）
+- **结果数据:** `results/evidence/t2/`
+- **状态:** **ACCEPTED AS DISCOVERY**（reverse-direction；27 predictors 预注册）
+
+### 8. T2-R Reverse Validation
+- **Canonical:** `[research/market_state/MARKET_STATE_REVERSE_VALIDATION.md](research/market_state/MARKET_STATE_REVERSE_VALIDATION.md)`
+- **源码:** `research/market_state/STEP_A_PREREGISTER.py` / `STEP_B_VALIDATE.py`
+- **Registry:** `research/market_state/registries/TEMPORAL_STATE_REVERSE_VALIDATION_REGISTRY.csv`
+- **结果数据:** `results/evidence/t2r/`
+- **状态:** **ACCEPTED** — **A — STRONG VALIDATION**（F02 ALL_A_EW_RET60 方向 NEGATIVE：Disc IC −0.441 / Val IC −0.417, BH q 0.0105, spread +2.75pp；F18 LIMIT_DOWN_SHARE 方向 POSITIVE：Val IC +0.164, BH q 0.021, spread +2.54pp）
+
+### 9. Market Gate T3
+- **Canonical:** `[research/market_state/MARKET_STATE_GATE_T3.md](research/market_state/MARKET_STATE_GATE_T3.md)`
+- **源码:** `research/market_state/market_state_gate_t3.py`
+- **Registry:** `research/market_state/registries/MARKET_STATE_GATE_REGISTRY.csv`
+- **结果数据:** `results/evidence/t3/`
+- **状态:** **CLOSED** — **C — NO USEFUL PORTFOLIO GATE**（硬门控失败；G0-G4 冻结，未来 Confirmation 主测 G1）
+- **附:** `T3_R05_BASIS_CLARIFICATION.md`（R05 cutpoint 基数澄清）
+
+### 10. Cross-sectional Ranking P1 / P1.1
+- **Canonical:** `[research/ranking/CROSS_SECTIONAL_RANKING_P1_CORRECTED.md](research/ranking/CROSS_SECTIONAL_RANKING_P1_CORRECTED.md)`（P1.1 corrected）
+- **源码:** `research/ranking/cross_sectional_ranking_p1_corrected.py`（+ `cross_sectional_ranking_p1.py` 被取代）
+- **Registry:** `research/ranking/registries/CROSS_SECTIONAL_RANKING_REGISTRY.csv`（SHA256 `fa5beb5a...bab819`）
+- **附:** `P1_RELATIVE_RETURN_INVARIANCE_NOTE.md`（REL_RET 同日内 rank-invariant 说明）
+- **结果数据:** `results/evidence/p1/`、`results/evidence/p11/`
+- **状态:** **ACCEPTED** — Discovery **A**（≥2 非冗余 predictor 通过 gate：RET3/RET20/DIST_MA20/ATR20_PCT/INTRADAY_RANGE）
+
+### 11. P2 Ranking Validation
+- **Canonical:** `[research/ranking/CROSS_SECTIONAL_RANKING_P2_VALIDATION.md](research/ranking/CROSS_SECTIONAL_RANKING_P2_VALIDATION.md)`
+- **源码:** `research/ranking/STEP_A_RANKING_VALIDATE_PREREGISTER.py` / `STEP_B_RANKING_VALIDATE.py`
+- **Registry:** `research/ranking/registries/CROSS_SECTIONAL_RANKING_VALIDATION_REGISTRY.csv`
+- **结果数据:** `results/evidence/p2/`
+- **状态:** **ACCEPTED** — **B — PARTIAL VALIDATION**（唯一 full pass：V04/F09 ATR20_PCT POS；Val daily CS IC≈+0.134, BH q≈1.6e-8, pairwise 55.23%, K3 lift +1.426pp, bootstrap CI [+0.50,+2.51]）
+
+### 12. P3 ATR Slot Allocation
+- **Canonical:** `[research/portfolio/ATR_SLOT_ALLOCATION_P3.md](research/portfolio/ATR_SLOT_ALLOCATION_P3.md)`
+- **源码:** `research/portfolio/atr_slot_allocation_p3.py`
+- **Registry:** `research/portfolio/registries/ATR_SLOT_ALLOCATION_REGISTRY.csv`
+- **附:** `P3_FUTURE_CONFIRMATION_RULE.md`（未来 Confirmation 预注册标准）
+- **结果数据:** `results/evidence/p3/`
+- **状态:** **CLOSED** — **C — NO USEFUL PORTFOLIO RANKING**（dev 2020–2024 PURE STOCK 10bp：B0 +30.30% / B1 −18.66%；B2 FULL-SIGNAL NON-DEPLOYABLE）
+- **附:** `P3_MECHANISM_CORRECTION_NOTE.md`（文档标签勘误，不影响 C 结论）
+
+### 13. P3.1 Slot Contention
+- **Canonical:** `[research/portfolio/SLOT_CONTENTION_PATH_AUDIT.md](research/portfolio/SLOT_CONTENTION_PATH_AUDIT.md)`
+- **源码:** `research/portfolio/slot_contention_path_audit.py`
+- **附:** `SLIPPAGE_PATH_DISCONTINUITY_AUDIT.md`
+- **结果数据:** `results/evidence/p31/`
+- **状态:** **ACCEPTED DIAGNOSTIC** — **C — BOTH**（ranking-actionable 仅 16/1212=1.32%；K=3 saturation 是主瓶颈；少数选择差异被 path dependence 放大）
+
+### 14. ★ CURRENT: Portfolio Architecture（组合架构）
+- **状态:** 研究**暂停**。当前唯一活跃问题是：有限 K=3 slots + 长持仓 + 多层占位/路径依赖的组合架构如何提升资金效率。
+- **约束:** 本轮只整理仓库，不研究；下一研究阶段必须等待外部审计决定；2025–2026 Confirmation 继续 CLOSED。
+
+---
+
+## 预注册 Registry 索引
+
+| Registry | 位置 | 冻结 commit |
+|---|---|---|
+| 104-cell Hypothesis Registry | `[archive/superseded/HYPOTHESIS_REGISTRY.csv](archive/superseded/HYPOTHESIS_REGISTRY.csv)` | `0d5979bf`（原始，历史） |
+| T2 Feature Registry | `research/market_state/registries/` | `0d5979bf`（T2 registry commit） |
+| T2-R Reverse Validation Registry | `research/market_state/registries/` | T2-R registry commit |
+| P1 Ranking Registry | `research/ranking/registries/` | `9c36887` |
+| P2 Ranking Validation Registry | `research/ranking/registries/` | `83c3f1e` |
+| ATR Slot Allocation Registry | `research/portfolio/registries/` | P3 registry commit |
+| Market State Gate Registry | `research/market_state/registries/` | T3 registry commit |
+
+---
+
+## 完整性审计
+
+- `[CANONICAL_ARTIFACT_INTEGRITY.csv](CANONICAL_ARTIFACT_INTEGRITY.csv)` — 468 个迁移文件迁移前后 SHA256 全部 **UNCHANGED**
+- `[DUPLICATE_FILE_AUDIT.csv](DUPLICATE_FILE_AUDIT.csv)` — 7 组字节级重复（历史命名证据，保留并说明）
+- `[BROKEN_LINK_AUDIT.md](BROKEN_LINK_AUDIT.md)` — Markdown 内部链接扫描（目标 0 unresolved）
+- 远程 Git 验证：`[REMOTE_VERIFICATION.md](REMOTE_VERIFICATION.md)`（P3.1 commit `a4fed2b` 已 push，remote_contains_commit=YES）

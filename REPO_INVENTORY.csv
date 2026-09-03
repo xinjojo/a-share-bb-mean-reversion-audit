@@ -662,3 +662,14 @@ results/evidence/f21/f21_natural_exit_parity.csv,csv,F2.1,result,ACTIVE,N,,high,
 results/evidence/f21/f21_old_vs_corrected_basis.csv,csv,F2.1,result,ACTIVE,N,,medium,results/evidence/f21/,
 results/evidence/f21/f21_summary.json,json,F2.1,result,ACTIVE,Y,,high,results/evidence/f21/,
 results/evidence/f21/f21_tp_benefit.csv,csv,F2.1,result,ACTIVE,N,,medium,results/evidence/f21/,
+research/risk/registries/FAILURE_STATE_F22_BREAK_EVEN_REGISTRY.csv,csv,F2.2,registry,ACTIVE,Y,,high,research/risk/registries/,"F2.2-A prereg, SHA aff9c429..."
+research/risk/registries/FAILURE_STATE_F22_BREAK_EVEN_REGISTRY.sha256,sha256,F2.2,registry,ACTIVE,Y,,high,research/risk/registries/,
+research/risk/failure_state_f22.py,py,F2.2,code,ACTIVE,Y,,infra,research/risk/,corrected A_d/B_d break-even
+research/risk/FAILURE_STATE_F22.md,md,F2.2,report,ACTIVE,Y,,high,research/risk/,"F2.2 canonical report, B classification"
+results/evidence/f22/f22_break_even_frontier.csv,csv,F2.2,result,ACTIVE,Y,,high,results/evidence/f22/,
+results/evidence/f22/f22_day_components.csv,csv,F2.2,result,ACTIVE,N,,medium,results/evidence/f22/,
+results/evidence/f22/f22_expected_value_formula.csv,csv,F2.2,result,ACTIVE,N,,medium,results/evidence/f22/,
+results/evidence/f22/f22_mc_analytic_parity.csv,csv,F2.2,result,ACTIVE,N,,high,results/evidence/f22/,
+results/evidence/f22/f22_precision_frontier.csv,csv,F2.2,result,ACTIVE,N,,medium,results/evidence/f22/,
+results/evidence/f22/f22_safe_frontier.csv,csv,F2.2,result,ACTIVE,N,,high,results/evidence/f22/,
+results/evidence/f22/f22_summary.json,json,F2.2,result,ACTIVE,Y,,high,results/evidence/f22/,

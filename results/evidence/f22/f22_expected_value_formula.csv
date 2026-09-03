@@ -1,0 +1,5 @@
+field,value,unit
+A_failure_unit_contribution_day_equal,1.44858,pp
+B_recovery_unit_contribution_day_equal,-2.683262,pp
+analytic_expected_delta,TPR*A + FPR*B,pp
+precision_prevalence_episode,0.63336,fraction

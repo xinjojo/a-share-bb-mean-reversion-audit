@@ -216,8 +216,15 @@ F2 Actionability Value Bound ──► D ACTIONABILITY NEGATIVE (DEVELOPMENT DIA
 - **源码:** `research/risk/failure_state_f21.py`
 - **Registry:** `research/risk/registries/FAILURE_STATE_F21_MATCHED_ACTION_REGISTRY.csv`（SHA256 `12f8311c...`，pre-reg `02c6738`）
 - **结果数据:** `results/evidence/f21/`
-- **状态:** **PROVISIONAL B — NARROW POSITIVE ACTIONABILITY**（matched-share O1 core evidence 有效；**break-even/precision 模块 INVALID，WAITING F2.2**；未写入 README CURRENT TRUTH）
-- **关键数字:** O1 完美标签 D20+1 清仓 +1.45pp（HAC [0.48,2.42] / boot [0.40,2.61] 显著正）；O2/O3 跨 0；TP −0.46pp、FP −17.9~−25.0pp；natural exit 61,828 replay parity 0 误差；future-add 57.0%。**break-even/precision 数字（0.080/96%）已作废，由 F2.2 重算。**未设计 predictor/stop/exit。
+- **状态:** **B — NARROW POSITIVE ACTIONABILITY**（matched-share O1 core evidence 有效；break-even/precision 由 F2.2 修正；未写入 README CURRENT TRUTH）
+- **关键数字:** O1 完美标签 D20+1 清仓 +1.45pp（HAC [0.48,2.42] / boot [0.40,2.61] 显著正）；O2/O3 跨 0；TP −0.46pp、FP −17.9~−25.0pp；natural exit 61,828 replay parity 0 误差；future-add 57.0%。**break-even/precision 见 F2.2（point BE 0.135–0.540、precision 0.762、safe frontier 0.05–0.30）。**未设计 predictor/stop/exit。
+### 14g. F2.2 Break-Even / Precision Remediation
+- **Canonical:** `[research/risk/FAILURE_STATE_F22.md](research/risk/FAILURE_STATE_F22.md)`
+- **源码:** `research/risk/failure_state_f22.py`
+- **Registry:** `research/risk/registries/FAILURE_STATE_F22_BREAK_EVEN_REGISTRY.csv`（SHA256 `aff9c429...`，pre-reg `a829298`）
+- **结果数据:** `results/evidence/f22/`
+- **状态:** **DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH）** — 修正 F2.1 break-even bug（A_d/B_d 正确分解，752 days 等权）
+- **关键数字:** A=+1.4486pp、B=−2.6833pp；analytic-MC parity 0.0071pp（grid 复现 0 误差）；**point break-even FPR 0.135/0.270/0.405/0.540；break-even precision 0.762；CI-safe frontier 0.05/0.10/0.30/0.30**；TPR=.75/FPR=.30 CI 显著正；旧 0.96/0.08 撤销；classification 仍 B。**未设计 predictor/stop/exit/timing。**
 ### 15. ★ CURRENT: Portfolio Architecture（组合架构）
 - **状态:** 研究**暂停**。当前唯一活跃问题是：有限 K=3 slots + 长持仓 + 多层占位/路径依赖的组合架构如何提升资金效率。
 - **P4 进展（2026-09-03，ACCEPTED DIAGNOSTIC，外审通过）:** 结构性消融显示 K=3 是实际容量瓶颈，但在当前历史样本与组合规则下同时表现为保护性的 admission constraint（解除任一约束组合均大幅恶化）；完全移除多层加仓（5→1 层）在测试路径下有害（不断言 5 层最优）。瓶颈在更深层。下一步必须等待外部审计决定；2025–2026 Confirmation 继续 CLOSED。
@@ -243,6 +250,7 @@ F2 Actionability Value Bound ──► D ACTIONABILITY NEGATIVE (DEVELOPMENT DIA
 | F1.1 Inference Remediation Registry | `research/risk/registries/` | `2cecd15`（F1.1-A） |
 | F2 Actionability Value Bound Registry | `research/risk/registries/` | `4e088fb`（F2-A，INVALID/P0） |
 | F2.1 Matched-Share Actionability Registry | `research/risk/registries/` | `02c6738`（F2.1-A） |
+| F2.2 Break-Even Precision Registry | `research/risk/registries/` | `a829298`（F2.2-A） |
 
 ---
 

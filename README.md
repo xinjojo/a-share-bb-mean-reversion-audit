@@ -53,6 +53,7 @@
 | 时间聚类 | `[research/market_state/TEMPORAL_CLUSTERING_PHASE_T1.md](research/market_state/TEMPORAL_CLUSTERING_PHASE_T1.md)` | **A — STRONG**（runs z≈−11, lag1 ACF≈0.43） | ACCEPTED |
 | 市场状态前瞻解释 | `[research/market_state/MARKET_STATE_PHASE_T2.md](research/market_state/MARKET_STATE_PHASE_T2.md)`（Discovery）<br>`[research/market_state/MARKET_STATE_REVERSE_VALIDATION.md](research/market_state/MARKET_STATE_REVERSE_VALIDATION.md)`（T2-R） | **A — STRONG VALIDATION**（F02 ALL_A_EW_RET60 反向、F18 LIMIT_DOWN_SHARE） | ACCEPTED |
 | 个股横截面排序 | `[research/ranking/CROSS_SECTIONAL_RANKING_P1_CORRECTED.md](research/ranking/CROSS_SECTIONAL_RANKING_P1_CORRECTED.md)`（Discovery）<br>`[research/ranking/CROSS_SECTIONAL_RANKING_P2_VALIDATION.md](research/ranking/CROSS_SECTIONAL_RANKING_P2_VALIDATION.md)`（Validation） | Discovery **A**；Validation **B — PARTIAL**（唯一 full pass：ATR20_PCT） | ACCEPTED |
+| Deep-MAE failure/recovery state | `[research/risk/FAILURE_STATE_F11.md](research/risk/FAILURE_STATE_F11.md)`（F1.1 corrected anchor-day inference） | **PROSPECTIVELY IDENTIFIABLE (A, F1.1)** —— **NO EXIT POLICY YET** | ACCEPTED |
 | 2025–2026 Confirmation | — | **全程 UNTOUCHED / CLOSED** | CLOSED |
 
 ---

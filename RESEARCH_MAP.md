@@ -57,10 +57,10 @@ P4.1 Marginal Admission ──► B CAPITAL/PATH DILUTION DOMINANT (DEVELOPMENT 
 S0 Stop-Loss Semantics ──► A OLD PHASE-A CONCLUSION ROBUST (ACCEPTED)
    │
    ▼
-F1 Deep-MAE Recoverability ──► A STRONG RECOVERABILITY PREDICTABILITY (DEVELOPMENT DIAGNOSTIC, 待外审)
+F1 Deep-MAE Recoverability ──► A STRONG RECOVERABILITY PREDICTABILITY (SUPERSEDED FOR INFERENCE BY F1.1, 描述性输出有效)
    │
    ▼
-F1.1 Inference Remediation ──► FINAL A (CLOSE A / TOUCH A) (EXTERNAL AUDIT REMEDIATION, 待外审)
+F1.1 Inference Remediation ──► FINAL A (CLOSE A / TOUCH A) (ACCEPTED — NO EXIT POLICY YET)
    │
    ▼
 ★ CURRENT: Portfolio Architecture（组合架构瓶颈，研究暂停，等待外部审计）★
@@ -198,7 +198,7 @@ F1.1 Inference Remediation ──► FINAL A (CLOSE A / TOUCH A) (EXTERNAL AUDIT
 - **源码:** `research/risk/failure_state_f11.py`
 - **Registry:** `research/risk/registries/FAILURE_STATE_F11_INFERENCE_REGISTRY.csv`（SHA256 `aacb2146...`，pre-reg `2cecd15`）
 - **结果数据:** `results/evidence/f11/`
-- **状态:** **EXTERNAL AUDIT REMEDIATION（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH）** — **FINAL = A — STRONG RECOVERABILITY PREDICTABILITY**（保守取 CLOSE/TOUCH 较低者）
+- **状态:** **ACCEPTED（R0.4 外审通过，2026-09-03）** — **FINAL = A — STRONG RECOVERABILITY PREDICTABILITY**（保守取 CLOSE/TOUCH 较低者；README CURRENT TRUTH 已新增一行，注明 **NO EXIT POLICY YET**）
 - **关键修复:** ①primary 用全部 anchor dates（D20=752/D30=537，去 MIN_DAY_N=5）；②gate 方向/D20-D30 一致性改用 anchor-day day_corr（F_AMT_RATIO20 在 CLOSE 下 corrected 一致性 True→False，不再误 pass）；③双 outcome 语义 CLOSE/A（9 pass）与 TOUCH/A（11 pass），各 4 family（PRICE_PATH/POSITION/RECOVERY/VOLATILITY）；calendar block-bootstrap CI 全排除 0；MIN5 sensitivity 不改方向；D30 strengthening q=0（仅 537 天，如实报告）；sanity A–J 全 PASS；F1 Registry SHA 不变。**仍未设计任何 stop/exit/failure-score。**
 
 ### 15. ★ CURRENT: Portfolio Architecture（组合架构）

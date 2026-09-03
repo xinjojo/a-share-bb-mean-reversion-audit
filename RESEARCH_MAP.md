@@ -240,6 +240,9 @@ F2 Actionability Value Bound ──► D ACTIONABILITY NEGATIVE (DEVELOPMENT DIA
 - **状态:** **ACCEPTED DIAGNOSTIC（经 R0.9 关闭）** — **C — PREDICTIVE BUT ECONOMICALLY INSUFFICIENT**；branch PAUSED/CLOSED FOR DEVELOPMENT
 - **关键数字:** OOF M1 AUC 0.720 / PR-AUC 0.786；STABLE_SAFE/STABLE_POINT **0/6**；2021–2023 EV 全负，2024 年 M0 T50/T75、M1 T50/T75/T90 为正（单年，不达标）；test FPR 0.12–0.64 vs calendar-safe ≤0.05–0.10；系数 3/4 方向稳定；D30 transfer AUC 0.584–0.807。无调参/无新特征/无 gate。
 ### 15. ★ CURRENT: Portfolio Architecture（组合架构）
+- **R1.0（2026-09-04）：** failure-state predictor branch PAUSED/CLOSED；研究主线回归 PORTFOLIO ARCHITECTURE。
+- **P5（进行中，preregistered）：** CAPACITY / CAPITAL-LOCK DIAGNOSTIC——A0（K3/5层/20万层）资金占用机制分解；diagnostic only，禁止优化。
+
 - **状态:** 研究**暂停**。当前唯一活跃问题是：有限 K=3 slots + 长持仓 + 多层占位/路径依赖的组合架构如何提升资金效率。
 - **P4 进展（2026-09-03，ACCEPTED DIAGNOSTIC，外审通过）:** 结构性消融显示 K=3 是实际容量瓶颈，但在当前历史样本与组合规则下同时表现为保护性的 admission constraint（解除任一约束组合均大幅恶化）；完全移除多层加仓（5→1 层）在测试路径下有害（不断言 5 层最优）。瓶颈在更深层。下一步必须等待外部审计决定；2025–2026 Confirmation 继续 CLOSED。
 - **P4.1 进展（2026-09-03，DEVELOPMENT DIAGNOSTIC，待外审）:** 解除 K 的恶化 = **B — CAPITAL/PATH DILUTION DOMINANT**——主因是共享资本/路径稀释（COMMON 同 65 笔、same exit 下 A1 少赚 67k，STRONG H3 证据）；H1 仅为 **suggestive tail-quality deterioration**（深 MAE 率 2.2×、最差几笔独立深亏），aggregate 独立质量未被统计建立为显著更差；A0_ONLY 覆盖 45.5% 显示 K=3 未证明系统性过滤坏信号。A1_ONLY 独立整体仍为正但实际 PnL −118,610。待外审后决定是否更新 README CURRENT TRUTH。

@@ -13,6 +13,9 @@ import numpy as np
 import pandas as pd
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SRC51 = os.path.join(ROOT, 'src', 'round51')
+if SRC51 not in sys.path:
+    sys.path.insert(0, SRC51)
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
@@ -205,7 +208,7 @@ def test_listing_from_listdate():
 def test_static_no_future_patterns():
     """R1: 源码禁止已知未来函数模式"""
     print('\n== 静态: 未来函数模式 ==')
-    src = open(os.path.join(ROOT, 'round51_audit.py'), encoding='utf-8').read()
+    src = open(os.path.join(SRC51, 'round51_audit.py'), encoding='utf-8').read()
     bad = [p for p in ['shift(-1)', "shift(-1)", 'center=True', 'center = True',
                        'iloc[i + 1]', 'iloc[i+1]', 'future_leak'] if p in src]
     _check('无 shift(-1)/center=True/iloc[i+1]', len(bad) == 0, f'found={bad}')
@@ -213,7 +216,7 @@ def test_static_no_future_patterns():
 def test_static_no_whole_day_oneword():
     """R6: next_open 成交判断禁止使用整日一字板 open==high==low==close"""
     print('\n== 静态: 无整日一字板判断成交 ==')
-    src = open(os.path.join(ROOT, 'round51_audit.py'), encoding='utf-8').read()
+    src = open(os.path.join(SRC51, 'round51_audit.py'), encoding='utf-8').read()
     _check("open_fill 参数存在", "open_fill='limit_conservative'" in src or "open_fill" in src)
     # 确认成交判断只使用 open 与 limit 价, 不使用 high/low/close 组合判一字板
     _check('成交判断用 limit_up_px/limit_down_px(非OHLC相等)',
@@ -222,7 +225,7 @@ def test_static_no_whole_day_oneword():
 def test_static_no_single_etf_px_for_whole_day():
     """R5: ETF 交易价不得单一变量覆盖整天 (无时间倒流)"""
     print('\n== 静态: ETF 事件驱动 ==')
-    src = open(os.path.join(ROOT, 'round51_audit.py'), encoding='utf-8').read()
+    src = open(os.path.join(SRC51, 'round51_audit.py'), encoding='utf-8').read()
     _check('ensure_cash_open 存在(open筹资)', 'def ensure_cash_open' in src)
     _check('rebalance_close 存在(close再投资)', 'def rebalance_close' in src)
     _check('无单一 etf_trade_px 覆盖整天', 'etf_trade_px' not in src)
@@ -230,7 +233,7 @@ def test_static_no_single_etf_px_for_whole_day():
 def test_static_adj_only_for_signal():
     """R8: 复权价只用于信号, 实际现金流用真实价"""
     print('\n== 静态: 复权价仅用于信号 ==')
-    src = open(os.path.join(ROOT, 'round51_audit.py'), encoding='utf-8').read()
+    src = open(os.path.join(SRC51, 'round51_audit.py'), encoding='utf-8').read()
     # 买入/卖出用 dd['open_']/dd['close'] (真实价), BB 信号用 close_adj/high_adj
     _check('买入价用 open_', "dd['open_'][j]" in src)
     _check('卖出(FINAL)价用 close', "dd['close'][j]" in src)
@@ -239,7 +242,7 @@ def test_static_adj_only_for_signal():
 def test_static_params_frozen():
     """R14: 冻结参数不得被调参覆盖 (仅审计口径)"""
     print('\n== 静态: 冻结参数 ==')
-    src = open(os.path.join(ROOT, 'round51_audit.py'), encoding='utf-8').read()
+    src = open(os.path.join(SRC51, 'round51_audit.py'), encoding='utf-8').read()
     for p in ["K=3", "top_n=10", "max_levels=5", "level_cash=200_000", "bb_window=20", "bb_std=2.0"]:
         _check(f'参数 {p} 存在(默认冻结)', p in src)
 

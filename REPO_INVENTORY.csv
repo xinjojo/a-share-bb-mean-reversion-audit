@@ -1,109 +1,109 @@
 path,file_type,phase,category,status,canonical,superseded_by,evidence_level,recommended_destination,notes
 .gitignore,file,governance,config,INFRASTRUCTURE,FALSE,,infra,.gitignore,repo infrastructure file
-ATR_SLOT_ALLOCATION_P3.md,file,p3,report,CLOSED,TRUE,,primary,research/portfolio/ATR_SLOT_ALLOCATION_P3.md,CANONICAL P3; C NO USEFUL PORTFOLIO RANKING (closed)
-ATR_SLOT_ALLOCATION_REGISTRY.csv,file,p3,registry,ACCEPTED,FALSE,,primary,research/portfolio/registries/ATR_SLOT_ALLOCATION_REGISTRY.csv,preregistration; committed before P3 portfolio runs
-ATR_SLOT_ALLOCATION_REGISTRY.sha256,file,p3,registry,ACCEPTED,FALSE,,primary,research/portfolio/registries/ATR_SLOT_ALLOCATION_REGISTRY.sha256,registry hash
-AUDIT_GUIDE.md,file,governance,doc,INFRASTRUCTURE,FALSE,,infra,docs/AUDIT_GUIDE.md,how to audit the repo
-AUDIT_REQUESTS.md,file,governance,doc,INFRASTRUCTURE,FALSE,,infra,docs/AUDIT_REQUESTS.md,external audit request log
-BACKTEST_INVARIANTS.md,file,governance,doc,INFRASTRUCTURE,FALSE,,infra,docs/BACKTEST_INVARIANTS.md,engine invariants / parity contract
-CALLCHAIN.md,file,governance,doc,INFRASTRUCTURE,FALSE,,infra,docs/CALLCHAIN.md,engine call-chain description
-CROSS_SECTIONAL_RANKING_P1.md,file,ranking,report,SUPERSEDED,FALSE,CROSS_SECTIONAL_RANKING_P1_CORRECTED.md,primary,archive/superseded/CROSS_SECTIONAL_RANKING_P1.md,P1 pre-correction
-CROSS_SECTIONAL_RANKING_P1_CORRECTED.md,file,ranking,report,ACCEPTED,TRUE,,primary,research/ranking/CROSS_SECTIONAL_RANKING_P1_CORRECTED.md,CANONICAL P1.1; A DISCOVERY ROBUST
-CROSS_SECTIONAL_RANKING_P2_VALIDATION.md,file,p2val,report,ACCEPTED,TRUE,,primary,research/ranking/CROSS_SECTIONAL_RANKING_P2_VALIDATION.md,CANONICAL P2; B PARTIAL VALIDATION (ATR20_PCT only)
-CROSS_SECTIONAL_RANKING_REGISTRY.csv,file,ranking,registry,ACCEPTED,FALSE,,primary,research/ranking/registries/CROSS_SECTIONAL_RANKING_REGISTRY.csv,P1 registry 9c36887
-CROSS_SECTIONAL_RANKING_REGISTRY.sha256,file,ranking,registry,ACCEPTED,FALSE,,primary,research/ranking/registries/CROSS_SECTIONAL_RANKING_REGISTRY.sha256,P1 registry hash
-CROSS_SECTIONAL_RANKING_VALIDATION_REGISTRY.csv,file,p2val,registry,ACCEPTED,FALSE,,primary,research/ranking/registries/CROSS_SECTIONAL_RANKING_VALIDATION_REGISTRY.csv,P2 validation registry
-CROSS_SECTIONAL_RANKING_VALIDATION_REGISTRY.sha256,file,p2val,registry,ACCEPTED,FALSE,,primary,research/ranking/registries/CROSS_SECTIONAL_RANKING_VALIDATION_REGISTRY.sha256,P2 registry hash
-FULL_MARKET_TRADE_PATH_AUDIT.md,file,fullmarket,report,ACCEPTED,TRUE,,primary,research/trade_path/FULL_MARKET_TRADE_PATH_AUDIT.md,CANONICAL full-market trade-path audit
-HYPOTHESIS_REGISTRY.csv,file,redteam,registry,CLOSED,FALSE,,primary,archive/superseded/HYPOTHESIS_REGISTRY.csv,"old 104-cell regime registry; frozen, not modified"
-HYPOTHESIS_REGISTRY_TEMPLATE.csv,file,redteam,registry,SUPERSEDED,FALSE,,secondary,archive/superseded/HYPOTHESIS_REGISTRY_TEMPLATE.csv,registry template
-INDEPENDENT_TRADE_REPLAY.md,file,independent,report,SUPERSEDED,FALSE,INDEPENDENT_TRADE_REPLAY_V2_AUDIT.md,primary,archive/superseded/INDEPENDENT_TRADE_REPLAY.md,replay V1
-INDEPENDENT_TRADE_REPLAY_V2_AUDIT.md,file,independent,report,ACCEPTED,TRUE,,primary,research/signal/INDEPENDENT_TRADE_REPLAY_V2_AUDIT.md,CANONICAL independent replay V2 audit
-KLINE_DATA.md,file,governance,doc,INFRASTRUCTURE,FALSE,,infra,data_docs/KLINE_DATA.md,kline data format / provenance
-MARKET_STATE_GATE_REGISTRY.csv,file,gateT3,registry,ACCEPTED,FALSE,,primary,research/market_state/registries/MARKET_STATE_GATE_REGISTRY.csv,T3 gate registry
-MARKET_STATE_GATE_REGISTRY.sha256,file,gateT3,registry,ACCEPTED,FALSE,,primary,research/market_state/registries/MARKET_STATE_GATE_REGISTRY.sha256,T3 registry hash
-MARKET_STATE_GATE_T3.md,file,gateT3,report,CLOSED,TRUE,,primary,research/market_state/MARKET_STATE_GATE_T3.md,CANONICAL T3; C NO USEFUL PORTFOLIO GATE (closed)
-MARKET_STATE_PHASE_T2.md,file,marketstate,report,ACCEPTED,TRUE,,primary,research/market_state/MARKET_STATE_PHASE_T2.md,CANONICAL T2 discovery (reverse-direction)
-MARKET_STATE_REVERSE_VALIDATION.md,file,marketstate,report,ACCEPTED,TRUE,,primary,research/market_state/MARKET_STATE_REVERSE_VALIDATION.md,CANONICAL T2-R; A STRONG VALIDATION
-P1_RELATIVE_RETURN_INVARIANCE_NOTE.md,file,ranking,report,ACCEPTED,FALSE,,secondary,research/ranking/P1_RELATIVE_RETURN_INVARIANCE_NOTE.md,REL_RET rank-invariance method note
-P3_FUTURE_CONFIRMATION_RULE.md,file,p3,report,ACCEPTED,FALSE,,secondary,research/portfolio/P3_FUTURE_CONFIRMATION_RULE.md,pre-frozen 2025-26 confirmation rule
-P3_MECHANISM_CORRECTION_NOTE.md,file,p31,report,ACCEPTED,FALSE,,secondary,research/portfolio/P3_MECHANISM_CORRECTION_NOTE.md,P3 doc label-error correction note
-PATH_DEPENDENCE_ATTRIBUTION.md,file,gateT3,report,SUPERSEDED,FALSE,MARKET_STATE_GATE_T3.md,secondary,archive/superseded/PATH_DEPENDENCE_ATTRIBUTION.md,early T3 path attribution; superseded by gate T3 report
-R01_DISCOVERY_CUTPOINTS.json,file,gateT3,config,ACCEPTED,FALSE,,primary,research/market_state/R01_DISCOVERY_CUTPOINTS.json,frozen R01 (ALL_A_EW_RET60) Discovery quintile cutpoints
-R05_DISCOVERY_CUTPOINTS.json,file,gateT3,config,ACCEPTED,FALSE,,primary,research/market_state/R05_DISCOVERY_CUTPOINTS.json,frozen R05 (LIMIT_DOWN_SHARE) Discovery cutpoints
+research/portfolio/ATR_SLOT_ALLOCATION_P3.md,file,p3,report,CLOSED,TRUE,,primary,research/portfolio/ATR_SLOT_ALLOCATION_P3.md,CANONICAL P3; C NO USEFUL PORTFOLIO RANKING (closed)
+research/portfolio/registries/ATR_SLOT_ALLOCATION_REGISTRY.csv,file,p3,registry,ACCEPTED,FALSE,,primary,research/portfolio/registries/ATR_SLOT_ALLOCATION_REGISTRY.csv,preregistration; committed before P3 portfolio runs
+research/portfolio/registries/ATR_SLOT_ALLOCATION_REGISTRY.sha256,file,p3,registry,ACCEPTED,FALSE,,primary,research/portfolio/registries/ATR_SLOT_ALLOCATION_REGISTRY.sha256,registry hash
+docs/AUDIT_GUIDE.md,file,governance,doc,INFRASTRUCTURE,FALSE,,infra,docs/AUDIT_GUIDE.md,how to audit the repo
+docs/AUDIT_REQUESTS.md,file,governance,doc,INFRASTRUCTURE,FALSE,,infra,docs/AUDIT_REQUESTS.md,external audit request log
+docs/BACKTEST_INVARIANTS.md,file,governance,doc,INFRASTRUCTURE,FALSE,,infra,docs/BACKTEST_INVARIANTS.md,engine invariants / parity contract
+docs/CALLCHAIN.md,file,governance,doc,INFRASTRUCTURE,FALSE,,infra,docs/CALLCHAIN.md,engine call-chain description
+archive/superseded/CROSS_SECTIONAL_RANKING_P1.md,file,ranking,report,SUPERSEDED,FALSE,CROSS_SECTIONAL_RANKING_P1_CORRECTED.md,primary,archive/superseded/CROSS_SECTIONAL_RANKING_P1.md,P1 pre-correction
+research/ranking/CROSS_SECTIONAL_RANKING_P1_CORRECTED.md,file,ranking,report,ACCEPTED,TRUE,,primary,research/ranking/CROSS_SECTIONAL_RANKING_P1_CORRECTED.md,CANONICAL P1.1; A DISCOVERY ROBUST
+research/ranking/CROSS_SECTIONAL_RANKING_P2_VALIDATION.md,file,p2val,report,ACCEPTED,TRUE,,primary,research/ranking/CROSS_SECTIONAL_RANKING_P2_VALIDATION.md,CANONICAL P2; B PARTIAL VALIDATION (ATR20_PCT only)
+research/ranking/registries/CROSS_SECTIONAL_RANKING_REGISTRY.csv,file,ranking,registry,ACCEPTED,FALSE,,primary,research/ranking/registries/CROSS_SECTIONAL_RANKING_REGISTRY.csv,P1 registry 9c36887
+research/ranking/registries/CROSS_SECTIONAL_RANKING_REGISTRY.sha256,file,ranking,registry,ACCEPTED,FALSE,,primary,research/ranking/registries/CROSS_SECTIONAL_RANKING_REGISTRY.sha256,P1 registry hash
+research/ranking/registries/CROSS_SECTIONAL_RANKING_VALIDATION_REGISTRY.csv,file,p2val,registry,ACCEPTED,FALSE,,primary,research/ranking/registries/CROSS_SECTIONAL_RANKING_VALIDATION_REGISTRY.csv,P2 validation registry
+research/ranking/registries/CROSS_SECTIONAL_RANKING_VALIDATION_REGISTRY.sha256,file,p2val,registry,ACCEPTED,FALSE,,primary,research/ranking/registries/CROSS_SECTIONAL_RANKING_VALIDATION_REGISTRY.sha256,P2 registry hash
+research/trade_path/FULL_MARKET_TRADE_PATH_AUDIT.md,file,fullmarket,report,ACCEPTED,TRUE,,primary,research/trade_path/FULL_MARKET_TRADE_PATH_AUDIT.md,CANONICAL full-market trade-path audit
+archive/superseded/HYPOTHESIS_REGISTRY.csv,file,redteam,registry,CLOSED,FALSE,,primary,archive/superseded/HYPOTHESIS_REGISTRY.csv,"old 104-cell regime registry; frozen, not modified"
+archive/superseded/HYPOTHESIS_REGISTRY_TEMPLATE.csv,file,redteam,registry,SUPERSEDED,FALSE,,secondary,archive/superseded/HYPOTHESIS_REGISTRY_TEMPLATE.csv,registry template
+archive/superseded/INDEPENDENT_TRADE_REPLAY.md,file,independent,report,SUPERSEDED,FALSE,INDEPENDENT_TRADE_REPLAY_V2_AUDIT.md,primary,archive/superseded/INDEPENDENT_TRADE_REPLAY.md,replay V1
+research/signal/INDEPENDENT_TRADE_REPLAY_V2_AUDIT.md,file,independent,report,ACCEPTED,TRUE,,primary,research/signal/INDEPENDENT_TRADE_REPLAY_V2_AUDIT.md,CANONICAL independent replay V2 audit
+data_docs/KLINE_DATA.md,file,governance,doc,INFRASTRUCTURE,FALSE,,infra,data_docs/KLINE_DATA.md,kline data format / provenance
+research/market_state/registries/MARKET_STATE_GATE_REGISTRY.csv,file,gateT3,registry,ACCEPTED,FALSE,,primary,research/market_state/registries/MARKET_STATE_GATE_REGISTRY.csv,T3 gate registry
+research/market_state/registries/MARKET_STATE_GATE_REGISTRY.sha256,file,gateT3,registry,ACCEPTED,FALSE,,primary,research/market_state/registries/MARKET_STATE_GATE_REGISTRY.sha256,T3 registry hash
+research/market_state/MARKET_STATE_GATE_T3.md,file,gateT3,report,CLOSED,TRUE,,primary,research/market_state/MARKET_STATE_GATE_T3.md,CANONICAL T3; C NO USEFUL PORTFOLIO GATE (closed)
+research/market_state/MARKET_STATE_PHASE_T2.md,file,marketstate,report,ACCEPTED,TRUE,,primary,research/market_state/MARKET_STATE_PHASE_T2.md,CANONICAL T2 discovery (reverse-direction)
+research/market_state/MARKET_STATE_REVERSE_VALIDATION.md,file,marketstate,report,ACCEPTED,TRUE,,primary,research/market_state/MARKET_STATE_REVERSE_VALIDATION.md,CANONICAL T2-R; A STRONG VALIDATION
+research/ranking/P1_RELATIVE_RETURN_INVARIANCE_NOTE.md,file,ranking,report,ACCEPTED,FALSE,,secondary,research/ranking/P1_RELATIVE_RETURN_INVARIANCE_NOTE.md,REL_RET rank-invariance method note
+research/portfolio/P3_FUTURE_CONFIRMATION_RULE.md,file,p3,report,ACCEPTED,FALSE,,secondary,research/portfolio/P3_FUTURE_CONFIRMATION_RULE.md,pre-frozen 2025-26 confirmation rule
+research/portfolio/P3_MECHANISM_CORRECTION_NOTE.md,file,p31,report,ACCEPTED,FALSE,,secondary,research/portfolio/P3_MECHANISM_CORRECTION_NOTE.md,P3 doc label-error correction note
+archive/superseded/PATH_DEPENDENCE_ATTRIBUTION.md,file,gateT3,report,SUPERSEDED,FALSE,MARKET_STATE_GATE_T3.md,secondary,archive/superseded/PATH_DEPENDENCE_ATTRIBUTION.md,early T3 path attribution; superseded by gate T3 report
+research/market_state/R01_DISCOVERY_CUTPOINTS.json,file,gateT3,config,ACCEPTED,FALSE,,primary,research/market_state/R01_DISCOVERY_CUTPOINTS.json,frozen R01 (ALL_A_EW_RET60) Discovery quintile cutpoints
+research/market_state/R05_DISCOVERY_CUTPOINTS.json,file,gateT3,config,ACCEPTED,FALSE,,primary,research/market_state/R05_DISCOVERY_CUTPOINTS.json,frozen R05 (LIMIT_DOWN_SHARE) Discovery cutpoints
 README.md,file,governance,doc,ACTIVE,FALSE,,infra,README.md,entry point - rewrite in R0-C
-REDTEAM_AUDIT_REPLY.md,file,redteam,report,SUPERSEDED,FALSE,,secondary,archive/superseded/REDTEAM_AUDIT_REPLY.md,early reply doc
-REDTEAM_ROUND2_EXPERIMENTS.md,file,redteam,report,SUPERSEDED,FALSE,,secondary,archive/superseded/REDTEAM_ROUND2_EXPERIMENTS.md,early redteam round
-REDTEAM_ROUND3_ALPHA.md,file,redteam,report,SUPERSEDED,FALSE,,secondary,archive/superseded/REDTEAM_ROUND3_ALPHA.md,early redteam round
-REDTEAM_ROUND4_READINESS.md,file,redteam,report,SUPERSEDED,FALSE,,secondary,archive/superseded/REDTEAM_ROUND4_READINESS.md,early redteam round
-REDTEAM_ROUND51_STRICT.md,file,strict_c,report,ACCEPTED,TRUE,,primary,research/signal/REDTEAM_ROUND51_STRICT.md,CANONICAL STRICT_C frozen-engine report
-REDTEAM_ROUND5_STRICT.md,file,redteam,report,SUPERSEDED,FALSE,REDTEAM_ROUND51_STRICT.md,secondary,archive/superseded/REDTEAM_ROUND5_STRICT.md,superseded by round51
-REDTEAM_STRICT_C.md,file,strict_c,report,SUPERSEDED,FALSE,REDTEAM_STRICT_C_CORRECTED.md,primary,archive/superseded/REDTEAM_STRICT_C.md,superseded by corrected
-REDTEAM_STRICT_C_CORRECTED.md,file,strict_c,report,ACCEPTED,FALSE,,primary,research/signal/REDTEAM_STRICT_C_CORRECTED.md,STRICT_C semantics audit (corrected)
-REGIME_DISCOVERY_PHASE1.md,file,redteam,report,SUPERSEDED,FALSE,REGIME_DISCOVERY_PHASE1_CORRECTED.md,secondary,archive/superseded/REGIME_DISCOVERY_PHASE1.md,old regime discovery v1
-REGIME_DISCOVERY_PHASE1_CORRECTED.md,file,redteam,report,SUPERSEDED,FALSE,REGIME_DISCOVERY_PHASE1_V3.md,secondary,archive/superseded/REGIME_DISCOVERY_PHASE1_CORRECTED.md,old regime discovery v2
-REGIME_DISCOVERY_PHASE1_V3.md,file,redteam,report,SUPERSEDED,FALSE,MARKET_STATE_PHASE_T2.md,secondary,archive/superseded/REGIME_DISCOVERY_PHASE1_V3.md,old regime discovery v3; replaced by T2 branch
-REGIME_PHASE1_AUDIT_PACKET.md,file,redteam,report,SUPERSEDED,FALSE,,secondary,archive/superseded/REGIME_PHASE1_AUDIT_PACKET.md,old regime audit packet
-REGIME_PHASE1_METHODOLOGY_CLARIFICATION.md,file,redteam,report,SUPERSEDED,FALSE,,secondary,archive/superseded/REGIME_PHASE1_METHODOLOGY_CLARIFICATION.md,old regime methodology note
-REGIME_RESEARCH_PLAN.md,file,redteam,doc,SUPERSEDED,FALSE,,secondary,archive/superseded/REGIME_RESEARCH_PLAN.md,old regime research plan
+archive/superseded/REDTEAM_AUDIT_REPLY.md,file,redteam,report,SUPERSEDED,FALSE,,secondary,archive/superseded/REDTEAM_AUDIT_REPLY.md,early reply doc
+archive/superseded/REDTEAM_ROUND2_EXPERIMENTS.md,file,redteam,report,SUPERSEDED,FALSE,,secondary,archive/superseded/REDTEAM_ROUND2_EXPERIMENTS.md,early redteam round
+archive/superseded/REDTEAM_ROUND3_ALPHA.md,file,redteam,report,SUPERSEDED,FALSE,,secondary,archive/superseded/REDTEAM_ROUND3_ALPHA.md,early redteam round
+archive/superseded/REDTEAM_ROUND4_READINESS.md,file,redteam,report,SUPERSEDED,FALSE,,secondary,archive/superseded/REDTEAM_ROUND4_READINESS.md,early redteam round
+research/signal/REDTEAM_ROUND51_STRICT.md,file,strict_c,report,ACCEPTED,TRUE,,primary,research/signal/REDTEAM_ROUND51_STRICT.md,CANONICAL STRICT_C frozen-engine report
+archive/superseded/REDTEAM_ROUND5_STRICT.md,file,redteam,report,SUPERSEDED,FALSE,REDTEAM_ROUND51_STRICT.md,secondary,archive/superseded/REDTEAM_ROUND5_STRICT.md,superseded by round51
+archive/superseded/REDTEAM_STRICT_C.md,file,strict_c,report,SUPERSEDED,FALSE,REDTEAM_STRICT_C_CORRECTED.md,primary,archive/superseded/REDTEAM_STRICT_C.md,superseded by corrected
+research/signal/REDTEAM_STRICT_C_CORRECTED.md,file,strict_c,report,ACCEPTED,FALSE,,primary,research/signal/REDTEAM_STRICT_C_CORRECTED.md,STRICT_C semantics audit (corrected)
+archive/superseded/REGIME_DISCOVERY_PHASE1.md,file,redteam,report,SUPERSEDED,FALSE,REGIME_DISCOVERY_PHASE1_CORRECTED.md,secondary,archive/superseded/REGIME_DISCOVERY_PHASE1.md,old regime discovery v1
+archive/superseded/REGIME_DISCOVERY_PHASE1_CORRECTED.md,file,redteam,report,SUPERSEDED,FALSE,REGIME_DISCOVERY_PHASE1_V3.md,secondary,archive/superseded/REGIME_DISCOVERY_PHASE1_CORRECTED.md,old regime discovery v2
+archive/superseded/REGIME_DISCOVERY_PHASE1_V3.md,file,redteam,report,SUPERSEDED,FALSE,MARKET_STATE_PHASE_T2.md,secondary,archive/superseded/REGIME_DISCOVERY_PHASE1_V3.md,old regime discovery v3; replaced by T2 branch
+archive/superseded/REGIME_PHASE1_AUDIT_PACKET.md,file,redteam,report,SUPERSEDED,FALSE,,secondary,archive/superseded/REGIME_PHASE1_AUDIT_PACKET.md,old regime audit packet
+archive/superseded/REGIME_PHASE1_METHODOLOGY_CLARIFICATION.md,file,redteam,report,SUPERSEDED,FALSE,,secondary,archive/superseded/REGIME_PHASE1_METHODOLOGY_CLARIFICATION.md,old regime methodology note
+archive/superseded/REGIME_RESEARCH_PLAN.md,file,redteam,doc,SUPERSEDED,FALSE,,secondary,archive/superseded/REGIME_RESEARCH_PLAN.md,old regime research plan
 REMOTE_VERIFICATION.md,file,governance,doc,ACTIVE,FALSE,,infra,REMOTE_VERIFICATION.md,phase R0 - remote push verification
-RESULTS_LATEST.md,file,original,report,INVALID,FALSE,,invalid,archive/invalid/RESULTS_LATEST.md,pre-lookahead result summary; superseded by STRICT_C chain
-SLIPPAGE_PATH_DISCONTINUITY_AUDIT.md,file,p31,report,ACCEPTED,FALSE,,secondary,research/portfolio/SLIPPAGE_PATH_DISCONTINUITY_AUDIT.md,10/20/50bp path-discontinuity audit
-SLOT_CONTENTION_PATH_AUDIT.md,file,p31,report,ACCEPTED,TRUE,,primary,research/portfolio/SLOT_CONTENTION_PATH_AUDIT.md,CANONICAL P3.1; C BOTH (diagnostic)
-STEP_A_PREREGISTER.py,file,marketstate,script,ACCEPTED,FALSE,,primary,research/market_state/STEP_A_PREREGISTER.py,T2 preregistration step
-STEP_A_RANKING_VALIDATE_PREREGISTER.py,file,p2val,script,ACCEPTED,FALSE,,primary,research/ranking/STEP_A_RANKING_VALIDATE_PREREGISTER.py,P2 preregister
-STEP_B_RANKING_VALIDATE.py,file,p2val,script,ACCEPTED,FALSE,,primary,research/ranking/STEP_B_RANKING_VALIDATE.py,P2 validate
-STEP_B_VALIDATE.py,file,marketstate,script,ACCEPTED,FALSE,,primary,research/market_state/STEP_B_VALIDATE.py,T2 validate step
-STOP_LOSS_COUNTERFACTUAL_PHASE_A.md,file,stopA,report,CLOSED,TRUE,,primary,research/execution/STOP_LOSS_COUNTERFACTUAL_PHASE_A.md,CANONICAL stop phase A; verdict C NO USEFUL STOP; semantics issue NOT formally closed (not ACCEPTED)
-T3_R05_BASIS_CLARIFICATION.md,file,gateT3,report,ACCEPTED,FALSE,,secondary,research/market_state/T3_R05_BASIS_CLARIFICATION.md,R05 cutpoint-basis clarification (does not change T3 C)
-TEMPORAL_CLUSTERING_PHASE_T1.md,file,temporal,report,ACCEPTED,TRUE,,primary,research/market_state/TEMPORAL_CLUSTERING_PHASE_T1.md,CANONICAL T1; A STRONG CLUSTERING
-TEMPORAL_STATE_FEATURE_REGISTRY.csv,file,marketstate,registry,ACCEPTED,FALSE,,primary,research/market_state/registries/TEMPORAL_STATE_FEATURE_REGISTRY.csv,T2 preregistered 27 features
-TEMPORAL_STATE_FEATURE_REGISTRY.sha256,file,marketstate,registry,ACCEPTED,FALSE,,primary,research/market_state/registries/TEMPORAL_STATE_FEATURE_REGISTRY.sha256,T2 registry hash
-TEMPORAL_STATE_REVERSE_VALIDATION_REGISTRY.csv,file,marketstate,registry,ACCEPTED,FALSE,,primary,research/market_state/registries/TEMPORAL_STATE_REVERSE_VALIDATION_REGISTRY.csv,T2-R reverse registry (7 vars)
-TEMPORAL_STATE_REVERSE_VALIDATION_REGISTRY.sha256,file,marketstate,registry,ACCEPTED,FALSE,,primary,research/market_state/registries/TEMPORAL_STATE_REVERSE_VALIDATION_REGISTRY.sha256,T2-R registry hash
-THIRD_PARTY_AUDIT_BRIEF.md,file,governance,doc,INFRASTRUCTURE,FALSE,,infra,docs/THIRD_PARTY_AUDIT_BRIEF.md,brief for third-party auditor
-THIRD_PARTY_CLAIM_CHECK_ADJ_FACTOR.md,file,redteam,report,SUPERSEDED,FALSE,THIRD_PARTY_CLAIM_CHECK_ADJ_FACTOR_V2.md,secondary,archive/superseded/THIRD_PARTY_CLAIM_CHECK_ADJ_FACTOR.md,superseded by V2
-THIRD_PARTY_CLAIM_CHECK_ADJ_FACTOR_V2.md,file,redteam,report,ACCEPTED,FALSE,,primary,research/signal/THIRD_PARTY_CLAIM_CHECK_ADJ_FACTOR_V2.md,adj-factor claim check v2
-TRADE_PATH_QUALITY_AUDIT.md,file,tradepath,report,SUPERSEDED,FALSE,FULL_MARKET_TRADE_PATH_AUDIT.md,primary,archive/superseded/TRADE_PATH_QUALITY_AUDIT.md,primary-only path audit; superseded by full-market
-TRADING_SYSTEM_STEPBYSTEP.md,file,governance,doc,INFRASTRUCTURE,FALSE,,infra,docs/TRADING_SYSTEM_STEPBYSTEP.md,original system description (historical)
-analysis/__init__.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/analysis/__init__.py,analysis helpers
-analysis/generate_kline_tool.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/analysis/generate_kline_tool.py,analysis helpers
-analysis/generate_trade_charts.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/analysis/generate_trade_charts.py,analysis helpers
-analysis/holding_period_analysis.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/analysis/holding_period_analysis.py,analysis helpers
-analysis/param_scan.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analysis/param_scan.py,parameter/time-stop/topN sweep on original system
-analysis/parameter_sweep.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analysis/parameter_sweep.py,parameter/time-stop/topN sweep on original system
-analysis/parameter_sweep_v2.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analysis/parameter_sweep_v2.py,parameter/time-stop/topN sweep on original system
-analysis/performance.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/analysis/performance.py,analysis helpers
-analysis/plot_candlestick.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/analysis/plot_candlestick.py,analysis helpers
-analysis/plot_charts.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/analysis/plot_charts.py,analysis helpers
-analysis/position_analysis.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/analysis/position_analysis.py,analysis helpers
-analysis/single_stock_bb_backtest.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analysis/single_stock_bb_backtest.py,parameter/time-stop/topN sweep on original system
-analysis/time_stop_single.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analysis/time_stop_single.py,parameter/time-stop/topN sweep on original system
-analysis/time_stop_sweep.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analysis/time_stop_sweep.py,parameter/time-stop/topN sweep on original system
-analysis/time_stop_sweep_v2.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analysis/time_stop_sweep_v2.py,parameter/time-stop/topN sweep on original system
-analysis/topn_position_sweep.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analysis/topn_position_sweep.py,parameter/time-stop/topN sweep on original system
-analysis/topn_position_sweep_v2.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analysis/topn_position_sweep_v2.py,parameter/time-stop/topN sweep on original system
-analysis/trade_review.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/analysis/trade_review.py,analysis helpers
-analyze_drawdown_postexit.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analyze_drawdown_postexit.py,post-exit drawdown analysis (original)
-analyze_features_large.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analyze_features_large.py,large feature analysis
-analyze_levels_comparison.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analyze_levels_comparison.py,levels comparison analysis
-analyze_shrink_signal.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analyze_shrink_signal.py,shrink-signal analysis
-analyze_trade_features.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analyze_trade_features.py,original feature analysis
-analyze_volume_signal.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analyze_volume_signal.py,volume-signal analysis
-atr_slot_allocation_p3.py,file,p3,script,CLOSED,FALSE,,primary,research/portfolio/atr_slot_allocation_p3.py,P3 engine + instrumentation
-backtest/__init__.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/backtest/__init__.py,backtest framework
-backtest/run_backtest.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/backtest/run_backtest.py,backtest framework
-backtest/vbt_runner.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/backtest/vbt_runner.py,backtest framework
-bb_levels_comparison.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/bb_levels_comparison.py,levels comparison (original)
-bb_lower_upper_full_market.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/bb_lower_upper_full_market.py,BB lower/upper scan
-bb_sensitivity.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/bb_sensitivity.py,BB param sensitivity (original)
-bb_stop_grid.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/bb_stop_grid.py,"stop grid on original system (optimization, not evidence)"
-build_registry.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/build_registry.py,old registry builder
-claim_check_case_study.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/claim_check_case_study.py,adj-factor claim check case study
+archive/invalid/RESULTS_LATEST.md,file,original,report,INVALID,FALSE,,invalid,archive/invalid/RESULTS_LATEST.md,pre-lookahead result summary; superseded by STRICT_C chain
+research/portfolio/SLIPPAGE_PATH_DISCONTINUITY_AUDIT.md,file,p31,report,ACCEPTED,FALSE,,secondary,research/portfolio/SLIPPAGE_PATH_DISCONTINUITY_AUDIT.md,10/20/50bp path-discontinuity audit
+research/portfolio/SLOT_CONTENTION_PATH_AUDIT.md,file,p31,report,ACCEPTED,TRUE,,primary,research/portfolio/SLOT_CONTENTION_PATH_AUDIT.md,CANONICAL P3.1; C BOTH (diagnostic)
+research/market_state/STEP_A_PREREGISTER.py,file,marketstate,script,ACCEPTED,FALSE,,primary,research/market_state/STEP_A_PREREGISTER.py,T2 preregistration step
+research/ranking/STEP_A_RANKING_VALIDATE_PREREGISTER.py,file,p2val,script,ACCEPTED,FALSE,,primary,research/ranking/STEP_A_RANKING_VALIDATE_PREREGISTER.py,P2 preregister
+research/ranking/STEP_B_RANKING_VALIDATE.py,file,p2val,script,ACCEPTED,FALSE,,primary,research/ranking/STEP_B_RANKING_VALIDATE.py,P2 validate
+research/market_state/STEP_B_VALIDATE.py,file,marketstate,script,ACCEPTED,FALSE,,primary,research/market_state/STEP_B_VALIDATE.py,T2 validate step
+research/execution/STOP_LOSS_COUNTERFACTUAL_PHASE_A.md,file,stopA,report,CLOSED,TRUE,,primary,research/execution/STOP_LOSS_COUNTERFACTUAL_PHASE_A.md,CANONICAL stop phase A; verdict C NO USEFUL STOP; semantics issue NOT formally closed (not ACCEPTED)
+research/market_state/T3_R05_BASIS_CLARIFICATION.md,file,gateT3,report,ACCEPTED,FALSE,,secondary,research/market_state/T3_R05_BASIS_CLARIFICATION.md,R05 cutpoint-basis clarification (does not change T3 C)
+research/market_state/TEMPORAL_CLUSTERING_PHASE_T1.md,file,temporal,report,ACCEPTED,TRUE,,primary,research/market_state/TEMPORAL_CLUSTERING_PHASE_T1.md,CANONICAL T1; A STRONG CLUSTERING
+research/market_state/registries/TEMPORAL_STATE_FEATURE_REGISTRY.csv,file,marketstate,registry,ACCEPTED,FALSE,,primary,research/market_state/registries/TEMPORAL_STATE_FEATURE_REGISTRY.csv,T2 preregistered 27 features
+research/market_state/registries/TEMPORAL_STATE_FEATURE_REGISTRY.sha256,file,marketstate,registry,ACCEPTED,FALSE,,primary,research/market_state/registries/TEMPORAL_STATE_FEATURE_REGISTRY.sha256,T2 registry hash
+research/market_state/registries/TEMPORAL_STATE_REVERSE_VALIDATION_REGISTRY.csv,file,marketstate,registry,ACCEPTED,FALSE,,primary,research/market_state/registries/TEMPORAL_STATE_REVERSE_VALIDATION_REGISTRY.csv,T2-R reverse registry (7 vars)
+research/market_state/registries/TEMPORAL_STATE_REVERSE_VALIDATION_REGISTRY.sha256,file,marketstate,registry,ACCEPTED,FALSE,,primary,research/market_state/registries/TEMPORAL_STATE_REVERSE_VALIDATION_REGISTRY.sha256,T2-R registry hash
+docs/THIRD_PARTY_AUDIT_BRIEF.md,file,governance,doc,INFRASTRUCTURE,FALSE,,infra,docs/THIRD_PARTY_AUDIT_BRIEF.md,brief for third-party auditor
+archive/superseded/THIRD_PARTY_CLAIM_CHECK_ADJ_FACTOR.md,file,redteam,report,SUPERSEDED,FALSE,THIRD_PARTY_CLAIM_CHECK_ADJ_FACTOR_V2.md,secondary,archive/superseded/THIRD_PARTY_CLAIM_CHECK_ADJ_FACTOR.md,superseded by V2
+research/signal/THIRD_PARTY_CLAIM_CHECK_ADJ_FACTOR_V2.md,file,redteam,report,ACCEPTED,FALSE,,primary,research/signal/THIRD_PARTY_CLAIM_CHECK_ADJ_FACTOR_V2.md,adj-factor claim check v2
+archive/superseded/TRADE_PATH_QUALITY_AUDIT.md,file,tradepath,report,SUPERSEDED,FALSE,FULL_MARKET_TRADE_PATH_AUDIT.md,primary,archive/superseded/TRADE_PATH_QUALITY_AUDIT.md,primary-only path audit; superseded by full-market
+docs/TRADING_SYSTEM_STEPBYSTEP.md,file,governance,doc,INFRASTRUCTURE,FALSE,,infra,docs/TRADING_SYSTEM_STEPBYSTEP.md,original system description (historical)
+src/analysis/__init__.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/analysis/__init__.py,analysis helpers
+src/analysis/generate_kline_tool.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/analysis/generate_kline_tool.py,analysis helpers
+src/analysis/generate_trade_charts.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/analysis/generate_trade_charts.py,analysis helpers
+src/analysis/holding_period_analysis.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/analysis/holding_period_analysis.py,analysis helpers
+archive/invalid/analysis/param_scan.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analysis/param_scan.py,parameter/time-stop/topN sweep on original system
+archive/invalid/analysis/parameter_sweep.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analysis/parameter_sweep.py,parameter/time-stop/topN sweep on original system
+archive/invalid/analysis/parameter_sweep_v2.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analysis/parameter_sweep_v2.py,parameter/time-stop/topN sweep on original system
+src/analysis/performance.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/analysis/performance.py,analysis helpers
+src/analysis/plot_candlestick.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/analysis/plot_candlestick.py,analysis helpers
+src/analysis/plot_charts.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/analysis/plot_charts.py,analysis helpers
+src/analysis/position_analysis.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/analysis/position_analysis.py,analysis helpers
+archive/invalid/analysis/single_stock_bb_backtest.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analysis/single_stock_bb_backtest.py,parameter/time-stop/topN sweep on original system
+archive/invalid/analysis/time_stop_single.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analysis/time_stop_single.py,parameter/time-stop/topN sweep on original system
+archive/invalid/analysis/time_stop_sweep.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analysis/time_stop_sweep.py,parameter/time-stop/topN sweep on original system
+archive/invalid/analysis/time_stop_sweep_v2.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analysis/time_stop_sweep_v2.py,parameter/time-stop/topN sweep on original system
+archive/invalid/analysis/topn_position_sweep.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analysis/topn_position_sweep.py,parameter/time-stop/topN sweep on original system
+archive/invalid/analysis/topn_position_sweep_v2.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analysis/topn_position_sweep_v2.py,parameter/time-stop/topN sweep on original system
+src/analysis/trade_review.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/analysis/trade_review.py,analysis helpers
+archive/invalid/analyze_drawdown_postexit.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analyze_drawdown_postexit.py,post-exit drawdown analysis (original)
+archive/invalid/analyze_features_large.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analyze_features_large.py,large feature analysis
+archive/invalid/analyze_levels_comparison.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analyze_levels_comparison.py,levels comparison analysis
+archive/invalid/analyze_shrink_signal.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analyze_shrink_signal.py,shrink-signal analysis
+archive/invalid/analyze_trade_features.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analyze_trade_features.py,original feature analysis
+archive/invalid/analyze_volume_signal.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/analyze_volume_signal.py,volume-signal analysis
+research/portfolio/atr_slot_allocation_p3.py,file,p3,script,CLOSED,FALSE,,primary,research/portfolio/atr_slot_allocation_p3.py,P3 engine + instrumentation
+src/backtest/__init__.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/backtest/__init__.py,backtest framework
+src/backtest/run_backtest.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/backtest/run_backtest.py,backtest framework
+src/backtest/vbt_runner.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/backtest/vbt_runner.py,backtest framework
+archive/invalid/bb_levels_comparison.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/bb_levels_comparison.py,levels comparison (original)
+archive/invalid/bb_lower_upper_full_market.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/bb_lower_upper_full_market.py,BB lower/upper scan
+archive/invalid/bb_sensitivity.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/bb_sensitivity.py,BB param sensitivity (original)
+archive/invalid/bb_stop_grid.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/bb_stop_grid.py,"stop grid on original system (optimization, not evidence)"
+archive/superseded/build_registry.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/build_registry.py,old registry builder
+archive/superseded/claim_check_case_study.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/claim_check_case_study.py,adj-factor claim check case study
 config/config.yaml,file,governance,config,INFRASTRUCTURE,FALSE,,infra,config/config.yaml,config
-cross_check_phase1.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/cross_check_phase1.py,old regime cross-check
-cross_sectional_ranking_p1.py,file,ranking,script,ACCEPTED,FALSE,,primary,research/ranking/cross_sectional_ranking_p1.py,P1 ranking discovery
-cross_sectional_ranking_p1_corrected.py,file,ranking,script,ACCEPTED,FALSE,,primary,research/ranking/cross_sectional_ranking_p1_corrected.py,P1.1 corrected
+archive/superseded/cross_check_phase1.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/cross_check_phase1.py,old regime cross-check
+research/ranking/cross_sectional_ranking_p1.py,file,ranking,script,ACCEPTED,FALSE,,primary,research/ranking/cross_sectional_ranking_p1.py,P1 ranking discovery
+research/ranking/cross_sectional_ranking_p1_corrected.py,file,ranking,script,ACCEPTED,FALSE,,primary,research/ranking/cross_sectional_ranking_p1_corrected.py,P1.1 corrected
 data/kline/2020.parquet,file,infra,data,INFRASTRUCTURE,FALSE,,infra,data/kline/2020.parquet,kline/etf market data (parquet)
 data/kline/2021.parquet,file,infra,data,INFRASTRUCTURE,FALSE,,infra,data/kline/2021.parquet,kline/etf market data (parquet)
 data/kline/2022.parquet,file,infra,data,INFRASTRUCTURE,FALSE,,infra,data/kline/2022.parquet,kline/etf market data (parquet)
@@ -113,24 +113,24 @@ data/kline/2025.parquet,file,infra,data,INFRASTRUCTURE,FALSE,,infra,data/kline/2
 data/kline/2026.parquet,file,infra,data,INFRASTRUCTURE,FALSE,,infra,data/kline/2026.parquet,kline/etf market data (parquet)
 data/kline/etf_513500_merged.parquet,file,infra,data,INFRASTRUCTURE,FALSE,,infra,data/kline/etf_513500_merged.parquet,kline/etf market data (parquet)
 data/kline/merge_kline.py,file,infra,data,INFRASTRUCTURE,FALSE,,infra,data/kline/merge_kline.py,kline/etf market data (parquet)
-data_loader/__init__.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/data_loader/__init__.py,data loader
-data_loader/akshare_loader.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/data_loader/akshare_loader.py,data loader
-data_loader/data_validator.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/data_loader/data_validator.py,data loader
-data_loader/download_data.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/data_loader/download_data.py,data loader
-data_loader/download_incremental.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/data_loader/download_incremental.py,data loader
-data_loader/storage.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/data_loader/storage.py,data loader
-data_loader/tushare_loader.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/data_loader/tushare_loader.py,data loader
-div_crosscheck.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/div_crosscheck.py,dividend cross-check (early)
-download_warmup.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/download_warmup.py,original warmup
-engine/__init__.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/engine/__init__.py,engine modules
-engine/commission.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/engine/commission.py,engine modules
-engine/position.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/engine/position.py,engine modules
-engine/trading_rules.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/engine/trading_rules.py,engine modules
-etf_live_backtest.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/etf_live_backtest.py,original ETF live backtest
-etf_plot.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/etf_plot.py,ETF plot helper
-etf_ratio_scan.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/etf_ratio_scan.py,ETF ratio scan
-experiment_fast.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/experiment_fast.py,early experiment
-export_trade_details.py,file,independent,script,ACCEPTED,FALSE,,secondary,research/signal/export_trade_details.py,trade detail export
+src/data_loader/__init__.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/data_loader/__init__.py,data loader
+src/data_loader/akshare_loader.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/data_loader/akshare_loader.py,data loader
+src/data_loader/data_validator.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/data_loader/data_validator.py,data loader
+src/data_loader/download_data.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/data_loader/download_data.py,data loader
+src/data_loader/download_incremental.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/data_loader/download_incremental.py,data loader
+src/data_loader/storage.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/data_loader/storage.py,data loader
+src/data_loader/tushare_loader.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/data_loader/tushare_loader.py,data loader
+archive/superseded/div_crosscheck.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/div_crosscheck.py,dividend cross-check (early)
+archive/invalid/download_warmup.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/download_warmup.py,original warmup
+src/engine/__init__.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/engine/__init__.py,engine modules
+src/engine/commission.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/engine/commission.py,engine modules
+src/engine/position.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/engine/position.py,engine modules
+src/engine/trading_rules.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,src/engine/trading_rules.py,engine modules
+archive/invalid/etf_live_backtest.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/etf_live_backtest.py,original ETF live backtest
+archive/invalid/etf_plot.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/etf_plot.py,ETF plot helper
+archive/invalid/etf_ratio_scan.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/etf_ratio_scan.py,ETF ratio scan
+archive/invalid/experiment_fast.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/experiment_fast.py,early experiment
+research/signal/export_trade_details.py,file,independent,script,ACCEPTED,FALSE,,secondary,research/signal/export_trade_details.py,trade detail export
 figures/daily_signal_return_series.png,file,temporal,figure,ACCEPTED,FALSE,,supporting,figures/daily_signal_return_series.png,figure for phase temporal
 figures/levels_vs_quality.png,file,fullmarket,figure,ACCEPTED,FALSE,,supporting,figures/levels_vs_quality.png,figure for phase fullmarket
 figures/levels_vs_quality_secondary.png,file,fullmarket,figure,ACCEPTED,FALSE,,supporting,figures/levels_vs_quality_secondary.png,figure for phase fullmarket
@@ -189,354 +189,354 @@ figures/turnover_rank_vs_mae.png,file,fullmarket,figure,ACCEPTED,FALSE,,supporti
 figures/turnover_rank_vs_return.png,file,fullmarket,figure,ACCEPTED,FALSE,,supporting,figures/turnover_rank_vs_return.png,figure for phase fullmarket
 figures/underwater_duration_distribution.png,file,fullmarket,figure,ACCEPTED,FALSE,,supporting,figures/underwater_duration_distribution.png,figure for phase fullmarket
 figures/yearly_quality_primary_secondary.png,file,fullmarket,figure,ACCEPTED,FALSE,,supporting,figures/yearly_quality_primary_secondary.png,figure for phase fullmarket
-full_market_scan.py,file,fullmarket,script,ACCEPTED,FALSE,,secondary,research/trade_path/full_market_scan.py,full-market eligible scan
-full_market_trade_path_audit.py,file,fullmarket,script,ACCEPTED,FALSE,,primary,research/trade_path/full_market_trade_path_audit.py,full-market trade-path audit
-full_market_v8.py,file,fullmarket,script,ACCEPTED,FALSE,,secondary,research/trade_path/full_market_v8.py,full-market scan v8 (secondary universe build)
-independent_trade_replay.py,file,independent,script,SUPERSEDED,FALSE,independent_trade_replay_v2.py,secondary,archive/superseded/independent_trade_replay.py,replay V1
-independent_trade_replay_v2.py,file,independent,script,ACCEPTED,FALSE,,primary,research/signal/independent_trade_replay_v2.py,replay V2 (canonical)
-independent_trade_stats.py,file,independent,script,ACCEPTED,FALSE,,secondary,research/signal/independent_trade_stats.py,replay stats
-level1_tight_stop.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/level1_tight_stop.py,tight-stop experiment (original)
-live_analyze_r2.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/live_analyze_r2.py,r2 analyzer
-live_backtest.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/live_backtest.py,original live backtest
-live_backtest_r2.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/live_backtest_r2.py,original r2 live backtest
-live_plot.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/live_plot.py,plot helper
-market_state_gate_t3.py,file,gateT3,script,CLOSED,FALSE,,primary,research/market_state/market_state_gate_t3.py,T3 gate construction
-market_state_phase_t2.py,file,marketstate,script,ACCEPTED,FALSE,,primary,research/market_state/market_state_phase_t2.py,T2 market-state discovery
-mechanism_plot.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,tools/mechanism_plot.py,plot helper
-multi_analyze.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/multi_analyze.py,original analyzer
-multi_backtest.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/multi_backtest.py,original multi backtest
-path_dependence_attribution.py,file,gateT3,script,SUPERSEDED,FALSE,market_state_gate_t3.py,secondary,archive/superseded/path_dependence_attribution.py,early T3 attribution
-pool_analyze.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/pool_analyze.py,original pool analyzer
-regime_discovery.py,file,redteam,script,SUPERSEDED,FALSE,regime_discovery_corrected.py,secondary,archive/superseded/regime_discovery.py,old regime discovery v1
-regime_discovery_corrected.py,file,redteam,script,SUPERSEDED,FALSE,regime_discovery_v3.py,secondary,archive/superseded/regime_discovery_corrected.py,old regime discovery v2
-regime_discovery_v3.py,file,redteam,script,SUPERSEDED,FALSE,market_state_phase_t2.py,secondary,archive/superseded/regime_discovery_v3.py,old regime discovery v3
+research/trade_path/full_market_scan.py,file,fullmarket,script,ACCEPTED,FALSE,,secondary,research/trade_path/full_market_scan.py,full-market eligible scan
+research/trade_path/full_market_trade_path_audit.py,file,fullmarket,script,ACCEPTED,FALSE,,primary,research/trade_path/full_market_trade_path_audit.py,full-market trade-path audit
+research/trade_path/full_market_v8.py,file,fullmarket,script,ACCEPTED,FALSE,,secondary,research/trade_path/full_market_v8.py,full-market scan v8 (secondary universe build)
+archive/superseded/independent_trade_replay.py,file,independent,script,SUPERSEDED,FALSE,independent_trade_replay_v2.py,secondary,archive/superseded/independent_trade_replay.py,replay V1
+research/signal/independent_trade_replay_v2.py,file,independent,script,ACCEPTED,FALSE,,primary,research/signal/independent_trade_replay_v2.py,replay V2 (canonical)
+research/signal/independent_trade_stats.py,file,independent,script,ACCEPTED,FALSE,,secondary,research/signal/independent_trade_stats.py,replay stats
+archive/invalid/level1_tight_stop.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/level1_tight_stop.py,tight-stop experiment (original)
+archive/invalid/live_analyze_r2.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/live_analyze_r2.py,r2 analyzer
+archive/invalid/live_backtest.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/live_backtest.py,original live backtest
+archive/invalid/live_backtest_r2.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/live_backtest_r2.py,original r2 live backtest
+archive/invalid/live_plot.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/live_plot.py,plot helper
+research/market_state/market_state_gate_t3.py,file,gateT3,script,CLOSED,FALSE,,primary,research/market_state/market_state_gate_t3.py,T3 gate construction
+research/market_state/market_state_phase_t2.py,file,marketstate,script,ACCEPTED,FALSE,,primary,research/market_state/market_state_phase_t2.py,T2 market-state discovery
+tools/mechanism_plot.py,file,governance,script,INFRASTRUCTURE,FALSE,,infra,tools/mechanism_plot.py,plot helper
+archive/invalid/multi_analyze.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/multi_analyze.py,original analyzer
+archive/invalid/multi_backtest.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/multi_backtest.py,original multi backtest
+archive/superseded/path_dependence_attribution.py,file,gateT3,script,SUPERSEDED,FALSE,market_state_gate_t3.py,secondary,archive/superseded/path_dependence_attribution.py,early T3 attribution
+archive/invalid/pool_analyze.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/pool_analyze.py,original pool analyzer
+archive/superseded/regime_discovery.py,file,redteam,script,SUPERSEDED,FALSE,regime_discovery_corrected.py,secondary,archive/superseded/regime_discovery.py,old regime discovery v1
+archive/superseded/regime_discovery_corrected.py,file,redteam,script,SUPERSEDED,FALSE,regime_discovery_v3.py,secondary,archive/superseded/regime_discovery_corrected.py,old regime discovery v2
+archive/superseded/regime_discovery_v3.py,file,redteam,script,SUPERSEDED,FALSE,market_state_phase_t2.py,secondary,archive/superseded/regime_discovery_v3.py,old regime discovery v3
 requirements.txt,file,governance,config,INFRASTRUCTURE,FALSE,,infra,requirements.txt,repo infrastructure file
-results/adjfactor_vs_dividend.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,results/evidence/redteam/adjfactor_vs_dividend.csv,adjfactor check output
-results/drawdown_by_level.png,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/drawdown_by_level.png,original-system output (invalid as performance evidence)
-results/drawdown_postexit_per_trade.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/drawdown_postexit_per_trade.csv,original-system output (invalid as performance evidence)
-results/drawdown_summary_export.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/drawdown_summary_export.csv,original-system output (invalid as performance evidence)
-results/equity_curve.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/equity_curve.csv,original-system output (invalid as performance evidence)
-results/etf_log.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/etf_log.csv,original-system output (invalid as performance evidence)
-results/fullmarket_crowding_dist.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_crowding_dist.csv,full-market output
-results/fullmarket_episode_metrics.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_episode_metrics.csv,full-market output
-results/fullmarket_eventday_stats.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_eventday_stats.csv,full-market output
-results/fullmarket_exit_quality.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_exit_quality.csv,full-market output
-results/fullmarket_gate_summary.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_gate_summary.csv,full-market output
-results/fullmarket_levels.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_levels.csv,full-market output
-results/fullmarket_mae_thresholds.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_mae_thresholds.csv,full-market output
-results/fullmarket_primary_secondary_compare.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_primary_secondary_compare.csv,full-market output
-results/fullmarket_remove_best.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_remove_best.csv,full-market output
-results/fullmarket_signal_crowding.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_signal_crowding.csv,full-market output
-results/fullmarket_tail_risk.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_tail_risk.csv,full-market output
-results/fullmarket_top10_stocks.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_top10_stocks.csv,full-market output
-results/fullmarket_turnover_rank_buckets.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_turnover_rank_buckets.csv,full-market output
-results/fullmarket_winner_loser.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_winner_loser.csv,full-market output
-results/fullmarket_winner_mae_breach.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_winner_mae_breach.csv,full-market output
-results/fullmarket_worst_episodes.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_worst_episodes.csv,full-market output
-results/fullmarket_yearly.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_yearly.csv,full-market output
-results/independent_trade_concentration.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_concentration.csv,independent replay output
-results/independent_trade_cross_section.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_cross_section.csv,independent replay output
-results/independent_trade_episodes.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_episodes.csv,independent replay output
-results/independent_trade_episodes_secondary.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_episodes_secondary.csv,independent replay output
-results/independent_trade_eventday.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_eventday.csv,independent replay output
-results/independent_trade_eventday_secondary.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_eventday_secondary.csv,independent replay output
-results/independent_trade_exit_semantics.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_exit_semantics.csv,independent replay output
-results/independent_trade_layers.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_layers.csv,independent replay output
-results/independent_trade_timesplit.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_timesplit.csv,independent replay output
-results/independent_trade_yearly.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_yearly.csv,independent replay output
-results/independent_trade_yearly_secondary.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_yearly_secondary.csv,independent replay output
-results/independent_v2_censored_episodes.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_v2_censored_episodes.csv,independent replay output
-results/independent_v2_parity_check.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_v2_parity_check.csv,independent replay output
-results/independent_v2_parity_frozen_trades.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_v2_parity_frozen_trades.csv,independent replay output
-results/independent_v2_primary_summary.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_v2_primary_summary.csv,independent replay output
-results/independent_v2_semantics_diff.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_v2_semantics_diff.csv,independent replay output
-results/independent_v2a_episodes.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_v2a_episodes.csv,independent replay output
-results/multi_pos_comparison_final_v3.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/multi_pos_comparison_final_v3.csv,original-system output (invalid as performance evidence)
-results/multi_pos_curve_final_v3.png,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/multi_pos_curve_final_v3.png,original-system output (invalid as performance evidence)
-results/multi_pos_equity_final_v3.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/multi_pos_equity_final_v3.csv,original-system output (invalid as performance evidence)
-results/p11_k3_bootstrap.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_k3_bootstrap.csv,P1.1 corrected output
-results/p11_master_table.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_master_table.csv,P1.1 corrected output
-results/p11_old_new_pass_diff.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_old_new_pass_diff.csv,P1.1 corrected output
-results/p11_oracle.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_oracle.csv,P1.1 corrected output
-results/p11_pairwise.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_pairwise.csv,P1.1 corrected output
-results/p11_passer_redundancy.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_passer_redundancy.csv,P1.1 corrected output
-results/p11_primary_direction_sensitivity.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_primary_direction_sensitivity.csv,P1.1 corrected output
-results/p11_quintile_metrics.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_quintile_metrics.csv,P1.1 corrected output
-results/p11_random_baseline_comparison.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_random_baseline_comparison.csv,P1.1 corrected output
-results/p11_random_k3_corrected.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_random_k3_corrected.csv,P1.1 corrected output
-results/p11_suspension_gap_audit.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_suspension_gap_audit.csv,P1.1 corrected output
-results/p11_suspension_sensitivity.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_suspension_sensitivity.csv,P1.1 corrected output
-results/p11_turnover_rank_diagnostic.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_turnover_rank_diagnostic.csv,P1.1 corrected output
-results/p1_crowding_sensitivity.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_crowding_sensitivity.csv,P1 discovery output
-results/p1_feature_daily_ic.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_feature_daily_ic.csv,P1 discovery output
-results/p1_marketstate_sensitivity.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_marketstate_sensitivity.csv,P1 discovery output
-results/p1_master_table.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_master_table.csv,P1 discovery output
-results/p1_oracle_upper_bound.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_oracle_upper_bound.csv,P1 discovery output
-results/p1_pairwise_accuracy.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_pairwise_accuracy.csv,P1 discovery output
-results/p1_primary_sensitivity.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_primary_sensitivity.csv,P1 discovery output
-results/p1_quintiles_episodeweighted.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_quintiles_episodeweighted.csv,P1 discovery output
-results/p1_quintiles_equalday.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_quintiles_equalday.csv,P1 discovery output
-results/p1_random_k3.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_random_k3.csv,P1 discovery output
-results/p1_redundancy.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_redundancy.csv,P1 discovery output
-results/p1_topk_selection.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_topk_selection.csv,P1 discovery output
-results/p1_turnover_rank_diagnostic.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_turnover_rank_diagnostic.csv,P1 discovery output
-results/p1_yearly.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_yearly.csv,P1 discovery output
-results/p2_bh5.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_bh5.csv,P2 validation output
-results/p2_daily_ic.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_daily_ic.csv,P2 validation output
-results/p2_effect_replication.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_effect_replication.csv,P2 validation output
-results/p2_f05_marginal.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_f05_marginal.csv,P2 validation output
-results/p2_hac.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_hac.csv,P2 validation output
-results/p2_k3_bootstrap.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_k3_bootstrap.csv,P2 validation output
-results/p2_k3_lift.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_k3_lift.csv,P2 validation output
-results/p2_master_table.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_master_table.csv,P2 validation output
-results/p2_oracle.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_oracle.csv,P2 validation output
-results/p2_pairwise.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_pairwise.csv,P2 validation output
-results/p2_primary_sensitivity.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_primary_sensitivity.csv,P2 validation output
-results/p2_quintiles.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_quintiles.csv,P2 validation output
-results/p2_random_k3_per_feature.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_random_k3_per_feature.csv,P2 validation output
-results/p2_redundancy.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_redundancy.csv,P2 validation output
-results/p2_suspension_sensitivity.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_suspension_sensitivity.csv,P2 validation output
-results/p2_turnover_top10_descriptive.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_turnover_top10_descriptive.csv,P2 validation output
-results/p2_yearly.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_yearly.csv,P2 validation output
-results/p31_actionable_yearly.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_actionable_yearly.csv,P3.1 mechanism audit output
-results/p31_b2_liquidity_risk.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_b2_liquidity_risk.csv,P3.1 mechanism audit output
-results/p31_capital_constraint.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_capital_constraint.csv,P3.1 mechanism audit output
-results/p31_capital_constraint_stats.json,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_capital_constraint_stats.json,P3.1 mechanism audit output
-results/p31_contention_funnel_daily.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_contention_funnel_daily.csv,P3.1 mechanism audit output
-results/p31_contention_taxonomy.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_contention_taxonomy.csv,P3.1 mechanism audit output
-results/p31_exec_outcomes.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_exec_outcomes.csv,P3.1 mechanism audit output
-results/p31_independent_coverage.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_independent_coverage.csv,P3.1 mechanism audit output
-results/p31_leave_one_swap.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_leave_one_swap.csv,P3.1 mechanism audit output
-results/p31_mechanism_summary.json,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_mechanism_summary.json,P3.1 mechanism audit output
-results/p31_non_actionable_reasons.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_non_actionable_reasons.csv,P3.1 mechanism audit output
-results/p31_path_cascade.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_path_cascade.csv,P3.1 mechanism audit output
-results/p31_path_cascade_2021-05-24.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_path_cascade_2021-05-24.csv,P3.1 mechanism audit output
-results/p31_path_cascade_2021-05-24_events_b0.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_path_cascade_2021-05-24_events_b0.csv,P3.1 mechanism audit output
-results/p31_path_cascade_2021-05-24_events_b1.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_path_cascade_2021-05-24_events_b1.csv,P3.1 mechanism audit output
-results/p31_path_cascade_2021-11-16.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_path_cascade_2021-11-16.csv,P3.1 mechanism audit output
-results/p31_path_cascade_2021-11-16_events_b0.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_path_cascade_2021-11-16_events_b0.csv,P3.1 mechanism audit output
-results/p31_path_cascade_2021-11-16_events_b1.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_path_cascade_2021-11-16_events_b1.csv,P3.1 mechanism audit output
-results/p31_slippage_path_diff.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_slippage_path_diff.csv,P3.1 mechanism audit output
-results/p31_slot_occupancy_trades.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_slot_occupancy_trades.csv,P3.1 mechanism audit output
-results/p31_slot_saturation.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_slot_saturation.csv,P3.1 mechanism audit output
-results/p31_slot_saturation_stats.json,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_slot_saturation_stats.json,P3.1 mechanism audit output
-results/p31_swap_reconciliation.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_swap_reconciliation.csv,P3.1 mechanism audit output
-results/p31_top_slot_blockers.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_top_slot_blockers.csv,P3.1 mechanism audit output
-results/p3_blocked_opportunities.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_blocked_opportunities.csv,P3 portfolio output
-results/p3_capital_efficiency.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_capital_efficiency.csv,P3 portfolio output
-results/p3_contested_signal_diagnostic.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_contested_signal_diagnostic.csv,P3 portfolio output
-results/p3_liquidity_risk.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_liquidity_risk.csv,P3 portfolio output
-results/p3_path_divergence.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_path_divergence.csv,P3 portfolio output
-results/p3_portfolio_summary.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_portfolio_summary.csv,P3 portfolio output
-results/p3_selection_changed_events.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_selection_changed_events.csv,P3 portfolio output
-results/p3_slippage_stress.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_slippage_stress.csv,P3 portfolio output
-results/p3_trade_diff.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_trade_diff.csv,P3 portfolio output
-results/p3_yearly.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_yearly.csv,P3 portfolio output
-results/parameter_scan_bollinger.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/parameter_scan_bollinger.csv,original-system output (invalid as performance evidence)
-results/parameter_scan_etf_ratio.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/parameter_scan_etf_ratio.csv,original-system output (invalid as performance evidence)
-results/postexit_analysis.png,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/postexit_analysis.png,original-system output (invalid as performance evidence)
-results/regime_discovery_matrix.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,results/evidence/regime_old/regime_discovery_matrix.csv,old regime results (frozen)
-results/regime_discovery_matrix_v2.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,results/evidence/regime_old/regime_discovery_matrix_v2.csv,old regime results (frozen)
-results/regime_discovery_matrix_v3.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,results/evidence/regime_old/regime_discovery_matrix_v3.csv,old regime results (frozen)
-results/regime_v2_v3_diff.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,results/evidence/regime_old/regime_v2_v3_diff.csv,old regime results (frozen)
-results/regime_v3_bh104_reference.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,results/evidence/regime_old/regime_v3_bh104_reference.csv,old regime results (frozen)
-results/regime_v3_hac_lag_sensitivity.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,results/evidence/regime_old/regime_v3_hac_lag_sensitivity.csv,old regime results (frozen)
-results/round5/adjfactor_attribution_v2.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/adjfactor_attribution_v2.csv,round5 STRICT_C frozen outputs
-results/round5/adjfactor_stress_v2.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/adjfactor_stress_v2.csv,round5 STRICT_C frozen outputs
-results/round5/extra_checks.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/extra_checks.json,round5 STRICT_C frozen outputs
-results/round5/p0_audit.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p0_audit.csv,round5 STRICT_C frozen outputs
-results/round5/p0_matrix.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p0_matrix.csv,round5 STRICT_C frozen outputs
-results/round5/p0_summary.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p0_summary.json,round5 STRICT_C frozen outputs
-results/round5/p0_v0_vs_v1_top10.csv,file,strict_c,result,SUPERSEDED,FALSE,,secondary,results/evidence/strict_c/round5/p0_v0_vs_v1_top10.csv,v1 variant superseded
-results/round5/p1_matrix.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p1_matrix.csv,round5 STRICT_C frozen outputs
-results/round5/p1_summary.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p1_summary.json,round5 STRICT_C frozen outputs
-results/round5/p2_etf_slip_matrix.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p2_etf_slip_matrix.csv,round5 STRICT_C frozen outputs
-results/round5/p3_summary.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p3_summary.json,round5 STRICT_C frozen outputs
-results/round5/p4_oos.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p4_oos.csv,round5 STRICT_C frozen outputs
-results/round5/p4_summary.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p4_summary.json,round5 STRICT_C frozen outputs
-results/round5/p4_time_stop_scan.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p4_time_stop_scan.csv,round5 STRICT_C frozen outputs
-results/round5/p5_k_walkforward.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p5_k_walkforward.csv,round5 STRICT_C frozen outputs
-results/round5/p5_summary.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p5_summary.json,round5 STRICT_C frozen outputs
-results/round5/p6_liquidity.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p6_liquidity.csv,round5 STRICT_C frozen outputs
-results/round5/p6_summary.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p6_summary.json,round5 STRICT_C frozen outputs
-results/round5/p8_exit_unbiased.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p8_exit_unbiased.csv,round5 STRICT_C frozen outputs
-results/round5/p8_summary.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p8_summary.json,round5 STRICT_C frozen outputs
-results/round5/pit_st_top10_impact.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/pit_st_top10_impact.json,round5 STRICT_C frozen outputs
-results/round5/semantic_invalid_vs_dynamic.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/semantic_invalid_vs_dynamic.csv,round5 STRICT_C frozen outputs
-results/round5/semantic_strictc_vs_current.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/semantic_strictc_vs_current.csv,round5 STRICT_C frozen outputs
-results/round5/strict_c_corr_equity.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_corr_equity.csv,round5 STRICT_C frozen outputs
-results/round5/strict_c_corr_optimistic_equity.csv,file,strict_c,result,SUPERSEDED,FALSE,,secondary,results/evidence/strict_c/round5/strict_c_corr_optimistic_equity.csv,optimistic-tick variant (invalid as evidence)
-results/round5/strict_c_corr_pure_equity.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_corr_pure_equity.csv,round5 STRICT_C frozen outputs
-results/round5/strict_c_corr_pure_trades.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_corr_pure_trades.csv,round5 STRICT_C frozen outputs
-results/round5/strict_c_corr_trades.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_corr_trades.csv,round5 STRICT_C frozen outputs
-results/round5/strict_c_equity.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_equity.csv,round5 STRICT_C frozen outputs
-results/round5/strict_c_executable_tick_equity.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_executable_tick_equity.csv,round5 STRICT_C frozen outputs
-results/round5/strict_c_executable_tick_pure_equity.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_executable_tick_pure_equity.csv,round5 STRICT_C frozen outputs
-results/round5/strict_c_executable_tick_pure_trades.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_executable_tick_pure_trades.csv,round5 STRICT_C frozen outputs
-results/round5/strict_c_executable_tick_trades.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_executable_tick_trades.csv,round5 STRICT_C frozen outputs
-results/round5/strict_c_matrix.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_matrix.csv,round5 STRICT_C frozen outputs
-results/round5/strict_c_pure_equity.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_pure_equity.csv,round5 STRICT_C frozen outputs
-results/round5/strict_c_pure_trades.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_pure_trades.csv,round5 STRICT_C frozen outputs
-results/round5/strict_c_trades.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_trades.csv,round5 STRICT_C frozen outputs
-results/round5/strict_matrix.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_matrix.csv,round5 STRICT_C frozen outputs
-results/round5/strict_oos.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_oos.json,round5 STRICT_C frozen outputs
-results/round5/strict_summary.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_summary.json,round5 STRICT_C frozen outputs
-results/round5/strict_v1_full_trades.csv,file,strict_c,result,SUPERSEDED,FALSE,,secondary,results/evidence/strict_c/round5/strict_v1_full_trades.csv,v1 variant superseded
-results/round5/strict_v1_trades.csv,file,strict_c,result,SUPERSEDED,FALSE,,secondary,results/evidence/strict_c/round5/strict_v1_trades.csv,v1 variant superseded
-results/round5/strict_v2_matrix.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_v2_matrix.csv,round5 STRICT_C frozen outputs
-results/round5/strict_v2_oos.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_v2_oos.csv,round5 STRICT_C frozen outputs
-results/stop_phaseA_censored_sensitivity.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_censored_sensitivity.csv,stop phase A output (verdict C)
-results/stop_phaseA_collisions.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_collisions.csv,stop phase A output (verdict C)
-results/stop_phaseA_early_late.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_early_late.csv,stop phase A output (verdict C)
-results/stop_phaseA_episode_detail.csv.gz,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_episode_detail.csv.gz,stop phase A output (verdict C)
-results/stop_phaseA_episode_detail_primary.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_episode_detail_primary.csv,stop phase A output (verdict C)
-results/stop_phaseA_eventday.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_eventday.csv,stop phase A output (verdict C)
-results/stop_phaseA_killed_winners.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_killed_winners.csv,stop phase A output (verdict C)
-results/stop_phaseA_levels.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_levels.csv,stop phase A output (verdict C)
-results/stop_phaseA_net_value.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_net_value.csv,stop phase A output (verdict C)
-results/stop_phaseA_primary.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_primary.csv,stop phase A output (verdict C)
-results/stop_phaseA_saved_losers.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_saved_losers.csv,stop phase A output (verdict C)
-results/stop_phaseA_secondary.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_secondary.csv,stop phase A output (verdict C)
-results/stop_phaseA_strata.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_strata.csv,stop phase A output (verdict C)
-results/stop_phaseA_summary.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_summary.csv,stop phase A output (verdict C)
-results/stop_phaseA_tailrisk.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_tailrisk.csv,stop phase A output (verdict C)
-results/stop_phaseA_yearly.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_yearly.csv,stop phase A output (verdict C)
-results/t2_badstate_auc.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_badstate_auc.csv,T2 discovery output
-results/t2_bh27.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_bh27.csv,T2 discovery output
-results/t2_block_bootstrap.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_block_bootstrap.csv,T2 discovery output
-results/t2_contemporaneous.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_contemporaneous.csv,T2 discovery output
-results/t2_discovery_badsegment_explanation.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_discovery_badsegment_explanation.csv,T2 discovery output
-results/t2_feature_redundancy.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_feature_redundancy.csv,T2 discovery output
-results/t2_feature_redundancy_pairs.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_feature_redundancy_pairs.csv,T2 discovery output
-results/t2_feature_values_discovery.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_feature_values_discovery.csv,T2 discovery output
-results/t2_fullsample_DESCRIPTIVE_ONLY.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_fullsample_DESCRIPTIVE_ONLY.csv,T2 discovery output
-results/t2_hac.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_hac.csv,T2 discovery output
-results/t2_leave_one_year_out.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_leave_one_year_out.csv,T2 discovery output
-results/t2_master_table.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_master_table.csv,T2 discovery output
-results/t2_mrh_leak_audit.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_mrh_leak_audit.csv,T2 discovery output
-results/t2_primary_sensitivity.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_primary_sensitivity.csv,T2 discovery output
-results/t2_prospective_ic.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_prospective_ic.csv,T2 discovery output
-results/t2_quintiles_pit.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_quintiles_pit.csv,T2 discovery output
-results/t2_signalday_series_full.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_signalday_series_full.csv,T2 discovery output
-results/t2r_bh7.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_bh7.csv,T2-R validation output
-results/t2r_bootstrap.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_bootstrap.csv,T2-R validation output
-results/t2r_discovery_validation_effect.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_discovery_validation_effect.csv,T2-R validation output
-results/t2r_family_redundancy.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_family_redundancy.csv,T2-R validation output
-results/t2r_family_redundancy_pairs.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_family_redundancy_pairs.csv,T2-R validation output
-results/t2r_hac.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_hac.csv,T2-R validation output
-results/t2r_master_table.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_master_table.csv,T2-R validation output
-results/t2r_nonoverlap_offsets.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_nonoverlap_offsets.csv,T2-R validation output
-results/t2r_primary_sensitivity.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_primary_sensitivity.csv,T2-R validation output
-results/t2r_quintiles_expanding_sensitivity.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_quintiles_expanding_sensitivity.csv,T2-R validation output
-results/t2r_quintiles_fixed.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_quintiles_fixed.csv,T2-R validation output
-results/t2r_sample_days.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_sample_days.csv,T2-R validation output
-results/t2r_yearly.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_yearly.csv,T2-R validation output
-results/t3_blocked_opportunities.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_blocked_opportunities.csv,T3 gate output
-results/t3_capital_efficiency.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_capital_efficiency.csv,T3 gate output
-results/t3_cutpoints.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_cutpoints.csv,T3 gate output
-results/t3_entry_add_sensitivity.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_entry_add_sensitivity.csv,T3 gate output
-results/t3_episode_quality.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_episode_quality.csv,T3 gate output
-results/t3_etf_secondary.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_etf_secondary.csv,T3 gate output
-results/t3_etf_secondary_attribution.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_etf_secondary_attribution.csv,T3 gate output
-results/t3_gate_attribution.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_gate_attribution.csv,T3 gate output
-results/t3_portfolio_summary.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_portfolio_summary.csv,T3 gate output
-results/t3_portfolio_yearly.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_portfolio_yearly.csv,T3 gate output
-results/t3_rejected_vs_accepted.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_rejected_vs_accepted.csv,T3 gate output
-results/temporal_acf.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_acf.csv,T1 output
-results/temporal_block_analysis.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_block_analysis.csv,T1 output
-results/temporal_change_points.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_change_points.csv,T1 output
-results/temporal_crosssection_quality.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_crosssection_quality.csv,T1 output
-results/temporal_daily_series.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_daily_series.csv,T1 output
-results/temporal_effective_sample_size.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_effective_sample_size.csv,T1 output
-results/temporal_leave_one_year_out.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_leave_one_year_out.csv,T1 output
-results/temporal_monthly.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_monthly.csv,T1 output
-results/temporal_permutation_null.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_permutation_null.csv,T1 output
-results/temporal_persistence.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_persistence.csv,T1 output
-results/temporal_primary_secondary.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_primary_secondary.csv,T1 output
-results/temporal_quality_drawdowns.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_quality_drawdowns.csv,T1 output
-results/temporal_quarterly.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_quarterly.csv,T1 output
-results/temporal_runs.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_runs.csv,T1 output
-results/temporal_segments.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_segments.csv,T1 output
-results/temporal_segments_duration.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_segments_duration.csv,T1 output
-results/trade_path_daily_nav.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_daily_nav.csv,primary-only path output; superseded by fullmarket
-results/trade_path_desc_stats.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_desc_stats.csv,primary-only path output; superseded by fullmarket
-results/trade_path_episode_metrics.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_episode_metrics.csv,primary-only path output; superseded by fullmarket
-results/trade_path_eventday_stats.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_eventday_stats.csv,primary-only path output; superseded by fullmarket
-results/trade_path_exit_quality.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_exit_quality.csv,primary-only path output; superseded by fullmarket
-results/trade_path_levels.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_levels.csv,primary-only path output; superseded by fullmarket
-results/trade_path_mae_thresholds.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_mae_thresholds.csv,primary-only path output; superseded by fullmarket
-results/trade_path_quantiles.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_quantiles.csv,primary-only path output; superseded by fullmarket
-results/trade_path_quantiles_norm.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_quantiles_norm.csv,primary-only path output; superseded by fullmarket
-results/trade_path_tail_risk.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_tail_risk.csv,primary-only path output; superseded by fullmarket
-results/trade_path_tail_risk_worst20.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_tail_risk_worst20.csv,primary-only path output; superseded by fullmarket
-results/trade_path_winner_loser_stats.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_winner_loser_stats.csv,primary-only path output; superseded by fullmarket
-results/trade_path_yearly.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_yearly.csv,primary-only path output; superseded by fullmarket
-results/trades.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/trades.csv,original-system output (invalid as performance evidence)
-results/yearly_returns.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/yearly_returns.csv,original-system output (invalid as performance evidence)
-results_exp/MISSING_DATA_REQUIRED.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/results_exp/MISSING_DATA_REQUIRED.csv,early experiments
-results_exp/exp1_pit_summary.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/results_exp/exp1_pit_summary.csv,early experiments
-results_exp/exp1_pit_verification.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/results_exp/exp1_pit_verification.csv,early experiments
-results_exp/exp2_false_filtered_top10_bb.csv,file,redteam,result,INVALID,FALSE,,invalid,archive/invalid/results_exp/exp2_false_filtered_top10_bb.csv,exp2 limit-mismatch (invalid)
-results_exp/exp2_limit_mismatch.csv,file,redteam,result,INVALID,FALSE,,invalid,archive/invalid/results_exp/exp2_limit_mismatch.csv,exp2 limit-mismatch (invalid)
-results_exp/exp2_summary.csv,file,redteam,result,INVALID,FALSE,,invalid,archive/invalid/results_exp/exp2_summary.csv,exp2 limit-mismatch (invalid)
-results_exp/exp345_summary.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/results_exp/exp345_summary.csv,early experiments
-revised_backtest.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/revised_backtest.py,original revised backtest
-revised_plot.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/revised_plot.py,plot helper
-revised_signal_analysis.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/revised_signal_analysis.py,original signal analysis
-round3/exp7_param_scan.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round3/exp7_param_scan.csv,round3 experiments
-round3/exp8_benchmark.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round3/exp8_benchmark.csv,round3 experiments
-round3/round3_bootstrap.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round3/round3_bootstrap.csv,round3 experiments
-round3/round3_trades.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round3/round3_trades.csv,round3 experiments
-round3/round3_walkforward.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round3/round3_walkforward.csv,round3 experiments
-round3/round3_yearly.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round3/round3_yearly.csv,round3 experiments
-round4/blind_test_log.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round4/blind_test_log.csv,round4 experiments
-round4/round4_cost_stress.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round4/round4_cost_stress.csv,round4 experiments
-round4/round4_execution_constraints.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round4/round4_execution_constraints.csv,round4 experiments
-round4/round4_permutation.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round4/round4_permutation.csv,round4 experiments
-round4/round4_pit_survivorship.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round4/round4_pit_survivorship.csv,round4 experiments
-round5/round5_audit.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/round5_audit.py,round5 scripts; superseded by round51
-round5/run_extra_checks.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_extra_checks.py,round5 scripts; superseded by round51
-round5/run_p0.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_p0.py,round5 scripts; superseded by round51
-round5/run_p1.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_p1.py,round5 scripts; superseded by round51
-round5/run_p2.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_p2.py,round5 scripts; superseded by round51
-round5/run_p3.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_p3.py,round5 scripts; superseded by round51
-round5/run_p4.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_p4.py,round5 scripts; superseded by round51
-round5/run_p5.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_p5.py,round5 scripts; superseded by round51
-round5/run_p6.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_p6.py,round5 scripts; superseded by round51
-round5/run_p8.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_p8.py,round5 scripts; superseded by round51
-round5/run_strict.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_strict.py,round5 scripts; superseded by round51
-round5/run_strict_oos.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_strict_oos.py,round5 scripts; superseded by round51
-round51/build_pit_st.py,file,strict_c,script,ACCEPTED,FALSE,,primary,src/round51/build_pit_st.py,STRICT_C frozen engine scripts (round51)
-round51/round51_audit.py,file,strict_c,script,ACCEPTED,FALSE,,primary,src/round51/round51_audit.py,STRICT_C frozen engine scripts (round51)
-round51/run_pit_top10_impact.py,file,strict_c,script,ACCEPTED,FALSE,,primary,src/round51/run_pit_top10_impact.py,STRICT_C frozen engine scripts (round51)
-round51/run_strict_v2.py,file,strict_c,script,ACCEPTED,FALSE,,primary,src/round51/run_strict_v2.py,STRICT_C frozen engine scripts (round51)
-round51/run_strict_v2_oos.py,file,strict_c,script,ACCEPTED,FALSE,,primary,src/round51/run_strict_v2_oos.py,STRICT_C frozen engine scripts (round51)
-run_strict_c.py,file,strict_c,script,ACCEPTED,FALSE,,primary,src/run_strict_c.py,STRICT_C runner (canonical engine entry)
-run_strict_c_math.py,file,strict_c,script,ACCEPTED,FALSE,,secondary,src/run_strict_c_math.py,STRICT_C math verification
-scan_pool.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/scan_pool.py,original pool scan
-semantic_touch.py,file,strict_c,script,ACCEPTED,FALSE,,secondary,src/semantic_touch.py,semantic touch test for STRICT_C
-signal_frequency.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/signal_frequency.py,original signal freq
-slot_contention_path_audit.py,file,p31,script,ACCEPTED,FALSE,,primary,research/portfolio/slot_contention_path_audit.py,P3.1 audit script
-stop_loss_counterfactual_phase_a.py,file,stopA,script,CLOSED,FALSE,,primary,research/execution/stop_loss_counterfactual_phase_a.py,stop counterfactual Phase A
-stop_loss_sensitivity.py,file,stopA,script,CLOSED,FALSE,,secondary,research/execution/stop_loss_sensitivity.py,stop sensitivity helper (pre-counterfactual)
-strategy_bearish_exit.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/strategy_bearish_exit.py,original bearish-exit variant
-strategy_improved.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/strategy_improved.py,original strategy variant
-strategy_multi_pool.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/strategy_multi_pool.py,original multi-pool variant
-strategy_multi_tp.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/strategy_multi_tp.py,original multi-TP variant
-strategy_optimized.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/strategy_optimized.py,original strategy (lookahead)
-strategy_v8_multi.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/strategy_v8_multi.py,original v8 multi
-strategy_v8_multi_combined.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/strategy_v8_multi_combined.py,original v8 combined
-strategy_v8_multi_fast.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/strategy_v8_multi_fast.py,original v8 fast
-stress_test_v2.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/stress_test_v2.py,original stress test
-strict_c_attribution.py,file,strict_c,script,ACCEPTED,FALSE,,secondary,src/strict_c_attribution.py,STRICT_C attribution
-strict_c_corrected.py,file,strict_c,script,ACCEPTED,FALSE,,primary,src/strict_c_corrected.py,STRICT_C corrected semantics
-temporal_clustering_phase_t1.py,file,temporal,script,ACCEPTED,FALSE,,primary,research/market_state/temporal_clustering_phase_t1.py,T1 temporal clustering
-test_multi3.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/test_multi3.py,original test
-test_timestop.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/test_timestop.py,original time-stop experiment
-test_vbt_multi3.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/test_vbt_multi3.py,original vbt test
-test_vbt_quick.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/test_vbt_quick.py,original vbt test
+results/evidence/redteam/adjfactor_vs_dividend.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,results/evidence/redteam/adjfactor_vs_dividend.csv,adjfactor check output
+archive/invalid/results/drawdown_by_level.png,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/drawdown_by_level.png,original-system output (invalid as performance evidence)
+archive/invalid/results/drawdown_postexit_per_trade.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/drawdown_postexit_per_trade.csv,original-system output (invalid as performance evidence)
+archive/invalid/results/drawdown_summary_export.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/drawdown_summary_export.csv,original-system output (invalid as performance evidence)
+archive/invalid/results/equity_curve.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/equity_curve.csv,original-system output (invalid as performance evidence)
+archive/invalid/results/etf_log.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/etf_log.csv,original-system output (invalid as performance evidence)
+results/evidence/fullmarket/fullmarket_crowding_dist.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_crowding_dist.csv,full-market output
+results/evidence/fullmarket/fullmarket_episode_metrics.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_episode_metrics.csv,full-market output
+results/evidence/fullmarket/fullmarket_eventday_stats.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_eventday_stats.csv,full-market output
+results/evidence/fullmarket/fullmarket_exit_quality.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_exit_quality.csv,full-market output
+results/evidence/fullmarket/fullmarket_gate_summary.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_gate_summary.csv,full-market output
+results/evidence/fullmarket/fullmarket_levels.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_levels.csv,full-market output
+results/evidence/fullmarket/fullmarket_mae_thresholds.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_mae_thresholds.csv,full-market output
+results/evidence/fullmarket/fullmarket_primary_secondary_compare.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_primary_secondary_compare.csv,full-market output
+results/evidence/fullmarket/fullmarket_remove_best.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_remove_best.csv,full-market output
+results/evidence/fullmarket/fullmarket_signal_crowding.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_signal_crowding.csv,full-market output
+results/evidence/fullmarket/fullmarket_tail_risk.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_tail_risk.csv,full-market output
+results/evidence/fullmarket/fullmarket_top10_stocks.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_top10_stocks.csv,full-market output
+results/evidence/fullmarket/fullmarket_turnover_rank_buckets.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_turnover_rank_buckets.csv,full-market output
+results/evidence/fullmarket/fullmarket_winner_loser.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_winner_loser.csv,full-market output
+results/evidence/fullmarket/fullmarket_winner_mae_breach.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_winner_mae_breach.csv,full-market output
+results/evidence/fullmarket/fullmarket_worst_episodes.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_worst_episodes.csv,full-market output
+results/evidence/fullmarket/fullmarket_yearly.csv,file,fullmarket,result,ACCEPTED,FALSE,,primary,results/evidence/fullmarket/fullmarket_yearly.csv,full-market output
+results/evidence/independent/independent_trade_concentration.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_concentration.csv,independent replay output
+results/evidence/independent/independent_trade_cross_section.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_cross_section.csv,independent replay output
+results/evidence/independent/independent_trade_episodes.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_episodes.csv,independent replay output
+results/evidence/independent/independent_trade_episodes_secondary.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_episodes_secondary.csv,independent replay output
+results/evidence/independent/independent_trade_eventday.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_eventday.csv,independent replay output
+results/evidence/independent/independent_trade_eventday_secondary.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_eventday_secondary.csv,independent replay output
+results/evidence/independent/independent_trade_exit_semantics.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_exit_semantics.csv,independent replay output
+results/evidence/independent/independent_trade_layers.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_layers.csv,independent replay output
+results/evidence/independent/independent_trade_timesplit.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_timesplit.csv,independent replay output
+results/evidence/independent/independent_trade_yearly.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_yearly.csv,independent replay output
+results/evidence/independent/independent_trade_yearly_secondary.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_trade_yearly_secondary.csv,independent replay output
+results/evidence/independent/independent_v2_censored_episodes.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_v2_censored_episodes.csv,independent replay output
+results/evidence/independent/independent_v2_parity_check.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_v2_parity_check.csv,independent replay output
+results/evidence/independent/independent_v2_parity_frozen_trades.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_v2_parity_frozen_trades.csv,independent replay output
+results/evidence/independent/independent_v2_primary_summary.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_v2_primary_summary.csv,independent replay output
+results/evidence/independent/independent_v2_semantics_diff.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_v2_semantics_diff.csv,independent replay output
+results/evidence/independent/independent_v2a_episodes.csv,file,independent,result,ACCEPTED,FALSE,,primary,results/evidence/independent/independent_v2a_episodes.csv,independent replay output
+archive/invalid/results/multi_pos_comparison_final_v3.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/multi_pos_comparison_final_v3.csv,original-system output (invalid as performance evidence)
+archive/invalid/results/multi_pos_curve_final_v3.png,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/multi_pos_curve_final_v3.png,original-system output (invalid as performance evidence)
+archive/invalid/results/multi_pos_equity_final_v3.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/multi_pos_equity_final_v3.csv,original-system output (invalid as performance evidence)
+results/evidence/p11/p11_k3_bootstrap.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_k3_bootstrap.csv,P1.1 corrected output
+results/evidence/p11/p11_master_table.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_master_table.csv,P1.1 corrected output
+results/evidence/p11/p11_old_new_pass_diff.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_old_new_pass_diff.csv,P1.1 corrected output
+results/evidence/p11/p11_oracle.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_oracle.csv,P1.1 corrected output
+results/evidence/p11/p11_pairwise.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_pairwise.csv,P1.1 corrected output
+results/evidence/p11/p11_passer_redundancy.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_passer_redundancy.csv,P1.1 corrected output
+results/evidence/p11/p11_primary_direction_sensitivity.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_primary_direction_sensitivity.csv,P1.1 corrected output
+results/evidence/p11/p11_quintile_metrics.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_quintile_metrics.csv,P1.1 corrected output
+results/evidence/p11/p11_random_baseline_comparison.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_random_baseline_comparison.csv,P1.1 corrected output
+results/evidence/p11/p11_random_k3_corrected.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_random_k3_corrected.csv,P1.1 corrected output
+results/evidence/p11/p11_suspension_gap_audit.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_suspension_gap_audit.csv,P1.1 corrected output
+results/evidence/p11/p11_suspension_sensitivity.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_suspension_sensitivity.csv,P1.1 corrected output
+results/evidence/p11/p11_turnover_rank_diagnostic.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p11/p11_turnover_rank_diagnostic.csv,P1.1 corrected output
+results/evidence/p1/p1_crowding_sensitivity.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_crowding_sensitivity.csv,P1 discovery output
+results/evidence/p1/p1_feature_daily_ic.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_feature_daily_ic.csv,P1 discovery output
+results/evidence/p1/p1_marketstate_sensitivity.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_marketstate_sensitivity.csv,P1 discovery output
+results/evidence/p1/p1_master_table.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_master_table.csv,P1 discovery output
+results/evidence/p1/p1_oracle_upper_bound.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_oracle_upper_bound.csv,P1 discovery output
+results/evidence/p1/p1_pairwise_accuracy.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_pairwise_accuracy.csv,P1 discovery output
+results/evidence/p1/p1_primary_sensitivity.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_primary_sensitivity.csv,P1 discovery output
+results/evidence/p1/p1_quintiles_episodeweighted.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_quintiles_episodeweighted.csv,P1 discovery output
+results/evidence/p1/p1_quintiles_equalday.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_quintiles_equalday.csv,P1 discovery output
+results/evidence/p1/p1_random_k3.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_random_k3.csv,P1 discovery output
+results/evidence/p1/p1_redundancy.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_redundancy.csv,P1 discovery output
+results/evidence/p1/p1_topk_selection.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_topk_selection.csv,P1 discovery output
+results/evidence/p1/p1_turnover_rank_diagnostic.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_turnover_rank_diagnostic.csv,P1 discovery output
+results/evidence/p1/p1_yearly.csv,file,ranking,result,ACCEPTED,FALSE,,primary,results/evidence/p1/p1_yearly.csv,P1 discovery output
+results/evidence/p2/p2_bh5.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_bh5.csv,P2 validation output
+results/evidence/p2/p2_daily_ic.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_daily_ic.csv,P2 validation output
+results/evidence/p2/p2_effect_replication.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_effect_replication.csv,P2 validation output
+results/evidence/p2/p2_f05_marginal.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_f05_marginal.csv,P2 validation output
+results/evidence/p2/p2_hac.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_hac.csv,P2 validation output
+results/evidence/p2/p2_k3_bootstrap.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_k3_bootstrap.csv,P2 validation output
+results/evidence/p2/p2_k3_lift.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_k3_lift.csv,P2 validation output
+results/evidence/p2/p2_master_table.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_master_table.csv,P2 validation output
+results/evidence/p2/p2_oracle.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_oracle.csv,P2 validation output
+results/evidence/p2/p2_pairwise.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_pairwise.csv,P2 validation output
+results/evidence/p2/p2_primary_sensitivity.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_primary_sensitivity.csv,P2 validation output
+results/evidence/p2/p2_quintiles.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_quintiles.csv,P2 validation output
+results/evidence/p2/p2_random_k3_per_feature.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_random_k3_per_feature.csv,P2 validation output
+results/evidence/p2/p2_redundancy.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_redundancy.csv,P2 validation output
+results/evidence/p2/p2_suspension_sensitivity.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_suspension_sensitivity.csv,P2 validation output
+results/evidence/p2/p2_turnover_top10_descriptive.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_turnover_top10_descriptive.csv,P2 validation output
+results/evidence/p2/p2_yearly.csv,file,p2val,result,ACCEPTED,FALSE,,primary,results/evidence/p2/p2_yearly.csv,P2 validation output
+results/evidence/p31/p31_actionable_yearly.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_actionable_yearly.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_b2_liquidity_risk.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_b2_liquidity_risk.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_capital_constraint.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_capital_constraint.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_capital_constraint_stats.json,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_capital_constraint_stats.json,P3.1 mechanism audit output
+results/evidence/p31/p31_contention_funnel_daily.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_contention_funnel_daily.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_contention_taxonomy.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_contention_taxonomy.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_exec_outcomes.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_exec_outcomes.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_independent_coverage.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_independent_coverage.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_leave_one_swap.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_leave_one_swap.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_mechanism_summary.json,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_mechanism_summary.json,P3.1 mechanism audit output
+results/evidence/p31/p31_non_actionable_reasons.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_non_actionable_reasons.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_path_cascade.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_path_cascade.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_path_cascade_2021-05-24.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_path_cascade_2021-05-24.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_path_cascade_2021-05-24_events_b0.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_path_cascade_2021-05-24_events_b0.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_path_cascade_2021-05-24_events_b1.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_path_cascade_2021-05-24_events_b1.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_path_cascade_2021-11-16.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_path_cascade_2021-11-16.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_path_cascade_2021-11-16_events_b0.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_path_cascade_2021-11-16_events_b0.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_path_cascade_2021-11-16_events_b1.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_path_cascade_2021-11-16_events_b1.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_slippage_path_diff.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_slippage_path_diff.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_slot_occupancy_trades.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_slot_occupancy_trades.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_slot_saturation.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_slot_saturation.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_slot_saturation_stats.json,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_slot_saturation_stats.json,P3.1 mechanism audit output
+results/evidence/p31/p31_swap_reconciliation.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_swap_reconciliation.csv,P3.1 mechanism audit output
+results/evidence/p31/p31_top_slot_blockers.csv,file,p31,result,ACCEPTED,FALSE,,primary,results/evidence/p31/p31_top_slot_blockers.csv,P3.1 mechanism audit output
+results/evidence/p3/p3_blocked_opportunities.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_blocked_opportunities.csv,P3 portfolio output
+results/evidence/p3/p3_capital_efficiency.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_capital_efficiency.csv,P3 portfolio output
+results/evidence/p3/p3_contested_signal_diagnostic.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_contested_signal_diagnostic.csv,P3 portfolio output
+results/evidence/p3/p3_liquidity_risk.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_liquidity_risk.csv,P3 portfolio output
+results/evidence/p3/p3_path_divergence.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_path_divergence.csv,P3 portfolio output
+results/evidence/p3/p3_portfolio_summary.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_portfolio_summary.csv,P3 portfolio output
+results/evidence/p3/p3_selection_changed_events.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_selection_changed_events.csv,P3 portfolio output
+results/evidence/p3/p3_slippage_stress.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_slippage_stress.csv,P3 portfolio output
+results/evidence/p3/p3_trade_diff.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_trade_diff.csv,P3 portfolio output
+results/evidence/p3/p3_yearly.csv,file,p3,result,CLOSED,FALSE,,primary,results/evidence/p3/p3_yearly.csv,P3 portfolio output
+archive/invalid/results/parameter_scan_bollinger.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/parameter_scan_bollinger.csv,original-system output (invalid as performance evidence)
+archive/invalid/results/parameter_scan_etf_ratio.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/parameter_scan_etf_ratio.csv,original-system output (invalid as performance evidence)
+archive/invalid/results/postexit_analysis.png,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/postexit_analysis.png,original-system output (invalid as performance evidence)
+results/evidence/regime_old/regime_discovery_matrix.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,results/evidence/regime_old/regime_discovery_matrix.csv,old regime results (frozen)
+results/evidence/regime_old/regime_discovery_matrix_v2.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,results/evidence/regime_old/regime_discovery_matrix_v2.csv,old regime results (frozen)
+results/evidence/regime_old/regime_discovery_matrix_v3.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,results/evidence/regime_old/regime_discovery_matrix_v3.csv,old regime results (frozen)
+results/evidence/regime_old/regime_v2_v3_diff.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,results/evidence/regime_old/regime_v2_v3_diff.csv,old regime results (frozen)
+results/evidence/regime_old/regime_v3_bh104_reference.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,results/evidence/regime_old/regime_v3_bh104_reference.csv,old regime results (frozen)
+results/evidence/regime_old/regime_v3_hac_lag_sensitivity.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,results/evidence/regime_old/regime_v3_hac_lag_sensitivity.csv,old regime results (frozen)
+results/evidence/strict_c/round5/adjfactor_attribution_v2.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/adjfactor_attribution_v2.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/adjfactor_stress_v2.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/adjfactor_stress_v2.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/extra_checks.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/extra_checks.json,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/p0_audit.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p0_audit.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/p0_matrix.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p0_matrix.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/p0_summary.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p0_summary.json,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/p0_v0_vs_v1_top10.csv,file,strict_c,result,SUPERSEDED,FALSE,,secondary,results/evidence/strict_c/round5/p0_v0_vs_v1_top10.csv,v1 variant superseded
+results/evidence/strict_c/round5/p1_matrix.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p1_matrix.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/p1_summary.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p1_summary.json,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/p2_etf_slip_matrix.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p2_etf_slip_matrix.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/p3_summary.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p3_summary.json,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/p4_oos.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p4_oos.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/p4_summary.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p4_summary.json,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/p4_time_stop_scan.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p4_time_stop_scan.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/p5_k_walkforward.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p5_k_walkforward.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/p5_summary.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p5_summary.json,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/p6_liquidity.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p6_liquidity.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/p6_summary.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p6_summary.json,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/p8_exit_unbiased.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p8_exit_unbiased.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/p8_summary.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/p8_summary.json,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/pit_st_top10_impact.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/pit_st_top10_impact.json,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/semantic_invalid_vs_dynamic.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/semantic_invalid_vs_dynamic.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/semantic_strictc_vs_current.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/semantic_strictc_vs_current.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/strict_c_corr_equity.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_corr_equity.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/strict_c_corr_optimistic_equity.csv,file,strict_c,result,SUPERSEDED,FALSE,,secondary,results/evidence/strict_c/round5/strict_c_corr_optimistic_equity.csv,optimistic-tick variant (invalid as evidence)
+results/evidence/strict_c/round5/strict_c_corr_pure_equity.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_corr_pure_equity.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/strict_c_corr_pure_trades.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_corr_pure_trades.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/strict_c_corr_trades.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_corr_trades.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/strict_c_equity.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_equity.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/strict_c_executable_tick_equity.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_executable_tick_equity.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/strict_c_executable_tick_pure_equity.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_executable_tick_pure_equity.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/strict_c_executable_tick_pure_trades.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_executable_tick_pure_trades.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/strict_c_executable_tick_trades.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_executable_tick_trades.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/strict_c_matrix.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_matrix.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/strict_c_pure_equity.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_pure_equity.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/strict_c_pure_trades.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_pure_trades.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/strict_c_trades.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_c_trades.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/strict_matrix.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_matrix.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/strict_oos.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_oos.json,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/strict_summary.json,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_summary.json,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/strict_v1_full_trades.csv,file,strict_c,result,SUPERSEDED,FALSE,,secondary,results/evidence/strict_c/round5/strict_v1_full_trades.csv,v1 variant superseded
+results/evidence/strict_c/round5/strict_v1_trades.csv,file,strict_c,result,SUPERSEDED,FALSE,,secondary,results/evidence/strict_c/round5/strict_v1_trades.csv,v1 variant superseded
+results/evidence/strict_c/round5/strict_v2_matrix.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_v2_matrix.csv,round5 STRICT_C frozen outputs
+results/evidence/strict_c/round5/strict_v2_oos.csv,file,strict_c,result,ACCEPTED,FALSE,,primary,results/evidence/strict_c/round5/strict_v2_oos.csv,round5 STRICT_C frozen outputs
+results/evidence/stopA/stop_phaseA_censored_sensitivity.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_censored_sensitivity.csv,stop phase A output (verdict C)
+results/evidence/stopA/stop_phaseA_collisions.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_collisions.csv,stop phase A output (verdict C)
+results/evidence/stopA/stop_phaseA_early_late.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_early_late.csv,stop phase A output (verdict C)
+results/evidence/stopA/stop_phaseA_episode_detail.csv.gz,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_episode_detail.csv.gz,stop phase A output (verdict C)
+results/evidence/stopA/stop_phaseA_episode_detail_primary.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_episode_detail_primary.csv,stop phase A output (verdict C)
+results/evidence/stopA/stop_phaseA_eventday.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_eventday.csv,stop phase A output (verdict C)
+results/evidence/stopA/stop_phaseA_killed_winners.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_killed_winners.csv,stop phase A output (verdict C)
+results/evidence/stopA/stop_phaseA_levels.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_levels.csv,stop phase A output (verdict C)
+results/evidence/stopA/stop_phaseA_net_value.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_net_value.csv,stop phase A output (verdict C)
+results/evidence/stopA/stop_phaseA_primary.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_primary.csv,stop phase A output (verdict C)
+results/evidence/stopA/stop_phaseA_saved_losers.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_saved_losers.csv,stop phase A output (verdict C)
+results/evidence/stopA/stop_phaseA_secondary.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_secondary.csv,stop phase A output (verdict C)
+results/evidence/stopA/stop_phaseA_strata.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_strata.csv,stop phase A output (verdict C)
+results/evidence/stopA/stop_phaseA_summary.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_summary.csv,stop phase A output (verdict C)
+results/evidence/stopA/stop_phaseA_tailrisk.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_tailrisk.csv,stop phase A output (verdict C)
+results/evidence/stopA/stop_phaseA_yearly.csv,file,stopA,result,CLOSED,FALSE,,primary,results/evidence/stopA/stop_phaseA_yearly.csv,stop phase A output (verdict C)
+results/evidence/t2/t2_badstate_auc.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_badstate_auc.csv,T2 discovery output
+results/evidence/t2/t2_bh27.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_bh27.csv,T2 discovery output
+results/evidence/t2/t2_block_bootstrap.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_block_bootstrap.csv,T2 discovery output
+results/evidence/t2/t2_contemporaneous.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_contemporaneous.csv,T2 discovery output
+results/evidence/t2/t2_discovery_badsegment_explanation.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_discovery_badsegment_explanation.csv,T2 discovery output
+results/evidence/t2/t2_feature_redundancy.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_feature_redundancy.csv,T2 discovery output
+results/evidence/t2/t2_feature_redundancy_pairs.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_feature_redundancy_pairs.csv,T2 discovery output
+results/evidence/t2/t2_feature_values_discovery.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_feature_values_discovery.csv,T2 discovery output
+results/evidence/t2/t2_fullsample_DESCRIPTIVE_ONLY.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_fullsample_DESCRIPTIVE_ONLY.csv,T2 discovery output
+results/evidence/t2/t2_hac.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_hac.csv,T2 discovery output
+results/evidence/t2/t2_leave_one_year_out.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_leave_one_year_out.csv,T2 discovery output
+results/evidence/t2/t2_master_table.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_master_table.csv,T2 discovery output
+results/evidence/t2/t2_mrh_leak_audit.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_mrh_leak_audit.csv,T2 discovery output
+results/evidence/t2/t2_primary_sensitivity.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_primary_sensitivity.csv,T2 discovery output
+results/evidence/t2/t2_prospective_ic.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_prospective_ic.csv,T2 discovery output
+results/evidence/t2/t2_quintiles_pit.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_quintiles_pit.csv,T2 discovery output
+results/evidence/t2/t2_signalday_series_full.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2/t2_signalday_series_full.csv,T2 discovery output
+results/evidence/t2r/t2r_bh7.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_bh7.csv,T2-R validation output
+results/evidence/t2r/t2r_bootstrap.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_bootstrap.csv,T2-R validation output
+results/evidence/t2r/t2r_discovery_validation_effect.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_discovery_validation_effect.csv,T2-R validation output
+results/evidence/t2r/t2r_family_redundancy.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_family_redundancy.csv,T2-R validation output
+results/evidence/t2r/t2r_family_redundancy_pairs.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_family_redundancy_pairs.csv,T2-R validation output
+results/evidence/t2r/t2r_hac.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_hac.csv,T2-R validation output
+results/evidence/t2r/t2r_master_table.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_master_table.csv,T2-R validation output
+results/evidence/t2r/t2r_nonoverlap_offsets.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_nonoverlap_offsets.csv,T2-R validation output
+results/evidence/t2r/t2r_primary_sensitivity.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_primary_sensitivity.csv,T2-R validation output
+results/evidence/t2r/t2r_quintiles_expanding_sensitivity.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_quintiles_expanding_sensitivity.csv,T2-R validation output
+results/evidence/t2r/t2r_quintiles_fixed.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_quintiles_fixed.csv,T2-R validation output
+results/evidence/t2r/t2r_sample_days.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_sample_days.csv,T2-R validation output
+results/evidence/t2r/t2r_yearly.csv,file,marketstate,result,ACCEPTED,FALSE,,primary,results/evidence/t2r/t2r_yearly.csv,T2-R validation output
+results/evidence/t3/t3_blocked_opportunities.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_blocked_opportunities.csv,T3 gate output
+results/evidence/t3/t3_capital_efficiency.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_capital_efficiency.csv,T3 gate output
+results/evidence/t3/t3_cutpoints.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_cutpoints.csv,T3 gate output
+results/evidence/t3/t3_entry_add_sensitivity.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_entry_add_sensitivity.csv,T3 gate output
+results/evidence/t3/t3_episode_quality.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_episode_quality.csv,T3 gate output
+results/evidence/t3/t3_etf_secondary.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_etf_secondary.csv,T3 gate output
+results/evidence/t3/t3_etf_secondary_attribution.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_etf_secondary_attribution.csv,T3 gate output
+results/evidence/t3/t3_gate_attribution.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_gate_attribution.csv,T3 gate output
+results/evidence/t3/t3_portfolio_summary.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_portfolio_summary.csv,T3 gate output
+results/evidence/t3/t3_portfolio_yearly.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_portfolio_yearly.csv,T3 gate output
+results/evidence/t3/t3_rejected_vs_accepted.csv,file,gateT3,result,CLOSED,FALSE,,primary,results/evidence/t3/t3_rejected_vs_accepted.csv,T3 gate output
+results/evidence/temporal/temporal_acf.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_acf.csv,T1 output
+results/evidence/temporal/temporal_block_analysis.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_block_analysis.csv,T1 output
+results/evidence/temporal/temporal_change_points.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_change_points.csv,T1 output
+results/evidence/temporal/temporal_crosssection_quality.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_crosssection_quality.csv,T1 output
+results/evidence/temporal/temporal_daily_series.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_daily_series.csv,T1 output
+results/evidence/temporal/temporal_effective_sample_size.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_effective_sample_size.csv,T1 output
+results/evidence/temporal/temporal_leave_one_year_out.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_leave_one_year_out.csv,T1 output
+results/evidence/temporal/temporal_monthly.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_monthly.csv,T1 output
+results/evidence/temporal/temporal_permutation_null.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_permutation_null.csv,T1 output
+results/evidence/temporal/temporal_persistence.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_persistence.csv,T1 output
+results/evidence/temporal/temporal_primary_secondary.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_primary_secondary.csv,T1 output
+results/evidence/temporal/temporal_quality_drawdowns.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_quality_drawdowns.csv,T1 output
+results/evidence/temporal/temporal_quarterly.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_quarterly.csv,T1 output
+results/evidence/temporal/temporal_runs.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_runs.csv,T1 output
+results/evidence/temporal/temporal_segments.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_segments.csv,T1 output
+results/evidence/temporal/temporal_segments_duration.csv,file,temporal,result,ACCEPTED,FALSE,,primary,results/evidence/temporal/temporal_segments_duration.csv,T1 output
+results/evidence/tradepath/trade_path_daily_nav.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_daily_nav.csv,primary-only path output; superseded by fullmarket
+results/evidence/tradepath/trade_path_desc_stats.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_desc_stats.csv,primary-only path output; superseded by fullmarket
+results/evidence/tradepath/trade_path_episode_metrics.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_episode_metrics.csv,primary-only path output; superseded by fullmarket
+results/evidence/tradepath/trade_path_eventday_stats.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_eventday_stats.csv,primary-only path output; superseded by fullmarket
+results/evidence/tradepath/trade_path_exit_quality.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_exit_quality.csv,primary-only path output; superseded by fullmarket
+results/evidence/tradepath/trade_path_levels.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_levels.csv,primary-only path output; superseded by fullmarket
+results/evidence/tradepath/trade_path_mae_thresholds.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_mae_thresholds.csv,primary-only path output; superseded by fullmarket
+results/evidence/tradepath/trade_path_quantiles.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_quantiles.csv,primary-only path output; superseded by fullmarket
+results/evidence/tradepath/trade_path_quantiles_norm.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_quantiles_norm.csv,primary-only path output; superseded by fullmarket
+results/evidence/tradepath/trade_path_tail_risk.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_tail_risk.csv,primary-only path output; superseded by fullmarket
+results/evidence/tradepath/trade_path_tail_risk_worst20.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_tail_risk_worst20.csv,primary-only path output; superseded by fullmarket
+results/evidence/tradepath/trade_path_winner_loser_stats.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_winner_loser_stats.csv,primary-only path output; superseded by fullmarket
+results/evidence/tradepath/trade_path_yearly.csv,file,tradepath,result,SUPERSEDED,FALSE,fullmarket,primary,results/evidence/tradepath/trade_path_yearly.csv,primary-only path output; superseded by fullmarket
+archive/invalid/results/trades.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/trades.csv,original-system output (invalid as performance evidence)
+archive/invalid/results/yearly_returns.csv,file,original,result,INVALID,FALSE,,invalid,archive/invalid/results/yearly_returns.csv,original-system output (invalid as performance evidence)
+archive/superseded/results_exp/MISSING_DATA_REQUIRED.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/results_exp/MISSING_DATA_REQUIRED.csv,early experiments
+archive/superseded/results_exp/exp1_pit_summary.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/results_exp/exp1_pit_summary.csv,early experiments
+archive/superseded/results_exp/exp1_pit_verification.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/results_exp/exp1_pit_verification.csv,early experiments
+archive/invalid/results_exp/exp2_false_filtered_top10_bb.csv,file,redteam,result,INVALID,FALSE,,invalid,archive/invalid/results_exp/exp2_false_filtered_top10_bb.csv,exp2 limit-mismatch (invalid)
+archive/invalid/results_exp/exp2_limit_mismatch.csv,file,redteam,result,INVALID,FALSE,,invalid,archive/invalid/results_exp/exp2_limit_mismatch.csv,exp2 limit-mismatch (invalid)
+archive/invalid/results_exp/exp2_summary.csv,file,redteam,result,INVALID,FALSE,,invalid,archive/invalid/results_exp/exp2_summary.csv,exp2 limit-mismatch (invalid)
+archive/superseded/results_exp/exp345_summary.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/results_exp/exp345_summary.csv,early experiments
+archive/invalid/revised_backtest.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/revised_backtest.py,original revised backtest
+archive/invalid/revised_plot.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/revised_plot.py,plot helper
+archive/invalid/revised_signal_analysis.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/revised_signal_analysis.py,original signal analysis
+archive/superseded/round3/exp7_param_scan.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round3/exp7_param_scan.csv,round3 experiments
+archive/superseded/round3/exp8_benchmark.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round3/exp8_benchmark.csv,round3 experiments
+archive/superseded/round3/round3_bootstrap.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round3/round3_bootstrap.csv,round3 experiments
+archive/superseded/round3/round3_trades.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round3/round3_trades.csv,round3 experiments
+archive/superseded/round3/round3_walkforward.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round3/round3_walkforward.csv,round3 experiments
+archive/superseded/round3/round3_yearly.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round3/round3_yearly.csv,round3 experiments
+archive/superseded/round4/blind_test_log.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round4/blind_test_log.csv,round4 experiments
+archive/superseded/round4/round4_cost_stress.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round4/round4_cost_stress.csv,round4 experiments
+archive/superseded/round4/round4_execution_constraints.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round4/round4_execution_constraints.csv,round4 experiments
+archive/superseded/round4/round4_permutation.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round4/round4_permutation.csv,round4 experiments
+archive/superseded/round4/round4_pit_survivorship.csv,file,redteam,result,SUPERSEDED,FALSE,,secondary,archive/superseded/round4/round4_pit_survivorship.csv,round4 experiments
+archive/superseded/round5/round5_audit.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/round5_audit.py,round5 scripts; superseded by round51
+archive/superseded/round5/run_extra_checks.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_extra_checks.py,round5 scripts; superseded by round51
+archive/superseded/round5/run_p0.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_p0.py,round5 scripts; superseded by round51
+archive/superseded/round5/run_p1.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_p1.py,round5 scripts; superseded by round51
+archive/superseded/round5/run_p2.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_p2.py,round5 scripts; superseded by round51
+archive/superseded/round5/run_p3.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_p3.py,round5 scripts; superseded by round51
+archive/superseded/round5/run_p4.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_p4.py,round5 scripts; superseded by round51
+archive/superseded/round5/run_p5.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_p5.py,round5 scripts; superseded by round51
+archive/superseded/round5/run_p6.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_p6.py,round5 scripts; superseded by round51
+archive/superseded/round5/run_p8.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_p8.py,round5 scripts; superseded by round51
+archive/superseded/round5/run_strict.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_strict.py,round5 scripts; superseded by round51
+archive/superseded/round5/run_strict_oos.py,file,redteam,script,SUPERSEDED,FALSE,,secondary,archive/superseded/round5/run_strict_oos.py,round5 scripts; superseded by round51
+src/round51/build_pit_st.py,file,strict_c,script,ACCEPTED,FALSE,,primary,src/round51/build_pit_st.py,STRICT_C frozen engine scripts (round51)
+src/round51/round51_audit.py,file,strict_c,script,ACCEPTED,FALSE,,primary,src/round51/round51_audit.py,STRICT_C frozen engine scripts (round51)
+src/round51/run_pit_top10_impact.py,file,strict_c,script,ACCEPTED,FALSE,,primary,src/round51/run_pit_top10_impact.py,STRICT_C frozen engine scripts (round51)
+src/round51/run_strict_v2.py,file,strict_c,script,ACCEPTED,FALSE,,primary,src/round51/run_strict_v2.py,STRICT_C frozen engine scripts (round51)
+src/round51/run_strict_v2_oos.py,file,strict_c,script,ACCEPTED,FALSE,,primary,src/round51/run_strict_v2_oos.py,STRICT_C frozen engine scripts (round51)
+src/run_strict_c.py,file,strict_c,script,ACCEPTED,FALSE,,primary,src/run_strict_c.py,STRICT_C runner (canonical engine entry)
+src/run_strict_c_math.py,file,strict_c,script,ACCEPTED,FALSE,,secondary,src/run_strict_c_math.py,STRICT_C math verification
+archive/invalid/scan_pool.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/scan_pool.py,original pool scan
+src/semantic_touch.py,file,strict_c,script,ACCEPTED,FALSE,,secondary,src/semantic_touch.py,semantic touch test for STRICT_C
+archive/invalid/signal_frequency.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/signal_frequency.py,original signal freq
+research/portfolio/slot_contention_path_audit.py,file,p31,script,ACCEPTED,FALSE,,primary,research/portfolio/slot_contention_path_audit.py,P3.1 audit script
+research/execution/stop_loss_counterfactual_phase_a.py,file,stopA,script,CLOSED,FALSE,,primary,research/execution/stop_loss_counterfactual_phase_a.py,stop counterfactual Phase A
+research/execution/stop_loss_sensitivity.py,file,stopA,script,CLOSED,FALSE,,secondary,research/execution/stop_loss_sensitivity.py,stop sensitivity helper (pre-counterfactual)
+archive/invalid/strategy_bearish_exit.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/strategy_bearish_exit.py,original bearish-exit variant
+archive/invalid/strategy_improved.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/strategy_improved.py,original strategy variant
+archive/invalid/strategy_multi_pool.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/strategy_multi_pool.py,original multi-pool variant
+archive/invalid/strategy_multi_tp.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/strategy_multi_tp.py,original multi-TP variant
+archive/invalid/strategy_optimized.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/strategy_optimized.py,original strategy (lookahead)
+archive/invalid/strategy_v8_multi.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/strategy_v8_multi.py,original v8 multi
+archive/invalid/strategy_v8_multi_combined.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/strategy_v8_multi_combined.py,original v8 combined
+archive/invalid/strategy_v8_multi_fast.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/strategy_v8_multi_fast.py,original v8 fast
+archive/invalid/stress_test_v2.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/stress_test_v2.py,original stress test
+src/strict_c_attribution.py,file,strict_c,script,ACCEPTED,FALSE,,secondary,src/strict_c_attribution.py,STRICT_C attribution
+src/strict_c_corrected.py,file,strict_c,script,ACCEPTED,FALSE,,primary,src/strict_c_corrected.py,STRICT_C corrected semantics
+research/market_state/temporal_clustering_phase_t1.py,file,temporal,script,ACCEPTED,FALSE,,primary,research/market_state/temporal_clustering_phase_t1.py,T1 temporal clustering
+archive/invalid/test_multi3.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/test_multi3.py,original test
+archive/invalid/test_timestop.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/test_timestop.py,original time-stop experiment
+archive/invalid/test_vbt_multi3.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/test_vbt_multi3.py,original vbt test
+archive/invalid/test_vbt_quick.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/test_vbt_quick.py,original vbt test
 tests/test_backtest_invariants.py,file,governance,test,INFRASTRUCTURE,FALSE,,infra,tests/test_backtest_invariants.py,invariant/parity tests
-top10_selection.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/top10_selection.py,original Top10 selection
-trade_max_drawdown.py,file,tradepath,script,SUPERSEDED,FALSE,full_market_trade_path_audit.py,secondary,archive/superseded/trade_max_drawdown.py,max drawdown audit
-trade_path_quality_audit.py,file,tradepath,script,SUPERSEDED,FALSE,full_market_trade_path_audit.py,secondary,archive/superseded/trade_path_quality_audit.py,primary-only path quality audit
-walk_forward.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/walk_forward.py,original walk-forward (optimistic)
+archive/invalid/top10_selection.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/top10_selection.py,original Top10 selection
+archive/superseded/trade_max_drawdown.py,file,tradepath,script,SUPERSEDED,FALSE,full_market_trade_path_audit.py,secondary,archive/superseded/trade_max_drawdown.py,max drawdown audit
+archive/superseded/trade_path_quality_audit.py,file,tradepath,script,SUPERSEDED,FALSE,full_market_trade_path_audit.py,secondary,archive/superseded/trade_path_quality_audit.py,primary-only path quality audit
+archive/invalid/walk_forward.py,file,original,script,INVALID,FALSE,,invalid,archive/invalid/walk_forward.py,original walk-forward (optimistic)

@@ -722,7 +722,7 @@ if __name__ == '__main__':
     base=set(results['A0']['tr']['ts_code'])
     for label in ('A1','A2','A3'):
         tV=set(results[label]['tr']['ts_code'])
-        tset_rows.append(dict(arch=label, common=list(base&tV), only_variant=list(tV-base), only_A0=list(base-tV)))
+        tset_rows.append(dict(arch=label, common=sorted(base&tV), only_variant=sorted(tV-base), only_A0=sorted(base-tV)))
     with open(os.path.join(OUT,'p4_trade_set_diff.csv'),'w') as f:
         f.write('arch|common|only_variant|only_A0\n')
         for r in tset_rows:

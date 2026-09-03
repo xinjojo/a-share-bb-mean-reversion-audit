@@ -28,6 +28,7 @@
 | 14c | P4.1 Marginal Admission / Capacity Shadow-Price Audit | **B — CAPITAL/PATH DILUTION DOMINANT**（A1_ONLY 58 笔独立 quality +3.28%/win 68.8% 仍为正，但实际 PnL −118,610；**COMMON 65 笔同 key、same exit 100% 下 A1 少赚 67,116（STRONG CAPITAL/PATH DILUTION EVIDENCE）**；A1_ONLY 深 MAE 率 40.6% vs COMMON 18.8%（**SUGGESTIVE TAIL-QUALITY DETERIORATION**，非 population-level 信号质量恶化——事件日 bootstrap CI [−3.59,+1.73] 跨 0，aggregate independent quality 不显著更差）；A0_ONLY 独立质量 −1.97%/win 40% 且覆盖仅 45.5% → K=3 未被证明系统性过滤坏信号；PnL bridge residual=0.00；容量影子成本每额外 1 笔 ≈ −6,494 元） | DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH） | `[research/portfolio/MARGINAL_ADMISSION_P41.md](research/portfolio/MARGINAL_ADMISSION_P41.md)` |
 | 14d | S0 Stop-Loss Semantics Remediation（复权语义修复） | **A — OLD PHASE-A CONCLUSION ROBUST TO ADJUSTED-SPACE SEMANTICS FIX**（dev n=61,828；factor_changed 7,492=12.12%，old-only 误触发 460、new-only 0；**11 档 adjusted-space 固定止损均值全部低于 baseline**（d_adj_base −2.69~−0.85pp）；**S0.1 补全配对推断：paired delta block-bootstrap（L=21,B=2000）11/11 档 95% CI 上界全 <0、p(delta≥0)=0.000**；adjusted vs old 差异 <0.03pp；I1–I8 invariants 全 PASS（I7=dev-comparable old parity exact、I8=2025 边界污染隔离）；旧 raw parity true_mismatch=0（唯一差异 002789 为 canonical 依赖 2025-01-24 价格的已知边界，已披露）） | **ACCEPTED**（S0.1 外审通过） | `[research/execution/STOP_LOSS_SEMANTICS_S0.md](research/execution/STOP_LOSS_SEMANTICS_S0.md)` |
 | 14e | F1 Deep-MAE Recoverability / Failure-State Taxonomy | **A — STRONG RECOVERABILITY PREDICTABILITY**（DEVELOPMENT DIAGNOSTIC；D20 锚点 12,590 笔、D30 6,130 笔；**18 个预注册 primary 中 13 个通过完整 gate**：方向一致 + BH q(m=18)<0.05 + 配对 block-bootstrap(L=21,B=2000) CI 排除 0 + D20/D30 同向，覆盖 PRICE_PATH/POSITION/VOLATILITY/RECOVERY/LIQUIDITY 5 family（收敛为约 3 个独立维度：浮亏深度×时长、波动率、量能）；F_CUR_MAE 本身不显著(q=0.123)；R01 Q1 弱市场 D20 恢复率 15.7% vs Q5 3.6%、R05 Q5 压力市场 17.8% vs Q1 4.4%（与 T3 systemic-vs-isolated 呼应）；跌到 −20% 后 ~90% 样本仍会再创新低、一半再跌 ≥7.5pp；实现审计：F_DAYS_SINCE_LOW 因 anchor 定义 degenerate 恒 0（已披露）、F_NLOW10 方向与预注册相反不 pass）。**本阶段仅证明失败/可恢复前瞻可识别，未设计任何 stop/exit** | DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH） | `[research/risk/FAILURE_STATE_F1.md](research/risk/FAILURE_STATE_F1.md)` |
+| 14f | F1.1 Failure-State Inference Remediation | **FINAL = A — STRONG RECOVERABILITY PREDICTABILITY**（保守取 CLOSE/TOUCH 两语义较低者；修复三问题：①primary 用全部 anchor dates（D20=752/D30=537，去掉未注册 MIN_DAY_N=5，降为 sensitivity）；②gate 方向/D20-D30 一致性改用 anchor-day day_corr（F_AMT_RATIO20 由此 CLOSE 下 d30_consistent 由 True 改 False，不再误 pass）；③双 recovery 语义 CLOSE/A（9 pass）与 TOUCH/A（11 pass），各 4 family（PRICE_PATH/POSITION/RECOVERY/VOLATILITY）≥2 非冗余；calendar block-bootstrap(L21,B2000,seed0) CI 全排除 0；MIN5 sensitivity 不改方向；D30 strengthening q 计数 0（仅 537 天更稀疏，如实报告，不作为门槛）；sanity A–J 全 PASS） | DEVELOPMENT / EXTERNAL AUDIT REMEDIATION（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH） | `[research/risk/FAILURE_STATE_F11.md](research/risk/FAILURE_STATE_F11.md)` |
 | 15 | 2025–2026 Confirmation | **UNTOUCHED / CLOSED**（全程未读取任何 2025–2026 的 episode outcome / portfolio / feature） | CLOSED | — |
 
 ---
@@ -85,6 +86,13 @@ F_DAYS_SINCE_FIRST_D10（−0.322）、F_DIST_MA20（−0.317）；F_CUR_MAE 单
 相反不 pass；均不改变 Registry，不影响门控。
 **本轮未设计任何 stop/exit/failure-score；禁止据此构造交易规则。**
 
+**F1.1 进展（2026-09-03，EXTERNAL AUDIT REMEDIATION，待外审）：** 修复 F1 外部审计三项问题后，最终评级 **A**：
+（1）**primary 口径修正**——去掉未注册的 MIN_DAY_N=5 过滤，primary 用全部 anchor dates（D20=752、D30=537，仅要求当日 feature 非缺失），`n>=5` 降为 sensitivity（方向 17/18 一致，不改结论）。
+（2）**primary-unit 修正**——gate 方向与 D20/D30 一致性改用 anchor-day day_corr 而非 episode corr；F_AMT_RATIO20 在 CLOSE 下 corrected 一致性由 True→False（D20 day −0.053 / D30 day +0.005），不再误 pass，验证旧 bug 已修。
+（3）**双 outcome 语义**——RECOVER_CLOSE（D20 12.1%/D30 7.8%）与 RECOVER_TOUCH（D20 16.5%/D30 10.9%）各自跑完整 gate；CLOSE 9 pass / TOUCH 11 pass，各 4 family（PRICE_PATH/POSITION/RECOVERY/VOLATILITY）；**FINAL=min(CLOSE,TOUCH)=A**。
+（4）calendar block-bootstrap（L21/B2000/seed0，完整 1,212 交易日，配对）CI 全部排除 0；D30 strengthening q 计数 0（D30 仅 537 天更稀疏，按预注册不作硬门槛，如实报告）；sanity A–J 全 PASS；F1 Registry SHA 不变。
+**结论不变：深度浮亏后的失败/恢复在锚点当日具有前瞻可识别性；仍未设计任何 stop/exit/failure-score。**
+
 **下一步仍须等待外部审计决定**，方可决定是否打开 2025–2026 Confirmation 或进入新的
 研究阶段。
 
@@ -119,6 +127,7 @@ F_DAYS_SINCE_FIRST_D10（−0.322）、F_DIST_MA20（−0.317）；F_CUR_MAE 单
 | Market State Gate Registry | 见 `research/market_state/registries/MARKET_STATE_GATE_REGISTRY.sha256` | — |
 | S0 Stop-Loss Semantics Registry | `b352f77`（S0-A，结果前 push） | `7e8416fd4fc3a3f67da41d020747ffda34aaf8b1e230ddf574c131ab30f36273` |
 | F1 Failure-State Registry | `1de126b`（F1-A，结果前 push） | `a052309e6f939796795566d1cd1094e2ec706f53250c231377c64efb315eef14` |
+| F1.1 Inference Remediation Registry | `2cecd15`（F1.1-A，结果前 push） | `aacb2146308abd155401c1231209b7cab14e1bc44c50e6f19007ac39582aef91` |
 
 ---
 

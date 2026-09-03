@@ -60,6 +60,9 @@ S0 Stop-Loss Semantics ──► A OLD PHASE-A CONCLUSION ROBUST (ACCEPTED)
 F1 Deep-MAE Recoverability ──► A STRONG RECOVERABILITY PREDICTABILITY (DEVELOPMENT DIAGNOSTIC, 待外审)
    │
    ▼
+F1.1 Inference Remediation ──► FINAL A (CLOSE A / TOUCH A) (EXTERNAL AUDIT REMEDIATION, 待外审)
+   │
+   ▼
 ★ CURRENT: Portfolio Architecture（组合架构瓶颈，研究暂停，等待外部审计）★
 ```
 
@@ -190,6 +193,14 @@ F1 Deep-MAE Recoverability ──► A STRONG RECOVERABILITY PREDICTABILITY (DEV
 - **状态:** **DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH）** — **A — STRONG RECOVERABILITY PREDICTABILITY**（D20 锚点 12,590 笔 / D30 6,130 笔；18 个预注册 primary 中 13 个通过完整 gate：方向 + BH q(m=18)<0.05 + 配对 block-bootstrap(L=21,B=2000) CI 排除 0 + D20/D30 同向）
 - **关键发现:** ① 基线——D20 后 recover_to_entry 12.1%、final_profit 36.7%；跌到 −20% 后 ~90% 样本仍会再创新低、一半再跌 ≥7.5pp；② 最强 prospective 信号=浮亏深度×时长（F_DAYS_UNDERWATER −0.353 / F_DAYS_SINCE_FIRST_D10 −0.322 / F_DIST_MA20 −0.317）+ 波动率（F_ATR20_PCT +0.344 / F_INTRADAY_RANGE +0.321 / F_RV20 +0.305），F_CUR_MAE 单点深度不显著（q=0.123）；③ 收敛为约 3 个独立维度（深度×时长/波动/量能），不可表述为 13 个独立发现；④ 市场 overlay：弱市场/压力市场 deep-MAE 恢复率远高于强市场孤立超跌（R01 Q1 15.7% vs Q5 3.6%；R05 Q5 17.8% vs Q1 4.4%），与 T3 systemic-vs-isolated 呼应；⑤ 实现审计：F_DAYS_SINCE_LOW 因 anchor 定义 degenerate（恒 0）、F_NLOW10 方向与预注册相反不 pass。**本轮未设计任何 stop/exit/failure-score。**
 
+### 14d. F1.1 Failure-State Inference Remediation
+- **Canonical:** `[research/risk/FAILURE_STATE_F11.md](research/risk/FAILURE_STATE_F11.md)`
+- **源码:** `research/risk/failure_state_f11.py`
+- **Registry:** `research/risk/registries/FAILURE_STATE_F11_INFERENCE_REGISTRY.csv`（SHA256 `aacb2146...`，pre-reg `2cecd15`）
+- **结果数据:** `results/evidence/f11/`
+- **状态:** **EXTERNAL AUDIT REMEDIATION（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH）** — **FINAL = A — STRONG RECOVERABILITY PREDICTABILITY**（保守取 CLOSE/TOUCH 较低者）
+- **关键修复:** ①primary 用全部 anchor dates（D20=752/D30=537，去 MIN_DAY_N=5）；②gate 方向/D20-D30 一致性改用 anchor-day day_corr（F_AMT_RATIO20 在 CLOSE 下 corrected 一致性 True→False，不再误 pass）；③双 outcome 语义 CLOSE/A（9 pass）与 TOUCH/A（11 pass），各 4 family（PRICE_PATH/POSITION/RECOVERY/VOLATILITY）；calendar block-bootstrap CI 全排除 0；MIN5 sensitivity 不改方向；D30 strengthening q=0（仅 537 天，如实报告）；sanity A–J 全 PASS；F1 Registry SHA 不变。**仍未设计任何 stop/exit/failure-score。**
+
 ### 15. ★ CURRENT: Portfolio Architecture（组合架构）
 - **状态:** 研究**暂停**。当前唯一活跃问题是：有限 K=3 slots + 长持仓 + 多层占位/路径依赖的组合架构如何提升资金效率。
 - **P4 进展（2026-09-03，ACCEPTED DIAGNOSTIC，外审通过）:** 结构性消融显示 K=3 是实际容量瓶颈，但在当前历史样本与组合规则下同时表现为保护性的 admission constraint（解除任一约束组合均大幅恶化）；完全移除多层加仓（5→1 层）在测试路径下有害（不断言 5 层最优）。瓶颈在更深层。下一步必须等待外部审计决定；2025–2026 Confirmation 继续 CLOSED。
@@ -212,6 +223,7 @@ F1 Deep-MAE Recoverability ──► A STRONG RECOVERABILITY PREDICTABILITY (DEV
 | Marginal Admission P4.1 Registry | `research/portfolio/registries/` | `c6c2865`（P4.1-A） |
 | S0 Stop-Loss Semantics Registry | `research/execution/registries/` | `b352f77`（S0-A） |
 | F1 Failure-State Registry | `research/risk/registries/` | `1de126b`（F1-A） |
+| F1.1 Inference Remediation Registry | `research/risk/registries/` | `2cecd15`（F1.1-A） |
 
 ---
 

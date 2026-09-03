@@ -1,0 +1,80 @@
+{
+  "registry_commit": "2cecd158d9719fd8a1949ef49d25f0d1b5455c20",
+  "registry_sha": "aacb2146308abd155401c1231209b7cab14e1bc44c50e6f19007ac39582aef91",
+  "D20_anchor_dates": 752,
+  "D30_anchor_dates": 537,
+  "close_classification": "A",
+  "close_pass": [
+    "F_DAYS_SINCE_ENTRY",
+    "F_DAYS_SINCE_FIRST_D10",
+    "F_RET20",
+    "F_REB3",
+    "F_REB5",
+    "F_ATR20_PCT",
+    "F_INTRADAY_RANGE",
+    "F_RV20",
+    "F_DAYS_UNDERWATER"
+  ],
+  "close_families": [
+    "POSITION",
+    "PRICE_PATH",
+    "RECOVERY",
+    "VOLATILITY"
+  ],
+  "touch_classification": "A",
+  "touch_pass": [
+    "F_DAYS_SINCE_ENTRY",
+    "F_DAYS_SINCE_FIRST_D10",
+    "F_DIST_MA20",
+    "F_RET5",
+    "F_RET20",
+    "F_REB3",
+    "F_REB5",
+    "F_ATR20_PCT",
+    "F_INTRADAY_RANGE",
+    "F_RV20",
+    "F_DAYS_UNDERWATER"
+  ],
+  "touch_families": [
+    "POSITION",
+    "PRICE_PATH",
+    "RECOVERY",
+    "VOLATILITY"
+  ],
+  "final_classification": "A",
+  "close_n_full_pass": 9,
+  "touch_n_full_pass": 11,
+  "close_d30_strengthening_q": 0,
+  "touch_d30_strengthening_q": 0,
+  "amt_ratio_old_vs_corrected": {
+    "close": {
+      "ep_corr_D20": -0.06444956034316585,
+      "day_corr_D20": -0.05289146473044798,
+      "ep_corr_D30": -0.029313333916262063,
+      "day_corr_D30": 0.005247070820667819,
+      "old_consistent": "True",
+      "corrected_consistent": "False"
+    },
+    "touch": {
+      "ep_corr_D20": -0.0726528843432822,
+      "day_corr_D20": -0.07328862565204279,
+      "ep_corr_D30": -0.015305043747462976,
+      "day_corr_D30": -0.0023885647570158447,
+      "old_consistent": "True",
+      "corrected_consistent": "True"
+    }
+  },
+  "sanity": {
+    "D20_total_anchor_dates": 752,
+    "D30_total_anchor_dates": 537,
+    "no_min_day_n_in_primary": true,
+    "gate_direction_uses_day_corr": true,
+    "bootstrap_paired": true,
+    "bootstrap_full_calendar": true,
+    "bh_m18": true,
+    "no_2025_read": true,
+    "f1_registry_sha_unchanged": true,
+    "no_new_feature_stop_exit": true
+  },
+  "no_2025_read": true
+}

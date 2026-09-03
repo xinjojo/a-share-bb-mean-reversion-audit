@@ -216,21 +216,21 @@ F2 Actionability Value Bound ──► D ACTIONABILITY NEGATIVE (DEVELOPMENT DIA
 - **源码:** `research/risk/failure_state_f21.py`
 - **Registry:** `research/risk/registries/FAILURE_STATE_F21_MATCHED_ACTION_REGISTRY.csv`（SHA256 `12f8311c...`，pre-reg `02c6738`）
 - **结果数据:** `results/evidence/f21/`
-- **状态:** **B — NARROW POSITIVE ACTIONABILITY**（matched-share O1 core evidence 有效；break-even/precision 由 F2.2 修正；未写入 README CURRENT TRUTH）
+- **状态:** **B — NARROW POSITIVE ACTIONABILITY（ACCEPTED，经 R0.8 关闭）**（matched-share O1 core evidence 有效；break-even/precision 由 F2.2 修正；README 仅加一行）
 - **关键数字:** O1 完美标签 D20+1 清仓 +1.45pp（HAC [0.48,2.42] / boot [0.40,2.61] 显著正）；O2/O3 跨 0；TP −0.46pp、FP −17.9~−25.0pp；natural exit 61,828 replay parity 0 误差；future-add 57.0%。**break-even/precision 见 F2.2（point BE 0.135–0.540、precision 0.762、safe frontier 0.05–0.30）。**未设计 predictor/stop/exit。
 ### 14g. F2.2 Break-Even / Precision Remediation
 - **Canonical:** `[research/risk/FAILURE_STATE_F22.md](research/risk/FAILURE_STATE_F22.md)`
 - **源码:** `research/risk/failure_state_f22.py`
 - **Registry:** `research/risk/registries/FAILURE_STATE_F22_BREAK_EVEN_REGISTRY.csv`（SHA256 `aff9c429...`，pre-reg `a829298`）
 - **结果数据:** `results/evidence/f22/`
-- **状态:** **POINT BREAK-EVEN/PRECISION ACCEPTED**（F2.3 完成 sampling 推断后 classification 仍 **B**；未写入 README CURRENT TRUTH）
+- **状态:** **ACCEPTED**（point 数学 + precision 冻结；与 F2.1/F2.3 统一 **B — NARROW POSITIVE ACTIONABILITY**）
 - **关键数字:** A=+1.4486pp、B=−2.6833pp；point break-even FPR 0.135/0.270/0.405/0.540；break-even precision 0.762（ACCEPTED）。**calendar-safe frontier（F2.3）：0.00/0.05/0.10/0.10；randomization interval 仅 reference。**未设计 predictor/stop/exit/timing。
 ### 14h. F2.3 Policy-Value Sampling Inference
 - **Canonical:** `[research/risk/FAILURE_STATE_F23.md](research/risk/FAILURE_STATE_F23.md)`
 - **源码:** `research/risk/failure_state_f23.py`
 - **Registry:** `research/risk/registries/FAILURE_STATE_F23_POLICY_VALUE_INFERENCE_REGISTRY.csv`（SHA256 `c0f4d1d2...`，pre-reg `73b9c19`）
 - **结果数据:** `results/evidence/f23/`
-- **状态:** **DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH）** — policy-value 历史采样推断完成，classification 仍 B
+- **状态:** **ACCEPTED（经 R0.8 外部审计正式关闭）** — policy-value 历史采样推断完成，FINAL **B — NARROW POSITIVE ACTIONABILITY**
 - **关键数字:** V_d=t·A_d+f·B_d 确定性；O1 parity PASS（HAC [0.48,2.42] / CAL [0.40,2.61]）；**calendar-safe frontier 0.00/0.05/0.10/0.10**（HAC 一致）；.75/.30、1.00/.30 在 sampling 下跨 0；randomization interval 仅 reference。未设计 predictor/stop/exit/timing。
 ### 15. ★ CURRENT: Portfolio Architecture（组合架构）
 - **状态:** 研究**暂停**。当前唯一活跃问题是：有限 K=3 slots + 长持仓 + 多层占位/路径依赖的组合架构如何提升资金效率。

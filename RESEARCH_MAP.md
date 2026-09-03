@@ -165,13 +165,13 @@ P4.1 Marginal Admission ──► C BOTH (DEVELOPMENT DIAGNOSTIC, 待外审)
 - **源码:** `research/portfolio/marginal_admission_p41.py`
 - **Registry:** `research/portfolio/registries/MARGINAL_ADMISSION_P41_REGISTRY.csv`（SHA256 `6efc564f...3d6efed`）
 - **结果数据:** `results/evidence/p41/`
-- **状态:** **DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH）** — **C — BOTH**（A1_ONLY 58 笔独立 quality +3.28%/win 68.8% 仍为正，但实际 PnL −118,610；COMMON 65 笔同 key 在 A1 少赚 67,116（赢家稀释>深亏减少）；A1_ONLY 深 MAE 率 40.6% vs COMMON 18.8%，最差几笔独立 return −18%~−22%、MAE −37%~−55% 本就被坏信号标记；PnL bridge residual=0.00 精确闭合）
-- **关键发现:** **H1（边际信号更差）+ H3（资本/路径稀释）= both**。A1_ONLY 实际亏损集中在少数 deep-MAE 长持仓（4 笔 < −50k 合计 −308,226，其余 54 笔 +189,616）；同一批 COMMON 交易在 A1 中赢家被稀释 > 深亏减少。容量影子成本：每额外 1 笔 ≈ −6,494 元、每额外 slot-day ≈ −148 元。P4 结论保持不变。
+- **状态:** **DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH）** — **B — CAPITAL/PATH DILUTION DOMINANT**（A1_ONLY 58 笔独立 quality +3.28%/win 68.8% 仍为正，但实际 PnL −118,610；COMMON 65 笔同 key、same exit 100% 下 A1 少赚 67,116（STRONG CAPITAL/PATH DILUTION EVIDENCE）；A1_ONLY 深 MAE 率 40.6% vs COMMON 18.8%（SUGGESTIVE TAIL-QUALITY DETERIORATION）；A0_ONLY 独立 −1.97%/win40% 覆盖 45.5% → K=3 未证明系统性过滤坏信号；PnL bridge residual=0.00 精确闭合）
+- **关键发现:** **H3（资本/路径稀释）主导**；H1（边际信号更差）仅 **suggestive tail-quality deterioration**，aggregate 独立质量未被统计建立为显著更差（事件日 bootstrap CI [−3.59,+1.73] 跨 0）。A1_ONLY 实际亏损集中在少数 deep-MAE 长持仓（4 笔 < −50k 合计 −308,226，其余 54 笔 +189,616）；同一批 COMMON 交易在 A1 中赢家被稀释 > 深亏减少。容量影子成本：每额外 1 笔 ≈ −6,494 元、每额外 slot-day ≈ −148 元。P4 结论保持不变。
 
 ### 15. ★ CURRENT: Portfolio Architecture（组合架构）
 - **状态:** 研究**暂停**。当前唯一活跃问题是：有限 K=3 slots + 长持仓 + 多层占位/路径依赖的组合架构如何提升资金效率。
 - **P4 进展（2026-09-03，ACCEPTED DIAGNOSTIC，外审通过）:** 结构性消融显示 K=3 是实际容量瓶颈，但在当前历史样本与组合规则下同时表现为保护性的 admission constraint（解除任一约束组合均大幅恶化）；完全移除多层加仓（5→1 层）在测试路径下有害（不断言 5 层最优）。瓶颈在更深层。下一步必须等待外部审计决定；2025–2026 Confirmation 继续 CLOSED。
-- **P4.1 进展（2026-09-03，DEVELOPMENT DIAGNOSTIC，待外审）:** 解除 K 的恶化 = **C — BOTH**——边际信号本身更差（深 MAE 率 2.2×、最差几笔独立就深亏）+ 共享资本/路径稀释（同一批交易赢家被稀释、COMMON 少赚 67k）；A1_ONLY 独立整体仍为正但实际 PnL −118,610。待外审后决定是否更新 README CURRENT TRUTH。
+- **P4.1 进展（2026-09-03，DEVELOPMENT DIAGNOSTIC，待外审）:** 解除 K 的恶化 = **B — CAPITAL/PATH DILUTION DOMINANT**——主因是共享资本/路径稀释（COMMON 同 65 笔、same exit 下 A1 少赚 67k，STRONG H3 证据）；H1 仅为 **suggestive tail-quality deterioration**（深 MAE 率 2.2×、最差几笔独立深亏），aggregate 独立质量未被统计建立为显著更差；A0_ONLY 覆盖 45.5% 显示 K=3 未证明系统性过滤坏信号。A1_ONLY 独立整体仍为正但实际 PnL −118,610。待外审后决定是否更新 README CURRENT TRUTH。
 
 ---
 

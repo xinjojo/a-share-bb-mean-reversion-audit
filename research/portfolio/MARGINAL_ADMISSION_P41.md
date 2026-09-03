@@ -100,8 +100,10 @@ top5 信号日占 13.8%、top10 占 22.4%。
 
 **关键**：4 笔 < −50k 合计 −308,226，其余 54 笔合计 +189,616，净 −118,610 —— **深亏高度集中在
 少数 deep-MAE 长持仓**。其中 002714/300750/000625 三笔的**独立 episode return 为 −18%~−22%、
-MAE −37%~−55%**——这些**本来就被 MAE 深度标记为坏信号**（H1 成立：边际信号中含独立也差的
-deep-MAE 长持仓）。但其余覆盖的 A1_ONLY 独立整体为正（+3.28%）→ 不全是 H1。
+MAE −37%~−55%**——这构成 **SUGGESTIVE TAIL-QUALITY DETERIORATION**（A1_ONLY 深 MAE 率 40.6%
+vs COMMON 18.8%）。但**这是 tail 层面的暗示，不是 population-level 信号质量恶化的统计结论**：
+事件日 bootstrap CI [−3.59, +1.73] 跨 0，A1_ONLY 覆盖样本 aggregate 独立质量（+3.28%、win 68.8%）
+并未被统计建立为显著更差。
 
 ## COMMON matched 资本稀释（65 笔同 key 对比）
 
@@ -173,18 +175,29 @@ residual = 0 精确闭合，P0 检查通过。
 **解除 K 的边际成本：每多接 1 笔交易 ≈ −6,494 元、每多占 1 slot-day ≈ −148 元。**
 这是历史路径下的影子成本，不是未来收益预测。
 
-## 机制分类：**C — BOTH**
+## 机制分类：**B — CAPITAL/PATH DILUTION DOMINANT**
 
-- **H1 成立（部分）**：A1_ONLY 独立质量略低（+3.28% vs +4.11%）、深 MAE 率 40.6%（2.2×）、
-  最差几笔（002714/300750/000625）独立 return −18%~−22%、MAE −37%~−55%，本来就被坏信号标记。
-- **H3 成立（部分）**：A1_ONLY 覆盖样本整体独立为正（+3.28%、win 68.8%），但实际组合 PnL
-  为 −118,610；COMMON 同一批 65 笔在 A1 中因资金分散少赚 67,116（赢家稀释 > 深亏减少）。
+**Secondary finding：MARGINAL ADMISSION SHOWS SUGGESTIVE TAIL-QUALITY DETERIORATION,
+BUT AGGREGATE INDEPENDENT QUALITY IS NOT SIGNIFICANTLY WORSE.**
+
+- **STRONG H3 证据（主导）**：COMMON 65 笔同 key、same exit 100% 下，仅因资本可用性/数量/加仓
+  路径不同，A1 比 A0 少赚 67,116（same signals, same entry dates, same exits, but different
+  capital availability / quantities / layer paths → clear PnL degradation）。A1_ONLY 覆盖样本
+  独立整体为正（+3.28%、win 68.8%），但实际组合 PnL −118,610。
+- **H1 证据（suggestive only，非统计建立）**：A1_ONLY 独立质量略低（+3.28% vs +4.11%）、深 MAE
+  率 40.6%（2.2×）、最差几笔独立 return −18%~−22%、MAE −37%~−55% —— 但事件日 bootstrap CI
+  [−3.59, +1.73] 跨 0，**aggregate independent-quality deterioration 未被统计建立**。禁止写成
+  "marginal admitted signals are established as intrinsically worse" 或 "H1 is confirmed"。
+- **A0_ONLY counterevidence（重要）**：独立 mean −1.97%、win 40%、deep-MAE 40%（覆盖仅 45.5%）——
+  **K=3 未被证明系统性过滤坏信号并保留好信号**。更准确：**K=3 改变内生共享资金路径；历史上实现的
+  K=3 路径恰好产生更优的组合结果**。禁止写成 "K=3 protected portfolio because it filtered
+  intrinsically bad signals"。
 - **H2**：A1_ONLY 进入时点无系统性的更差资金状态证据（A0_ONLY 反而最差），且 R01/R05 无差异。
 
 **措辞边界**：A1_ONLY 实际 PnL 很差 ≠ "边际信号没有 alpha"。独立 episode 证据显示其整体
-仍为正（+3.28%），其组合失败 = 少数 deep-MAE 长持仓（独立也差）的路径放大 + 赢家被共享
-资金稀释。**P4 结论保持不变**：K=3 是实际容量瓶颈，但在当前历史样本与组合规则下表现为
-保护性 admission constraint（排掉独立也差的 deep-MAE 长持仓边际信号）。
+仍为正（+3.28%），其组合失败主要是**共享资金/路径稀释**（H3 主导），叠加少数 deep-MAE 长持仓
+的 **suggestive tail-quality deterioration**（tail 层面）。**P4 结论保持不变**：K=3 是实际容量
+瓶颈，但在当前历史样本与组合规则下，历史上实现的 K=3 路径恰好产生更优组合结果。
 
 ## 2025–2026 Confirmation
 

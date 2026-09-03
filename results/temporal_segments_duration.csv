@@ -1,0 +1,3 @@
+seg_type,n,cal_days_p50,cal_days_p75,cal_days_p90,cal_days_max,sig_days_p50,sig_days_max,mean_neg_seg
+positive,17,38.0,207.0,380.6,445.0,22.0,294.0,
+negative,5,5.0,47.0,69.2,84.0,4.0,53.0,

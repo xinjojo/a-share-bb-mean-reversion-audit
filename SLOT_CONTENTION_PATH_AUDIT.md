@@ -298,6 +298,30 @@ Confirmation remains **CLOSED**. No strategy design is proposed in this phase.
 
 ---
 
+## 13b. External-audit wording reconciliation (R0)
+
+Per external audit R0, the following wording is fixed:
+
+**ACCEPTED**
+
+- ranking-actionable days are extremely rare: **16 / 1,212 = 1.32%** of signal days.
+- K=3 slot saturation is the primary bottleneck (P(K-full | Top10 oversold signal) = 75.5%).
+- Capital constraint is rarely binding (18 / 1,212 days = 1.49%).
+- A few selection differences are strongly amplified by portfolio path dependence
+  (never reconverging within 60 trading days; all 6 leave-one-swap Δ < 0).
+
+**NOT ACCEPTED**
+
+- Any claim that "ATR has systematic negative alpha in the contested regime."
+
+Reason: the selection-changed / actionable sample is extremely small (16 actionable
+days, 6 selection-changed events over 2020–2024). The 6 negative leave-one-swap results
+are **historical path attribution** (each a full endogenous re-run from B0), **not**
+statistical conditional-alpha evidence. No population-level claim about ATR's conditional
+edge is made or implied.
+
+---
+
 ## 14. Files
 
 - `results/p31_contention_funnel_daily.csv` · `p31_contention_taxonomy.csv` · `p31_exec_outcomes.csv`

@@ -625,14 +625,20 @@ research/risk/registries/FAILURE_STATE_F1_REGISTRY.sha256,file,f1,registry,ACTIV
 research/risk/failure_state_f1.py,file,f1,code,ACTIVE,TRUE,,primary,research/risk/,F1 failure-state taxonomy script
 research/risk/FAILURE_STATE_F1.md,file,f1,report,ACTIVE,TRUE,,primary,research/risk/,F1 canonical report (DEVELOPMENT DIAGNOSTIC)
 results/evidence/f1/f1_base_rates.csv,file,f1,result,ACTIVE,FALSE,,primary,results/evidence/f1/,F1 D10/D20/D30 base recovery rates
-results/evidence/f1/f1_anchor_episodes.csv,file,f1,result,ACTIVE,FALSE,,evidence,results/evidence/f1/,F1 anchor episode detail (45,634 rows)
-results/evidence/f1/f1_feature_effects.csv,file,f1,result,ACTIVE,FALSE,,primary,results/evidence/f1/,F1 per-feature effects D10/D20/D30
-results/evidence/f1/f1_quintiles.csv,file,f1,result,ACTIVE,FALSE,,evidence,results/evidence/f1/,F1 feature quintile recovery rates
-results/evidence/f1/f1_anchor_day_inference.csv,file,f1,result,ACTIVE,FALSE,,primary,results/evidence/f1/,F1 D20 day-level HAC + BH m=18
-results/evidence/f1/f1_winner_loser_effects.csv,file,f1,result,ACTIVE,FALSE,,evidence,results/evidence/f1/,F1 winner vs loser standardized effects
-results/evidence/f1/f1_future_adverse_excursion.csv,file,f1,result,ACTIVE,FALSE,,primary,results/evidence/f1/,F1 additional adverse excursion after anchor
-results/evidence/f1/f1_recovery_timing.csv,file,f1,result,ACTIVE,FALSE,,primary,results/evidence/f1/,F1 time-to-breakeven distribution
-results/evidence/f1/f1_layer_recovery.csv,file,f1,result,ACTIVE,FALSE,,evidence,results/evidence/f1/,F1 layer-count recovery descriptive
-results/evidence/f1/f1_market_state.csv,file,f1,result,ACTIVE,FALSE,,evidence,results/evidence/f1/,F1 R01/R05 market-state overlay
-results/evidence/f1/f1_predictability_gate.csv,file,f1,result,ACTIVE,FALSE,,primary,results/evidence/f1/,F1 full predictability gate
-results/evidence/f1/f1_summary.json,file,f1,result,ACTIVE,FALSE,,primary,results/evidence/f1/,F1 summary json (classification A)
+research/risk/registries/FAILURE_STATE_F2_ACTIONABILITY_REGISTRY.csv,csv,F2,registry,ACTIVE,Y,,high,research/risk/registries/,"F2-A prereg, SHA 9ed07a57..."
+research/risk/registries/FAILURE_STATE_F2_ACTIONABILITY_REGISTRY.sha256,sha256,F2,registry,ACTIVE,Y,,high,research/risk/registries/,
+research/risk/failure_state_f2.py,py,F2,code,ACTIVE,Y,,infra,research/risk/,oracle value-of-information bound
+research/risk/FAILURE_STATE_F2.md,md,F2,report,ACTIVE,Y,,high,research/risk/,"F2 canonical report, D classification"
+results/evidence/f2/f2_break_even_frontier.csv,csv,F2,result,ACTIVE,N,,medium,results/evidence/f2/,
+results/evidence/f2/f2_calendar_bootstrap.csv,csv,F2,result,ACTIVE,N,,medium,results/evidence/f2/,
+results/evidence/f2/f2_capital_days.csv,csv,F2,result,ACTIVE,N,,medium,results/evidence/f2/,
+results/evidence/f2/f2_confusion_value_grid.csv,csv,F2,result,ACTIVE,N,,high,results/evidence/f2/,
+results/evidence/f2/f2_eventday.csv,csv,F2,result,ACTIVE,N,,medium,results/evidence/f2/,
+results/evidence/f2/f2_fp_cost.csv,csv,F2,result,ACTIVE,N,,medium,results/evidence/f2/,
+results/evidence/f2/f2_layer_subset.csv,csv,F2,result,ACTIVE,N,,medium,results/evidence/f2/,
+results/evidence/f2/f2_market_state.csv,csv,F2,result,ACTIVE,N,,medium,results/evidence/f2/,
+results/evidence/f2/f2_oracle_episode.csv,csv,F2,result,ACTIVE,N,,medium,results/evidence/f2/,
+results/evidence/f2/f2_oracle_summary.csv,csv,F2,result,ACTIVE,Y,,high,results/evidence/f2/,
+results/evidence/f2/f2_precision_recall.csv,csv,F2,result,ACTIVE,N,,medium,results/evidence/f2/,
+results/evidence/f2/f2_summary.json,json,F2,result,ACTIVE,Y,,high,results/evidence/f2/,
+results/evidence/f2/f2_tp_benefit.csv,csv,F2,result,ACTIVE,N,,medium,results/evidence/f2/,

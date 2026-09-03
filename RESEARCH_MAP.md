@@ -63,6 +63,9 @@ F1 Deep-MAE Recoverability ──► A STRONG RECOVERABILITY PREDICTABILITY (SUP
 F1.1 Inference Remediation ──► FINAL A (CLOSE A / TOUCH A) (ACCEPTED — NO EXIT POLICY YET)
    │
    ▼
+F2 Actionability Value Bound ──► D ACTIONABILITY NEGATIVE (DEVELOPMENT DIAGNOSTIC, 待外审)
+   │
+   ▼
 ★ CURRENT: Portfolio Architecture（组合架构瓶颈，研究暂停，等待外部审计）★
 ```
 
@@ -201,6 +204,13 @@ F1.1 Inference Remediation ──► FINAL A (CLOSE A / TOUCH A) (ACCEPTED — N
 - **状态:** **ACCEPTED（R0.4 外审通过，2026-09-03）** — **FINAL = A — STRONG RECOVERABILITY PREDICTABILITY**（保守取 CLOSE/TOUCH 较低者；README CURRENT TRUTH 已新增一行，注明 **NO EXIT POLICY YET**）
 - **关键修复:** ①primary 用全部 anchor dates（D20=752/D30=537，去 MIN_DAY_N=5）；②gate 方向/D20-D30 一致性改用 anchor-day day_corr（F_AMT_RATIO20 在 CLOSE 下 corrected 一致性 True→False，不再误 pass）；③双 outcome 语义 CLOSE/A（9 pass）与 TOUCH/A（11 pass），各 4 family（PRICE_PATH/POSITION/RECOVERY/VOLATILITY）；calendar block-bootstrap CI 全排除 0；MIN5 sensitivity 不改方向；D30 strengthening q=0（仅 537 天，如实报告）；sanity A–J 全 PASS；F1 Registry SHA 不变。**仍未设计任何 stop/exit/failure-score。**
 
+### 14e. F2 Failure-State Actionability / Perfect-Information Value Bound
+- **Canonical:** `[research/risk/FAILURE_STATE_F2.md](research/risk/FAILURE_STATE_F2.md)`
+- **源码:** `research/risk/failure_state_f2.py`
+- **Registry:** `research/risk/registries/FAILURE_STATE_F2_ACTIONABILITY_REGISTRY.csv`（SHA256 `9ed07a57...`，pre-reg `4e088fb`）
+- **结果数据:** `results/evidence/f2/`
+- **状态:** **DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH）** — **D — ACTIONABILITY NEGATIVE**（oracle upper bound，非策略）
+- **关键数字:** O1/O2/O3 eventday Δ −2.28/−5.19/−4.81pp（HAC & calendar boot CI 全显著负）；TP benefit −4.13pp；FP cost −24.6~−30.3pp；confusion grid 28/28 负；break-even FPR 无解；anchor-close 乐观 −1.69pp 仍负。**未设计 predictor/stop/exit。**
 ### 15. ★ CURRENT: Portfolio Architecture（组合架构）
 - **状态:** 研究**暂停**。当前唯一活跃问题是：有限 K=3 slots + 长持仓 + 多层占位/路径依赖的组合架构如何提升资金效率。
 - **P4 进展（2026-09-03，ACCEPTED DIAGNOSTIC，外审通过）:** 结构性消融显示 K=3 是实际容量瓶颈，但在当前历史样本与组合规则下同时表现为保护性的 admission constraint（解除任一约束组合均大幅恶化）；完全移除多层加仓（5→1 层）在测试路径下有害（不断言 5 层最优）。瓶颈在更深层。下一步必须等待外部审计决定；2025–2026 Confirmation 继续 CLOSED。
@@ -224,6 +234,7 @@ F1.1 Inference Remediation ──► FINAL A (CLOSE A / TOUCH A) (ACCEPTED — N
 | S0 Stop-Loss Semantics Registry | `research/execution/registries/` | `b352f77`（S0-A） |
 | F1 Failure-State Registry | `research/risk/registries/` | `1de126b`（F1-A） |
 | F1.1 Inference Remediation Registry | `research/risk/registries/` | `2cecd15`（F1.1-A） |
+| F2 Actionability Value Bound Registry | `research/risk/registries/` | `4e088fb`（F2-A） |
 
 ---
 

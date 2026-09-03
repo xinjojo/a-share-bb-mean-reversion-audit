@@ -1,0 +1,137 @@
+{
+  "registry_commit": "4e088fbf93adbe5c3340971d659fcc9843fb212e",
+  "registry_sha": "9ed07a575ae65bbda3d63321e676431231d00548bb8977fb443764163b85642a",
+  "D20_episodes": 12590,
+  "D30_episodes": 6130,
+  "oracle_summary": [
+    {
+      "episode_mean": -2.618398615570839,
+      "eventday_mean": -2.280865783996554,
+      "hac_ci_lo": -3.037724565948967,
+      "hac_ci_hi": -1.5240070020441414,
+      "boot_ci_lo": -3.030812335559154,
+      "boot_ci_hi": -1.4424338316763208,
+      "p_delta_gt_0": 0.1596505162827641,
+      "oracle": "O1",
+      "failure_prevalence": 0.6333598093725179,
+      "mean_baseline": -3.8005350116946164,
+      "mean_oracle": -6.418933627265456,
+      "median_delta": 0.0
+    },
+    {
+      "episode_mean": -7.962620285959125,
+      "eventday_mean": -5.188390502431361,
+      "hac_ci_lo": -6.185239152439867,
+      "hac_ci_hi": -4.191541852422858,
+      "boot_ci_lo": -6.261772651180875,
+      "boot_ci_hi": -4.0903007740224755,
+      "p_delta_gt_0": 0.1567116759332804,
+      "oracle": "O2",
+      "failure_prevalence": 0.8790309769658459,
+      "mean_baseline": -3.8005350116946164,
+      "mean_oracle": -11.76315529765374,
+      "median_delta": -7.837275215030985
+    },
+    {
+      "episode_mean": -6.969592752201473,
+      "eventday_mean": -4.813058212507443,
+      "hac_ci_lo": -5.7770206621913625,
+      "hac_ci_hi": -3.8490957628235245,
+      "boot_ci_lo": -5.867164737747859,
+      "boot_ci_hi": -3.735660765098716,
+      "p_delta_gt_0": 0.15480540111199365,
+      "oracle": "O3",
+      "failure_prevalence": 0.835186656076251,
+      "mean_baseline": -3.8005350116946164,
+      "mean_oracle": -10.77012776389609,
+      "median_delta": -6.775494552417761
+    }
+  ],
+  "o1_anchor_close_sensitivity": {
+    "eventday_delta": -1.6893883955493352,
+    "mean_delta": -2.449503458047254
+  },
+  "tp_benefit": [
+    {
+      "n": 7974,
+      "mean": -4.134140778785662,
+      "median": -6.0660433803291305,
+      "p90": 9.155360050051568,
+      "capital_days_saved_mean": 36.811763230499125,
+      "capital_days_saved_median": 29.0
+    }
+  ],
+  "fp_cost": [
+    {
+      "recovery_definition": "RECOVER_CLOSE",
+      "n": 1523.0,
+      "mean": -30.299146557532517,
+      "median": -29.486755056674415,
+      "p90": -14.870706075787474
+    },
+    {
+      "recovery_definition": "RECOVER_TOUCH",
+      "n": 2075.0,
+      "mean": -28.264008123918483,
+      "median": -27.791992984009678,
+      "p90": -13.667730704139906
+    },
+    {
+      "recovery_definition": "FINAL_PROFIT",
+      "n": 4616.0,
+      "mean": -24.573082980353234,
+      "median": -22.423792484759566,
+      "p90": -13.47638235176671
+    }
+  ],
+  "break_even": [
+    {
+      "TPR": 0.25,
+      "break_even_fpr": -0.0726567644718196,
+      "break_even_fpr_on_grid": 0.0,
+      "break_even_precision": 1.2022678442952197
+    },
+    {
+      "TPR": 0.5,
+      "break_even_fpr": -0.1453135289436392,
+      "break_even_fpr_on_grid": 0.0,
+      "break_even_precision": 1.2022678442952197
+    },
+    {
+      "TPR": 0.75,
+      "break_even_fpr": -0.21797029341545882,
+      "break_even_fpr_on_grid": 0.0,
+      "break_even_precision": 1.2022678442952195
+    },
+    {
+      "TPR": 1.0,
+      "break_even_fpr": -0.2906270578872784,
+      "break_even_fpr_on_grid": 0.0,
+      "break_even_precision": 1.2022678442952197
+    }
+  ],
+  "grid_t50_f20": [
+    {
+      "TPR": 0.5,
+      "FPR": 0.2,
+      "expected_delta": -1.9366269910476412,
+      "ci_lo": -2.206014499291669,
+      "ci_hi": -1.662794379090847
+    }
+  ],
+  "grid_t75_f10": [
+    {
+      "TPR": 0.75,
+      "FPR": 0.1,
+      "expected_delta": -2.107022467014725,
+      "ci_lo": -2.338376492618809,
+      "ci_hi": -1.8936155013299851
+    }
+  ],
+  "classification": "D",
+  "no_2025_read": true,
+  "no_predictor": true,
+  "no_stop": true,
+  "no_exit_change": true,
+  "no_threshold_opt": true
+}

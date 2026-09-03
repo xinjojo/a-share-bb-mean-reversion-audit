@@ -15,7 +15,7 @@
 - 前瞻预测关系**存在**：M0/M1 四个时间外推 fold 的 test AUC 全部 >0.55（M1：0.587 / 0.639 / 0.628 / 0.788）；OOF（2021–2024 严格样本外）M1 AUC **0.720**、PR-AUC **0.786**。
 - 但**没有任何 model-target 组合进入 F2.3 冻结的经济可行区域**：
   - STABLE_SAFE：**0/6 组合**（所有 SAFE_REGION gate 全 fail）；
-  - STABLE_POINT：**0/6 组合**（仅 2024 年 T50/T75/T90-EV 为正，2021/2022/2023 全负，2023 显著负）。
+  - STABLE_POINT：**0/6 组合**（2021–2023 所有预注册 model-target 的 point EV 均为负；2024 年 M0 T50/T75 与 M1 T50/T75/T90 为正，但没有任何组合满足 STABLE_POINT/STABLE_SAFE）。
 - 根因：O1 failure prevalence **63.3%** 下，模型排序力（AUC 0.6–0.7）不足以维持足够 precision；F2.3 经济门槛要求 TPR/FPR 收益比 > **1.85**（A=+1.45pp vs B=−2.68pp），T50 目标需 FPR ≤ **0.27**，而 test FPR 实际为 0.12–0.64。
 
 ## 1. 预注册设计（冻结，未偏离）
@@ -95,7 +95,7 @@
 1. **排序力真实但有限**：AUC 0.58–0.79（OOF 0.72）——F1.1 的 anchor-day 前瞻信息确实存在。
 2. **高 prevalence 放大 precision 需求**：failure 占 63%，T50 目标下 test FPR 需 ≤0.27 才 EV>0（且统计显著需 ≤0.05）；实际 FPR 0.12–0.64。
 3. **经济杠杆不对称**：A=+1.45pp vs B=−2.68pp，误杀一个恢复者 ≈ 抵消 1.85 个正确退出；要求 operating point 极高 precision。
-4. **逐年不稳**：EV 正仅 2024（AUC 0.79），2021–2023 AUC 0.59–0.65 时 EV 全负；无 STABLE_POINT/STABLE_SAFE。
+4. **逐年不稳**：2021–2023 所有 model-target 的 EV 全负（AUC 0.59–0.65）；2024 年 M0 T50/T75、M1 T50/T75/T90 为正（AUC 0.79），但仍无 STABLE_POINT/STABLE_SAFE。
 
 ## 9. Invariants（全部 PASS）
 
@@ -117,4 +117,4 @@ results/evidence/f3/ (12 files: fold_metrics / fold_thresholds / fold_economic /
   market_overlay / summary.json + invariants.json)
 ```
 
-**结论一句话**：F1.1 的 failure-state 前瞻可识别性在真实分类器中成立（OOF AUC 0.72），但 F2.3 冻结的经济门槛（TPR/FPR 收益比 >1.85、统计显著 FPR ≤5–10%）在 63% failure prevalence 下要求过高 precision——4 个时间外推年仅 2024 达标，无任何预注册 model-target 组合通过 STABLE_POINT/STABLE_SAFE，故 **C — PREDICTIVE BUT ECONOMICALLY INSUFFICIENT**。
+**结论一句话**：F1.1 的 failure-state 前瞻可识别性在真实分类器中成立（OOF AUC 0.72），但 F2.3 冻结的经济门槛（TPR/FPR 收益比 >1.85、统计显著 FPR ≤5–10%）在 63% failure prevalence 下要求过高 precision——4 个时间外推年仅 2024 年出现正 EV（M0 T50/T75、M1 T50/T75/T90），无任何预注册 model-target 组合通过 STABLE_POINT/STABLE_SAFE，故 **C — PREDICTIVE BUT ECONOMICALLY INSUFFICIENT**。

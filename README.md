@@ -55,6 +55,7 @@
 | 个股横截面排序 | `[research/ranking/CROSS_SECTIONAL_RANKING_P1_CORRECTED.md](research/ranking/CROSS_SECTIONAL_RANKING_P1_CORRECTED.md)`（Discovery）<br>`[research/ranking/CROSS_SECTIONAL_RANKING_P2_VALIDATION.md](research/ranking/CROSS_SECTIONAL_RANKING_P2_VALIDATION.md)`（Validation） | Discovery **A**；Validation **B — PARTIAL**（唯一 full pass：ATR20_PCT） | ACCEPTED |
 | Deep-MAE failure/recovery state | `[research/risk/FAILURE_STATE_F11.md](research/risk/FAILURE_STATE_F11.md)`（F1.1 corrected anchor-day inference） | **PROSPECTIVELY IDENTIFIABLE (A, F1.1)** —— **NO EXIT POLICY YET** | ACCEPTED |
 | Failure-state actionability | `[research/risk/FAILURE_STATE_F23.md](research/risk/FAILURE_STATE_F23.md)`（F2.3 matched-share fixed-action diagnostic） | **POSITIVE BUT NARROW (B)** —— **NO DEPLOYABLE PREDICTOR YET** | ACCEPTED |
+| Failure-state predictor | `[research/risk/FAILURE_STATE_F3.md](research/risk/FAILURE_STATE_F3.md)`（F3 predictor feasibility） | **PREDICTIVE BUT NOT ECONOMICALLY STABLE (F3, C)** —— **NO DEPLOYABLE EXIT PREDICTOR** | ACCEPTED DIAGNOSTIC |
 | 2025–2026 Confirmation | — | **全程 UNTOUCHED / CLOSED** | CLOSED |
 
 ---

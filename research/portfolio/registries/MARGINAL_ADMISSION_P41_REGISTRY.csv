@@ -1,0 +1,25 @@
+phase,field,value
+P4.1,title,MARGINAL ADMISSION / CAPACITY SHADOW-PRICE AUDIT
+P4.1,objective,Decompose why relaxing K=3 degrades portfolio (A0 +30.30% vs A1 -0.23%): H1 marginal signals intrinsically worse vs H2 entry under worse portfolio/capital state vs H3 shared-capital path dilution vs H4 combination
+P4.1,frozen_paths,A0 (K=3 ML=5) and A1 (K=999 ML=5) from P4 frozen engine; amount-top10 priority; PURE STOCK 2020-2024; 1M/200k/5layers; 10bp; STRICT_C_EXECUTABLE_TICK
+P4.1,period,2020-01-01 to 2024-12-31 DEVELOPMENT ONLY
+P4.1,2025_2026,CLOSED - never read
+P4.1,primary_trade_key,(ts_code, entry_date)
+P4.1,secondary_key,ts_code-only overlap
+P4.1,trade_groups,COMMON = A0 AND A1; A0_ONLY = A0 minus A1; A1_ONLY = A1 minus A0
+P4.1,independent_join,frozen SECONDARY V2A episodes by (signal_date, ts_code) exact key; else NO_EXACT_EPISODE; no future re-signal substitution
+P4.1,eventday_aggregation,aggregate episode outcomes by signal_date (event-day equal weight); block bootstrap L=21 trading days B>=2000
+P4.1,admission_state,at signal_date close for each A1 executed entry: cash invested n_pos pending layers available_cash/layer drawdown rolling20D candidate_count top10_oversold_count A0 blocked_K/held/pending/queue
+P4.1,marginal_rank,amount-priority candidate rank 1/2/3/4+ per signal day; descriptive only no threshold optimization
+P4.1,congestion_bins,candidate_count 1/2/3+; A0 n_pos 0/1/2/3 (pre-fixed)
+P4.1,capital_dilution,COMMON trades: A0 vs A1 initial qty notional final shares levels avg_cost capital pnl return_pct hold exit
+P4.1,pnl_bridge,A0 stock_pnl +302950.94 -> A1 stock_pnl -2282.99 via COMMON delta + A1_ONLY pnl - A0_ONLY pnl + residual; residual must ~0 else P0 STOP
+P4.1,marginal_trade_pnl,A1_ONLY actual portfolio pnl reported SEPARATELY from independent episode quality
+P4.1,temporal_concentration,A1_ONLY by year/month/signal-day; top5/top10 date share; event-day clustered inference
+P4.1,market_overlay,descriptive only: R01 F02 ALL_A_EW_RET60 and R05 F18 LIMIT_DOWN_SHARE frozen validated features; no gating
+P4.1,mae_holding,COMMON/A0_ONLY/A1_ONLY actual path MAE hold_days levels capital-days slot-days plus independent where covered
+P4.1,shadow_price,CAPACITY SHADOW PNL = (A1 pnl - A0 pnl) per extra executed trade / per extra slot-day / per extra capital-day; historical diagnostic not forecast
+P4.1,forbidden,new predictor ranking ATR gate stop exit K scan layer scan capital scan threshold optimization ML composite
+P4.1,classification,A marginal signal quality deterioration | B capital/path dilution dominant | C both | D unresolved coverage insufficient
+P4.1,wording,even if A1_ONLY actual pnl poor: forbidden to claim no-alpha unless independent episode evidence supports it
+P4.1,status,DEVELOPMENT DIAGNOSTIC WAITING EXTERNAL AUDIT

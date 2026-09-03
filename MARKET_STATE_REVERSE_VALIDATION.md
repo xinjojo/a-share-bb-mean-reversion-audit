@@ -167,7 +167,7 @@ PRIMARY confirms direction for both, with the expected small-sample attenuation 
 
 The reverse-direction market-state hypothesis **independently replicates** on untouched 2023-2024:
 - **2 families** (TREND via R01, STRESS via R05) produce **reliable full-gate PASSes**, both STRONG (direction + BH q<0.05 + economic spread ≥1pp + non-extreme + block-bootstrap CI>0 + both years same direction).
-- All 7 hypotheses are direction-consistent in Validation; **6/7 effect-size REPLICATED**, 7/7 same sign in both 2023 and 2024, non-overlap direction consistency 0.8–1.0.
+- All 7 hypotheses are direction-consistent in Validation (validation IC matches registry direction); **6/7 are same-sign in both 2023 and 2024 individually** (R03's 2024 IC is +0.029, near zero / opposite sign), **6/7 effect-size REPLICATED**, non-overlap direction consistency 0.8–1.0.
 
 **Required caveats (do not overstate):**
 1. The two PASSes are on correlated dimensions (TREND & STRESS co-move), so this is best read as **one replicated regularity**: "in a strong / low-stress market, the few remaining oversold episodes have worse future 20-day quality; in a stressed market, oversold quality is better" — the **opposite** of the original T2 directional hypotheses (which are thereby rejected).

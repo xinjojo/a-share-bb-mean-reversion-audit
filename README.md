@@ -122,7 +122,7 @@ STRICT_C ──► 独立重放 A ──► 全市场 89k A ──► 时间聚�
 README.md            ← 你在这里：项目现状（第一屏）
 [CURRENT_STATUS.md](CURRENT_STATUS.md)    ← 所有研究结论的冻结总表（含 INVALID/SUPERSEDED 分类）
 [RESEARCH_MAP.md](RESEARCH_MAP.md)      ← 研究链地图（每个阶段 → 唯一 canonical 报告）
-[REPO_INVENTORY.csv](REPO_INVENTORY.csv)   ← 全仓库 600 个文件的分类清单（status / canonical / 落点）
+[REPO_INVENTORY.csv](REPO_INVENTORY.csv)   ← 全仓库 620 个文件的分类清单（status / canonical / 落点）
 [MIGRATION_MAP.csv](MIGRATION_MAP.csv)    ← 468 个文件的迁移映射（旧路径 → 新路径）
 CANONICAL_ARTIFACT_INTEGRITY.csv ← 迁移前后 canonical 文件 SHA256 校验（ALL UNCHANGED）
 DUPLICATE_FILE_AUDIT.csv         ← 字节级重复文件审计

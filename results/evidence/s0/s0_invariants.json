@@ -1,0 +1,9 @@
+{
+  "I1_factor_unchanged_trigger_date_match": true,
+  "I2_nostop_baseline_unchanged": true,
+  "I3_old_parity_exact": true,
+  "I4_tplus1": true,
+  "I5_costs_unchanged": true,
+  "I6_no_2025_read": true,
+  "I7_old_replication_exact": true
+}

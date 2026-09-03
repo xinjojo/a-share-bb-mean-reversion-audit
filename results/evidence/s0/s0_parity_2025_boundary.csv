@@ -1,0 +1,3 @@
+stop_pct,bound,ts_code,signal_date,canon_cf_ret,dev_cf_ret,canon_mae,dev_mae,canon_trig,dev_trig,reason
+-25.0,STOP_FIRST,002789.SZ,2024-02-02,-27.109066373076185,-4.278239951454001,-30.561240578935756,-25.102218726471282,1,1,canonical_depends_on_2025_price
+-25.0,TP_FIRST,002789.SZ,2024-02-02,-27.109066373076185,-4.278239951454001,-30.561240578935756,-25.102218726471282,1,1,canonical_depends_on_2025_price

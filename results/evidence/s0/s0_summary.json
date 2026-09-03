@@ -1,0 +1,37 @@
+{
+  "n_dev_episodes": 61828,
+  "n_factor_changed": 7492,
+  "n_old_only_trig": 460,
+  "n_new_only_trig": 0,
+  "n_same_date": 12590,
+  "old_parity_pass": true,
+  "n_boundary_2025": 2,
+  "n_true_mismatch": 0,
+  "invariants": {
+    "I1_factor_unchanged_trigger_date_match": true,
+    "I2_nostop_baseline_unchanged": true,
+    "I3_old_parity_exact": true,
+    "I4_tplus1": true,
+    "I5_costs_unchanged": true,
+    "I6_no_2025_read": true,
+    "I7_old_replication_exact": true
+  },
+  "adj_net_by_threshold": {
+    "-10.0": -2.6921451420662685,
+    "-12.5": -2.3381749932634146,
+    "-15.0": -2.102715484937309,
+    "-17.5": -1.91213811514202,
+    "-20.0": -1.782969693797698,
+    "-22.5": -1.6470466507101569,
+    "-25.0": -1.5357563302014836,
+    "-27.5": -1.4639672836187123,
+    "-30.0": -1.3595407735731948,
+    "-35.0": -1.1202394123019386,
+    "-40.0": -0.847947933136906
+  },
+  "positive_stable_thresholds": [],
+  "classification": "A",
+  "all_adjusted_below_baseline": true,
+  "any_adjusted_above_baseline": false,
+  "max_adj_vs_old_abs_diff": 0.021342126528171246
+}

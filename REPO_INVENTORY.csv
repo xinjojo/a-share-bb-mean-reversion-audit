@@ -599,3 +599,23 @@ results/evidence/p41/p41_market_state_overlay.csv,file,p4.1,result,ACTIVE,FALSE,
 results/evidence/p41/p41_mae_holding.csv,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_mae_holding.csv,P4.1 marginal admission audit result
 results/evidence/p41/p41_capacity_shadow.csv,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_capacity_shadow.csv,P4.1 marginal admission audit result
 results/evidence/p41/p41_summary.json,file,p4.1,result,ACTIVE,FALSE,,primary,results/evidence/p41/p41_summary.json,P4.1 marginal admission audit result
+research/execution/registries/STOP_LOSS_SEMANTICS_S0_REGISTRY.csv,file,s0,registry,ACTIVE,TRUE,,primary,research/execution/registries/,S0 preregistration registry
+research/execution/registries/STOP_LOSS_SEMANTICS_S0_REGISTRY.sha256,file,s0,registry,ACTIVE,TRUE,,primary,research/execution/registries/,S0 registry sha256
+research/execution/stop_loss_semantics_s0.py,file,s0,code,ACTIVE,TRUE,,primary,research/execution/,S0 remediation script
+research/execution/STOP_LOSS_SEMANTICS_S0.md,file,s0,report,ACTIVE,TRUE,,primary,research/execution/,S0 canonical report
+research/execution/figures/s0_threshold_means.png,file,s0,figure,ACTIVE,FALSE,,secondary,research/execution/figures/,S0 threshold means figure
+results/evidence/s0/s0_old_parity.csv,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 old raw parity vs canonical
+results/evidence/s0/s0_parity_2025_boundary.csv,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 boundary-2025 excluded episodes
+results/evidence/s0/s0_adjfactor_semantics_audit.csv,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 adj-factor semantics audit
+results/evidence/s0/s0_threshold_summary.csv,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 baseline/old/adjusted threshold summary
+results/evidence/s0/s0_samebar_bounds.csv,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 same-bar bounds
+results/evidence/s0/s0_gap_stops.csv,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 gap stops
+results/evidence/s0/s0_execution_delays.csv,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 execution delays
+results/evidence/s0/s0_saved_losers.csv,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 saved losers old vs adj
+results/evidence/s0/s0_killed_winners.csv,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 killed winners old vs adj
+results/evidence/s0/s0_deep_mae_subset.csv,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 deep-MAE subset
+results/evidence/s0/s0_factor_changed_subset.csv,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 factor changed vs unchanged subset
+results/evidence/s0/s0_eventday.csv,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 event-day inference
+results/evidence/s0/s0_bootstrap.csv,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 block bootstrap
+results/evidence/s0/s0_invariants.json,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 invariants I1-I7
+results/evidence/s0/s0_summary.json,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 summary + classification

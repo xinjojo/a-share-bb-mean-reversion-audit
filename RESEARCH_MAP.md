@@ -51,7 +51,10 @@ P3.1 Slot Contention ──► C BOTH (ACCEPTED DIAGNOSTIC)
 P4 Architecture Ablation ──► D TESTED BOTTLENECK (ACCEPTED DIAGNOSTIC)
    │
    ▼
-P4.1 Marginal Admission ──► C BOTH (DEVELOPMENT DIAGNOSTIC, 待外审)
+P4.1 Marginal Admission ──► B CAPITAL/PATH DILUTION DOMINANT (DEVELOPMENT DIAGNOSTIC, 待外审)
+   │
+   ▼
+S0 Stop-Loss Semantics ──► A OLD PHASE-A CONCLUSION ROBUST (Fixed Stop 语义修复, 待外审)
    │
    ▼
 ★ CURRENT: Portfolio Architecture（组合架构瓶颈，研究暂停，等待外部审计）★
@@ -92,6 +95,14 @@ P4.1 Marginal Admission ──► C BOTH (DEVELOPMENT DIAGNOSTIC, 待外审)
 - **源码:** `research/execution/stop_loss_counterfactual_phase_a.py`
 - **结果数据:** `results/evidence/stopA/`
 - **状态:** **PROVISIONAL / SEMANTICS ISSUE** — raw first-entry stop vs adjusted-space 问题未正式关闭，**不得误标 ACCEPTED**；结论为 `C — NO USEFUL STOP`
+- **下游（S0 语义修复）：** `research/execution/STOP_LOSS_SEMANTICS_S0.md`（adjusted-space 复刻后结论仍为 A——固定止损仍无用；Phase A 语义问题由此闭环，但 S0 待外审，Phase A 保持 PROVISIONAL）
+
+### 5a. S0 Stop-Loss Semantics Remediation
+- **Canonical:** `[research/execution/STOP_LOSS_SEMANTICS_S0.md](research/execution/STOP_LOSS_SEMANTICS_S0.md)`
+- **源码:** `research/execution/stop_loss_semantics_s0.py`
+- **Registry:** `research/execution/registries/STOP_LOSS_SEMANTICS_S0_REGISTRY.csv`（SHA256 `7e8416fd...`，pre-reg `b352f77`）
+- **结果数据:** `results/evidence/s0/`
+- **状态:** **A — OLD PHASE-A CONCLUSION ROBUST TO SEMANTICS FIX**（DEVELOPMENT DIAGNOSTIC，待外审）— dev n=61,828；factor_changed 12.12%；11 档 adjusted 全低于 baseline（事件日 delta HAC CI 全 <0）；I1–I7 全 PASS；2025+ 未读
 
 ### 6. Temporal Clustering T1
 - **Canonical:** `[research/market_state/TEMPORAL_CLUSTERING_PHASE_T1.md](research/market_state/TEMPORAL_CLUSTERING_PHASE_T1.md)`

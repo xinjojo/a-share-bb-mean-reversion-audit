@@ -15,7 +15,7 @@
 | 3 | 独立交易重放（Primary Top10, n=299） | mean≈+4.96% / median≈+5.22% / win≈75.9% · **Signal Layer A** | ACCEPTED | `[research/signal/INDEPENDENT_TRADE_REPLAY_V2_AUDIT.md](research/signal/INDEPENDENT_TRADE_REPLAY_V2_AUDIT.md)` |
 | 4 | 全市场 SECONDARY 89,046 realized + 124 censored（1,494 signal days） | 信号结构 **A**（MAE/MFE/尾部结构泛化，Top10 未提高单笔质量） | ACCEPTED | `[research/trade_path/FULL_MARKET_TRADE_PATH_AUDIT.md](research/trade_path/FULL_MARKET_TRADE_PATH_AUDIT.md)` |
 | 5 | Trade Path（描述性风险结构） | 接受：MAE 深度与最终交易质量显著相关 | ACCEPTED | `[research/trade_path/FULL_MARKET_TRADE_PATH_AUDIT.md](research/trade_path/FULL_MARKET_TRADE_PATH_AUDIT.md)` |
-| 6 | Fixed Stop Phase A | **PROVISIONAL / SEMANTICS ISSUE**（raw first-entry stop vs adjusted-space 问题未正式关闭，**不得误标 ACCEPTED**） | PROVISIONAL | `[research/execution/STOP_LOSS_COUNTERFACTUAL_PHASE_A.md](research/execution/STOP_LOSS_COUNTERFACTUAL_PHASE_A.md)` |
+| 6 | Fixed Stop Phase A | **PROVISIONAL / SEMANTICS ISSUE → S0 修复后结论稳健**（raw first-entry stop vs adjusted-space 问题由 S0 复权语义修复闭环；**结论 A — 固定止损仍无用**；但因 S0 尚待外审，Phase A 保持 PROVISIONAL，不标 ACCEPTED） | PROVISIONAL（+S0 DEVELOPMENT DIAGNOSTIC） | `[research/execution/STOP_LOSS_COUNTERFACTUAL_PHASE_A.md](research/execution/STOP_LOSS_COUNTERFACTUAL_PHASE_A.md)` |
 | 7 | Temporal Clustering T1 | **A — STRONG TEMPORAL CLUSTERING**（runs z≈−11, lag1 ACF≈0.43, 盈利/亏损显著按时间成团） | ACCEPTED | `[research/market_state/TEMPORAL_CLUSTERING_PHASE_T1.md](research/market_state/TEMPORAL_CLUSTERING_PHASE_T1.md)` |
 | 8 | Market State T2（Discovery） | reverse-direction discovery | ACCEPTED AS DISCOVERY | `[research/market_state/MARKET_STATE_PHASE_T2.md](research/market_state/MARKET_STATE_PHASE_T2.md)` |
 | 9 | T2-R Reverse Validation | **A — STRONG VALIDATION**（F02 ALL_A_EW_RET60 方向 NEGATIVE：Disc IC −0.441 / Val IC −0.417, BH q 0.0105, spread +2.75pp；F18 LIMIT_DOWN_SHARE 方向 POSITIVE：Val IC +0.164, BH q 0.021, spread +2.54pp） | ACCEPTED | `[research/market_state/MARKET_STATE_REVERSE_VALIDATION.md](research/market_state/MARKET_STATE_REVERSE_VALIDATION.md)` |
@@ -26,6 +26,7 @@
 | 14 | P3.1 Slot Contention | **C — BOTH**（ranking-actionable 仅 16/1212=1.32%；K=3 saturation 是主瓶颈；少数选择差异被 path dependence 放大） | ACCEPTED DIAGNOSTIC | `[research/portfolio/SLOT_CONTENTION_PATH_AUDIT.md](research/portfolio/SLOT_CONTENTION_PATH_AUDIT.md)` |
 | 14b | P4 Portfolio Architecture Causal Decomposition | **D — TESTED ARCHITECTURE BOTTLENECK NOT EXPLAINED BY SIMPLE K/LAYER REMOVAL**（结构消融 2020–2024 PURE STOCK 10bp：A0 +30.30% / A1 K=999 −0.23% / A2 ML=1 −5.84% / A3 −29.27%。**K=3 是实际容量瓶颈（candidate 530 / blocked_K 336），但在当前历史样本与组合规则下同时表现为保护性的 admission constraint / implicit capacity filter**；解除任一约束均大幅恶化；A2 同批股票纯路径差异即可 ±50 万；A0 parity 精确通过。边界：P4 仅测试极端消融 K 3→999、levels 5→1，未搜索 architecture space，不构成"K/layer 结构不重要"的全局断言） | ACCEPTED DIAGNOSTIC（外审通过） | `[research/portfolio/PORTFOLIO_ARCHITECTURE_P4.md](research/portfolio/PORTFOLIO_ARCHITECTURE_P4.md)` |
 | 14c | P4.1 Marginal Admission / Capacity Shadow-Price Audit | **B — CAPITAL/PATH DILUTION DOMINANT**（A1_ONLY 58 笔独立 quality +3.28%/win 68.8% 仍为正，但实际 PnL −118,610；**COMMON 65 笔同 key、same exit 100% 下 A1 少赚 67,116（STRONG CAPITAL/PATH DILUTION EVIDENCE）**；A1_ONLY 深 MAE 率 40.6% vs COMMON 18.8%（**SUGGESTIVE TAIL-QUALITY DETERIORATION**，非 population-level 信号质量恶化——事件日 bootstrap CI [−3.59,+1.73] 跨 0，aggregate independent quality 不显著更差）；A0_ONLY 独立质量 −1.97%/win 40% 且覆盖仅 45.5% → K=3 未被证明系统性过滤坏信号；PnL bridge residual=0.00；容量影子成本每额外 1 笔 ≈ −6,494 元） | DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH） | `[research/portfolio/MARGINAL_ADMISSION_P41.md](research/portfolio/MARGINAL_ADMISSION_P41.md)` |
+| 14d | S0 Stop-Loss Semantics Remediation（复权语义修复） | **A — OLD PHASE-A CONCLUSION ROBUST TO SEMANTICS FIX**（dev n=61,828；factor_changed 7,492=12.12%，old-only 误触发 460、new-only 0；**11 档 adjusted-space 固定止损均值全部低于 baseline**（d_adj_base −2.69~−0.85pp），事件日 delta HAC CI 全 <0，无稳定正净效应阈值；adjusted vs old 差异 <0.03pp；I1–I7 invariants 全 PASS；旧 raw parity true_mismatch=0（唯一差异 002789 为 canonical 依赖 2025-01-24 价格的已知边界，已披露）） | DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT） | `[research/execution/STOP_LOSS_SEMANTICS_S0.md](research/execution/STOP_LOSS_SEMANTICS_S0.md)` |
 | 15 | 2025–2026 Confirmation | **UNTOUCHED / CLOSED**（全程未读取任何 2025–2026 的 episode outcome / portfolio / feature） | CLOSED | — |
 
 ---
@@ -58,6 +59,13 @@ PnL −118,610。
 更准确：K=3 改变内生共享资金路径，历史上实现的 K=3 路径恰好产生更优组合结果。
 PnL bridge residual=0.00 精确闭合。容量影子成本：每额外 1 笔 ≈ −6,494 元、每额外 slot-day ≈ −148 元。
 
+**S0 进展（2026-09-03，DEVELOPMENT DIAGNOSTIC，待外审）：** 复权语义修复后，Phase A"固定止损无用"结论**保持稳健（A）**：
+（1）**old raw parity**——20/22 组合机器精度 exact，唯一差异 002789.SZ/2024-02-02 为 canonical 依赖 2025-01-24 价格的已知边界（true_mismatch=0，已披露）。
+（2）**factor_changed 7,492（12.12%）**，old-only 误触发 460、new-only 0；factor_unchanged 子集触发率逐档完全一致（I1 边界清楚）。
+（3）**11 档 adjusted 均值全部低于 baseline**（d_adj_base −2.69~−0.85pp），事件日 delta HAC 95% CI 全 <0，无稳定正净效应阈值；adjusted vs old 差异 <0.03pp。
+（4）I1–I7 全 PASS；2025+ 全程未读（I6）。
+Fixed Stop Phase A 仍为 **PROVISIONAL**，新增 S0 DEVELOPMENT DIAGNOSTIC；待外审后决定是否关闭语义问题。
+
 **下一步仍须等待外部审计决定**，方可决定是否打开 2025–2026 Confirmation 或进入新的
 研究阶段。
 
@@ -89,6 +97,7 @@ PnL bridge residual=0.00 精确闭合。容量影子成本：每额外 1 笔 ≈
 | P2 Ranking Validation Registry | `83c3f1e`（TASK 记录） | 见 `research/ranking/registries/CROSS_SECTIONAL_RANKING_VALIDATION_REGISTRY.sha256` |
 | ATR Slot Allocation Registry | 见 `research/portfolio/registries/ATR_SLOT_ALLOCATION_REGISTRY.sha256` | — |
 | Market State Gate Registry | 见 `research/market_state/registries/MARKET_STATE_GATE_REGISTRY.sha256` | — |
+| S0 Stop-Loss Semantics Registry | `b352f77`（S0-A，结果前 push） | `7e8416fd4fc3a3f67da41d020747ffda34aaf8b1e230ddf574c131ab30f36273` |
 
 ---
 

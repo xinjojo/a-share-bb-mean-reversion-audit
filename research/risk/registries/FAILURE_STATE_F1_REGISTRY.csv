@@ -1,0 +1,22 @@
+feature,family,name,exact_formula,information_time,hypothesized_direction,outcome,primary_secondary,status,notes
+F_CUR_MAE,PRICE_PATH,current adjusted MAE,low_adj[anchor]/entry_adj - 1 (adjusted-space),anchor close,NEGATIVE,RECOVER_TO_ENTRY,PRIMARY,frozen,deeper MAE -> lower recovery
+F_DAYS_SINCE_ENTRY,PRICE_PATH,days since entry,anchor_i - entry_i (trading days),anchor close,NEGATIVE,RECOVER_TO_ENTRY,PRIMARY,frozen,longer underwater -> failure
+F_DAYS_SINCE_FIRST_D10,PRICE_PATH,days since first D10,anchor_i - first_D10_i (0 for D10 anchor),anchor close,NEGATIVE,RECOVER_TO_ENTRY,PRIMARY,frozen,no recovery since D10 -> failure
+F_DIST_MA20,PRICE_PATH,distance from MA20,"close_adj/MA20(close_adj,20 observed bars) - 1",anchor close,NEGATIVE,RECOVER_TO_ENTRY,PRIMARY,frozen,further below MA20 -> still falling -> failure
+F_DIST_LBB,PRICE_PATH,distance from lower BB,close_adj/BB_lower20 - 1; BB_lower=MA20-2*SD20,anchor close,NEGATIVE,RECOVER_TO_ENTRY,PRIMARY,frozen,further below BB -> failure
+F_RET3,PRICE_PATH,3d adjusted return,close_adj[anchor]/close_adj[anchor-3 observed bars] - 1,anchor close,NEGATIVE,RECOVER_TO_ENTRY,PRIMARY,frozen,still falling -> failure
+F_RET5,PRICE_PATH,5d adjusted return,close_adj[anchor]/close_adj[anchor-5 observed bars] - 1,anchor close,NEGATIVE,RECOVER_TO_ENTRY,PRIMARY,frozen,still falling -> failure
+F_RET20,PRICE_PATH,20d adjusted return,close_adj[anchor]/close_adj[anchor-20 observed bars] - 1,anchor close,NEGATIVE,RECOVER_TO_ENTRY,PRIMARY,frozen,still falling -> failure
+F_REB3,RECOVERY,3d rebound from local low,close_adj[anchor]/min(low_adj[anchor-2..anchor]) - 1,anchor close,POSITIVE,RECOVER_TO_ENTRY,PRIMARY,frozen,stronger rebound -> recovery
+F_REB5,RECOVERY,5d rebound from local low,close_adj[anchor]/min(low_adj[anchor-4..anchor]) - 1,anchor close,POSITIVE,RECOVER_TO_ENTRY,PRIMARY,frozen,stronger rebound -> recovery
+F_NLOW10,RECOVERY,new lows in prior 10d,count of days in prior 10 obs with low_adj <= min(low_adj of prior 20 obs before that day),anchor close,NEGATIVE,RECOVER_TO_ENTRY,PRIMARY,frozen,more new lows -> failure
+F_DAYS_SINCE_LOW,RECOVERY,days since latest low,anchor_i - i_of_min(low_adj[prior 20 obs]) (0 if today is new low),anchor close,POSITIVE,RECOVER_TO_ENTRY,PRIMARY,frozen,left low longer -> recovering
+F_AMT_RATIO20,LIQUIDITY,amount ratio vs MA20,"amount[anchor]/MA20(amount,20 observed bars)",anchor close,NEGATIVE,RECOVER_TO_ENTRY,PRIMARY,frozen,volume spike (panic) -> failure
+F_ATR20_PCT,VOLATILITY,ATR20 pct,"ATR20/close_adj; TR=max(h-l,abs(h-pc),abs(l-pc)) over 20 obs",anchor close,POSITIVE,RECOVER_TO_ENTRY,PRIMARY,frozen,high vol -> stronger mean reversion (consistent P2)
+F_INTRADAY_RANGE,VOLATILITY,intraday range,(high_adj-low_adj)/pre_close_adj [anchor day],anchor close,POSITIVE,RECOVER_TO_ENTRY,PRIMARY,frozen,consistent P2 F13
+F_RV20,VOLATILITY,realized vol 20d,"std(close_adj daily ret, 20 observed bars)*100",anchor close,POSITIVE,RECOVER_TO_ENTRY,PRIMARY,frozen,consistent P2 F08 direction
+F_DAYS_UNDERWATER,POSITION,days underwater,count of days entry..anchor with close_adj < entry_adj,anchor close,NEGATIVE,RECOVER_TO_ENTRY,PRIMARY,frozen,longer underwater -> failure
+F_DIST_AVGCOST,POSITION,distance from avg cost,close_raw[anchor]/avg_cost_raw - 1 (layers with layer_i<=anchor_i),anchor close,NEGATIVE,RECOVER_TO_ENTRY,PRIMARY,frozen,further below avg cost -> failure
+F_R01_RET60,MARKET,All-A EW 60d return,ret60_ea (frozen T2-R R01; Discovery Q20/40/60/80 cutpoints),anchor close,DESCRIPTIVE,RECOVER_TO_ENTRY,SECONDARY,frozen,"market-state overlay, descriptive only"
+F_R05_LDS,MARKET,limit-down share,limit_down share (frozen T2-R R05),anchor close,DESCRIPTIVE,RECOVER_TO_ENTRY,SECONDARY,frozen,"market-state overlay, descriptive only"
+F_LAYER_COUNT,POSITION,layer count at anchor,number of layers with layer_i <= anchor_i,anchor close,DESCRIPTIVE,RECOVER_TO_ENTRY,SECONDARY,frozen,descriptive only (P4: removing adds harmful)

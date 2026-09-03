@@ -1,3 +1,11 @@
+> [!IMPORTANT]
+> **INVALID HISTORICAL DIAGNOSTIC — denominator / capital-basis mismatch（P0, R0.5）。**
+> natural baseline ret0 = final PnL / FINAL TOTAL COST（含 D20 anchor 之后 future adds）；
+> oracle return = early-exit PnL / ANCHOR TOTAL COST（仅 layers ≤ anchor）。
+> 两者比较了 different shares / different capital base / different future capital commitments，
+> 不得解释为 action economic value。
+> 本文件数字仅作历史记录。正确经济比较见 **[FAILURE_STATE_F21.md](FAILURE_STATE_F21.md)**（matched-share basis）。
+
 # FAILURE-STATE ACTIONABILITY / PERFECT-INFORMATION VALUE BOUND — PHASE F2
 
 **状态：DEVELOPMENT DIAGNOSTIC — WAITING EXTERNAL AUDIT（未写入 README CURRENT TRUTH）**

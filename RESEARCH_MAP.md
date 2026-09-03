@@ -209,7 +209,7 @@ F2 Actionability Value Bound ──► D ACTIONABILITY NEGATIVE (DEVELOPMENT DIA
 - **源码:** `research/risk/failure_state_f2.py`
 - **Registry:** `research/risk/registries/FAILURE_STATE_F2_ACTIONABILITY_REGISTRY.csv`（SHA256 `9ed07a57...`，pre-reg `4e088fb`）
 - **结果数据:** `results/evidence/f2/`
-- **状态:** **DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH）** — **D — ACTIONABILITY NEGATIVE**（oracle upper bound，非策略）
+- **状态:** **INVALID / P0 — CAPITAL-BASIS MISMATCH（SUPERSEDED FOR INFERENCE BY F2.1）**：baseline ret0 分母含 D20 后 future adds，oracle return 分母只含 anchor 已持资本——不同 shares/资本基准，经济比较无效。历史 D 数字仅作记录，不得作 economic value 结论
 - **关键数字:** O1/O2/O3 eventday Δ −2.28/−5.19/−4.81pp（HAC & calendar boot CI 全显著负）；TP benefit −4.13pp；FP cost −24.6~−30.3pp；confusion grid 28/28 负；break-even FPR 无解；anchor-close 乐观 −1.69pp 仍负。**未设计 predictor/stop/exit。**
 ### 15. ★ CURRENT: Portfolio Architecture（组合架构）
 - **状态:** 研究**暂停**。当前唯一活跃问题是：有限 K=3 slots + 长持仓 + 多层占位/路径依赖的组合架构如何提升资金效率。

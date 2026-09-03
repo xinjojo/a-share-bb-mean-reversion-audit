@@ -274,8 +274,13 @@ universe. Its PnL is not evidence about alpha.
 
 ## 13. Final mechanism classification
 
-**C — BOTH** (low actionability **and** wrong-on-the-rare-actionable-tail, compounded
-by path amplification).
+**C — BOTH**, defined as:
+
+- **A. RANKING RARELY ACTIONABLE** — the K=3 architecture almost never lets a ranking
+  rule act (ranking-actionable 16/1,212 signal days = 1.32%).
+- **B. RARE HISTORICAL ADVERSE SELECTIONS ARE STRONGLY PATH-AMPLIFIED** — on the few
+  actionable days, a small number of adverse choices were amplified by a portfolio path
+  that never reconverges.
 
 More precisely:
 
@@ -283,15 +288,20 @@ More precisely:
   gets a slot on 16/1,212 signal days (1.32%); 71.4% of signal days have no Top10
   oversold at all and on 75.5% of Top10-oversold days K is already full. The portfolio
   architecture (K=3 + long, deep-MAE, multi-layer positions) is the binding constraint.
-- **When it is actionable, the conditional ATR edge is not positive on the contested
-  tail (B):** 2/3 full-return swaps were large losses, and every leave-one-swap is
-  negative once the path is re-run.
+- **The observed actionable sample is too sparse to estimate population conditional ATR
+  alpha (B):** only 6 selection-changed events over 2020–2024. Historically, a few
+  adverse actionable selections were strongly amplified by portfolio path dependence
+  (2/3 full-return swaps were large losses; all leave-one-swap re-runs are negative;
+  no reconvergence; Δ −26k…−436k per swap). These are **historical path attribution
+  results, not statistical evidence of systematic negative conditional ATR alpha** (see
+  §13b).
 - The two factors **compound**: the rare contested decisions that do occur are exactly
-  the ones that unlock huge path cascades (no reconvergence; Δ −26k…−436k per swap).
+  the ones that unlock huge path cascades.
 
-Therefore the answer to the P3.1 closing question is: **ATR "failed" for both reasons —
-the K=3 architecture almost never lets a ranking rule act, and on the rare days it does,
-a few wrong large-loss choices get amplified by a path that never reconverges.**
+Therefore the answer to the P3.1 closing question is: **ATR "failed" because the K=3
+architecture almost never lets a ranking rule act, and on the few days it does, a small
+number of adverse historical choices were strongly amplified by a path that never
+reconverges.** No claim is made that ATR has systematic negative conditional alpha.
 
 P3's development verdict `C — NO USEFUL PORTFOLIO RANKING` is **kept**. 2025–2026
 Confirmation remains **CLOSED**. No strategy design is proposed in this phase.

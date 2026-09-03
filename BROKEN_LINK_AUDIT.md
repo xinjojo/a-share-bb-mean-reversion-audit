@@ -4,14 +4,14 @@
 
 **扫描范围：** 全文件系统所有 `.md` 文件（含 R0-C 新增入口文档），排除外部链接（`http/https/mailto`）与锚点（`#`）。
 
-**审计结果：** `64` 个内部链接，`0` broken ✅
+**审计结果：** `65` 个内部链接，`0` broken ✅
 
 | 项目 | 值 |
 |---|---|
 | 扫描 Markdown 文件数 | 50 |
-| 内部相对链接总数 | 64 |
+| 内部相对链接总数 | 65 |
 | 未解析 broken links | **0** |
-| 修复记录 | 迁移后修复旧 README 3 处失效路径链接（→ 重写为当前 canonical 路径）；新建 3 个入口文档（README/CURRENT_STATUS/RESEARCH_MAP）统一使用迁移后路径 |
+| 修复记录 | 迁移后修复旧 README 3 处失效路径链接（→ 重写为当前 canonical 路径）；新建 3 个入口文档（README/CURRENT_STATUS/RESEARCH_MAP）统一使用迁移后路径；R0.1 修复 README 中 1 处畸形 INVALID canonical 链接（`[[archive/invalid/](...)RESULTS_LATEST.md]` → 标准链接） |
 
 **说明：**
 - 迁移（R0-B，`git mv` 468 文件）后，旧版 README 中指向顶层旧路径的 3 个链接失效，已通过 R0-C 重写修复。

@@ -63,7 +63,7 @@
 
 | 尝试 | 结论 | 状态 |
 |---|---|---|
-| Fixed Price Stop（Phase A） | `C — NO USEFUL STOP`（系统性错杀最终赢家） | CLOSED · 语义问题未正式关闭 |
+| Fixed Price Stop（Phase A） | PROVISIONAL：raw-space 证据对固定止损不利（系统性错杀最终赢家），但 **adjusted-price-space 止损语义仍未解决**，未正式关闭 | PROVISIONAL · SEMANTICS ISSUE（不可正式写为 CLOSED） |
 | Market-State Hard Gate（T3） | `C — NO USEFUL PORTFOLIO GATE`（删信号改变组合路径后更差） | CLOSED |
 | ATR20_PCT Slot Allocation（P3） | `C — NO USEFUL PORTFOLIO RANKING`（B0 +30.30% vs B1 −18.66%） | CLOSED |
 | 原 +354.9% / 乐观 tick / 参数扫描 | `INVALID` | 见 `[archive/invalid/](archive/invalid/)` |
@@ -105,7 +105,7 @@ STRICT_C ──► 独立重放 A ──► 全市场 89k A ──► 时间聚�
 
 | Question | Canonical Evidence | Verdict | Status |
 |---|---|---|---|
-| 原 +354.9% 是否可信？ | `[[archive/invalid/](archive/invalid/)RESULTS_LATEST.md](archive/invalid/RESULTS_LATEST.md)` | INVALID（same-bar 未来信息等） | INVALID |
+| 原 +354.9% 是否可信？ | `[RESULTS_LATEST.md](archive/invalid/RESULTS_LATEST.md)`（见 [archive/invalid/](archive/invalid/)） | INVALID（same-bar 未来信息等） | INVALID |
 | BB 超跌信号本身有无 edge？ | `[research/signal/INDEPENDENT_TRADE_REPLAY_V2_AUDIT.md](research/signal/INDEPENDENT_TRADE_REPLAY_V2_AUDIT.md)` | 有（Signal Layer A） | ACCEPTED |
 | 89k 全市场交易说明什么？ | `[research/trade_path/FULL_MARKET_TRADE_PATH_AUDIT.md](research/trade_path/FULL_MARKET_TRADE_PATH_AUDIT.md)` | 结构 A，MAE 深度与质量显著相关 | ACCEPTED |
 | 市场状态有无预测力？ | `[research/market_state/MARKET_STATE_REVERSE_VALIDATION.md](research/market_state/MARKET_STATE_REVERSE_VALIDATION.md)` | 有（A — STRONG VALIDATION） | ACCEPTED |
@@ -122,7 +122,7 @@ STRICT_C ──► 独立重放 A ──► 全市场 89k A ──► 时间聚�
 README.md            ← 你在这里：项目现状（第一屏）
 [CURRENT_STATUS.md](CURRENT_STATUS.md)    ← 所有研究结论的冻结总表（含 INVALID/SUPERSEDED 分类）
 [RESEARCH_MAP.md](RESEARCH_MAP.md)      ← 研究链地图（每个阶段 → 唯一 canonical 报告）
-[REPO_INVENTORY.csv](REPO_INVENTORY.csv)   ← 全仓库 541 个文件的分类清单（status / canonical / 落点）
+[REPO_INVENTORY.csv](REPO_INVENTORY.csv)   ← 全仓库 563 个文件的分类清单（status / canonical / 落点）
 [MIGRATION_MAP.csv](MIGRATION_MAP.csv)    ← 468 个文件的迁移映射（旧路径 → 新路径）
 CANONICAL_ARTIFACT_INTEGRITY.csv ← 迁移前后 canonical 文件 SHA256 校验（ALL UNCHANGED）
 DUPLICATE_FILE_AUDIT.csv         ← 字节级重复文件审计

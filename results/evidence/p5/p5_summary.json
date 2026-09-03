@@ -1,0 +1,185 @@
+{
+  "parity": "PASS",
+  "n_days": 1212,
+  "k_full_days": 668,
+  "k_full_pct": 55.115511551155116,
+  "cash_insufficient_days": 18,
+  "cash_insufficient_pct": 1.4851485148514851,
+  "both_k_cash_days": 387,
+  "both_pct": 31.93069306930693,
+  "candidate_events": 530,
+  "admitted": 76,
+  "blocked_k": 336,
+  "blocked_cash": 0,
+  "blocked_held": 116,
+  "blocked_other": 2,
+  "top10pct_slot_share": 26.934749620637326,
+  "top10pct_capital_share": 37.76649909168835,
+  "age_gt60_slot_share": 16.084977238239755,
+  "age_gt60_capital_share": 18.904475315993174,
+  "layer2plus_capital_share": 50.86869099829039,
+  "layer3plus_capital_share": 19.06731491911435,
+  "admitted_ind_mean": 3.533503474723117,
+  "blocked_k_ind_mean": 5.078763473106538,
+  "blocked_cash_ind_mean": NaN,
+  "shadow": [
+    {
+      "reason": "BLOCKED_K",
+      "n": 123,
+      "missed_positive": 1821334.8744960648,
+      "avoided_negative": 571959.0601118563,
+      "net": 1249375.8143842085
+    },
+    {
+      "reason": "BLOCKED_CASH",
+      "n": 0,
+      "missed_positive": 0.0,
+      "avoided_negative": -0.0,
+      "net": 0.0
+    },
+    {
+      "reason": "BLOCKED_K+CASH",
+      "n": 123,
+      "missed_positive": 1821334.8744960648,
+      "avoided_negative": 571959.0601118563,
+      "net": 1249375.8143842085
+    }
+  ],
+  "virtual_queue_median_wait": 11.0,
+  "virtual_queue_np_before_release_pct": 16.260162601626014,
+  "blocked_vs_admitted": [
+    {
+      "reason": "BLOCKED_K",
+      "n_days": 7,
+      "admitted_mean": 2.2130535851311204,
+      "blocked_mean": -3.336206854943496,
+      "delta_mean": -5.549260440074617,
+      "delta_hac_ci_lo": NaN,
+      "delta_hac_ci_hi": NaN,
+      "delta_boot_ci_lo": -14.082733258339385,
+      "delta_boot_ci_hi": 4.787659996992503
+    },
+    {
+      "reason": "BLOCKED_CASH",
+      "n_days": 0,
+      "admitted_mean": NaN,
+      "blocked_mean": NaN,
+      "delta_mean": NaN,
+      "delta_hac_ci_lo": NaN,
+      "delta_hac_ci_hi": NaN,
+      "delta_boot_ci_lo": NaN,
+      "delta_boot_ci_hi": NaN
+    }
+  ],
+  "occupancy_concentration": [
+    {
+      "frac": 0.05,
+      "n_top": 4,
+      "slot_share": 16.95751138088012,
+      "capital_share": 27.878756510983976,
+      "blocked_share": 19.957835558678845
+    },
+    {
+      "frac": 0.1,
+      "n_top": 8,
+      "slot_share": 26.934749620637326,
+      "capital_share": 37.76649909168835,
+      "blocked_share": 32.25579761068166
+    },
+    {
+      "frac": 0.2,
+      "n_top": 16,
+      "slot_share": 42.75417298937785,
+      "capital_share": 53.35235400477833,
+      "blocked_share": 48.2782853127196
+    },
+    {
+      "frac": "HHI_slot",
+      "n_top": 76,
+      "slot_share": 0.01990445126542492,
+      "capital_share": NaN,
+      "blocked_share": NaN
+    }
+  ],
+  "age_curve": [
+    {
+      "age_bin": "0-5d",
+      "n": 0,
+      "slot_days": 0,
+      "capital_days": 0.0,
+      "blocked_signals": 0,
+      "add_capital": 0.0,
+      "realized_pnl": 0.0
+    },
+    {
+      "age_bin": "6-10d",
+      "n": 4,
+      "slot_days": 33,
+      "capital_days": 6522887.159829,
+      "blocked_signals": 16,
+      "add_capital": 0.0,
+      "realized_pnl": 98226.28070910013
+    },
+    {
+      "age_bin": "11-20d",
+      "n": 20,
+      "slot_days": 336,
+      "capital_days": 101877250.23647921,
+      "blocked_signals": 138,
+      "add_capital": 2571262.69,
+      "realized_pnl": 489495.792054161
+    },
+    {
+      "age_bin": "21-40d",
+      "n": 31,
+      "slot_days": 921,
+      "capital_days": 265737480.82175,
+      "blocked_signals": 463,
+      "add_capital": 5270670.42,
+      "realized_pnl": 294763.60313265177
+    },
+    {
+      "age_bin": "41-60d",
+      "n": 15,
+      "slot_days": 750,
+      "capital_days": 258899948.14557594,
+      "blocked_signals": 408,
+      "add_capital": 3807998.18,
+      "realized_pnl": -156519.4332351691
+    },
+    {
+      "age_bin": "61-90d",
+      "n": 4,
+      "slot_days": 318,
+      "capital_days": 134702743.8498624,
+      "blocked_signals": 246,
+      "add_capital": 1825975.1499999997,
+      "realized_pnl": -43422.76190447947
+    },
+    {
+      "age_bin": "91-120d",
+      "n": 1,
+      "slot_days": 106,
+      "capital_days": 47479825.49582702,
+      "blocked_signals": 80,
+      "add_capital": 358209.85,
+      "realized_pnl": -97943.60455811996
+    },
+    {
+      "age_bin": "120-+d",
+      "n": 1,
+      "slot_days": 172,
+      "capital_days": 148480608.69358015,
+      "blocked_signals": 72,
+      "add_capital": 791971.1799999999,
+      "realized_pnl": -281648.9383369199
+    }
+  ],
+  "layer_summary": {
+    "1": 76,
+    "2": 49,
+    "3": 25,
+    "4": 5,
+    "5": 3
+  }
+}

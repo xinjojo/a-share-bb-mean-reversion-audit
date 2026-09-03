@@ -1,0 +1,15 @@
+{
+  "I1_parity": "PASS",
+  "I2_candidate_universe_unchanged": true,
+  "I3_entry_unchanged": true,
+  "I4_exit_unchanged": true,
+  "I5_cost_slippage_unchanged": true,
+  "I6_no_predictor": true,
+  "I7_no_gate": true,
+  "I8_no_new_admission_rule": true,
+  "I9_independent_diagnostic_only": true,
+  "I10_same_exit_matched_share": true,
+  "I11_no_2025_read": true,
+  "I12_prior_registry_shas_unchanged": true,
+  "registry_sha": "7415608a1003b612704e295a76427eba5c124607163a926fb514342c699f7ce7"
+}

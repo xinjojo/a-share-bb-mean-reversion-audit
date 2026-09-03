@@ -702,3 +702,21 @@ results/evidence/f3/f3_oof_metrics.csv,csv,F3,result,ACTIVE,N,,high,results/evid
 results/evidence/f3/f3_oof_predictions.csv,csv,F3,result,ACTIVE,N,,medium,results/evidence/f3/,
 results/evidence/f3/f3_stability_gate.csv,csv,F3,result,ACTIVE,Y,,high,results/evidence/f3/,
 results/evidence/f3/f3_summary.json,json,F3,result,ACTIVE,Y,,high,results/evidence/f3/,
+research/portfolio/registries/PORTFOLIO_ARCHITECTURE_P5_REGISTRY.csv,csv,P5,portfolio,ACCEPTED,research/portfolio/registries/PORTFOLIO_ARCHITECTURE_P5_REGISTRY.csv,,PREREGISTRATION,research/portfolio/registries/,SHA 7415608a... prereg e007979
+research/portfolio/registries/PORTFOLIO_ARCHITECTURE_P5_REGISTRY.sha256,sha256,P5,portfolio,ACCEPTED,research/portfolio/registries/PORTFOLIO_ARCHITECTURE_P5_REGISTRY.sha256,,PREREGISTRATION,research/portfolio/registries/,
+research/portfolio/portfolio_architecture_p5.py,py,P5,portfolio,ACTIVE,research/portfolio/portfolio_architecture_p5.py,,CODE,research/portfolio/,diagnostic only; imports frozen P4 engine
+research/portfolio/PORTFOLIO_ARCHITECTURE_P5.md,md,P5,portfolio,ACTIVE,research/portfolio/PORTFOLIO_ARCHITECTURE_P5.md,,CANONICAL REPORT,research/portfolio/,"development diagnostic, waiting external audit"
+results/evidence/p5/p5_baseline_parity.json,json,P5,portfolio,ACTIVE,results/evidence/p5/p5_baseline_parity.json,,EVIDENCE,results/evidence/p5/,
+results/evidence/p5/p5_daily_capital_ledger.csv,csv,P5,portfolio,ACTIVE,results/evidence/p5/p5_daily_capital_ledger.csv,,EVIDENCE,results/evidence/p5/,
+results/evidence/p5/p5_position_lock.csv,csv,P5,portfolio,ACTIVE,results/evidence/p5/p5_position_lock.csv,,EVIDENCE,results/evidence/p5/,
+results/evidence/p5/p5_signal_collision.csv,csv,P5,portfolio,ACTIVE,results/evidence/p5/p5_signal_collision.csv,,EVIDENCE,results/evidence/p5/,
+results/evidence/p5/p5_lock_age_curve.csv,csv,P5,portfolio,ACTIVE,results/evidence/p5/p5_lock_age_curve.csv,,EVIDENCE,results/evidence/p5/,
+results/evidence/p5/p5_layer_capital_curve.csv,csv,P5,portfolio,ACTIVE,results/evidence/p5/p5_layer_capital_curve.csv,,EVIDENCE,results/evidence/p5/,
+results/evidence/p5/p5_blocked_signal_quality.csv,csv,P5,portfolio,ACTIVE,results/evidence/p5/p5_blocked_signal_quality.csv,,EVIDENCE,results/evidence/p5/,
+results/evidence/p5/p5_blocked_signal_eventday.csv,csv,P5,portfolio,ACTIVE,results/evidence/p5/p5_blocked_signal_eventday.csv,,EVIDENCE,results/evidence/p5/,
+results/evidence/p5/p5_blocked_signal_bootstrap.csv,csv,P5,portfolio,ACTIVE,results/evidence/p5/p5_blocked_signal_bootstrap.csv,,EVIDENCE,results/evidence/p5/,
+results/evidence/p5/p5_capital_shadow.csv,csv,P5,portfolio,ACTIVE,results/evidence/p5/p5_capital_shadow.csv,,EVIDENCE,results/evidence/p5/,
+results/evidence/p5/p5_occupancy_concentration.csv,csv,P5,portfolio,ACTIVE,results/evidence/p5/p5_occupancy_concentration.csv,,EVIDENCE,results/evidence/p5/,
+results/evidence/p5/p5_virtual_queue.csv,csv,P5,portfolio,ACTIVE,results/evidence/p5/p5_virtual_queue.csv,,EVIDENCE,results/evidence/p5/,
+results/evidence/p5/p5_summary.json,json,P5,portfolio,ACTIVE,results/evidence/p5/p5_summary.json,,EVIDENCE,results/evidence/p5/,
+results/evidence/p5/p5_invariants.json,json,P5,portfolio,ACTIVE,results/evidence/p5/p5_invariants.json,,EVIDENCE,results/evidence/p5/,

@@ -241,7 +241,7 @@ F2 Actionability Value Bound ──► D ACTIONABILITY NEGATIVE (DEVELOPMENT DIA
 - **关键数字:** OOF M1 AUC 0.720 / PR-AUC 0.786；STABLE_SAFE/STABLE_POINT **0/6**；2021–2023 EV 全负，2024 年 M0 T50/T75、M1 T50/T75/T90 为正（单年，不达标）；test FPR 0.12–0.64 vs calendar-safe ≤0.05–0.10；系数 3/4 方向稳定；D30 transfer AUC 0.584–0.807。无调参/无新特征/无 gate。
 ### 15. ★ CURRENT: Portfolio Architecture（组合架构）
 - **R1.0（2026-09-04）：** failure-state predictor branch PAUSED/CLOSED；研究主线回归 PORTFOLIO ARCHITECTURE。
-- **P5（进行中，preregistered）：** CAPACITY / CAPITAL-LOCK DIAGNOSTIC——A0（K3/5层/20万层）资金占用机制分解；diagnostic only，禁止优化。
+- **P5（完成，DEVELOPMENT DIAGNOSTIC / WAITING EXTERNAL AUDIT）：** CAPACITY / CAPITAL-LOCK DIAGNOSTIC（prereg `e007979`，A0 parity PASS，结果 commit 见本表下方）。**K=3 槽位是主导容量瓶颈（63.4% 候选、55.1% 交易日 K 满），现金从不阻塞（0），K 同时是保护性 admission constraint（R0.2）**；Top10% 持仓占 capital-days 37.8%；layer2+ 占投入资本 50.9%（matched-share 平均正）；blocked_K 独立质量无显著差异（CI 跨 0）；虚拟队列 336 全部可释放、median 11 天、16.3% 已过期。Q7 登记 NEXT = D QUEUE/DEFERRED ADMISSION（仅登记不执行）。分类 A。未外审。canonical: `research/portfolio/PORTFOLIO_ARCHITECTURE_P5.md` + `results/evidence/p5/`。
 
 - **状态:** 研究**暂停**。当前唯一活跃问题是：有限 K=3 slots + 长持仓 + 多层占位/路径依赖的组合架构如何提升资金效率。
 - **P4 进展（2026-09-03，ACCEPTED DIAGNOSTIC，外审通过）:** 结构性消融显示 K=3 是实际容量瓶颈，但在当前历史样本与组合规则下同时表现为保护性的 admission constraint（解除任一约束组合均大幅恶化）；完全移除多层加仓（5→1 层）在测试路径下有害（不断言 5 层最优）。瓶颈在更深层。下一步必须等待外部审计决定；2025–2026 Confirmation 继续 CLOSED。

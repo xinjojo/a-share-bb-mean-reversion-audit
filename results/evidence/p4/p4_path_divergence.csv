@@ -1,0 +1,4 @@
+arch,first_holdings_diff_date,first_cash_diff_date,reconverged,reconverge_date,max_equity_divergence,trade_set_jaccard,common_trades,only_variant,only_A0
+A1,2020-06-16,2020-06-16,False,NEVER_RECONVERGED,345907.39573379094,0.48507462686567165,65,58,11
+A2,2023-08-15,2020-03-10,False,NEVER_RECONVERGED,502102.2981514917,0.961038961038961,74,1,2
+A3,2020-03-17,2020-03-10,False,NEVER_RECONVERGED,688399.7795526714,0.4605263157894737,70,76,6

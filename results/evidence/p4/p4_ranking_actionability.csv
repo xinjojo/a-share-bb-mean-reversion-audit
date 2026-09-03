@@ -1,0 +1,5 @@
+arch,signal_days,ranking_actionable_days,ranking_actionable_pct,no_queueable_days,full_block_days
+A0,1212,16,1.3201320132013201,913,225
+A1,1212,0,0.0,939,0
+A2,1212,17,1.4026402640264026,915,225
+A3,1212,0,0.0,945,0

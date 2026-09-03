@@ -562,3 +562,19 @@ results/current/07_p11_ranking_master.csv,csv,R0,INFRASTRUCTURE,INFRASTRUCTURE,F
 results/current/08_p2_validation_master.csv,csv,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,results/current/08_p2_validation_master.csv,R0 current summary (<=15 files)
 results/current/09_p3_portfolio_summary.csv,csv,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,results/current/09_p3_portfolio_summary.csv,R0 current summary (<=15 files)
 results/current/10_p31_mechanism_summary.json,json,R0,INFRASTRUCTURE,INFRASTRUCTURE,FALSE,,INFRASTRUCTURE,results/current/10_p31_mechanism_summary.json,R0 current summary (<=15 files)
+research/portfolio/registries/PORTFOLIO_ARCHITECTURE_P4_REGISTRY.csv,file,p4,registry,ACTIVE,FALSE,,primary,research/portfolio/registries/PORTFOLIO_ARCHITECTURE_P4_REGISTRY.csv,P4-A preregister; SHA 5f30974c
+research/portfolio/registries/PORTFOLIO_ARCHITECTURE_P4_REGISTRY.sha256,file,p4,registry,ACTIVE,FALSE,,primary,research/portfolio/registries/PORTFOLIO_ARCHITECTURE_P4_REGISTRY.sha256,SHA256 5f30974cd45a2849a9f0bf1c3252f2a14ad1ea236c26a4f2f16a5f65f8ee6545
+research/portfolio/portfolio_architecture_p4.py,file,p4,script,ACTIVE,FALSE,,primary,research/portfolio/portfolio_architecture_p4.py,P4 structural ablation engine
+research/portfolio/PORTFOLIO_ARCHITECTURE_P4.md,file,p4,report,ACTIVE,TRUE,,primary,research/portfolio/PORTFOLIO_ARCHITECTURE_P4.md,CANONICAL P4; D classification; PENDING EXTERNAL AUDIT
+results/evidence/p4/p4_portfolio_summary.csv,file,p4,result,ACTIVE,FALSE,,primary,results/evidence/p4/p4_portfolio_summary.csv,A0-A3 portfolio metrics
+results/evidence/p4/p4_yearly.csv,file,p4,result,ACTIVE,FALSE,,primary,results/evidence/p4/p4_yearly.csv,yearly returns
+results/evidence/p4/p4_signal_capture.csv,file,p4,result,ACTIVE,FALSE,,primary,results/evidence/p4/p4_signal_capture.csv,candidate/queued/executed/blocked
+results/evidence/p4/p4_ranking_actionability.csv,file,p4,result,ACTIVE,FALSE,,primary,results/evidence/p4/p4_ranking_actionability.csv,actionable days per arch
+results/evidence/p4/p4_position_occupancy.csv,file,p4,result,ACTIVE,FALSE,,primary,results/evidence/p4/p4_position_occupancy.csv,per position occupancy
+results/evidence/p4/p4_path_divergence.csv,file,p4,result,ACTIVE,FALSE,,primary,results/evidence/p4/p4_path_divergence.csv,vs A0 path divergence
+results/evidence/p4/p4_trade_set_diff.csv,file,p4,result,ACTIVE,FALSE,,primary,results/evidence/p4/p4_trade_set_diff.csv,entry-level trade set diff
+results/evidence/p4/p4_deep_mae_occupancy.csv,file,p4,result,ACTIVE,FALSE,,primary,results/evidence/p4/p4_deep_mae_occupancy.csv,A0 deep-MAE occupancy (descriptive)
+results/evidence/p4/p4_full_block_ledger.csv,file,p4,result,ACTIVE,FALSE,,primary,results/evidence/p4/p4_full_block_ledger.csv,A0 full-block dates
+results/evidence/p4/p4_blocked_episode_outcomes.csv,file,p4,result,ACTIVE,FALSE,,primary,results/evidence/p4/p4_blocked_episode_outcomes.csv,blocked candidate outcome coverage 27.2%
+results/evidence/p4/p4_blocked_opportunities.csv,file,p4,result,ACTIVE,FALSE,,primary,results/evidence/p4/p4_blocked_opportunities.csv,blocked K/held per arch
+results/evidence/p4/p4_interaction_decomposition.csv,file,p4,result,ACTIVE,FALSE,,primary,results/evidence/p4/p4_interaction_decomposition.csv,slot/layer/interaction decomposition

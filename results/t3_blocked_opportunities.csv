@@ -1,0 +1,7 @@
+total_signal_opportunities,executed_initial,blocked_gate,blocked_by_k,blocked_by_held,blocked_capital,blocked_missing,blocked_lot,unfilled_eop,blocked_k_with_frozen_episode,blocked_k_positive_frozen,gate
+530,76,0,336,116,0,0,1,1,123,92,G0
+530,70,40,296,107,0,0,16,1,101,79,G1_EO
+530,71,40,304,101,0,0,13,1,101,78,G1_EA
+530,74,0,344,110,0,0,1,1,125,92,G2
+530,74,4,341,108,0,0,2,1,121,93,G4_EO
+530,72,4,325,111,0,0,17,1,117,91,G4_EA

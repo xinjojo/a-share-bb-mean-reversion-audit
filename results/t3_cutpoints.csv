@@ -1,0 +1,5 @@
+item,family,cutpoint_source,Q20,Q40,Q60,Q80,basis,nan_policy,gate_use
+R01 ALL_A_EW_RET60,TREND(reverse),T2-R Discovery fixed,-4.700457275255376,-0.557761557869696,4.877382517508266,9.989866281447757,2020-01-01..2022-12-31 Discovery Y20-valid signal days with finite feature,NaN -> not strong (allow entry),G1/G2/G4 primary feature
+R05 LIMIT_DOWN_SHARE,STRESS(reverse),T2-R Discovery fixed,0.00070323488045,0.0013238019592268,0.0022593764121102,0.0044705224923162,2020-01-01..2022-12-31 Discovery Y20-valid days (dropna),NaN -> not low-stress (allow entry),G4 low-stress condition (R05<=Q20)
+G1 gate days (dev 2020-2024),,,,,,,R01>=Discovery Q80,,217
+G4 gate days (dev 2020-2024),,,,,,,R01>=Q80 AND R05<=Q20,,66

@@ -27,6 +27,7 @@
 | 14b | P4 Portfolio Architecture Causal Decomposition | **D — TESTED ARCHITECTURE BOTTLENECK NOT EXPLAINED BY SIMPLE K/LAYER REMOVAL**（结构消融 2020–2024 PURE STOCK 10bp：A0 +30.30% / A1 K=999 −0.23% / A2 ML=1 −5.84% / A3 −29.27%。**K=3 是实际容量瓶颈（candidate 530 / blocked_K 336），但在当前历史样本与组合规则下同时表现为保护性的 admission constraint / implicit capacity filter**；解除任一约束均大幅恶化；A2 同批股票纯路径差异即可 ±50 万；A0 parity 精确通过。边界：P4 仅测试极端消融 K 3→999、levels 5→1，未搜索 architecture space，不构成"K/layer 结构不重要"的全局断言） | ACCEPTED DIAGNOSTIC（外审通过） | `[research/portfolio/PORTFOLIO_ARCHITECTURE_P4.md](research/portfolio/PORTFOLIO_ARCHITECTURE_P4.md)` |
 | 14c | P4.1 Marginal Admission / Capacity Shadow-Price Audit | **B — CAPITAL/PATH DILUTION DOMINANT**（A1_ONLY 58 笔独立 quality +3.28%/win 68.8% 仍为正，但实际 PnL −118,610；**COMMON 65 笔同 key、same exit 100% 下 A1 少赚 67,116（STRONG CAPITAL/PATH DILUTION EVIDENCE）**；A1_ONLY 深 MAE 率 40.6% vs COMMON 18.8%（**SUGGESTIVE TAIL-QUALITY DETERIORATION**，非 population-level 信号质量恶化——事件日 bootstrap CI [−3.59,+1.73] 跨 0，aggregate independent quality 不显著更差）；A0_ONLY 独立质量 −1.97%/win 40% 且覆盖仅 45.5% → K=3 未被证明系统性过滤坏信号；PnL bridge residual=0.00；容量影子成本每额外 1 笔 ≈ −6,494 元） | DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH） | `[research/portfolio/MARGINAL_ADMISSION_P41.md](research/portfolio/MARGINAL_ADMISSION_P41.md)` |
 | 14d | S0 Stop-Loss Semantics Remediation（复权语义修复） | **A — OLD PHASE-A CONCLUSION ROBUST TO ADJUSTED-SPACE SEMANTICS FIX**（dev n=61,828；factor_changed 7,492=12.12%，old-only 误触发 460、new-only 0；**11 档 adjusted-space 固定止损均值全部低于 baseline**（d_adj_base −2.69~−0.85pp）；**S0.1 补全配对推断：paired delta block-bootstrap（L=21,B=2000）11/11 档 95% CI 上界全 <0、p(delta≥0)=0.000**；adjusted vs old 差异 <0.03pp；I1–I8 invariants 全 PASS（I7=dev-comparable old parity exact、I8=2025 边界污染隔离）；旧 raw parity true_mismatch=0（唯一差异 002789 为 canonical 依赖 2025-01-24 价格的已知边界，已披露）） | **ACCEPTED**（S0.1 外审通过） | `[research/execution/STOP_LOSS_SEMANTICS_S0.md](research/execution/STOP_LOSS_SEMANTICS_S0.md)` |
+| 14e | F1 Deep-MAE Recoverability / Failure-State Taxonomy | **A — STRONG RECOVERABILITY PREDICTABILITY**（DEVELOPMENT DIAGNOSTIC；D20 锚点 12,590 笔、D30 6,130 笔；**18 个预注册 primary 中 13 个通过完整 gate**：方向一致 + BH q(m=18)<0.05 + 配对 block-bootstrap(L=21,B=2000) CI 排除 0 + D20/D30 同向，覆盖 PRICE_PATH/POSITION/VOLATILITY/RECOVERY/LIQUIDITY 5 family（收敛为约 3 个独立维度：浮亏深度×时长、波动率、量能）；F_CUR_MAE 本身不显著(q=0.123)；R01 Q1 弱市场 D20 恢复率 15.7% vs Q5 3.6%、R05 Q5 压力市场 17.8% vs Q1 4.4%（与 T3 systemic-vs-isolated 呼应）；跌到 −20% 后 ~90% 样本仍会再创新低、一半再跌 ≥7.5pp；实现审计：F_DAYS_SINCE_LOW 因 anchor 定义 degenerate 恒 0（已披露）、F_NLOW10 方向与预注册相反不 pass）。**本阶段仅证明失败/可恢复前瞻可识别，未设计任何 stop/exit** | DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH） | `[research/risk/FAILURE_STATE_F1.md](research/risk/FAILURE_STATE_F1.md)` |
 | 15 | 2025–2026 Confirmation | **UNTOUCHED / CLOSED**（全程未读取任何 2025–2026 的 episode outcome / portfolio / feature） | CLOSED | — |
 
 ---
@@ -68,6 +69,22 @@ PnL bridge residual=0.00 精确闭合。容量影子成本：每额外 1 笔 ≈
 结论（范围限定）：**在冻结的 −10%…−40% 网格下，简单固定价格止损对独立 BB episode 期望稳健有害**。这**不等于**所有止损方法都无用。
 Fixed Stop Phase A → **SUPERSEDED BY S0**；S0 → **ACCEPTED**。
 
+**F1 进展（2026-09-03，DEVELOPMENT DIAGNOSTIC，待外审）：** 深度浮亏锚点（D20/D30）的
+可恢复性前瞻识别——**A — STRONG RECOVERABILITY PREDICTABILITY**：
+（1）**基线**：D20 后 recover_to_entry 仅 12.1%、final_profit 36.7%、中位回本 11 天；D30 后
+recover 7.8%、final_profit 30.6%。跌到 −20% 后 ~90% 样本还会再创新低，其中一半再跌 ≥7.5pp
+（典型触底约 −27.5%）。
+（2）**13/18 primary 通过完整 gate**（方向 + BH q<0.05 + 配对 block-bootstrap CI 排除 0 +
+D20/D30 同向）：最强为 F_DAYS_UNDERWATER（corr −0.353）、F_ATR20_PCT（+0.344）、
+F_DAYS_SINCE_FIRST_D10（−0.322）、F_DIST_MA20（−0.317）；F_CUR_MAE 单点深度不显著。
+收敛为约 3 个独立维度（浮亏深度×时长 / 波动率 / 量能）——不可表述为 13 个独立发现。
+（3）**市场状态 overlay（secondary）**：弱市场/压力市场中的 deep-MAE 恢复率远高于强市场
+孤立超跌（R01 Q1 15.7% vs Q5 3.6%；R05 Q5 17.8% vs Q1 4.4%）——与 T3 systemic-vs-isolated
+主题在 recovery 维度独立呼应。
+（4）实现审计：F_DAYS_SINCE_LOW 因 anchor 定义 degenerate（恒 0）、F_NLOW10 方向与预注册
+相反不 pass；均不改变 Registry，不影响门控。
+**本轮未设计任何 stop/exit/failure-score；禁止据此构造交易规则。**
+
 **下一步仍须等待外部审计决定**，方可决定是否打开 2025–2026 Confirmation 或进入新的
 研究阶段。
 
@@ -101,6 +118,7 @@ Fixed Stop Phase A → **SUPERSEDED BY S0**；S0 → **ACCEPTED**。
 | ATR Slot Allocation Registry | 见 `research/portfolio/registries/ATR_SLOT_ALLOCATION_REGISTRY.sha256` | — |
 | Market State Gate Registry | 见 `research/market_state/registries/MARKET_STATE_GATE_REGISTRY.sha256` | — |
 | S0 Stop-Loss Semantics Registry | `b352f77`（S0-A，结果前 push） | `7e8416fd4fc3a3f67da41d020747ffda34aaf8b1e230ddf574c131ab30f36273` |
+| F1 Failure-State Registry | `1de126b`（F1-A，结果前 push） | `a052309e6f939796795566d1cd1094e2ec706f53250c231377c64efb315eef14` |
 
 ---
 

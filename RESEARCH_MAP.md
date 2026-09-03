@@ -57,6 +57,9 @@ P4.1 Marginal Admission ──► B CAPITAL/PATH DILUTION DOMINANT (DEVELOPMENT 
 S0 Stop-Loss Semantics ──► A OLD PHASE-A CONCLUSION ROBUST (ACCEPTED)
    │
    ▼
+F1 Deep-MAE Recoverability ──► A STRONG RECOVERABILITY PREDICTABILITY (DEVELOPMENT DIAGNOSTIC, 待外审)
+   │
+   ▼
 ★ CURRENT: Portfolio Architecture（组合架构瓶颈，研究暂停，等待外部审计）★
 ```
 
@@ -179,6 +182,14 @@ S0 Stop-Loss Semantics ──► A OLD PHASE-A CONCLUSION ROBUST (ACCEPTED)
 - **状态:** **DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH）** — **B — CAPITAL/PATH DILUTION DOMINANT**（A1_ONLY 58 笔独立 quality +3.28%/win 68.8% 仍为正，但实际 PnL −118,610；COMMON 65 笔同 key、same exit 100% 下 A1 少赚 67,116（STRONG CAPITAL/PATH DILUTION EVIDENCE）；A1_ONLY 深 MAE 率 40.6% vs COMMON 18.8%（SUGGESTIVE TAIL-QUALITY DETERIORATION）；A0_ONLY 独立 −1.97%/win40% 覆盖 45.5% → K=3 未证明系统性过滤坏信号；PnL bridge residual=0.00 精确闭合）
 - **关键发现:** **H3（资本/路径稀释）主导**；H1（边际信号更差）仅 **suggestive tail-quality deterioration**，aggregate 独立质量未被统计建立为显著更差（事件日 bootstrap CI [−3.59,+1.73] 跨 0）。A1_ONLY 实际亏损集中在少数 deep-MAE 长持仓（4 笔 < −50k 合计 −308,226，其余 54 笔 +189,616）；同一批 COMMON 交易在 A1 中赢家被稀释 > 深亏减少。容量影子成本：每额外 1 笔 ≈ −6,494 元、每额外 slot-day ≈ −148 元。P4 结论保持不变。
 
+### 14c. F1 Deep-MAE Recoverability / Failure-State Taxonomy
+- **Canonical:** `[research/risk/FAILURE_STATE_F1.md](research/risk/FAILURE_STATE_F1.md)`
+- **源码:** `research/risk/failure_state_f1.py`
+- **Registry:** `research/risk/registries/FAILURE_STATE_F1_REGISTRY.csv`（SHA256 `a052309e...eef14`，pre-reg `1de126b`）
+- **结果数据:** `results/evidence/f1/`
+- **状态:** **DEVELOPMENT DIAGNOSTIC（WAITING EXTERNAL AUDIT，未写入 README CURRENT TRUTH）** — **A — STRONG RECOVERABILITY PREDICTABILITY**（D20 锚点 12,590 笔 / D30 6,130 笔；18 个预注册 primary 中 13 个通过完整 gate：方向 + BH q(m=18)<0.05 + 配对 block-bootstrap(L=21,B=2000) CI 排除 0 + D20/D30 同向）
+- **关键发现:** ① 基线——D20 后 recover_to_entry 12.1%、final_profit 36.7%；跌到 −20% 后 ~90% 样本仍会再创新低、一半再跌 ≥7.5pp；② 最强 prospective 信号=浮亏深度×时长（F_DAYS_UNDERWATER −0.353 / F_DAYS_SINCE_FIRST_D10 −0.322 / F_DIST_MA20 −0.317）+ 波动率（F_ATR20_PCT +0.344 / F_INTRADAY_RANGE +0.321 / F_RV20 +0.305），F_CUR_MAE 单点深度不显著（q=0.123）；③ 收敛为约 3 个独立维度（深度×时长/波动/量能），不可表述为 13 个独立发现；④ 市场 overlay：弱市场/压力市场 deep-MAE 恢复率远高于强市场孤立超跌（R01 Q1 15.7% vs Q5 3.6%；R05 Q5 17.8% vs Q1 4.4%），与 T3 systemic-vs-isolated 呼应；⑤ 实现审计：F_DAYS_SINCE_LOW 因 anchor 定义 degenerate（恒 0）、F_NLOW10 方向与预注册相反不 pass。**本轮未设计任何 stop/exit/failure-score。**
+
 ### 15. ★ CURRENT: Portfolio Architecture（组合架构）
 - **状态:** 研究**暂停**。当前唯一活跃问题是：有限 K=3 slots + 长持仓 + 多层占位/路径依赖的组合架构如何提升资金效率。
 - **P4 进展（2026-09-03，ACCEPTED DIAGNOSTIC，外审通过）:** 结构性消融显示 K=3 是实际容量瓶颈，但在当前历史样本与组合规则下同时表现为保护性的 admission constraint（解除任一约束组合均大幅恶化）；完全移除多层加仓（5→1 层）在测试路径下有害（不断言 5 层最优）。瓶颈在更深层。下一步必须等待外部审计决定；2025–2026 Confirmation 继续 CLOSED。
@@ -199,6 +210,8 @@ S0 Stop-Loss Semantics ──► A OLD PHASE-A CONCLUSION ROBUST (ACCEPTED)
 | Market State Gate Registry | `research/market_state/registries/` | T3 registry commit |
 | Portfolio Architecture P4 Registry | `research/portfolio/registries/` | `70588a7`（P4-A） |
 | Marginal Admission P4.1 Registry | `research/portfolio/registries/` | `c6c2865`（P4.1-A） |
+| S0 Stop-Loss Semantics Registry | `research/execution/registries/` | `b352f77`（S0-A） |
+| F1 Failure-State Registry | `research/risk/registries/` | `1de126b`（F1-A） |
 
 ---
 

@@ -620,3 +620,19 @@ results/evidence/s0/s0_bootstrap.csv,file,s0,result,ACTIVE,FALSE,,primary,result
 results/evidence/s0/s0_invariants.json,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 invariants I1-I7
 results/evidence/s0/s0_summary.json,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0 summary + classification
 results/evidence/s0/s0_delta_block_bootstrap.csv,file,s0,result,ACTIVE,FALSE,,primary,results/evidence/s0/,S0.1 paired delta block bootstrap (primary inference)
+research/risk/registries/FAILURE_STATE_F1_REGISTRY.csv,file,f1,registry,ACTIVE,TRUE,,primary,research/risk/registries/,F1 preregistration registry (18 primary + 3 secondary; commit 1de126b)
+research/risk/registries/FAILURE_STATE_F1_REGISTRY.sha256,file,f1,registry,ACTIVE,TRUE,,primary,research/risk/registries/,F1 registry sha256 (a052309e...)
+research/risk/failure_state_f1.py,file,f1,code,ACTIVE,TRUE,,primary,research/risk/,F1 failure-state taxonomy script
+research/risk/FAILURE_STATE_F1.md,file,f1,report,ACTIVE,TRUE,,primary,research/risk/,F1 canonical report (DEVELOPMENT DIAGNOSTIC)
+results/evidence/f1/f1_base_rates.csv,file,f1,result,ACTIVE,FALSE,,primary,results/evidence/f1/,F1 D10/D20/D30 base recovery rates
+results/evidence/f1/f1_anchor_episodes.csv,file,f1,result,ACTIVE,FALSE,,evidence,results/evidence/f1/,F1 anchor episode detail (45,634 rows)
+results/evidence/f1/f1_feature_effects.csv,file,f1,result,ACTIVE,FALSE,,primary,results/evidence/f1/,F1 per-feature effects D10/D20/D30
+results/evidence/f1/f1_quintiles.csv,file,f1,result,ACTIVE,FALSE,,evidence,results/evidence/f1/,F1 feature quintile recovery rates
+results/evidence/f1/f1_anchor_day_inference.csv,file,f1,result,ACTIVE,FALSE,,primary,results/evidence/f1/,F1 D20 day-level HAC + BH m=18
+results/evidence/f1/f1_winner_loser_effects.csv,file,f1,result,ACTIVE,FALSE,,evidence,results/evidence/f1/,F1 winner vs loser standardized effects
+results/evidence/f1/f1_future_adverse_excursion.csv,file,f1,result,ACTIVE,FALSE,,primary,results/evidence/f1/,F1 additional adverse excursion after anchor
+results/evidence/f1/f1_recovery_timing.csv,file,f1,result,ACTIVE,FALSE,,primary,results/evidence/f1/,F1 time-to-breakeven distribution
+results/evidence/f1/f1_layer_recovery.csv,file,f1,result,ACTIVE,FALSE,,evidence,results/evidence/f1/,F1 layer-count recovery descriptive
+results/evidence/f1/f1_market_state.csv,file,f1,result,ACTIVE,FALSE,,evidence,results/evidence/f1/,F1 R01/R05 market-state overlay
+results/evidence/f1/f1_predictability_gate.csv,file,f1,result,ACTIVE,FALSE,,primary,results/evidence/f1/,F1 full predictability gate
+results/evidence/f1/f1_summary.json,file,f1,result,ACTIVE,FALSE,,primary,results/evidence/f1/,F1 summary json (classification A)

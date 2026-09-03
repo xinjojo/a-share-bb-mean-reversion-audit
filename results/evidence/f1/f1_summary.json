@@ -1,0 +1,33 @@
+{
+  "n_dev_episodes": 61828,
+  "n_anchors_D10": 26914,
+  "n_anchors_D20": 12590,
+  "n_anchors_D30": 6130,
+  "n_features_ok": 45634,
+  "primary_BH_m": 18,
+  "n_full_pass": 13,
+  "pass_features": [
+    "F_DAYS_SINCE_ENTRY",
+    "F_DAYS_SINCE_FIRST_D10",
+    "F_DIST_MA20",
+    "F_RET3",
+    "F_RET5",
+    "F_RET20",
+    "F_REB3",
+    "F_REB5",
+    "F_AMT_RATIO20",
+    "F_ATR20_PCT",
+    "F_INTRADAY_RANGE",
+    "F_RV20",
+    "F_DAYS_UNDERWATER"
+  ],
+  "pass_families": [
+    "LIQUIDITY",
+    "POSITION",
+    "PRICE_PATH",
+    "RECOVERY",
+    "VOLATILITY"
+  ],
+  "classification": "A",
+  "no_2025_read": true
+}

@@ -16,3 +16,4 @@ __pycache__/
 
 # 敏感
 download.txt
+results/_p3_cache/

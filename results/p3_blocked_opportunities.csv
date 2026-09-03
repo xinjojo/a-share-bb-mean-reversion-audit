@@ -1,0 +1,4 @@
+version,total_candidates,queued,blocked_held,blocked_k,blocked_k_with_frozen,blocked_k_positive_frozen
+B0,530,78,116,336,123,92
+B1,530,85,95,350,122,94
+B2,252477,58,142,252277,64043,49591

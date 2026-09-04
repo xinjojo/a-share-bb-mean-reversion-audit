@@ -1,0 +1,24 @@
+key,value
+phase,E5.1
+title,Stock Date Alignment Gate
+verdict,PASS WITH CORRECTION
+date_mapping_method,Full-data stocks only (2618/5237) + ETF trading calendar (authoritative)
+e5_date_mapping_issue,E5 used row-in-year index -> first N trading days; incorrect for IPO stocks (assigned early-year dates instead of actual listing dates)
+full_data_stocks,2618
+total_stocks,5237
+full_data_pct,50.0
+partial_stocks_excluded,2619
+pre_close_mismatch_pct,0.334
+price_anchor_000001_20200102,16.87 OK
+price_anchor_000001_20201231,19.34 OK
+price_anchor_600000_20200102,12.47 OK
+price_anchor_300750_20200102,107.52 OK
+stocks_per_day,2618 constant
+zero_amount_rows,0
+suspension_handling,Suspended days excluded (not kept as zero-amount rows)
+forward_return_horizon,Market trading day horizon (shift(-h) by trading days), consistent stock/ETF
+pit_breadth,signal_count_t / eligible_count_t per day; denominator =当天真实 eligible universe
+random_topn_method,Per-day: fixed candidate set, fixed N, 1000 reps, fixed seed 42; report mean/median daily percentile + pooled actual vs pooled random expected
+core_conclusions_unchanged,True (all 7)
+h4_status,STILL PARTIALLY SUPPORTED (corrected values strengthen signal expectancy and BB_Z IC)
+next_phase,S1 Stock Signal Mechanism Validation

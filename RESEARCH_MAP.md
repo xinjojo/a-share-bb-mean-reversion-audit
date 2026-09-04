@@ -81,7 +81,19 @@ F3 Predictor Feasibility ──► C PREDICTIVE BUT ECONOMICALLY INSUFFICIENT (A
 S1 Signal Selectivity ──► BB threshold D HARMFUL / RSI C / Sector N/A (ACCEPTED)
    │
    ▼
-★ CURRENT: B1 B20 SIGNAL BREADTH / CROWDING DIAGNOSTIC（date-level；W1=D ACCEPTED 已关 branch；D1 HOLD；S3 NOT START；2025–26 CLOSED）★
+S1.1 Contemporaneous BB Depth Ranking ──► C NO STABLE RANKING VALUE (ACCEPTED)
+   │
+   ▼
+D1 / D1.1 / D1.2 PIT Context ──► SECTOR B PARTIAL · FUNDAMENTAL HOLD (D1.2-C AMBIGUOUS; S3 NOT START) (ACCEPTED)
+   │
+   ▼
+W1 Multi-Timeframe BB ──► D HARMFUL (ACCEPTED; W2 NOT START)
+   │
+   ▼
+B1 / B1.1 Signal Breadth ──► A STRONG BREADTH VALUE (B1.1 corrected inference ACCEPTED)
+   │
+   ▼
+★ CURRENT: P7 PANIC-BREADTH CAPACITY ARCHITECTURE（panic-day K6 / Top20 结构探针；530-vs-527 bridge 前置；2025–26 CLOSED）★
 ```
 
 ---

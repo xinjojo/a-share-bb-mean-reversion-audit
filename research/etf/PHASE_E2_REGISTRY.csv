@@ -1,0 +1,98 @@
+parameter,value,notes
+# === FROZEN REFERENCES ===
+e1_commit,6789810,E1 official commit
+e1_verdict,NO_REPLICATION,frozen; E2 cannot redefine
+e1_1_commit,1fa73e9,E1.1 official commit
+e1_1_verdict,MULTI-MECHANISM_FAILURE,frozen; E2 cannot redefine
+e2_gate_verdict,PASS_WITH_CORRECTION,Gate 1A corrected +16.5% to +0.38% mean at mid; Gate 1B confirmed ranking=amount
+
+# === HYPOTHESIS ===
+hypothesis,H1_MIDLINE_EXIT,For ETF/index BB mean reversion, natural post-oversold reversion target may be BB midline rather than upper band/STRICT_C
+mechanism_source,E1.1 exit-mismatch evidence,100% hit mid, ~60% hit upper, ~43% hit mid then failed, 95% losers=REBOUND_RELAPSE
+note,Gate 1A correction: actual return at first mid touch is modest (M1 mean +0.38%, median +1.33%), not +16.5%
+
+# === CONTROL ===
+control_exit,STRICT_C_dynamic_touch,high_adj >= pstar(analytic_Pstar 近19日 close_adj) -> fill at pstar/adj*(1-slippage)
+control_exit_semantics,bar_based_threshold_touch,same as frozen E1
+
+# === TREATMENT (only difference from Control) ===
+treatment_exit,FIRST_BB_MIDLINE_TOUCH,high_adj >= bb_mid(MA20) -> fill at bb_mid/adj*(1-slippage)
+treatment_exit_semantics,bar_based_threshold_touch,IDENTICAL execution generosity as Control
+midline_definition,bb_mid = rolling mean 20 of close_adj,computed PIT using only data up to each day, no future data
+midline_touch_condition,high_adj >= bb_mid,same bar-based semantics as STRICT_C pstar touch
+midline_fill_price,bb_mid / adj * (1 - slippage),same slippage and tick rounding as Control
+midline_no_future_data,true,bb_mid computed with rolling(20) on each day, no look-ahead
+
+# === EVERYTHING ELSE FROZEN (identical to E1) ===
+bb_window,20,frozen
+bb_std,2.0,frozen
+entry_condition,close < bb_lower,Model1=ETF close; Model2=Index close
+ranking_variable,amount,日成交额降序 (confirmed by Gate 1B)
+top_n,10,frozen
+position_sizing,level_cash=200k per entry/add,frozen
+k_max_positions,3,frozen
+max_levels,5,frozen
+initial_cash,1000000,frozen
+slippage_bp,10,frozen
+commission_rate,0.00025,frozen
+commission_min,5,frozen
+sell_stamp_duty,0,ETF-specific
+liquidity_filter,ADV60(t-1)>=20000000 RMB,frozen
+pit_representative,highest ADV60 using t-1 info,frozen
+representative_switch,hold old ETF until exit,frozen
+lot_size,100,frozen
+tick_size,0.001,frozen
+price_limit,PIT 10%/20%,frozen
+t_plus_1,true,frozen (note: E1 engine allows same-day entry+exit in code; both Control and Treatment use identical semantics)
+suspension,amount>0 check,frozen
+signal_timing,T close,frozen
+execution_timing,T+1 open,frozen
+
+# === MODELS ===
+model1,ETF_price_signal_+_ETF_execution,frozen
+model2,Index_price_signal_+_PIT_ETF_execution,frozen
+four_results,M1_Control,M1_Midline,M2_Control,M2_Midline,Control must reproduce frozen E1
+
+# === WINDOWS ===
+full_window,2006-05-15 to 2026-09-03,each model's own max history
+common_window,2020-01-01 to 2024-12-31,primary comparison window, same as stock A0 baseline
+primary_judgment,common_window,avoid different history environments
+
+# === SUCCESS CRITERIA (frozen before run) ===
+strong_support,1.CW total return materially improves 2.PF>Control 3.payoff>Control 4.MaxDD not materially worse 5.tail loss decreases 6.rebound-relapse decreases AND CW expectancy>=0,
+partial_support,mechanism metrics (PF/payoff/holding/tail) clearly improve but total return still <=0,
+no_support,does not materially improve expectancy or only surface metrics change,
+inconclusive,data/execution ambiguity or insufficient Model2 coverage,
+positive_return_not_enough,must also confirm PF/payoff/tail/holding/mechanism consistency,
+
+# === FORBIDDEN MODIFICATIONS ===
+no_trailing_stop,true,
+no_partial_exit,true,
+no_time_stop,true,
+no_ma10_or_ma5_exit,true,
+no_mid_plus_buffer,true,
+no_upper_lower_hybrid,true,
+no_adaptive_exit,true,
+no_breadth_filter,true,leave for E3/E2b independent preregistration
+no_cluster_filter,true,
+no_stop_loss,true,leave for independent phase
+no_bb_window_change,true,
+no_sigma_change,true,
+no_top_n_change,true,
+no_position_size_change,true,
+no_liquidity_change,true,
+no_entry_side_change,true,
+
+# === TESTS ===
+test_midline_no_future_data,bb_mid uses rolling(20) only,
+test_same_execution_semantics,bar-based touch fill at threshold, identical to Control,
+test_t_plus_1,identical to E1 engine semantics (both Control and Treatment),
+test_tick_rounding,all fills round to 0.001,
+test_price_limit,limit-down day exit skipped,
+test_suspension,amount=0 day exit skipped,
+test_representative_switch,actual held ETF used, not current representative,
+test_control_reproduces_e1,Control result must match frozen E1 within float tolerance,
+
+# === OUTPUTS ===
+output_dir,results/etf/,
+registry_sha256,(computed after freeze),

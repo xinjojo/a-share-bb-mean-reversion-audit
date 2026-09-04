@@ -1,0 +1,5 @@
+config,total_return_pct,CAGR_pct,ann_vol_pct,Sharpe,MaxDD_pct
+M1 Control,-60.75,-4.5,16.5,-0.2065,-69.86
+M1 Midline,-66.69,-5.27,17.58,-0.2317,-71.84
+M2 Control,-43.41,-2.77,14.78,-0.1222,-50.06
+M2 Midline,-20.67,-1.13,13.48,-0.021,-35.26

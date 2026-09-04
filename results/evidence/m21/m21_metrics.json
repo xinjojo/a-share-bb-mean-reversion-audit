@@ -1,0 +1,14 @@
+{
+ "n_trades": 78,
+ "net_total_return_pct": -7.2514,
+ "net_pnl": -7251.41,
+ "cagr_pct": -1.5517,
+ "max_dd_pct": -24.1339,
+ "sharpe": -0.1017,
+ "mean_trade_pct": -0.0683,
+ "median_trade_pct": -0.1634,
+ "win_pct": 48.72,
+ "profit_factor": 0.93,
+ "worst_trade_pct": -5.3955,
+ "best_trade_pct": 6.8276
+}

@@ -1,0 +1,14 @@
+{
+ "I1_carrier_510300": true,
+ "I2_panic80_unchanged": true,
+ "I3_t1_open": true,
+ "I4_5d_hold": true,
+ "I5_non_overlap": true,
+ "I6_100k_capital": true,
+ "I7_no_negative_cash": true,
+ "I8_permutation_without_replacement": true,
+ "I9_B5000_seed0": true,
+ "I10_single_draw_not_primary": true,
+ "I11_no_scan": true,
+ "I12_no_2025_26": true
+}

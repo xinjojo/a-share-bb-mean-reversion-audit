@@ -1,0 +1,10 @@
+{
+ "commission_total_rmb": 3859.76,
+ "slippage_economic_impact_pp": 15.439,
+ "fee_economic_impact_pp": 3.8598,
+ "gross_account_total_return_pct": 12.0474,
+ "no_slip_net_account_total_return_pct": 8.1876,
+ "net_account_total_return_pct": -7.2514,
+ "sum_of_trade_gross_returns_pct": -5.3302,
+ "note": "sum_of_trade_gross_returns is NOT an account gross total; use gross_account_total_return_pct"
+}

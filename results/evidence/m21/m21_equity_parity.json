@@ -1,0 +1,7 @@
+{
+ "final_equity": 92748.5888,
+ "expected": 92748.5888,
+ "parity_diff_rmb": 0.0,
+ "parity_tolerance": 0.01,
+ "parity_pass": true
+}

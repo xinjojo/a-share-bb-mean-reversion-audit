@@ -1,0 +1,10 @@
+{
+ "old_qty_rule": "floor(CAPITAL/fill/lot)*lot, fee NOT included in sizing (fixed 100k budget regardless of account cash)",
+ "n_trades": 78,
+ "qty_changed_count": 76,
+ "qty_changed_pct": 97.44,
+ "old_rule_max_account_cash_deficit_rmb": 13206.41,
+ "old_rule_fee_overshoot_vs_100k_rmb": 24.9,
+ "corrected_min_cash_rmb": 2.42,
+ "cash_invariant_ok": true
+}

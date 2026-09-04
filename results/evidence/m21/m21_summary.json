@@ -1,0 +1,89 @@
+{
+ "registry_sha": "7ff3333e...",
+ "carrier": "510300.SH",
+ "trades": 78,
+ "metrics": {
+  "n_trades": 78,
+  "net_total_return_pct": -7.2514,
+  "net_pnl": -7251.41,
+  "cagr_pct": -1.5517,
+  "max_dd_pct": -24.1339,
+  "sharpe": -0.1017,
+  "mean_trade_pct": -0.0683,
+  "median_trade_pct": -0.1634,
+  "win_pct": 48.72,
+  "profit_factor": 0.93,
+  "worst_trade_pct": -5.3955,
+  "best_trade_pct": 6.8276
+ },
+ "yearly": [
+  {
+   "year": 2021,
+   "trade_count": 20,
+   "net_pnl": 8585.79,
+   "net_return_pct": 8.7805,
+   "mean_trade_pct": 0.439,
+   "win_pct": 65.0
+  },
+  {
+   "year": 2022,
+   "trade_count": 20,
+   "net_pnl": -4582.33,
+   "net_return_pct": -3.4742,
+   "mean_trade_pct": -0.1737,
+   "win_pct": 35.0
+  },
+  {
+   "year": 2023,
+   "trade_count": 19,
+   "net_pnl": -16924.44,
+   "net_return_pct": -17.3523,
+   "mean_trade_pct": -0.9133,
+   "win_pct": 47.37
+  },
+  {
+   "year": 2024,
+   "trade_count": 19,
+   "net_pnl": 5669.58,
+   "net_return_pct": 6.7158,
+   "mean_trade_pct": 0.3535,
+   "win_pct": 47.37
+  }
+ ],
+ "positive_years": [
+  2,
+  4
+ ],
+ "permutation": {
+  "observed_mean_pct": -0.0683,
+  "null_mean": -0.3941,
+  "null_p2_5": -0.9498,
+  "null_p97_5": 0.2569,
+  "empirical_p": 0.1452,
+  "b": 5000,
+  "seed": 0,
+  "without_replacement": true,
+  "old_single_draw_delta_pp": 0.5144,
+  "old_single_draw_status": "WITHDRAWN as primary evidence (single random matched draw; descriptive only)",
+  "delta_vs_null_mean_pp": 0.3257
+ },
+ "cost": {
+  "commission_total_rmb": 3859.76,
+  "slippage_economic_impact_pp": 15.439,
+  "fee_economic_impact_pp": 3.8598,
+  "gross_account_total_return_pct": 12.0474,
+  "no_slip_net_account_total_return_pct": 8.1876,
+  "net_account_total_return_pct": -7.2514,
+  "sum_of_trade_gross_returns_pct": -5.3302,
+  "note": "sum_of_trade_gross_returns is NOT an account gross total; use gross_account_total_return_pct"
+ },
+ "classification": "D_HARMFUL",
+ "equity_parity": {
+  "final_equity": 92748.5888,
+  "expected": 92748.5888,
+  "parity_diff_rmb": 0.0,
+  "parity_tolerance": 0.01,
+  "parity_pass": true
+ },
+ "note": "M2 substantive D accepted; M2.1 is hygiene remediation only; no verdict reopening"
+}

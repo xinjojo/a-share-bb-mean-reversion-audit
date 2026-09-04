@@ -1,0 +1,27 @@
+item,specification,frozen_value
+phase,PHASE S1 - SIGNAL SELECTIVITY AUDIT (BB DEPTH / RSI / SECTOR STRENGTH),entry-selectivity only
+sample,"2020-01-01 .. 2024-12-31 Development; 2025-2026 CLOSED; signal_date <= 2024-12-31 enforced","2020-2024 dev"
+evidence_framework,independent full-market replay ONLY (V2A_FROZEN_STRICT semantics); K=3 portfolio outcome NOT used as primary signal evidence,"frozen replay"
+baseline_signal,B20 = BB20 sample-std entry k=2.0 (close_adj < MA20 - 2*SD20); frozen eligibility: PIT ST / listed>=60d / amount rank recorded / execution constraints,"B20"
+exit,STRICT_C frozen: dynamic Pstar touch (Upper(P)=mean(x1..x19,P)+2*sample_std ddof=1, k=2 fixed) + TAKE_PROFIT_UB next-open + FINAL_SETTLE + censored; 10bp legs; historical stamp; 100-share lots; ref_first; tick ceil; T+1,"exit k=2 unchanged"
+test1_bb_depth,PRIMARY: B20 k=2.0 / B25 k=2.5 / B30 k=3.0 as REAL rebuilt entry signals (NOT post-hoc subset of B20 trades); forbidden: 2.1/2.2/2.3/2.4/2.6/2.7/2.8/2.9/3.1+; no optimum search; B25/B30 must rebuild independent episodes with same exit,"B20/B25/B30"
+bb_z_diagnostic,BB_Z=(close_adj-MA20)/SD20 sample-std; frozen bins [-2.0,-2.5) / [-2.5,-3.0) / [-3.0,-3.5) / <-3.5; no re-binning after results,"frozen bins"
+test2_rsi,Wilder RSI14 on close_adj (first 14 deltas simple-average seed then Wilder smoothing); R30=B20 AND RSI14<30 (PRIMARY); R25=B20 AND RSI14<25 (SECONDARY); forbidden other thresholds (20/22/27/28/32/35/40 etc),R30/R25 only
+rsi_incremental,BB_Z vs RSI14 correlation (signal set); within frozen BB_Z bins compare RSI<30 vs RSI>=30 outcome; signal-day equal-weight + HAC + calendar block bootstrap,"incremental check"
+test3_sector,PIT gate FIRST: need PIT historical sector/industry membership with source/effective-date/announcement-date; current-snapshot industry classification (stock_basic.industry) NOT acceptable for 2020-2024; if gate fails -> SECTOR TEST NOT RUN, report PIT DATA NOT READY,"PIT gate"
+sector_strength,IF PIT PASS: SECTOR_RET20 = signal-date-visible industry index/portfolio past-20d return; SECTOR_REL20 = SECTOR_RET20 - all-A equal-weight RET20; sector percentile TOP30 / MIDDLE40 / BOTTOM30 of same-day candidates; H1 strong-sector-pullback vs H2 weak-sector-extreme-reversion both allowed; no threshold scan,"TOP30/MID40/BOT30"
+macd,DIAGNOSTIC ONLY: MACD(12,26,9) DIF/DEA/histogram recorded; no gate, no classification input,"diagnostic only"
+fundamental,NOT TESTED; data-readiness audit only (PIT income/balance/cashflow/forecast/express with announcement_date before signal_date),readiness only
+news,NOT TESTED; data-readiness audit only (historical timestamped news/regulatory/earnings events); no search-engine post-hoc narrative,readiness only
+outcome_metrics,n_episodes / n_signal_days / signals per year / mean / median / win rate / profit factor / MAE / MFE / mean&median hold / days underwater / censored count / calendar-year 2020-2024,"per family"
+slot_efficiency,SIGNAL_SLOT_EFFICIENCY (independent normalized diagnostic, NOT K=3 portfolio return): episodes per 100 signal days; mean return per episode; median holding days; positive episodes per 1000 holding-days; sum normalized PnL per 1000 holding-days,"fixed formula"
+candidate_reduction,B25/B30/R30/R25 vs B20: retained % / reduced % / signal days %; NOT automatically good - must pair with expectancy/tail/slot-efficiency,"report only"
+inference,PRIMARY UNIT = signal-day equal weight; HAC maxlags=10; full 2020-2024 A-share trading-calendar moving-block bootstrap L=21 B=2000 seed=0 (NaN days dropped after resampling, fx/oy paired),"signal-day + HAC10 + cal-block"
+comparisons,B25-B20 (overall) / B25-B20_ONLY (nested, -2.0..-2.5) / B30-B25_ONLY (-2.5..-3.0) / R30-matched-B20 (within BB_Z bins) / sector TOP30-BOTTOM30 (if run),"frozen pairs"
+tail_risk_gate,MAE<=-10/-20/-30% share; hold>60d/>90d share; if mean improves but tail degrades -> flag TAIL-RISK TRADEOFF,"report"
+no_combinations,B25+RSI / B25+sector / RSI+sector / BB+RSI+MACD / BB+fundamental all FORBIDDEN this phase; single-factor only,"NO combos"
+classification_bb,A: B25 vs B20_ONLY event-day delta>0 AND HAC lower>0 AND calendar bootstrap lower>0 AND >=3/5 years positive AND no clear MAE<-30 or >90d deterioration; B: point positive + >=3/5 years but one primary CI crosses 0; C: no clear increment; D: harmful. B30 extreme sensitivity only - cannot replace primary B25 post-hoc,"frozen rules"
+classification_rsi,A: RSI<30 stable positive increment within matched BB-depth comparison + HAC/calendar lower>0 + >=3/5 years positive; B: point positive + >=3/5 years but CI incomplete; C: no independent increment (repeats BB depth); D: significantly worse after filter. R25 secondary only,"frozen rules"
+classification_sector,A/B/C/D same standard as RSI; if PIT fails -> N/A PIT DATA NOT READY,"frozen rules"
+next_decision,only A or B rated factor qualifies for K=3 portfolio test; C/D excluded; if multiple A/B pick strongest single factor (no combination); prereg portfolio test separately,"single next lever"
+invariants,I1 B20 reproduces frozen independent signal baseline within declared parity scope; I2 exit STRICT_C k=2 unchanged; I3 only entry depth changes; I4 RSI signal-date-visible only; I5 sector requires PIT PASS; I6 no current membership backfill; I7 no combinations; I8 MACD diagnostic only; I9 fundamental/news not filters; I10 no K=3 portfolio optimization; I11 no threshold scan; I12 no 2025+ read; I13 prior Registry SHA unchanged,"I1-I13"

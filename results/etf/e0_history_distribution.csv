@@ -1,0 +1,13 @@
+metric,value
+total_etfs_with_data,1345.0
+history>=15y,23.0
+history>=10y,80.0
+history>=7y,140.0
+history>=5y,404.0
+history>=3y,648.0
+history>=1y,1052.0
+history<1y,293.0
+median_years,2.9
+mean_years,3.7
+p25_years,1.17
+p75_years,5.21

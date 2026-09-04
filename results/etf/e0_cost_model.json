@@ -1,0 +1,13 @@
+{
+  "commission_rate": 0.00025,
+  "min_commission": 5.0,
+  "stamp_duty": 0.0,
+  "transfer_fee": 0.0,
+  "slippage_bp": 10,
+  "slippage_sensitivity_bp": [
+    5,
+    10,
+    20
+  ],
+  "note": "佣金含经手费/证管费; 无印花税; 无过户费(baseline); slippage baseline 10bp"
+}

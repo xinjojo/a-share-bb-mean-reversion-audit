@@ -1,0 +1,82 @@
+category,item,value,source,notes
+Universe,INCLUDE,中证指数有限公司发布的境内A股股票指数对应ETF,Tushare fund_basic+index_basic,宽基/行业/主题/Smart Beta
+Universe,EXCLUDE,债券/货币/黄金/商品/跨境/港股/美股/QDII/REIT/LOF/杠杆反向/主动ETF/ETF联接,fund_type+market+benchmark分析,
+Universe,MIXED_REVIEW,指数同时含A股+港股/境外证券者标记MIXED/REVIEW,单独报告,由主审决定
+Universe,candidate_count,1400,e0_etf_candidates.csv,
+Universe,eligible_with_data,1137,e0_master_etf_mapping.csv,
+Universe,unique_index_keys,377,e0_duplicate_index_report.csv,
+Universe_A,rule,当前规模最大ETF（fund_size最大，L状态优先）,e0_current_representatives.csv,仅描述当前市场
+Universe_A,count,328,e0_current_representatives.csv,
+Universe_A,csi_eligible,244,e0_current_representatives.csv,
+Universe_B,rule,B2: 每交易日t同指数内trailing ADV60(t-1)最大且已上市ETF,e0_pit_universe_selection_detail.csv,预注册，E1前冻结
+Universe_B,alt_rule,B1: PIT AUM(fd_share*close)最大,e0_pit_universe_selection_detail.csv,仅2018-06后可用
+Universe_B,count,363,e0_pit_universe_summary.csv,
+Universe_B,earliest,2006-02,e0_pit_universe_summary.csv,
+PIT,list_date_filter,list_date<=t且(delist_date为空或>t),e0_universes.py,
+PIT,min_listing_days,60个交易日,e0_signal_capacity.py,上市满60日
+PIT,survivorship,已清盘ETF fund_daily自然截止=不可交易,e0_universes.py,无未来泄漏
+PIT,limitation,delist_date大量缺失；跟踪指数历史变更未PIT重建,e0_universe_audit.md L节,
+Model2,design,Index close→BB→signal + ETF执行,e0_universe_audit.md F节,信号历史更长，可交易收益从ETF上市起
+Model2,status,仅设计未实施,E0,index_daily补全后E1实施
+BB,window,20,冻结,股票版baseline原样
+BB,sigma,2.0,冻结,
+BB,signal,close_adj<bb_lower,冻结,下轨超卖
+BB,ranking,amount Top10,冻结,
+BB,fill,次日open(T+1),冻结,
+Portfolio,K,3,冻结,
+Portfolio,max_levels,5,冻结,
+Portfolio,level_cash,200000,冻结,
+Portfolio,initial_cash,1000000,冻结,
+Portfolio,exit,STRICT_C dynamic_touch(high_adj>=Pstar),冻结,Pstar=analytic_Pstar(近19日close_adj)
+Portfolio,TAKE_PROFIT_UB,次日open,冻结,
+Portfolio,FINAL_SETTLE,期末close*(1-slip),冻结,
+Cost,slippage_bp,10,冻结,baseline
+Cost,slippage_sensitivity,"5,10,20",e0_cost_model.json,
+Cost,commission_rate,0.00025,e0_cost_model.json,万2.5
+Cost,min_commission,5.0,e0_cost_model.json,
+Cost,stamp_duty,0.0,e0_cost_model.json,ETF无卖出印花税
+Cost,transfer_fee,0.0,e0_cost_model.json,
+Trading,t_plus,T+1,e0_trading_rules_audit.md,股票ETF
+Trading,lot_size,100份,e0_price_limit_rule.csv,
+Trading,tick_size,0.001元,e0_trading_rules_audit.md,数据驱动核验0异常
+Trading,price_limit_10pct,1145只,e0_price_limit_rule.csv,
+Trading,price_limit_20pct_star,163只,e0_price_limit_rule.csv,科创板
+Trading,price_limit_20pct_gem,92只,e0_price_limit_rule.csv,创业板2020-08-24起
+Trading,e1_required,tick_round+limit_up_down_fill+amount_gt0,e0_trading_rules_audit.md,E1必须加入
+Liquidity,filter_baseline,ADV60>=2000万,e0_liquidity_distribution.csv,E1建议，509只
+Liquidity,filter_sensitivity,ADV60>=5000万,e0_liquidity_distribution.csv,437只
+Liquidity,adv60_ge_1yi,232只,e0_liquidity_distribution.csv,
+Liquidity,adv60_ge_5yi,74只,e0_liquidity_distribution.csv,
+Liquidity,aum_ge_10yi,318只,e0_liquidity_distribution.csv,
+Liquidity,zero_amount_days,0,e0_trading_rules_audit.md,全部候选无零成交
+History,median_years,2.9,e0_history_distribution.csv,
+History,mean_years,3.7,e0_history_distribution.csv,
+History,ge_15y,23,e0_history_distribution.csv,
+History,ge_10y,80,e0_history_distribution.csv,
+History,ge_5y,404,e0_history_distribution.csv,
+History,ge_3y,648,e0_history_distribution.csv,
+Correlation,n_series,534,e0_correlation_clusters.csv,
+Correlation,n_pairs,109532,e0_correlation_clusters.csv,min_periods=250
+Correlation,pairs_gt_0.80,12237,e0_correlation_clusters.csv,
+Correlation,mean,0.555,e0_correlation_clusters.csv,
+Correlation,independent_clusters_rho0.8,79,e0_correlation_clusters.csv,distance threshold 0.3
+Signal_Density,total_days,4941,e0_signal_density.csv,
+Signal_Density,mean_eligible,101.3,e0_signal_density.csv,
+Signal_Density,mean_signals,4.92,e0_signal_density.csv,
+Signal_Density,median_signals,0,e0_signal_density.csv,
+Signal_Density,pct_zero_signal,68.9%,e0_signal_density.csv,
+Signal_Density,max_signals,266,e0_signal_density.csv,
+Capital_Util,avg_invested_pct,67.4%,e0_capital_utilization.csv,
+Capital_Util,median_invested_pct,99.97%,e0_capital_utilization.csv,
+Capital_Util,fully_invested_pct,51.8%,e0_capital_utilization.csv,
+Capital_Util,lt50_invested_pct,31.8%,e0_capital_utilization.csv,
+Capital_Util,total_return_diagnostic,-56.6%,e0_capital_utilization.csv,冻结baseline诊断，非优化
+Decision,verdict,CONDITIONAL_GO,e0_universe_audit.md N节,
+Decision,conditions,"index_daily补全;B2规则冻结;ADV60>=2000万过滤;Model1+Model2双轨;交易规则tick+涨跌停;E1禁止优化",e0_universe_audit.md O节,
+Data,fund_basic_rows,2941,retrieval_meta.json,2205L+676D
+Data,index_basic_rows,8000,retrieval_meta.json,CSI全部
+Data,fund_daily_files,1345,data/raw/etf/fund_daily/,
+Data,fund_adj_files,1345,data/raw/etf/fund_adj/,
+Data,fund_share_files,1358,data/raw/etf/fund_share/,
+Data,index_daily_status,部分下载中,e0_download_index_daily.py,154 unique index
+Data,retrieval_date,2026-09-04,retrieval_meta.json,

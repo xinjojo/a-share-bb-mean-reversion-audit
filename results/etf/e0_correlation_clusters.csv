@@ -1,0 +1,11 @@
+metric,value
+n_indexes_with_returns,534.0
+n_pairs_computed,109532.0
+pairs_abs_gt_0.95,719.0
+pairs_gt_0.90,3060.0
+pairs_gt_0.80,12237.0
+pairs_gt_0.50,70000.0
+mean_corr,0.5546113127369815
+median_corr,0.5722099659057915
+p90_corr,0.8109548082479241
+n_clusters_at_dist_0.3,79.0

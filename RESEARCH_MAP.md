@@ -63,10 +63,25 @@ F1 Deep-MAE Recoverability ──► A STRONG RECOVERABILITY PREDICTABILITY (SUP
 F1.1 Inference Remediation ──► FINAL A (CLOSE A / TOUCH A) (ACCEPTED — NO EXIT POLICY YET)
    │
    ▼
-F2 Actionability Value Bound ──► D ACTIONABILITY NEGATIVE (DEVELOPMENT DIAGNOSTIC, 待外审)
+F2 Actionability Value Bound ──► D ACTIONABILITY NEGATIVE (INVALID · SUPERSEDED BY F2.1, capital-basis mismatch)
    │
    ▼
-★ CURRENT: Portfolio Architecture（组合架构瓶颈，研究暂停，等待外部审计）★
+F2.1 Matched-Share Actionability ──► B NARROW POSITIVE ACTIONABILITY (+1.44858pp)
+   │
+   ▼
+F2.2 Break-Even / Precision ──► point roots 0.135/0.270/0.405/0.540 · precision 0.762 (ACCEPTED)
+   │
+   ▼
+F2.3 Policy-Value Sampling Inference ──► FINAL B (calendar-safe 0/0.05/0.10/0.10) (ACCEPTED)
+   │
+   ▼
+F3 Predictor Feasibility ──► C PREDICTIVE BUT ECONOMICALLY INSUFFICIENT (ACCEPTED · branch PAUSED/CLOSED)
+   │
+   ▼
+S1 Signal Selectivity ──► BB threshold D HARMFUL / RSI C / Sector N/A (ACCEPTED)
+   │
+   ▼
+★ CURRENT: S1.1 Contemporaneous BB Depth Ranking（同日 BB_Z 排序诊断，K=3 稀缺槽位下的 signal selection）★
 ```
 
 ---
@@ -243,7 +258,8 @@ F2 Actionability Value Bound ──► D ACTIONABILITY NEGATIVE (DEVELOPMENT DIA
 - **R1.0（2026-09-04）：** failure-state predictor branch PAUSED/CLOSED；研究主线回归 PORTFOLIO ARCHITECTURE。
 - **P5（完成，DEVELOPMENT DIAGNOSTIC / WAITING EXTERNAL AUDIT）：** CAPACITY / CAPITAL-LOCK DIAGNOSTIC（prereg `e007979`，A0 parity PASS，结果 commit 见本表下方）。**K=3 槽位是主导容量瓶颈（63.4% 候选、55.1% 交易日 K 满），现金从不阻塞（0），K 同时是保护性 admission constraint（R0.2）**；Top10% 持仓占 capital-days 37.8%；layer2+ 占投入资本 50.9%（matched-share 平均正）；blocked_K 独立质量无显著差异（CI 跨 0）；虚拟队列 336 全部可释放、median 11 天、16.3% 已过期。Q7 登记 NEXT = D QUEUE/DEFERRED ADMISSION（仅登记不执行，**P5.1 后撤销**）。分类 **C**（R1.1 修正：bottleneck exists but economic relevance unclear——coverage 36.6%、CI 跨 0，无法证明可实现经济增益）。未外审。
 - **P6（ACCEPTED / D — HARMFUL，R1.3）：** ADD-BUDGET SEPARATION（prereg `407335e`，A0 parity PASS）。**预算隔离全面有害**：A1 +11.04% / A2 +10.27% / A3 −7.76% vs A0 +30.30%；A1 NO_NEW_BUDGET=0（新仓池从不缺钱，A1_ONLY=1）、NO_ADD_BUDGET=85、COMMON 74 信号 PnL −163,660（切掉 P5 已证明为正的 layer2/3）。分类 **D HARMFUL**；20/40/60% 仅探针、无正价值证据。核心：共享池的时间弹性是 A0 的组成部分，瓶颈是 K 不是钱。canonical: `research/portfolio/PORTFOLIO_ARCHITECTURE_P6.md` + `results/evidence/p6/`。
-- **S1（进行中，DEVELOPMENT DIAGNOSTIC）：** SIGNAL SELECTIVITY AUDIT — BB depth（B20/B25/B30 entry k，exit k=2 冻结）/ Wilder RSI14（R30/R25）/ sector strength（PIT gate）在 independent replay 框架下的 entry selectivity 审计；signal-day 等权 + HAC + calendar block bootstrap；禁组合；2025–2026 CLOSED。registry: `research/signal/registries/SIGNAL_SELECTIVITY_S1_REGISTRY.csv`。
+- **S1（ACCEPTED，R1.4 接受）：** SIGNAL SELECTIVITY AUDIT（prereg `227ab94`，result `1368584`）。**BB threshold = D — HARMFUL**（"等到 entry k=2.5/3.0 才买"显著有害：B25 vs B20_ONLY −2.12pp [HAC −2.60,−1.64 / CAL −2.64,−1.67]、B30 vs B25_ONLY −1.91pp，仅 2024 年正；B20 首次信号中同日更深 BB_Z bin 有更高 expectancy 迹象——排序价值≠阈值价值）；**RSI = C — NO STABLE INCREMENT**（R30 ep +7.70%/win 80.96% 但 matched-depth 4 bin 全跨 0、R30−B20 day-delta −0.02pp、2023 崩塌）；**Sector = N/A — PIT DATA NOT READY**（NOT RUN）。MACD diagnostic only（无关系）；Fundamental/News NOT_READY。无单因素通过 A/B gate 进 K=3 portfolio test。canonical: `research/signal/SIGNAL_SELECTIVITY_S1.md` + `results/evidence/s1/`。
+- **S1.1（进行中，DEVELOPMENT DIAGNOSTIC）：** CONTEMPORANEOUS BB DEPTH RANKING — 不改变 B20 入场（不等待 -2.5σ/-3σ），只研究同一天多个 B20 候选时 signal-date 当天可见 BB_Z 深度能否用于排序（DEEP30/MID40/SHALLOW30）；collision days（候选≥4）子集 + DEPTH_TOP3 vs AMOUNT_TOP3 counterfactual diagnostic + FIRST_HIT/REPEAT_HIT 机制诊断；signal-day 等权 + HAC + calendar block bootstrap；禁真实 portfolio / 禁延迟入场；2025–2026 CLOSED。registry: `research/signal/registries/SIGNAL_SELECTIVITY_S11_DEPTH_RANK_REGISTRY.csv`。
 - **R1.2（2026-09-04）：** 接受 P5.1=C QUEUE MOSTLY STALE（P5.1 PASS/ACCEPTED）；QUEUE/DEFERRED ADMISSION branch CLOSED（禁 queue cutoff/wait-day scan/delayed-entry optimization/queue ranking）；NEXT = P6 ADD-BUDGET SEPARATION。
 - **P5.1（完成，DEVELOPMENT DIAGNOSTIC / WAITING EXTERNAL AUDIT）：** DEFERRED-ADMISSION ELIGIBILITY（prereg `dc5fb74`）。336 个 BLOCKED_K 在 release 日重新扫描：**EXACT_ELIGIBLE 仅 2.68%（9）、NO_LONGER_OVERSOLD 88.99%**——P5 的“83.7% still active”是未达止盈而非仍可买；资格随等待快速衰减；65.2% 等待期重新超卖、37.5% 已被原 engine 自然重新捕获（未达冗余主导）。分类 **C QUEUE MOSTLY STALE**；显式 queue 不值得进入真实回测（NO）；NEXT lever=D 撤销。canonical: `research/portfolio/PORTFOLIO_ARCHITECTURE_P51.md` + `results/evidence/p51/`。canonical: `research/portfolio/PORTFOLIO_ARCHITECTURE_P5.md` + `results/evidence/p5/`。
 

@@ -1,0 +1,12 @@
+{
+ "n_old_clusters": 96,
+ "n_new_calendar_clusters": 96,
+ "old_split_clusters": 0,
+ "first_day_n": 96,
+ "comparator_n": 712,
+ "cluster_mean_pct": -0.2255,
+ "cluster_median_pct": 0.1177,
+ "cluster_win_pct": 0.51,
+ "normal_mean_pct": 0.0511,
+ "delta_pp": -0.2766
+}

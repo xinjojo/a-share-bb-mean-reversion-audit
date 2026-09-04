@@ -1,0 +1,12 @@
+{
+ "I1_primary_fwd5_unchanged": true,
+ "I2_panic80_unchanged": true,
+ "I3_188_panic_parity": true,
+ "I4_deployable_sample_unchanged": true,
+ "I5_bootstrap_full_1212_calendar": true,
+ "I6_no_panic_recompute": true,
+ "I7_cluster_calendar_adjacency": true,
+ "I8_dd5_same_population": true,
+ "I9_no_new_parameter": true,
+ "I10_2025_2026_closed": true
+}

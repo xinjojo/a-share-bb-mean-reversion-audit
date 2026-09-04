@@ -1,0 +1,8 @@
+{
+ "point_pp": 0.2752,
+ "boot_mean": 0.276,
+ "boot_median": 0.2804,
+ "boot_p2_5": -0.2879,
+ "boot_p97_5": 0.7979,
+ "na_replicates": 0
+}

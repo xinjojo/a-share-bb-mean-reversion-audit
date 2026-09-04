@@ -1,0 +1,3 @@
+method,point_pp,boot_mean,boot_median,boot_p2_5,boot_p97_5,na_replicates
+OLD_signal_day_sequence,0.2752,0.2896,0.2955,-0.2765,0.7866,
+CORRECTED_full_trading_calendar,0.2752,0.276,0.2804,-0.2879,0.7979,0.0

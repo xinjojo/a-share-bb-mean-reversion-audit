@@ -1,0 +1,15 @@
+{
+ "panic_n": 187,
+ "normal_n": 712,
+ "panic_mean": -1.715,
+ "panic_median": -1.3404,
+ "panic_p10": -5.2426,
+ "panic_p5": -6.5274,
+ "panic_min": -13.4557,
+ "normal_mean": -1.4483,
+ "normal_median": -0.969,
+ "normal_p10": -4.2456,
+ "normal_p5": -6.0465,
+ "normal_min": -20.1949,
+ "delta_mean_pp": -0.2667
+}

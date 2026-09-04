@@ -1,0 +1,61 @@
+{
+ "registry_sha": "524ae9e43acb9101029915c40eb284e2dab5d363fe7b14878e07b8befc26b5c1",
+ "primary_fwd5_delta_pp": 0.2752,
+ "deployable_n": 899,
+ "bootstrap_corrected": {
+  "point_pp": 0.2752,
+  "boot_mean": 0.276,
+  "boot_median": 0.2804,
+  "boot_p2_5": -0.2879,
+  "boot_p97_5": 0.7979,
+  "na_replicates": 0
+ },
+ "cluster": {
+  "n_old_clusters": 96,
+  "n_new_calendar_clusters": 96,
+  "old_split_clusters": 0,
+  "first_day_n": 96,
+  "comparator_n": 712,
+  "cluster_mean_pct": -0.2255,
+  "cluster_median_pct": 0.1177,
+  "cluster_win_pct": 0.51,
+  "normal_mean_pct": 0.0511,
+  "delta_pp": -0.2766
+ },
+ "dd5": {
+  "panic_n": 187,
+  "normal_n": 712,
+  "panic_mean": -1.715,
+  "panic_median": -1.3404,
+  "panic_p10": -5.2426,
+  "panic_p5": -6.5274,
+  "panic_min": -13.4557,
+  "normal_mean": -1.4483,
+  "normal_median": -0.969,
+  "normal_p10": -4.2456,
+  "normal_p5": -6.0465,
+  "normal_min": -20.1949,
+  "delta_mean_pp": -0.2667
+ },
+ "tail": {
+  "panic_n": 187,
+  "normal_n": 712,
+  "panic_mean": 0.3263,
+  "panic_median": 0.5391,
+  "panic_win": 56.15,
+  "panic_p10": -3.8694,
+  "panic_p5": -4.7774,
+  "panic_min": -12.3526,
+  "normal_mean": 0.0511,
+  "normal_median": 0.0081,
+  "normal_win": 50.14,
+  "normal_p10": -3.5888,
+  "normal_p5": -4.9884,
+  "normal_min": -20.1949,
+  "parity_assertion": true
+ },
+ "yearly_positive_2021_2024": 3,
+ "classification": "B_NARROW_MARKET_TRANSLATION",
+ "etf_gate": "YES",
+ "note": "cluster-first remains SECONDARY robustness; if negative, PANIC80 positive effect depends on repeated dates within same panic episode"
+}

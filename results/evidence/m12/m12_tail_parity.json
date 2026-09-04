@@ -1,0 +1,17 @@
+{
+ "panic_n": 187,
+ "normal_n": 712,
+ "panic_mean": 0.3263,
+ "panic_median": 0.5391,
+ "panic_win": 56.15,
+ "panic_p10": -3.8694,
+ "panic_p5": -4.7774,
+ "panic_min": -12.3526,
+ "normal_mean": 0.0511,
+ "normal_median": 0.0081,
+ "normal_win": 50.14,
+ "normal_p10": -3.5888,
+ "normal_p5": -4.9884,
+ "normal_min": -20.1949,
+ "parity_assertion": true
+}

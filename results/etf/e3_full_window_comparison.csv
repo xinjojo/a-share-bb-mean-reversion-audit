@@ -1,0 +1,5 @@
+config,total_return_pct,CAGR_pct,ann_vol_pct,Sharpe,MaxDD_pct
+M1 Control,-66.69,-5.27,17.58,-0.2317,-71.84
+M1 LowBreadth,-17.07,-0.92,8.63,-0.0676,-32.22
+M2 Control,-20.67,-1.13,13.48,-0.021,-35.26
+M2 LowBreadth,-3.44,-0.17,8.93,0.0242,-26.85

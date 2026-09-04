@@ -1,0 +1,91 @@
+parameter,value,notes
+# === FROZEN REFERENCES ===
+e2_commit,c8e8259,E2 official commit
+e2_verdict,H1_PARTIALLY_SUPPORTED,frozen; E3 cannot redefine
+e2_m1_midline_total_return,-66.74%,E2 M1 Midline full window (Control target)
+e2_m2_midline_total_return,-20.69%,E2 M2 Midline full window (Control target)
+e1_1_breadth_registry,PHASE_E1_1_REGISTRY.csv,source of frozen breadth definition
+
+# === HYPOTHESIS ===
+hypothesis,H2_LOW_BREADTH_ENTRY,ETF BB mean reversion has better expectancy when oversold signals are low-breadth/idiosyncratic, worse during systemic high-breadth selloffs
+mechanism_source,E1.1 post-hoc diagnostic,high-breadth PF~0.18 vs low-breadth PF~0.89
+e3_is_preregistered_test,true,not post-hoc; threshold frozen before run
+
+# === CONTROL ===
+control_exit,FIRST_BB_MIDLINE_TOUCH,high_adj >= bb_mid -> fill at bb_mid/adj*(1-slippage)
+control_breadth_filter,none,no filter; all signals eligible
+control_must_reproduce_e2,true,M1=-66.74%, M2=-20.69% (float tolerance)
+
+# === TREATMENT (only difference from Control) ===
+treatment_exit,FIRST_BB_MIDLINE_TOUCH,IDENTICAL to Control
+treatment_breadth_filter,LOW_BREADTH_ONLY,new entries only when signal_ratio < frozen_threshold
+breadth_threshold,0.10,signal_ratio < 10% (from E1.1 Registry, frozen)
+breadth_formula,signal_ratio_t = n_oversold_signals_t / n_eligible_universe_t,
+breadth_denominator,PIT eligible universe after liquidity filter,当日真实 eligible universe count
+breadth_numerator,BB oversold signal count at t close,Model1=ETF close<bb_lower; Model2=Index close<bb_lower
+breadth_no_future_data,true,computed using t-known data only
+breadth_applies_to,NEW ENTRY only,existing positions continue normally (exits/adds unaffected)
+high_breadth_action,block new pending_buy,do not force exit, do not reduce size, do not change exit
+
+# === EVERYTHING ELSE FROZEN (identical to E2 Midline) ===
+bb_window,20,frozen
+bb_std,2.0,frozen
+entry_condition,close < bb_lower,Model1=ETF close; Model2=Index close
+ranking_variable,amount,日成交额降序 (E2 Gate 1B confirmed; DO NOT CHANGE to BB_Z)
+top_n,10,frozen
+position_sizing,level_cash=200k per entry/add,frozen
+k_max_positions,3,frozen
+max_levels,5,frozen
+initial_cash,1000000,frozen
+slippage_bp,10,frozen
+commission_rate,0.00025,frozen
+commission_min,5,frozen
+sell_stamp_duty,0,ETF-specific
+liquidity_filter,ADV60(t-1)>=20000000 RMB,frozen
+pit_representative,highest ADV60 using t-1 info,frozen
+representative_switch,hold old ETF until exit,frozen
+lot_size,100,frozen
+tick_size,0.001,frozen
+price_limit,PIT 10%/20%,frozen
+t_plus_1,true,frozen
+suspension,amount>0 check,frozen
+signal_timing,T close,frozen
+execution_timing,T+1 open,frozen
+midline_exit_semantics,bar_based_threshold_touch,high_adj >= bb_mid -> fill at bb_mid/adj
+
+# === MODELS ===
+model1,ETF_price_signal_+_ETF_execution,frozen
+model2,Index_price_signal_+_PIT_ETF_execution,frozen
+four_configs,M1_Control,M1_LowBreadth,M2_Control,M2_LowBreadth,
+
+# === WINDOWS ===
+full_window,2006-05-15 to 2026-09-03,
+common_window,2020-01-01 to 2024-12-31,primary comparison
+primary_judgment,common_window,
+
+# === SUCCESS CRITERIA (frozen before run) ===
+strong_support,1.trade expectancy>=0 2.PF>=1 3.CW expectancy>=0 4.portfolio return materially improves 5.MaxDD not materially worse 6.not driven by one year,
+partial_support,expectancy/PF/tail materially improve but expectancy<0 or PF<1 or portfolio negative,
+no_support,little/no improvement or improvement driven by massive exposure reduction/small sample/one period,
+inconclusive,data/execution/sample-size issues,
+negative_result_rule,if <10% breadth still loses, do NOT test <5%/<7%/<8%/<12% threshold mining,
+
+# === FORBIDDEN MODIFICATIONS ===
+no_bb_z_ranking,true,
+no_cluster_diversification,true,
+no_stop_loss,true,
+no_time_stop,true,
+no_capital_deployment_change,true,
+no_market_regime_filter,true,
+no_trend_filter,true,
+no_atr_filter,true,
+no_rsi_filter,true,
+no_volatility_filter,true,
+no_bb_sigma_change,true,
+no_bb_window_change,true,
+no_exit_change,true,midline exit frozen
+no_threshold_mining,true,use frozen 10% only
+
+# === OUTPUTS ===
+output_dir,results/etf/,
+registry_sha256,(computed after freeze),

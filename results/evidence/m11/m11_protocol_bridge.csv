@@ -1,0 +1,9 @@
+deviation,external,m1_actual,m11
+D1,PRIMARY=FWD5,FWD20,FWD5 restored
+D2,horizons 1/3/5/10/20,5/10/20/40,1/3/5/10/20 (FWD40 excluded from classification)
+D3,EXPANDING_BREADTH_RANK01,raw Spearman + full-sample Q1-Q5,EXPANDING_BREADTH_RANK01
+D4,FWD5 ~ expanding_rank + MARKET_RET_T,panic dummy conditional,expanding_rank + MARKET_RET_T (panic-dummy kept as secondary descriptive)
+D5,yearly 2021-2024 >=3/4,registry 2020-2024 >=3/5,2021-2024 >=3/4
+D6,cluster-first robustness,missing,"clusters merged, first-day only"
+D7,FWD5 tail + future-5d drawdown,missing,FWD5 tail + DD5 present
+D8,benchmark hierarchy official-first,not executed/recorded,"official checked (000985 absent), PIT equal-weight fallback recorded"

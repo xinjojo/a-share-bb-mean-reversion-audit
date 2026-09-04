@@ -1,0 +1,17 @@
+{
+ "I1_m1_b_withdrawn": true,
+ "I2_m1_artifacts_exploratory": true,
+ "I3_panic80_p7_parity": true,
+ "I4_date_lt_T_only": true,
+ "I5_252_warmup": true,
+ "I6_fwd5_primary": true,
+ "I7_horizons_1_3_5_10_20": true,
+ "I8_continuous_expanding_rank": true,
+ "I9_conditional_expanding_rank": true,
+ "I10_year_2021_2024": true,
+ "I11_cluster_robustness": true,
+ "I12_5d_tail": true,
+ "I13_no_horizon_selection": true,
+ "I14_no_portfolio_etf": true,
+ "I15_2025_2026_closed": true
+}

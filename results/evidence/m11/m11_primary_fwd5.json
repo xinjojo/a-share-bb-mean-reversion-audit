@@ -1,0 +1,13 @@
+{
+ "panic_n": 187,
+ "normal_n": 712,
+ "panic_mean_pct": 0.3263,
+ "panic_median_pct": 0.5391,
+ "panic_win_pct": 56.15,
+ "panic_p10": -3.8694,
+ "panic_p90": 4.0724,
+ "normal_mean_pct": 0.0511,
+ "normal_median_pct": 0.0081,
+ "normal_win_pct": 50.14,
+ "delta_pp": 0.2752
+}

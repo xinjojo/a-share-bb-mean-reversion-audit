@@ -1,0 +1,10 @@
+{
+ "choice": "PIT_EQUAL_WEIGHT_FALLBACK",
+ "official_full_market_index_found": false,
+ "available_index_files": [
+  "index_000300.parquet",
+  "index_000852.parquet",
+  "index_000905.parquet"
+ ],
+ "reason": "repo data contains only \u6caa\u6df1300(000300)/\u4e2d\u8bc1500(000905)/\u4e2d\u8bc11000(000852), none is a full-market wide-base index; \u4e2d\u8bc1\u5168\u6307(000985) not present; per frozen protocol fallback = daily equal-weight close-to-close over that day legal universe (listed>=60d & non-PIT-ST & BB warmup non-NaN, same as B1 universe_size)"
+}

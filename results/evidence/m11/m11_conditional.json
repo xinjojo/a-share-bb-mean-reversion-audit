@@ -1,0 +1,12 @@
+{
+ "b1_rank_pp": -0.2134,
+ "b1_se": 0.6188,
+ "b1_ci_lower": -1.4264,
+ "b1_ci_upper": 0.9995,
+ "b2_mkt": 0.0373,
+ "b2_se": 0.1108,
+ "b2_ci_lower": -0.1798,
+ "b2_ci_upper": 0.2544,
+ "sm_parity_b1_se": 0.6188,
+ "statsmodels_match": true
+}

@@ -1,0 +1,193 @@
+{
+ "registry_sha": "bf10c7498d6e19d5a360ff654ef2da153424144f14961d56c869938b8b93f5b3",
+ "market_series": {
+  "choice": "PIT_EQUAL_WEIGHT_FALLBACK",
+  "official_full_market_index_found": false,
+  "available_index_files": [
+   "index_000300.parquet",
+   "index_000852.parquet",
+   "index_000905.parquet"
+  ],
+  "reason": "repo data contains only \u6caa\u6df1300(000300)/\u4e2d\u8bc1500(000905)/\u4e2d\u8bc11000(000852), none is a full-market wide-base index; \u4e2d\u8bc1\u5168\u6307(000985) not present; per frozen protocol fallback = daily equal-weight close-to-close over that day legal universe (listed>=60d & non-PIT-ST & BB warmup non-NaN, same as B1 universe_size)"
+ },
+ "primary": {
+  "panic_n": 187,
+  "normal_n": 712,
+  "panic_mean_pct": 0.3263,
+  "panic_median_pct": 0.5391,
+  "panic_win_pct": 56.15,
+  "panic_p10": -3.8694,
+  "panic_p90": 4.0724,
+  "normal_mean_pct": 0.0511,
+  "normal_median_pct": 0.0081,
+  "normal_win_pct": 50.14,
+  "delta_pp": 0.2752
+ },
+ "hac": {
+  "point_pp": 0.2752,
+  "se": 0.2937,
+  "ci_lower": -0.3004,
+  "ci_upper": 0.8507,
+  "sm_parity_se": 0.2937,
+  "sm_parity_ci": -0.3004,
+  "statsmodels_match": true
+ },
+ "bootstrap": {
+  "point_pp": 0.2752,
+  "boot_mean": 0.2896,
+  "boot_median": 0.2955,
+  "boot_p2_5": -0.2765,
+  "boot_p97_5": 0.7866,
+  "na_replicates": 0
+ },
+ "continuous": {
+  "slope_pp": -0.3186,
+  "se": 0.5891,
+  "ci_lower": -1.4732,
+  "ci_upper": 0.8361,
+  "spearman": 0.0038,
+  "spearman_p": 0.91,
+  "sm_parity_se": 0.5891,
+  "statsmodels_match": true
+ },
+ "conditional": {
+  "b1_rank_pp": -0.2134,
+  "b1_se": 0.6188,
+  "b1_ci_lower": -1.4264,
+  "b1_ci_upper": 0.9995,
+  "b2_mkt": 0.0373,
+  "b2_se": 0.1108,
+  "b2_ci_lower": -0.1798,
+  "b2_ci_upper": 0.2544,
+  "sm_parity_b1_se": 0.6188,
+  "statsmodels_match": true
+ },
+ "yearly": [
+  {
+   "year": 2021,
+   "panic_n": 46,
+   "normal_n": 186,
+   "panic_mean_pct": 1.1588,
+   "normal_mean_pct": 0.4126,
+   "delta_pp": 0.7462,
+   "spearman_rank": 0.1348
+  },
+  {
+   "year": 2022,
+   "panic_n": 51,
+   "normal_n": 176,
+   "panic_mean_pct": -0.2143,
+   "normal_mean_pct": -0.1237,
+   "delta_pp": -0.0906,
+   "spearman_rank": -0.0615
+  },
+  {
+   "year": 2023,
+   "panic_n": 52,
+   "normal_n": 186,
+   "panic_mean_pct": 0.2692,
+   "normal_mean_pct": 0.0228,
+   "delta_pp": 0.2464,
+   "spearman_rank": -0.0234
+  },
+  {
+   "year": 2024,
+   "panic_n": 38,
+   "normal_n": 164,
+   "panic_mean_pct": 0.1221,
+   "normal_mean_pct": -0.1391,
+   "delta_pp": 0.2612,
+   "spearman_rank": -0.0383
+  }
+ ],
+ "clusters": {
+  "n_clusters": 96,
+  "first_day_n": 96,
+  "cluster_mean_pct": -0.2255,
+  "cluster_median_pct": 0.1177,
+  "cluster_win_pct": 51.04,
+  "normal_mean_pct": 0.1433,
+  "delta_pp": -0.3687
+ },
+ "horizons": [
+  {
+   "horizon": 1,
+   "panic_n": 187,
+   "normal_n": 712,
+   "panic_mean_pct": -0.115,
+   "normal_mean_pct": 0.046,
+   "delta_pp": -0.1611,
+   "hac_ci_lower": -0.3824,
+   "hac_ci_upper": 0.0602
+  },
+  {
+   "horizon": 3,
+   "panic_n": 187,
+   "normal_n": 712,
+   "panic_mean_pct": 0.058,
+   "normal_mean_pct": 0.0495,
+   "delta_pp": 0.0085,
+   "hac_ci_lower": -0.4574,
+   "hac_ci_upper": 0.4744
+  },
+  {
+   "horizon": 5,
+   "panic_n": 187,
+   "normal_n": 712,
+   "panic_mean_pct": 0.3263,
+   "normal_mean_pct": 0.0511,
+   "delta_pp": 0.2752,
+   "hac_ci_lower": -0.3004,
+   "hac_ci_upper": 0.8507
+  },
+  {
+   "horizon": 10,
+   "panic_n": 185,
+   "normal_n": 709,
+   "panic_mean_pct": 0.8077,
+   "normal_mean_pct": 0.0898,
+   "delta_pp": 0.718,
+   "hac_ci_lower": -0.1951,
+   "hac_ci_upper": 1.631
+  },
+  {
+   "horizon": 20,
+   "panic_n": 184,
+   "normal_n": 701,
+   "panic_mean_pct": 1.2184,
+   "normal_mean_pct": 0.5348,
+   "delta_pp": 0.6836,
+   "hac_ci_lower": -0.5244,
+   "hac_ci_upper": 1.8916
+  }
+ ],
+ "tail": {
+  "panic_mean": 0.3263,
+  "panic_median": 0.5391,
+  "panic_win": 56.15,
+  "panic_p10": -3.8694,
+  "panic_p5": -4.7774,
+  "panic_min": -12.3526,
+  "normal_mean": 0.0511,
+  "normal_median": 0.0081,
+  "normal_win": 50.14,
+  "normal_p10": -3.5888,
+  "normal_p5": -4.9884,
+  "normal_min": -20.1949
+ },
+ "dd5": {
+  "panic_mean": -1.715,
+  "panic_median": -1.3404,
+  "panic_p10": -5.2426,
+  "panic_p5": -6.5274,
+  "panic_min": -13.4557,
+  "normal_mean": -1.4156,
+  "normal_median": -0.9515,
+  "normal_p10": -4.2645,
+  "normal_p5": -6.0387,
+  "normal_min": -20.1949
+ },
+ "positive_years": 3,
+ "classification": "B_NARROW_MARKET_TRANSLATION",
+ "etf_gate": "YES"
+}

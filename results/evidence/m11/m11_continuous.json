@@ -1,0 +1,10 @@
+{
+ "slope_pp": -0.3186,
+ "se": 0.5891,
+ "ci_lower": -1.4732,
+ "ci_upper": 0.8361,
+ "spearman": 0.0038,
+ "spearman_p": 0.91,
+ "sm_parity_se": 0.5891,
+ "statsmodels_match": true
+}

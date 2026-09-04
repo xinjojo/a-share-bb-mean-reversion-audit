@@ -1,0 +1,12 @@
+{
+ "panic_mean": -1.715,
+ "panic_median": -1.3404,
+ "panic_p10": -5.2426,
+ "panic_p5": -6.5274,
+ "panic_min": -13.4557,
+ "normal_mean": -1.4156,
+ "normal_median": -0.9515,
+ "normal_p10": -4.2645,
+ "normal_p5": -6.0387,
+ "normal_min": -20.1949
+}

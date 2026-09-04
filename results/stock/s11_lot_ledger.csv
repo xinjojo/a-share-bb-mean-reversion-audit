@@ -1,0 +1,6 @@
+levels_used,count,total_pnl,mean_pnl,mean_return_pct,median_return_pct,win_rate,mean_hold_days,lot_description
+1,21,305188.14,14532.77,7.37,8.34,85.7,20.43,initial only
+2,27,650048.24,24075.86,6.43,6.46,81.5,33.7,initial + 1 add
+3,18,-53464.48,-2970.25,-0.56,1.99,55.6,37.56,initial + 2 adds
+4,4,-120858.33,-30214.58,-3.7,-1.04,25.0,57.25,initial + 3 adds
+5,4,-515331.33,-128832.83,-13.89,-11.2,0.0,109.75,initial + 4 adds (max)

@@ -1,0 +1,2 @@
+verdict,registry_timing,k_semantics_corrected,raw_signal_20d,amount_ranking,exit_upper_hit,pyramid_higher_levels,breadth_reversal,trade_count_diff,panel_coverage
+S1 CONFIRMED WITH CORRECTIONS,POST-HOC,"K=3 concurrent positions, max_levels=5 lots",2.71%,HARMFUL,98.5%,HARMFUL (confirmed),CONFIRMED BUT EVENT-CLUSTERED,74 vs G0 76 (2-trade drift),"2618 full-year (50%, restricted diagnostic)"

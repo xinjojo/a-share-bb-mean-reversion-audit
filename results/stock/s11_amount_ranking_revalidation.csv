@@ -1,0 +1,2 @@
+all_signals_20d_mean_pct,amount_topn_20d_mean_pct,random_topn_20d_mean_pct,amount_minus_all_pct,amount_minus_random_pct,mean_daily_percentile,pct_days_above_random_median,n_days,classification
+2.713,0.041,0.438,-2.672,-0.397,43.1,42.3,900,HARMFUL

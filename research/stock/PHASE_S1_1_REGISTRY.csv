@@ -1,0 +1,17 @@
+key,value
+phase,S1.1
+title,Stock Mechanism Consistency & Attribution Gate
+research_status,AUDIT / GOVERNANCE / NOT NEW STRATEGY
+s1_verdict,MULTI-COMPONENT EDGE (PROVISIONAL, pending S1.1 audit)
+s1_commit,186a90c
+e51_commit,e7679d6
+s1_registry_created_before_analysis,PENDING_AUDIT
+k_semantics,PENDING_SOURCE_AUDIT
+official_trade_count,76 (G0 baseline)
+available_trade_log_count,PENDING_RECONCILIATION
+stock_panel_stocks,2618 full-year (50% of universe)
+panel_bias_status,PENDING_COVERAGE_AUDIT
+forbidden_changes,"No parameter optimization, no new strategy, no K search, no ranking replacement, no exit modification"
+audit_items,"registry timing, K semantics, lot attribution, trade reconciliation, panel coverage, raw signal revalidation, breadth reversal, amount ranking, exit capture, mechanism evidence table"
+s11_verdict,PENDING
+next_phase,"S2 PREREG DRAFT ONLY (do not run), S3 hypothesis draft"

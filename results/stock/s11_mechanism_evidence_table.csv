@@ -1,0 +1,7 @@
+mechanism,s1_claim,s11_revalidated,sample_count,strength,status
+Raw stock BB signal edge,"20d +2.71%, positive","20d 2.71% (bootstrap CI [2.65%, 2.79%])","147745 signals, 2618 stocks",STRONG,CONFIRMED
+Amount ranking contribution,HARMFUL (Top-N +0.04% vs all +2.71%),"Top-N 0.041% vs all 2.713%, daily percentile 43.1%",900 days,STRONG,CONFIRMED
+STRICT_C exit capture,"98.5% hit upper, 100% hit mid","98.5% hit upper, 100.0% hit mid",66 official trades,STRONG,CONFIRMED
+Pyramid/Add contribution,Higher levels harmful (Level 5 WR 0%),"Level 1 WR 85.7%, Level 5 WR 0.0%","74 trades, K=3 concurrent / max_levels=5 lots",MODERATE,"CONFIRMED WITH CORRECTION (K=3 = positions, not levels)"
+Breadth reversal (stock high=good),"25%+ breadth +6.09%, 0-5% -0.06%","25%+ breadth 6.091% (49 dates), 0-5% -0.062%","49 high-breadth dates, concentrated in crash events",MODERATE,CONFIRMED BUT EVENT-CLUSTERED
+Dispersion mechanism,High dispersion days better,"U-shaped: HIGH and LOW dispersion both ~+3.5%, MID +1.1%",3 terciles,WEAK,CONFIRMED WEAK

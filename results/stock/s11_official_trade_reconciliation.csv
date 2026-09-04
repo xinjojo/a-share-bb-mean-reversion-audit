@@ -1,0 +1,2 @@
+official_g0_trades,strict_c_trades_total,entered_2020_2024,exited_by_2024,entered_2020_2024_exited_by_2024,2024_entries_exited_after_2024,difference_vs_g0,likely_explanation,mechanism_impact
+76,96,74,73,73,1,2,2-trade difference likely from G0 including positions entered before 2020 or trade-log version drift; strict_c_trades.csv may be from earlier STRICT_C run than G0,"LOW - raw signal/amount/exit conclusions based on stock panel, not trade log"

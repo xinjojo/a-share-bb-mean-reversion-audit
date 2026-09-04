@@ -1,0 +1,11 @@
+breadth_pct,n_dates,mean_20d_pct,median_20d_pct,win_rate,asset
+Q1_lowest,246,-0.228,-1.019,45.2,stock
+Q2,216,-0.931,-1.609,42.7,stock
+Q3,219,-0.556,-1.622,41.9,stock
+Q4,227,0.5,-0.946,45.4,stock
+Q5_highest,226,3.684,2.097,58.7,stock
+Q1_lowest,99,-1.049,-1.051,42.5,etf
+Q2,99,-0.298,-0.761,44.3,etf
+Q3,98,1.559,-0.308,48.2,etf
+Q4,99,0.792,-0.264,48.0,etf
+Q5_highest,99,2.08,0.644,53.8,etf

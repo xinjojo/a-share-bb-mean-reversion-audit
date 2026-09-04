@@ -1,0 +1,96 @@
+parameter,value,notes
+# === RESEARCH STATUS ===
+research_status,ADAPTIVE_HISTORICAL_HYPOTHESIS_TEST,NOT clean out-of-sample; E1-E3 observed same interval; needs future blind test
+# === FROZEN REFERENCES ===
+e1_commit,6789810,E1 Baseline Falsification
+e1_1_commit,1fa73e9,E1.1 Failure Mechanism Audit
+e2_commit,c8e8259,E2 Midline Exit Hypothesis Test
+e3_commit,afa1076,E3 Low-Breadth Entry Hypothesis Test
+e3_m1_lowbreadth_return,-17.14%,E3 M1 Control target
+e3_m2_lowbreadth_return,-3.47%,E3 M2 Control target
+e3_m1_lowbreadth_pf,0.813,frozen
+e3_m2_lowbreadth_pf,0.937,frozen
+
+# === HYPOTHESIS ===
+hypothesis,H7_BB_Z_RANKING,Among BB-oversold candidates, greater standardized downside deviation (BB_Z) contains more mean-reversion info than trailing amount
+intuition,deeper_oversold_should_rebound_more,current ranking=amount may have zero info (E1.1 confirmed)
+
+# === EXACT BB_Z DEFINITION (frozen) ===
+bb_z_formula,(price_t - MA20_t) / rolling_std20_t,
+bb_z_price_source,Model1=ETF close_adj; Model2=Index close,
+bb_z_ma,rolling(20).mean(),same as BB midline
+bb_z_std,rolling(20).std(ddof=0),consistent with existing BB implementation
+bb_z_more_negative,deeper_oversold,
+sorting_direction,ascending,most negative BB_Z first
+tie_breaker_1,more_negative_BB_Z,primary
+tie_breaker_2,larger_amount,secondary
+tie_breaker_3,lexicographic_etf_index_code,tertiary
+no_random_tie,true,
+
+# === CONTROL AND TREATMENT ===
+control_ranking,amount_descending,E3 original rule
+treatment_ranking,BB_Z_ascending,only difference
+no_signal_change,true,BB_Z only for ranking among already-eligible candidates; signal threshold frozen
+no_hybrid_ranking,true,no BB_Z+amount, no weighted, no /volatility
+
+# === PRIMARY STRATEGY CONFIG (frozen from E3) ===
+exit,FIRST_BB_MIDLINE_TOUCH,frozen from E2
+entry_filter,LOW_BREADTH_signal_ratio<10%,frozen from E3
+bb_window,20,frozen
+bb_std,2.0,frozen
+entry_signal,close<bb_lower,frozen
+top_n,10,frozen
+position_sizing,level_cash=200k,frozen
+k_max_positions,3,frozen
+max_levels,5,frozen
+initial_cash,1000000,frozen
+slippage_bp,10,frozen
+commission_rate,0.00025,frozen
+commission_min,5,frozen
+sell_stamp_duty,0,frozen
+liquidity_filter,ADV60(t-1)>=20000000_RMB,frozen
+pit_representative,highest_ADV60_using_t-1_info,frozen
+representative_switch,hold_old_ETF_until_exit,frozen
+lot_size,100,frozen
+tick_size,0.001,frozen
+price_limit,PIT_10%/20%,frozen
+t_plus_1,true,frozen
+suspension,amount>0_check,frozen
+signal_timing,T_close,frozen
+execution_timing,T+1_open,frozen
+
+# === FOUR CONFIGS ===
+config1,M1_Midline_LowBreadth_Amount,Control
+config2,M1_Midline_LowBreadth_BB_Z,Treatment
+config3,M2_Midline_LowBreadth_Amount,Control
+config4,M2_Midline_LowBreadth_BB_Z,Treatment
+
+# === IC / RANKING DIAGNOSTIC ===
+ic_horizons,1d_3d_5d_10d_20d,frozen
+ic_method,Spearman_rank_correlation,pooled + date-level mean/median
+quantile_definition,Q1=deepest_oversold_Q5=least_oversold,5 quantiles when n>=10; else Registry fallback
+selected_vs_nonselected,Top-N_by_ranking_vs_rest,fixed horizons
+
+# === SUCCESS CRITERIA (frozen before run) ===
+strong_support,1.expectancy>=0 2.PF>=1 3.CW_expectancy>=0 4.portfolio materially improves 5.BB_Z IC directionally consistent 6.selected>non-selected 7.not one year,
+partial_support,IC/ranking separation improves OR PF/expectancy materially improves but PF<1 or CW negative,
+no_support,no useful cross-sectional separation AND expectancy not materially improve,
+inconclusive,sample/data/reproduction failure,
+
+# === FORBIDDEN MODIFICATIONS ===
+no_signal_threshold_change,true,
+no_alternative_z_scores,true,no %B, no distance_below_lower, no RSI, no ATR-normalized
+no_cluster_filter,true,
+no_capital_deployment_fix,true,
+no_breadth_threshold_change,true,
+no_exit_change,true,midline frozen
+no_stop_loss,true,
+no_time_stop,true,
+
+# === WINDOWS ===
+common_window,2020-01-01_to_2024-12-31,primary
+full_window,2006-05-15_to_2026-09-03,
+
+# === OUTPUTS ===
+output_dir,results/etf/,
+registry_sha256,(computed after freeze),

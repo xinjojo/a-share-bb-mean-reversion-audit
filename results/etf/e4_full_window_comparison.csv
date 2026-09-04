@@ -1,0 +1,5 @@
+config,total_return_pct,CAGR_pct,Sharpe,MaxDD_pct
+M1 Amount,-17.14,-0.92,-0.0676,-32.22
+M1 BB_Z,-29.65,-1.72,-0.1652,-40.76
+M2 Amount,-3.47,-0.17,0.0242,-26.85
+M2 BB_Z,-9.51,-0.49,-0.013,-29.2

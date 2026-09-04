@@ -81,7 +81,7 @@ F3 Predictor Feasibility ──► C PREDICTIVE BUT ECONOMICALLY INSUFFICIENT (A
 S1 Signal Selectivity ──► BB threshold D HARMFUL / RSI C / Sector N/A (ACCEPTED)
    │
    ▼
-★ CURRENT: WAITING EXTERNAL AUDIT — D1.2 C（visibility-date 语义歧义，f_ann 混合库更新时间；D1 HOLD）；S3 禁止，需更可靠公告日源或治理登记混合规则★
+★ CURRENT: W1 MULTI-TIMEFRAME BOLLINGER DIAGNOSTIC（日线 B20 × real-time weekly BB；D1 HOLD / D1.2=C ACCEPTED；S3 NOT START）★
 ```
 
 ---

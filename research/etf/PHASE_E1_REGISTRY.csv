@@ -1,0 +1,59 @@
+parameter,value,source,notes
+bb_window,20,frozen stock A0,identical to stock baseline
+bb_std,2.0,frozen stock A0,identical to stock baseline
+entry_condition,close < bb_lower,frozen stock A0,Model1=ETF close, Model2=Index close
+ranking,amount descending,frozen stock A0,Top-N selection
+top_n,10,frozen stock A0,
+position_sizing,level_cash=200k per entry/add,frozen stock A0,K=3 max positions
+max_levels,5,frozen stock A0,
+initial_cash,1000000,frozen stock A0,
+slippage_bp,10,frozen stock A0,
+commission_rate,0.00025,frozen stock A0,
+commission_min,5,frozen stock A0,
+sell_stamp_duty,0,ETF-specific,ETF has no sell stamp duty (stock=0.001)
+exit_condition,STRICT_C dynamic_touch,frozen stock A0,Pstar=analytic_Pstar(近19日 close_adj)
+signal_date,T close,frozen stock A0,
+execution_date,T+1 open,frozen stock A0,
+cash_semantics,level_cash per position,frozen stock A0,
+liquidity_filter,ADV60(t-1)>=20000000 RMB,Registry frozen,E0.1-H confirmed
+pit_representative,highest ADV60 using t-1 info,E0.1-F frozen,no future data
+representative_switch,hold old ETF until exit, E0.1-G frozen,no daily rebalance
+lot_size,100 units,ETF trading rule,
+tick_size,0.001 RMB,ETF trading rule,
+price_limit,PIT 10%/20%,E0 audit,1145=10%, 163 STAR=20%, 92 GEM=20%(2020-08-24起)
+t_plus_1,true,ETF trading rule,
+suspension,amount>0 check,ETF trading rule,
+model1_signal_source,ETF close,E1-1,
+model1_execution,ETF itself,E1-1,
+model2_signal_source,Index close,E1-2,
+model2_execution,PIT representative ETF,E1-2,
+model2_tradable_requirement,representative ETF exists,E1-2,no returns before ETF listing
+benchmark_csi300,buy and hold,E1-7,
+benchmark_csi_a500,buy and hold,E1-7,
+benchmark_equal_weight,equal-weight eligible ETF universe,E1-7,
+common_window,2020-01-01 to 2024-12-31,E1-8,stock baseline available period
+full_window,2006-05-15 to 2026-09-03,E1-8,ETF data available period
+stock_a0_total_return_pct,30.30,P4 Registry frozen,2020-2024
+stock_a0_cagr_pct,5.66,P4 Registry frozen,
+stock_a0_maxdd_pct,-30.79,P4 Registry frozen,
+stock_a0_sharpe,0.347,P4 Registry frozen,
+stock_a0_trades,76,P4 Registry frozen,
+model1_full_total_return_pct,-60.77,E1 result,
+model1_full_cagr_pct,-4.50,E1 result,
+model1_full_sharpe,-0.2065,E1 result,
+model1_full_maxdd_pct,-69.86,E1 result,
+model1_cw_total_return_pct,-14.40,E1 result,2020-2024
+model1_cw_cagr_pct,-3.06,E1 result,
+model1_cw_sharpe,-0.3838,E1 result,
+model1_cw_maxdd_pct,-21.85,E1 result,
+model2_full_total_return_pct,-43.44,E1 result,
+model2_full_cagr_pct,-2.77,E1 result,
+model2_full_sharpe,-0.1222,E1 result,
+model2_full_maxdd_pct,-50.06,E1 result,
+model2_cw_total_return_pct,-11.22,E1 result,2020-2024
+model2_cw_cagr_pct,-2.35,E1 result,
+model2_cw_sharpe,-0.3206,E1 result,
+model2_cw_maxdd_pct,-18.27,E1 result,
+final_verdict,NO_REPLICATION,E1 conclusion,
+optimization,none,E1-12,no parameter search performed
+shared_engine_changes,none,E1-14,ETF engine adapted from E0 diagnostic, stock engine untouched

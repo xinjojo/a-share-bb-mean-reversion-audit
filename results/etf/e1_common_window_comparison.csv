@@ -1,0 +1,11 @@
+metric,stock_A0,etf_model1,etf_model2
+period,2020-2024,2020-2024,
+total_return_pct,30.3,-14.4,-11.22
+CAGR_pct,5.66,-3.06,-2.35
+annualized_vol_pct,,7.66,6.97
+Sharpe,0.347,-0.3838,-0.3206
+MaxDD_pct,-30.79,-21.85,-18.27
+trades,76,44,
+completed_trades,76,20,
+win_rate_pct,,50.0,
+profit_factor,,0.4934,

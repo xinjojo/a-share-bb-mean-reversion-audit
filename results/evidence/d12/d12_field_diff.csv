@@ -1,0 +1,12 @@
+field,changed_n,changed_pct
+latest_report_period,381,0.5973
+latest_ann_date,346,0.5424
+revenue_ttm,1719,2.695
+netprofit_ttm,1916,3.0038
+ocf_ttm,690,1.0818
+revenue_yoy_pct,496,0.7776
+netprofit_yoy_pct,503,0.7886
+loss_flag,959,1.5035
+negative_ocf_flag,482,0.7557
+profit_decline_flag,151,0.2367
+revenue_decline_flag,174,0.2728

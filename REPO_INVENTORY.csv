@@ -811,3 +811,15 @@ results/evidence/d11/d11_conflict_spotcheck.csv,csv,D1.1,context,ACTIVE,d11_conf
 results/evidence/d11/d11_ttm_component_audit.csv,csv,D1.1,context,ACTIVE,d11_ttm_component_audit.csv,,EVIDENCE,results/evidence/d11/,249636 rows future=0
 results/evidence/d11/d11_summary.json,json,D1.1,context,ACTIVE,d11_summary.json,,EVIDENCE,results/evidence/d11/,
 results/evidence/d11/d11_invariants.json,json,D1.1,context,ACTIVE,d11_invariants.json,,EVIDENCE,results/evidence/d11/,
+research/context/pit_context_d12.py,py,D1.2,context,ACTIVE,pit_context_d12.py,,SOURCE,research/context/,visibility-date audit main script
+research/context/PIT_CONTEXT_D12.md,md,D1.2,context,ACTIVE,PIT_CONTEXT_D12.md,,REPORT,research/context/,D1.2 report: SEMANTICS_AMBIGUOUS (C); D1 stays HOLD
+results/evidence/d12/d12_date_profile.csv,csv,D1.2,context,ACTIVE,d12_date_profile.csv,,EVIDENCE,results/evidence/d12/,income f_ann>ann 3143 rows 1.64%; cashflow 2036 1.08%; delta median 295/182
+results/evidence/d12/d12_signal_exposure.csv,csv,D1.2,context,ACTIVE,d12_signal_exposure.csv,,EVIDENCE,results/evidence/d12/,3466 components ann<=T & f_ann>T; 2262 signals 3.55%; large>180d 91.5%
+results/evidence/d12/d12_official_semantics.md,md,D1.2,context,ACTIVE,d12_official_semantics.md,,EVIDENCE,results/evidence/d12/,Tushare docs: ann=公告日期 f_ann=实际公告日期; f_ann mixes disclosure date + warehouse timestamp
+results/evidence/d12/d12_spotcheck.csv,csv,D1.2,context,ACTIVE,d12_spotcheck.csv,,EVIDENCE,results/evidence/d12/,"30 big-delta cninfo cases: 0 f_ann match, 13 ann match, 10 OTHER, 7 no-hit"
+results/evidence/d12/d12_disclosure_crosscheck.csv,csv,D1.2,context,ACTIVE,d12_disclosure_crosscheck.csv,,EVIDENCE,results/evidence/d12/,37 rows forecast plans only; not comparable
+results/evidence/d12/d12_rule_diff.csv,csv,D1.2,context,ACTIVE,d12_rule_diff.csv,,EVIDENCE,results/evidence/d12/,RULE_B changed 381 signals 0.60% by year
+results/evidence/d12/d12_field_diff.csv,csv,D1.2,context,ACTIVE,d12_field_diff.csv,,EVIDENCE,results/evidence/d12/,field-level A vs B diff
+results/evidence/d12/d12_ttm_visibility_audit.csv,csv,D1.2,context,ACTIVE,d12_ttm_visibility_audit.csv,,EVIDENCE,results/evidence/d12/,RULE_B future_visible=0
+results/evidence/d12/d12_summary.json,json,D1.2,context,ACTIVE,d12_summary.json,,EVIDENCE,results/evidence/d12/,classification C SEMANTICS_AMBIGUOUS; leak bound 14-249 comps (0.02-0.39%)
+results/evidence/d12/d12_invariants.json,json,D1.2,context,ACTIVE,d12_invariants.json,,EVIDENCE,results/evidence/d12/,I1-I8 all True

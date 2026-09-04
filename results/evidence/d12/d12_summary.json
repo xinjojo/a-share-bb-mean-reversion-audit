@@ -1,0 +1,232 @@
+{
+ "profile": {
+  "income": {
+   "kind": "income",
+   "n_rows": 191436,
+   "f_ann_missing_rows": 0,
+   "f_ann_eq_rows": 188293,
+   "f_ann_lt_rows": 0,
+   "f_ann_gt_rows": 3143,
+   "f_ann_gt_pct": 1.6418,
+   "delta_days": {
+    "min": 1,
+    "p1": 2.0,
+    "p5": 17.0,
+    "median": 295.0,
+    "p95": 1094.8999999999996,
+    "p99": 1467.0,
+    "max": 2905
+   },
+   "group_counts": {
+    "eq": 131526,
+    "gt": 1993
+   }
+  },
+  "cashflow": {
+   "kind": "cashflow",
+   "n_rows": 188969,
+   "f_ann_missing_rows": 0,
+   "f_ann_eq_rows": 186933,
+   "f_ann_lt_rows": 0,
+   "f_ann_gt_rows": 2036,
+   "f_ann_gt_pct": 1.0774,
+   "delta_days": {
+    "min": 1,
+    "p1": 2.3500000000000014,
+    "p5": 14.0,
+    "median": 182.0,
+    "p95": 897.75,
+    "p99": 1218.65,
+    "max": 1902
+   },
+   "group_counts": {
+    "eq": 131918,
+    "gt": 1443
+   }
+  }
+ },
+ "exposure": {
+  "future_actual_ann_components": 3466,
+  "signals_hit": 2262,
+  "signals_hit_pct": 3.5463,
+  "comps_total": 370297,
+  "ann_le_signal": true
+ },
+ "rule_diff": {
+  "changed_signal_events": 381,
+  "changed_pct": 0.5973,
+  "by_year": {
+   "2020": {
+    "changed": 160,
+    "n": 8963,
+    "pct": 1.785
+   },
+   "2021": {
+    "changed": 117,
+    "n": 10532,
+    "pct": 1.111
+   },
+   "2022": {
+    "changed": 63,
+    "n": 15514,
+    "pct": 0.406
+   },
+   "2023": {
+    "changed": 21,
+    "n": 15487,
+    "pct": 0.136
+   },
+   "2024": {
+    "changed": 20,
+    "n": 13289,
+    "pct": 0.151
+   }
+  },
+  "rule_a_value_but_rule_b_not_visible": 0,
+  "field_diff": [
+   {
+    "field": "latest_report_period",
+    "changed_n": 381,
+    "changed_pct": 0.5973
+   },
+   {
+    "field": "latest_ann_date",
+    "changed_n": 346,
+    "changed_pct": 0.5424
+   },
+   {
+    "field": "revenue_ttm",
+    "changed_n": 1719,
+    "changed_pct": 2.695
+   },
+   {
+    "field": "netprofit_ttm",
+    "changed_n": 1916,
+    "changed_pct": 3.0038
+   },
+   {
+    "field": "ocf_ttm",
+    "changed_n": 690,
+    "changed_pct": 1.0818
+   },
+   {
+    "field": "revenue_yoy_pct",
+    "changed_n": 496,
+    "changed_pct": 0.7776
+   },
+   {
+    "field": "netprofit_yoy_pct",
+    "changed_n": 503,
+    "changed_pct": 0.7886
+   },
+   {
+    "field": "loss_flag",
+    "changed_n": 959,
+    "changed_pct": 1.5035
+   },
+   {
+    "field": "negative_ocf_flag",
+    "changed_n": 482,
+    "changed_pct": 0.7557
+   },
+   {
+    "field": "profit_decline_flag",
+    "changed_n": 151,
+    "changed_pct": 0.2367
+   },
+   {
+    "field": "revenue_decline_flag",
+    "changed_n": 174,
+    "changed_pct": 0.2728
+   }
+  ]
+ },
+ "ttm_p0": {
+  "future_visible_component_count": 0,
+  "component_rows": 368640
+ },
+ "forecast_express": {
+  "forecast": {
+   "has_f_ann_date": false,
+   "has_update_flag": true
+  },
+  "express": {
+   "has_f_ann_date": false,
+   "has_update_flag": true
+  }
+ },
+ "classification": "C_SEMANTICS_AMBIGUOUS",
+ "no_outcome_loaded": true,
+ "exposure_decomposition": {
+  "total": 3466,
+  "small_delta_le30": 14,
+  "mid_31_180": 280,
+  "large_gt180": 3172,
+  "large_pct": 91.52,
+  "cur_small_delta_le30": 14,
+  "cur_mid_31_180": 235,
+  "cur_large_gt180": 527,
+  "true_leak_candidate_lower": 14,
+  "true_leak_candidate_upper": 249,
+  "true_leak_pct_of_signals_lo": 0.0219,
+  "true_leak_pct_of_signals_hi": 0.3904
+ },
+ "spotcheck_bigdelta": {
+  "n": 30,
+  "ann_match": 13,
+  "fann_match": 0,
+  "other": 10,
+  "no_hit": 7
+ },
+ "spotcheck_smalldelta": {
+  "n": 11,
+  "fann_match": 8,
+  "ann_match": 1,
+  "other": 2,
+  "note": "11 cases delta 1-30d; 8/11 exactly match cninfo actual date"
+ },
+ "disclosure_crosscheck": {
+  "rows": 37,
+  "match_ann": 0,
+  "note": "disclosure_date covers earnings forecast/express disclosure plans only; not comparable to periodic report ann dates"
+ },
+ "official_semantics": {
+  "ann_date": "\u516c\u544a\u65e5\u671f",
+  "f_ann_date": "\u5b9e\u9645\u516c\u544a\u65e5\u671f",
+  "verdict": "f_ann_date mixes true disclosure date (small delta, 8/11 matched) and warehouse refresh timestamp (large delta, 0/30 matched); SEMANTICS_AMBIGUOUS"
+ },
+ "d1_final_accept": false,
+ "rule_b_impact": {
+  "changed_signals": 381,
+  "changed_pct": 0.5973,
+  "by_year": {
+   "2020": {
+    "changed": 160,
+    "n": 8963,
+    "pct": 1.785
+   },
+   "2021": {
+    "changed": 117,
+    "n": 10532,
+    "pct": 1.111
+   },
+   "2022": {
+    "changed": 63,
+    "n": 15514,
+    "pct": 0.406
+   },
+   "2023": {
+    "changed": 21,
+    "n": 15487,
+    "pct": 0.136
+   },
+   "2024": {
+    "changed": 20,
+    "n": 13289,
+    "pct": 0.151
+   }
+  },
+  "rule_a_value_but_rule_b_not_visible": 0,
+  "ttm_future_visible": 0
+ }
+}

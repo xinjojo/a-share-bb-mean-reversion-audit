@@ -1,0 +1,9 @@
+file,size_bytes,mtime,row_count,columns,has_trade_date
+data/kline/2020.parquet,24353397,2026-09-02 09:42,935586,"ts_code,open,high,low,close,vol,amount,pre_close,adj_factor,is_limit_down",False
+data/kline/2021.parquet,27757885,2026-09-02 09:42,1048200,"ts_code,open,high,low,close,vol,amount,pre_close,adj_factor,is_limit_down",False
+data/kline/2022.parquet,30337452,2026-09-02 09:42,1135135,"ts_code,open,high,low,close,vol,amount,pre_close,adj_factor,is_limit_down",False
+data/kline/2023.parquet,31893283,2026-09-02 09:42,1198320,"ts_code,open,high,low,close,vol,amount,pre_close,adj_factor,is_limit_down",False
+data/kline/2024.parquet,32067194,2026-09-02 09:42,1221793,"ts_code,open,high,low,close,vol,amount,pre_close,adj_factor,is_limit_down",False
+data/kline/2025.parquet,34997923,2026-09-02 09:42,1313872,"ts_code,open,high,low,close,vol,amount,pre_close,adj_factor,is_limit_down",False
+data/kline/2026.parquet,23929461,2026-09-02 09:42,878645,"ts_code,open,high,low,close,vol,amount,pre_close,adj_factor,is_limit_down",False
+data/raw/etf/etf_feat_long.parquet,47888492,2026-09-04 02:55,1129917,"date,etf,index_key,close,open,high,close_adj,high_adj,adj,bb_lower",False

@@ -1,0 +1,2 @@
+g0_tr,control_tr,tr_diff_pp,g0_trades,control_trades,trade_diff,g0_pf,control_pf,pf_diff,g0_maxdd,control_maxdd,maxdd_diff_pp,g0_wr,control_wr,wr_diff_pp,reproduction,root_cause,fix
+30.295,30.295,0.0,76,76,0,1.3045,1.3045,0.0,-30.79,-30.79,0.0,68.42,68.42,0.0,PASS_EXACT,etf_enabled=True in S2 engine (default) vs etf_enabled=False in G0. Idle cash invested in ETF 513500 inflated TR by ~9.7pp.,"Set etf_enabled=False in S2 engine, day_range=(0, N2024)"

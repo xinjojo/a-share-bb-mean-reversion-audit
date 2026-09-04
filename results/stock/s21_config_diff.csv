@@ -1,0 +1,26 @@
+field,G0_value,S2_value,status
+date_range,2020-01-02 to 2024-12-31 (day_range 0:N2024),full 2020-2026 (no day_range) in buggy run; corrected uses 0:N2024,different_fixed
+etf_enabled,False,"True (default, BUG)",different_root_cause
+stock_universe,prepare_v51 PIT universe,prepare_v51 PIT universe (identical),same
+PIT_rules,"limit_down_mode=correct, st_mode=pit",identical,same
+price_field,raw open/high/low/close + adj factor,identical,same
+BB_window,20,20,same
+BB_sigma,2.0,2.0,same
+entry_signal,"close_adj < bb_lower, not limit",identical,same
+ranking,amount descending,amount descending,same
+top_n,10,10,same
+K_max_positions,3,3,same
+max_levels,5,5,same
+level_cash,200000,200000,same
+ADD_logic,"close_adj < bb_lower, levels<5, gap>=1d",identical,same
+entry_timing,T close signal -> T+1 open fill,identical,same
+exit_timing,intraday high touches Pstar -> fill,identical,same
+STRICT_C_definition,"dynamic_touch, analytic_Pstar, tick conservative",identical,same
+T+1,enforced (entry day cannot sell),identical,same
+limit_up_down,limit_conservative open fill,identical,same
+suspension,amount=0 rows excluded from kline,identical,same
+commission,"0.025%, min 5元",identical,same
+stamp_duty,historical mode (0.05% sell),identical,same
+slippage,10bp fixed,10bp fixed,same
+cash_accounting,"initial 1M, no ETF cash mgmt",buggy: ETF 513500 rebalance; corrected: no ETF,different_fixed
+force_close,final day close sell,identical,same

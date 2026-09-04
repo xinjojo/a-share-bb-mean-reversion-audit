@@ -800,3 +800,14 @@ results/evidence/d1/d1_news_readiness.csv,csv,D1,context,ACTIVE,d1_news_readines
 results/evidence/d1/d1_redteam.json,json,D1,context,ACTIVE,d1_redteam.json,,EVIDENCE,results/evidence/d1/,
 results/evidence/d1/d1_summary.json,json,D1,context,ACTIVE,d1_summary.json,,EVIDENCE,results/evidence/d1/,
 results/evidence/d1/d1_invariants.json,json,D1,context,ACTIVE,d1_invariants.json,,EVIDENCE,results/evidence/d1/,
+research/context/pit_context_d11.py,py,D1.1,context,ACTIVE,pit_context_d11.py,,CODE,research/context/,STRICT version-selector remediation script
+research/context/PIT_CONTEXT_D11.md,md,D1.1,context,ACTIVE,PIT_CONTEXT_D11.md,,REPORT,research/context/,CANONICAL D1.1; PASS; sector B / fundamental A
+research/context/registries/PIT_CONTEXT_D11_VERSION_SELECTOR_REGISTRY.csv,csv,D1.1,context,REGISTRY,PIT_CONTEXT_D11_VERSION_SELECTOR_REGISTRY.csv,,REGISTRY,research/context/registries/,preregistered before remediation
+research/context/registries/PIT_CONTEXT_D11_VERSION_SELECTOR_REGISTRY.sha256,file,D1.1,context,REGISTRY,PIT_CONTEXT_D11_VERSION_SELECTOR_REGISTRY.sha256,,REGISTRY,research/context/registries/,SHA 414a1816fbe5bab5259a6f9c35f62f322a42bf384290354977d7da44535ac477
+results/evidence/d11/d11_version_conflicts.csv,csv,D1.1,context,ACTIVE,d11_version_conflicts.csv,,EVIDENCE,results/evidence/d11/,
+results/evidence/d11/d11_selector_diff.csv,csv,D1.1,context,ACTIVE,d11_selector_diff.csv,,EVIDENCE,results/evidence/d11/,signal-level OLD vs STRICT
+results/evidence/d11/d11_field_diff.csv,csv,D1.1,context,ACTIVE,d11_field_diff.csv,,EVIDENCE,results/evidence/d11/,
+results/evidence/d11/d11_conflict_spotcheck.csv,csv,D1.1,context,ACTIVE,d11_conflict_spotcheck.csv,,EVIDENCE,results/evidence/d11/,1179 full-audit 0 fail
+results/evidence/d11/d11_ttm_component_audit.csv,csv,D1.1,context,ACTIVE,d11_ttm_component_audit.csv,,EVIDENCE,results/evidence/d11/,249636 rows future=0
+results/evidence/d11/d11_summary.json,json,D1.1,context,ACTIVE,d11_summary.json,,EVIDENCE,results/evidence/d11/,
+results/evidence/d11/d11_invariants.json,json,D1.1,context,ACTIVE,d11_invariants.json,,EVIDENCE,results/evidence/d11/,

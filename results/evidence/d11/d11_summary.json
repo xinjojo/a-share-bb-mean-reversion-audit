@@ -1,0 +1,183 @@
+{
+ "conflict_scan": {
+  "income_dup_groups": 57838,
+  "cashflow_dup_groups": 55603,
+  "fina_dup_groups": 101904,
+  "groups_diff_update_flag": 113236,
+  "groups_same_up_diff_f_ann": 995,
+  "groups_diff_values": 2733
+ },
+ "fina_ambiguous_groups": 2020,
+ "fina_ambiguous_signal_events": 1179,
+ "fina_ambiguous_signal_pct": 1.8484,
+ "old_vs_strict": {
+  "changed_signal_events": 0,
+  "changed_pct": 0.0,
+  "by_year": {
+   "2020": {
+    "changed": 0,
+    "n": 8963,
+    "pct": 0.0
+   },
+   "2021": {
+    "changed": 0,
+    "n": 10532,
+    "pct": 0.0
+   },
+   "2022": {
+    "changed": 0,
+    "n": 15514,
+    "pct": 0.0
+   },
+   "2023": {
+    "changed": 0,
+    "n": 15487,
+    "pct": 0.0
+   },
+   "2024": {
+    "changed": 0,
+    "n": 13289,
+    "pct": 0.0
+   }
+  },
+  "field_diff": [
+   {
+    "field": "latest_report_period",
+    "changed_n": 0,
+    "changed_pct": 0.0,
+    "max_abs_diff": 0.0
+   },
+   {
+    "field": "latest_ann_date",
+    "changed_n": 0,
+    "changed_pct": 0.0,
+    "max_abs_diff": 0.0
+   },
+   {
+    "field": "financial_age_days",
+    "changed_n": 0,
+    "changed_pct": 0.0,
+    "max_abs_diff": 0.0
+   },
+   {
+    "field": "revenue_ttm",
+    "changed_n": 8064,
+    "changed_pct": 12.6425,
+    "max_abs_diff": 6481532118.169983
+   },
+   {
+    "field": "netprofit_ttm",
+    "changed_n": 8348,
+    "changed_pct": 13.0877,
+    "max_abs_diff": 673979216.73
+   },
+   {
+    "field": "ocf_ttm",
+    "changed_n": 7793,
+    "changed_pct": 12.2176,
+    "max_abs_diff": 1.52587890625e-05
+   },
+   {
+    "field": "revenue_yoy_pct",
+    "changed_n": 7363,
+    "changed_pct": 11.5435,
+    "max_abs_diff": 42.663061801427226
+   },
+   {
+    "field": "netprofit_yoy_pct",
+    "changed_n": 7115,
+    "changed_pct": 11.1547,
+    "max_abs_diff": 478.4992695525716
+   },
+   {
+    "field": "roe",
+    "changed_n": 1176,
+    "changed_pct": 1.8437,
+    "max_abs_diff": 0.0
+   },
+   {
+    "field": "gross_margin",
+    "changed_n": 1145,
+    "changed_pct": 1.7951,
+    "max_abs_diff": 0.0
+   },
+   {
+    "field": "debt_to_asset",
+    "changed_n": 1163,
+    "changed_pct": 1.8233,
+    "max_abs_diff": 0.0
+   },
+   {
+    "field": "current_ratio",
+    "changed_n": 1133,
+    "changed_pct": 1.7763,
+    "max_abs_diff": 0.0
+   },
+   {
+    "field": "ocf_to_netprofit",
+    "changed_n": 13524,
+    "changed_pct": 21.2025,
+    "max_abs_diff": 135.39704766168168
+   },
+   {
+    "field": "loss_flag",
+    "changed_n": 1,
+    "changed_pct": 0.0016,
+    "max_abs_diff": 1.0
+   },
+   {
+    "field": "negative_ocf_flag",
+    "changed_n": 0,
+    "changed_pct": 0.0,
+    "max_abs_diff": 0.0
+   },
+   {
+    "field": "profit_decline_flag",
+    "changed_n": 1,
+    "changed_pct": 0.0016,
+    "max_abs_diff": 1.0
+   },
+   {
+    "field": "revenue_decline_flag",
+    "changed_n": 5,
+    "changed_pct": 0.0078,
+    "max_abs_diff": 1.0
+   },
+   {
+    "field": "forecast_type",
+    "changed_n": 25,
+    "changed_pct": 0.0392,
+    "max_abs_diff": 0.0
+   },
+   {
+    "field": "express_available_flag",
+    "changed_n": 0,
+    "changed_pct": 0.0,
+    "max_abs_diff": 0.0
+   }
+  ]
+ },
+ "spotcheck": {
+  "n_checked": 1179,
+  "n_total_conflict_events": 1179,
+  "pass": true
+ },
+ "ttm_redteam": {
+  "component_rows": 249636,
+  "future_component_count": 0,
+  "pass": true
+ },
+ "coverage": {
+  "financial_strict_pct": 100.0,
+  "ttm_strict_pct": 98.8038,
+  "financial_d1_pct": 100.0,
+  "ttm_d1_pct": 98.804
+ },
+ "classification": {
+  "sector": "B",
+  "fundamental": "A",
+  "d11_pass": true
+ },
+ "sector_affected": false,
+ "no_outcome_loaded": true
+}

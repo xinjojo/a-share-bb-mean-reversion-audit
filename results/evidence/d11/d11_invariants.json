@@ -1,0 +1,10 @@
+{
+ "I1_strict_implements_registry": true,
+ "I2_income_cf_tie_reproducible": true,
+ "I3_fina_rule_deterministic": true,
+ "I4_spotchecks_pass": true,
+ "I5_ttm_future_component_count_0": true,
+ "I6_no_2025_read": true,
+ "I7_no_outcome_access": true,
+ "I8_prior_registry_sha_unchanged": true
+}

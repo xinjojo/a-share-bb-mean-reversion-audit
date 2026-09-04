@@ -1,0 +1,9 @@
+{
+ "I1_breadth_p7_panic80": true,
+ "I2_forward_dates_gt_T": true,
+ "I3_alla_equal_weight": true,
+ "I4_no_portfolio_run": true,
+ "I5_no_parameter_scan": true,
+ "I6_no_2025_2026": true,
+ "I7_prior_registry_sha_unchanged": true
+}

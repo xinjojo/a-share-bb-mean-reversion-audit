@@ -1,0 +1,2 @@
+control_tr,control_pf,random_median_tr,random_median_pf,p_random_tr_better,p_random_pf_better,control_tr_percentile,n_sim,etf_enabled,window
+30.295,1.3045,2.657,1.0754,33.0,34.5,67.0,200,False,2020-2024

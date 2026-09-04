@@ -110,11 +110,13 @@ SHA256 = `7415608a1003b612704e295a76427eba5c124607163a926fb514342c699f7ce7`（co
 理由：(a) 直击主导瓶颈 K（63.4% 阻塞）；(b) 保持 K=3 并发上限不变 → 保留 R0.2 认定的保护性 admission，不扩大并行暴露（与 P4.1 稀释证据不冲突）；(c) 现金从不阻塞（blocked_cash=0）→ 补位不撞资本墙；(d) 虚拟队列显示时序可行（median 11 天、83.7% 仍活、可自动过滤 16.3% 已过期信号）。
 备选（不执行）：C add-budget separation（layer2+ 占 50.9% 资本，但加仓平均有效，需设计“保护初始资本”的预算分离，风险是削弱有益加仓）。
 
-## 9. 分类
+## 9. 分类（R1.1 修正，外部审计后）
 
-**A — CLEAR ARCHITECTURAL BOTTLENECK（K slot）。**
+**C — BOTTLENECK EXISTS BUT ECONOMIC RELEVANCE UNCLEAR。**
 
-依据（registry 冻结定义）：单一机制（K 槽位）解释了 ≥50% 的 blocked events（336/530 = 63.4%），且统计与路径证据一致——P4 A1（K→999）是最大结构改变（capture ↑、组合 ↓）、P4.1 用 shared-capital 稀释完整解释了为何直接解除无效、本阶段显示现金从不阻塞。同时按 R0.2 措辞：K=3 是机械容量瓶颈，且在当前历史组合路径下同时充当保护性 admission constraint / 隐式容量过滤器。经济相关性层面：blocked_K 独立质量不差 + shadow 净值为正 → 机会成本真实存在，但 P4.1 证明其不可通过“直接放开 K”兑现，需借助保留 K 并发上限的机制（如队列补位）探索。
+修正说明：P5 预注册定义 C = “机械阻塞明显，但 blocked signal quality / shadow value 不支持经济重要性”。当前证据：K 槽位是明确机械容量瓶颈（63.4% 候选、55.1% 交易日 K 满、现金从不阻塞），**但** independent coverage 仅 36.6%，BLOCKED_K vs ADMITTED 事件日 calendar bootstrap CI = [−14.08, +4.79]pp 跨 0（HAC 因共同事件日仅 7 天无法计算），无法证明被挡信号经济质量显著更优或更差；且 P4/P4.1 已证明简单解除 K 会恶化共享资本路径。因此不能定 A（经济相关性未建立），最终为 C。
+
+措辞边界（禁止）：不得写“放开 K 会增加收益”“blocked_K 是更好的信号”“queue 已经证明值得部署”。保留：K=3 是实际容量瓶颈，同时是 protective admission constraint（R0.2）；blocked_K 独立质量 point 上不差（+5.08% vs +3.53%）但无统计结论；shadow net +1.25M 是 counterfactual、不可实现。
 
 ## 10. 交付物清单（`results/evidence/p5/`）
 

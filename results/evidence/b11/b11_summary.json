@@ -1,0 +1,118 @@
+{
+ "q5_q1": {
+  "point": 2.664291244840622,
+  "bootstrap_mean": 2.674289810910244,
+  "bootstrap_median": 2.6765349997921906,
+  "p2_5": 1.1015550635888787,
+  "p97_5": 4.184582758802494,
+  "old_ci_withdrawn": true
+ },
+ "primary_rank_hac": {
+  "slope": 0.002964484072604989,
+  "ci": [
+   0.001297091340899827,
+   0.0046318768043101515
+  ],
+  "old_ci": [
+   -0.0131,
+   0.019
+  ],
+  "withdrawn": true
+ },
+ "conditional": {
+  "b1": 3.2831833698585347,
+  "b1_se": 1.1498576508922977,
+  "b1_ci": [
+   1.0295037867618002,
+   5.5368629529552695
+  ],
+  "b2": -0.25946233225871235,
+  "b2_se": 17.657922831395524,
+  "b2_ci": [
+   -34.86835512358148,
+   34.34943045906405
+  ],
+  "intercept": 2.1098394491529877,
+  "old_b1_ci_withdrawn": true
+ },
+ "yearly_parity": true,
+ "yearly": [
+  {
+   "year": 2020,
+   "n": 198,
+   "spearman": 0.1349452015568106,
+   "q5_q1": 2.3522105813915744
+  },
+  {
+   "year": 2021,
+   "n": 241,
+   "spearman": 0.26998651237666343,
+   "q5_q1": 3.414410052826754
+  },
+  {
+   "year": 2022,
+   "n": 227,
+   "spearman": 0.14031176630829148,
+   "q5_q1": 2.3699568737007133
+  },
+  {
+   "year": 2023,
+   "n": 238,
+   "spearman": 0.11228174337369078,
+   "q5_q1": 1.3628071500099967
+  },
+  {
+   "year": 2024,
+   "n": 206,
+   "spearman": 0.1770778888078238,
+   "q5_q1": 3.3694150597136305
+  }
+ ],
+ "monotonicity": true,
+ "tail_bad": false,
+ "full_market_signal_capture_ratio": {
+  "Q1": 0.017771,
+  "Q2": 0.008665,
+  "Q3": 0.002386,
+  "Q4": 0.001848,
+  "Q5": 0.000367
+ },
+ "pipeline": {
+  "Q1": {
+   "pipeline": 20,
+   "admitted": 11,
+   "blocked_K": 10,
+   "k_block_rate": 0.5,
+   "admission_rate": 0.55
+  },
+  "Q2": {
+   "pipeline": 75,
+   "admitted": 17,
+   "blocked_K": 50,
+   "k_block_rate": 0.66667,
+   "admission_rate": 0.22667
+  },
+  "Q3": {
+   "pipeline": 95,
+   "admitted": 11,
+   "blocked_K": 60,
+   "k_block_rate": 0.63158,
+   "admission_rate": 0.11579
+  },
+  "Q4": {
+   "pipeline": 136,
+   "admitted": 19,
+   "blocked_K": 85,
+   "k_block_rate": 0.625,
+   "admission_rate": 0.13971
+  },
+  "Q5": {
+   "pipeline": 201,
+   "admitted": 17,
+   "blocked_K": 131,
+   "k_block_rate": 0.65174,
+   "admission_rate": 0.08458
+  }
+ },
+ "classification": "A_STRONG_BREADTH_VALUE"
+}

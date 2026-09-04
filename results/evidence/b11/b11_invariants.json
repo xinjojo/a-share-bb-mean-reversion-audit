@@ -1,0 +1,12 @@
+{
+ "I1_b20_n63785_unchanged": true,
+ "I2_quintile_labels_unchanged": true,
+ "I3_estimand_meanQ5_minus_meanQ1": true,
+ "I4_toy_estimand_4": true,
+ "I5_multivariate_hac_full_X": true,
+ "I6_ols_parity": true,
+ "I7_no_portfolio_rerun": true,
+ "I8_p5_block_semantics_unchanged": true,
+ "I9_no_new_threshold": true,
+ "I10_2025_2026_closed": true
+}

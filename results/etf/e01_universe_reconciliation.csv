@@ -1,0 +1,11 @@
+metric,value,definition
+candidate_etfs_total,1400,fund_basic filtered to stock-type exchange-traded ETFs (1400)
+eligible_with_daily,1089,eligible=True AND has_daily=True (1137)
+unique_index_keys_all_candidates,377,distinct index_key across all 1400 candidates (377)
+universe_A_current_reps,328,current largest-AUM ETF per index (live only)
+universe_B_pit_indexes,362,distinct index_keys in B2 PIT selection (362)
+universe_B_pit_unique_etfs,534,distinct ETFs ever selected as B2 representative (534) — NOT independent indexes
+indexes_with_multi_rep_over_time,115,indexes whose B2 representative changed at least once over history (115)
+max_rep_etfs_per_index,7,max number of distinct representative ETFs for a single index (7)
+correlation_series_original_etf_level,534,"BUG: original correlation used ETF-level series, inflating count"
+correlation_series_fixed_index_level,362,FIX: index-level concatenated PIT representative returns (one series per index)

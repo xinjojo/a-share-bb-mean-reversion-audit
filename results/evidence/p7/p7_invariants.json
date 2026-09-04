@@ -1,0 +1,17 @@
+{
+ "I1_b11_accepted_A": true,
+ "I2_bridge_530_527_closed": true,
+ "I3_a0_exact_parity": true,
+ "I4_panic_only_dates_lt_T": true,
+ "I5_no_full_sample_trigger": true,
+ "I6_252_prior_days_min": true,
+ "I7_T_signal_only_T1_admission": true,
+ "I8_normal_K3_panic_K6": true,
+ "I9_A2_only_panic_top20": true,
+ "I10_shared_1M_capital": true,
+ "I11_no_forced_sell_K6_to_K3": true,
+ "I12_add_logic_unchanged": true,
+ "I13_exit_unchanged": true,
+ "I14_no_parameter_scan": true,
+ "I15_2025_2026_closed": true
+}

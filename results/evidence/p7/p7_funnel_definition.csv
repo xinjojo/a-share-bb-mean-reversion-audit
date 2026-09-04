@@ -1,0 +1,7 @@
+layer,definition
+FULL_LEGAL_UNIVERSE,"listed>=60d & ~PIT ST & BB20 warmup non-NaN (V2A_FROZEN_STRICT eligibility), per signal date"
+B20_SIGNALS_FULL_MARKET,"all-market close_adj<bb_lower & ~is_limit among legal universe (S1.1 B20 episodes; n=63,785; B1 B20_COUNT)"
+AMOUNT_TOP10_UNIVERSE,frozen amount descending Top10 by signal-date amount (P4/P5 entry_rank_mode=amount_top10; P7 A2 panic days use Top20)
+P5_CANDIDATE_PIPELINE,amount Top10 ∩ BB oversold ∩ valid → cand_log (530 events 2020-2024); NOT FULLY IDENTIFIABLE single-layer gap vs full-market because P5 ledger aggregates after Top10
+BLOCKED_STATES,precedence HELD>EXEC>K>CASH>LOT>OTHER (P5 classify_candidate); BLOCKED_HELD / BLOCKED_K / QUEUED→EXECUTED
+ADMITTED,executed new entries (76 in A0)

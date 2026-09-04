@@ -46,7 +46,8 @@ def run_fast_multi_strict_c_atr(days, D, etf_idx, etf_px, etf_open, etf_nav, fir
                                 flow_sink=None,
                                 entry_rank_mode='amount_top10', atr_lookup=None,
                                 ledger=None, cand_log=None,
-                                day_log=None, exec_log=None, forced_first=None):
+                                day_log=None, exec_log=None, forced_first=None,
+                                k_open_lookup=None, k_scan_lookup=None, top_n_lookup=None):
     """entry_rank_mode: 'amount_top10' (B0 frozen) | 'atr_top10' (B1) | 'atr_all' (B2).
     ledger: list of {sig_date, ts_code, state} for all enumerated oversold candidates.
     cand_log: list of {sig_date, ts_code, amount, amount_rank, atr20_pct} for oversold candidates.
@@ -58,6 +59,12 @@ def run_fast_multi_strict_c_atr(days, D, etf_idx, etf_px, etf_open, etf_nav, fir
                 (EXECUTED / CARRY_LIMITUP / MISSING / DROPPED_K_HELD / NO_LOT / NO_CASH).
       forced_first: {str(sig_date): [ts_code,...]} — reorders that day's candidate priority
                 so the listed stocks queue first (used by P3.1 leave-one-swap attribution).
+    P7 PURELY-ADDITIVE diagnostics (no decision change when None):
+      k_open_lookup:  {global day index: int K ceiling} applied at OPEN when executing
+                pending buys from the prior day's signal (P7: panic(T) -> T+1 admission).
+      k_scan_lookup:  {global day index: int K ceiling} applied at CLOSE when scanning
+                that day's new signals (governs next-day admission).
+      top_n_lookup:   {global day index: int top_n} amount-top width for that day's scan.
     """
     slip = slippage_bp / 10000.0
     cash = initial_cash
@@ -98,6 +105,15 @@ def run_fast_multi_strict_c_atr(days, D, etf_idx, etf_px, etf_open, etf_nav, fir
             if flow_sink is not None:
                 flow_sink.append(dict(date=str(d.date()), leg='etf', action='sell',
                                       gross=amt, fee=fee, net=amt - fee, shares=sell_qty, px=eopx))
+
+    def k_open(i):
+        return k_open_lookup.get(i, K) if k_open_lookup else K
+
+    def k_scan(i):
+        return k_scan_lookup.get(i, K) if k_scan_lookup else K
+
+    def tn(i):
+        return top_n_lookup.get(i, top_n) if top_n_lookup else top_n
 
     def rebalance_close():
         nonlocal cash, etf_sh
@@ -231,7 +247,7 @@ def run_fast_multi_strict_c_atr(days, D, etf_idx, etf_px, etf_open, etf_nav, fir
             for pb in list(pending_buy):
                 erec = dict(sig_date=pb.get('sig_date'), ts_code=pb['ts_code'],
                             attempt_date=str(d.date())) if exec_log is not None else None
-                if len(positions) >= K or pb['ts_code'] in held:
+                if len(positions) >= k_open(i) or pb['ts_code'] in held:
                     if erec is not None:
                         erec['outcome'] = 'DROPPED_K_HELD'
                         exec_log.append(erec)
@@ -351,9 +367,9 @@ def run_fast_multi_strict_c_atr(days, D, etf_idx, etf_px, etf_open, etf_nav, fir
             amt = dd['amount'][cand_idx]
             atr = atr_lookup[d][cand_idx] if atr_lookup is not None else np.full(len(cand_idx), np.nan)
             if entry_rank_mode == 'amount_top10':
-                order = np.argsort(-amt)[:top_n]
+                order = np.argsort(-amt)[:tn(i)]
             elif entry_rank_mode == 'atr_top10':
-                top_idx = np.argsort(-amt)[:top_n]
+                top_idx = np.argsort(-amt)[:tn(i)]
                 atr_t = np.where(np.isnan(atr[top_idx]), -np.inf, atr[top_idx])
                 order = top_idx[np.argsort(-atr_t, kind='stable')]
             elif entry_rank_mode == 'atr_all':
@@ -375,7 +391,7 @@ def run_fast_multi_strict_c_atr(days, D, etf_idx, etf_px, etf_open, etf_nav, fir
                 bb_o = ((~np.isnan(dd['bb_lower'][cand_idx]))
                         & (dd['close_adj'][cand_idx] < dd['bb_lower'][cand_idx])
                         & (~dd['is_limit'][cand_idx]))
-                top_amt = np.argsort(-amt)[:top_n]
+                top_amt = np.argsort(-amt)[:tn(i)]
                 top_ov = [int(k) for k in top_amt if bb_o[k]]
                 heldset = {p['ts_code'] for p in positions} | pending_sell
                 pendset = {x['ts_code'] for x in pending_buy}
@@ -386,7 +402,7 @@ def run_fast_multi_strict_c_atr(days, D, etf_idx, etf_px, etf_open, etf_nav, fir
                     top10_oversold=len(top_ov),
                     held_conflicts=sum(1 for k in top_ov if dd['ts'][cand_idx[k]] in heldset),
                     pending_conflicts=sum(1 for k in top_ov if dd['ts'][cand_idx[k]] in pendset),
-                    available_slots=max(0, K - len(positions) - len(pending_buy)),
+                    available_slots=max(0, k_scan(i) - len(positions) - len(pending_buy)),
                     queueable_candidates=sum(1 for k in top_ov
                                              if (dd['ts'][cand_idx[k]] not in heldset)
                                              and (dd['ts'][cand_idx[k]] not in pendset))))
@@ -404,7 +420,7 @@ def run_fast_multi_strict_c_atr(days, D, etf_idx, etf_px, etf_open, etf_nav, fir
                 if tc in held or tc in pending_set:
                     ledger.append(dict(sig_date=str(d.date()), ts_code=tc, state='BLOCKED_HELD'))
                     continue
-                if len(positions) + len(pending_buy) >= K:
+                if len(positions) + len(pending_buy) >= k_scan(i):
                     ledger.append(dict(sig_date=str(d.date()), ts_code=tc, state='BLOCKED_K'))
                     continue
                 pending_buy.append({'ts_code': tc, 'name': None, 'layer_cash': level_cash,

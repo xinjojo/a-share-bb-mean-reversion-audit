@@ -1,0 +1,4 @@
+label,n,matched,mean_return_pct,win_rate_pct,mean_mae_pct,mae30_pct,median_hold_days
+A1_ONLY,32,15,5.774,73.33,-12.354,6.67,29.0
+A0_ONLY,25,12,7.806,83.33,-8.874,0.0,26.0
+A2_ONLY,37,20,0.752,60.0,-15.373,20.0,33.0

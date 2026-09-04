@@ -1,0 +1,135 @@
+{
+ "registry_sha": "db4d318ddc760e649acf14e93285345169313950de6822aaf9927981d439f909",
+ "panic80_days": 188,
+ "bridge_530_527": "CLOSED",
+ "a0": {
+  "total": 30.295094,
+  "mdd": -30.789729,
+  "sharpe": 0.346765,
+  "pnl": 302950.94,
+  "trades": 76
+ },
+ "a1": {
+  "total": -20.81233,
+  "mdd": -46.943413,
+  "sharpe": -0.046932,
+  "pnl": -208123.3,
+  "trades": 83
+ },
+ "a2": {
+  "total": -22.791409,
+  "mdd": -44.56891,
+  "sharpe": -0.093606,
+  "pnl": -227914.09,
+  "trades": 94
+ },
+ "a1_vs_a0": {
+  "delta_total": -51.1074,
+  "delta_mdd": -16.1537,
+  "delta_sharpe": -0.393697,
+  "delta_pnl": -511074.24
+ },
+ "a2_vs_a1": {
+  "delta_total": -1.9791,
+  "delta_pnl": -19790.78
+ },
+ "yearly_improved": {
+  "n": 0,
+  "years": []
+ },
+ "bridge_a1": {
+  "common": 51,
+  "a_only": 25,
+  "b_only": 32,
+  "common_pnl_delta": -183557.12,
+  "a_only_pnl": 415752.64,
+  "b_only_pnl": 88235.52
+ },
+ "bridge_a2": {
+  "common": 57,
+  "a_only": 26,
+  "b_only": 37,
+  "common_pnl_delta": 44677.52,
+  "a_only_pnl": -81166.82,
+  "b_only_pnl": -145635.12
+ },
+ "incremental_quality": [
+  {
+   "label": "A1_ONLY",
+   "n": 32,
+   "matched": 15,
+   "mean_return_pct": 5.774,
+   "win_rate_pct": 73.33,
+   "mean_mae_pct": -12.354,
+   "mae30_pct": 6.67,
+   "median_hold_days": 29.0
+  },
+  {
+   "label": "A0_ONLY",
+   "n": 25,
+   "matched": 12,
+   "mean_return_pct": 7.806,
+   "win_rate_pct": 83.33,
+   "mean_mae_pct": -8.874,
+   "mae30_pct": 0.0,
+   "median_hold_days": 26.0
+  },
+  {
+   "label": "A2_ONLY",
+   "n": 37,
+   "matched": 20,
+   "mean_return_pct": 0.752,
+   "win_rate_pct": 60.0,
+   "mean_mae_pct": -15.373,
+   "mae30_pct": 20.0,
+   "median_hold_days": 33.0
+  }
+ ],
+ "concentration": [
+  {
+   "variant": "A1_incremental_vs_A0",
+   "incremental_pnl": -511074.24,
+   "top1_date_pct": 13.93,
+   "top5_dates_pct": 33.23,
+   "top1_trade_pct": 13.93
+  },
+  {
+   "variant": "A2_incremental_vs_A1",
+   "incremental_pnl": -19790.78,
+   "top1_date_pct": 158.4,
+   "top5_dates_pct": 615.25,
+   "top1_trade_pct": 158.4
+  }
+ ],
+ "risk": [
+  {
+   "mode": "A0",
+   "maxdd_pct": -30.79,
+   "worst1d_pct": -8.365,
+   "worst5d_pct": -13.016,
+   "peak_positions": 3,
+   "peak_gross_exposure": 1599232.0,
+   "min_cash": 113.0
+  },
+  {
+   "mode": "A1",
+   "maxdd_pct": -46.943,
+   "worst1d_pct": -8.365,
+   "worst5d_pct": -13.606,
+   "peak_positions": 5,
+   "peak_gross_exposure": 1253686.0,
+   "min_cash": 123.0
+  },
+  {
+   "mode": "A2",
+   "maxdd_pct": -44.569,
+   "worst1d_pct": -8.365,
+   "worst5d_pct": -13.99,
+   "peak_positions": 6,
+   "peak_gross_exposure": 1213986.0,
+   "min_cash": 19.0
+  }
+ ],
+ "mechanism": "M4_BREADTH_ALPHA_NOT_PORTFOLIO_CONVERTIBLE",
+ "classification": "D_HARMFUL"
+}

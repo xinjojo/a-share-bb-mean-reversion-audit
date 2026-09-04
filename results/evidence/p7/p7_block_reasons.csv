@@ -1,0 +1,4 @@
+mode,candidates,queued,blocked_held,blocked_k,exec_dropped_k_held,exec_no_cash,exec_no_lot,exec_fail
+A0,530,78,116,336,0,0,1,0
+A1,530,161,133,236,0,0,77,0
+A2,678,180,165,333,0,0,85,0

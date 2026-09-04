@@ -1,0 +1,2 @@
+stock_source,stock_commit,stock_common_window,stock_unique_stocks,stock_eligible_rows,stock_signal_rows,etf_unique,etf_eligible_rows,etf_signal_rows,matched_dates,date_assignment,limitation
+/Users/mouha/DoubaoWork/chats/2026-08-25/new-chat/audit_package/github_repo/data/kline/*.parquet,43e9e4a (master HEAD),2020-01-01 to 2024-12-31,5230,5222524,261197,441,196872,11030,330,ETF trading calendar mapped to stock row-in-year index,No stock_basic/list_date/ST PIT data; using n_days>=20 as eligibility proxy; no ADV60 filter for stocks

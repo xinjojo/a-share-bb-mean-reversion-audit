@@ -1,0 +1,3 @@
+asset_class,actual_mean_pct,random_mean_pct,random_p5_pct,random_p50_pct,random_p95_pct,actual_percentile,n_days
+stock,-0.105,0.127,-11.425,-0.083,12.041,49.9,1106
+etf,0.588,1.168,-8.678,0.264,16.556,52.5,486

@@ -1,0 +1,33 @@
+key,value
+phase,E5
+title,Stock vs ETF Cross-Sectional Dispersion Mechanism Audit
+research_status,MECHANISM AUDIT / ADAPTIVE HISTORICAL RESEARCH / NOT CLEAN OUT-OF-SAMPLE
+hypothesis,H4: Stock-level BB mean reversion has larger and more informative cross-sectional idiosyncratic opportunity set than ETF/index-level mean reversion
+stock_data_source,audit_package/github_repo/data/kline/*.parquet (master HEAD 43e9e4a)
+stock_commit,43e9e4a
+etf_data_source,data/raw/etf/etf_feat_long.parquet + index_daily
+etf_commit,cc50cd0 (E4)
+common_window,2020-01-01 to 2024-12-31
+bb_window,20
+bb_std,2.0
+bb_z_formula,(close_adj - MA20) / rolling_std20; more negative = deeper oversold
+bb_z_sort,ascending (most negative first)
+forward_horizons,1d 3d 5d 10d 20d
+dispersion_metrics,std IQR MAD P10-P90 spread
+signal_definition,close_adj < bb_lower AND bb_lower notna
+stock_eligibility,n_days >= 20 (proxy for listing; no ADV60/ST filter available in kline-only data)
+etf_eligibility,listed AND n_days>=60 AND ADV60>=20000千元 (2000万元)
+stock_ranking_native,amount descending (confirmed from src/run_strict_c.py line 335)
+etf_ranking_native,amount descending (frozen from E1-E4)
+top_n,10
+matched_date_definition,both stock and ETF have >=5 signal candidates on same date
+ic_sign_convention,positive IC = deeper oversold (more negative BB_Z rank) predicts better future return
+random_topn_seed,42
+random_topn_reps,1000
+random_topn_rule,same date same candidate set same N; no cross-day sampling
+breadth_metrics,signal_ratio = signal_count / eligible_count; zero-signal days; percentiles; threshold days
+support_criteria_strong,"Stock BB_Z dispersion > ETF; forward return dispersion > ETF; stock IC > ETF; Top-N separation > ETF; signal expectancy > ETF; less synchronized; matched dates consistent"
+support_criteria_partial,dispersion and expectancy clearly higher but ranking IC weak or matched dates less clear
+support_criteria_none,dispersion/IC/separation similar between stock and ETF
+forbidden_changes,"No strategy modification; no parameter optimization; no new stock/ETF strategy; no filtering; results are mechanism diagnostics only"
+limitations,"Stock data lacks trade_cal/stock_basic/ST PIT/ADV60; dates assigned via ETF trading calendar; stock eligibility uses n_days>=20 proxy not full PIT; no stock ADV60 liquidity filter; pooled IC inflated by high-signal days"

@@ -266,7 +266,7 @@ B1 / B1.1 Signal Breadth ──► A STRONG BREADTH VALUE (B1.1 corrected infere
 - **结果数据:** `results/evidence/f3/`
 - **状态:** **ACCEPTED DIAGNOSTIC（经 R0.9 关闭）** — **C — PREDICTIVE BUT ECONOMICALLY INSUFFICIENT**；branch PAUSED/CLOSED FOR DEVELOPMENT
 - **关键数字:** OOF M1 AUC 0.720 / PR-AUC 0.786；STABLE_SAFE/STABLE_POINT **0/6**；2021–2023 EV 全负，2024 年 M0 T50/T75、M1 T50/T75/T90 为正（单年，不达标）；test FPR 0.12–0.64 vs calendar-safe ≤0.05–0.10；系数 3/4 方向稳定；D30 transfer AUC 0.584–0.807。无调参/无新特征/无 gate。
-### 15. ★ CURRENT: Portfolio Architecture → Panic-Breadth Chain（当前：M2 完成 / 待外审）
+### 15. ★ CURRENT: Portfolio Architecture → Panic-Breadth Chain（当前：M2 D substantive accepted / M2.1 hygiene remediation）
 - **R1.0（2026-09-04）：** failure-state predictor branch PAUSED/CLOSED；研究主线回归 PORTFOLIO ARCHITECTURE。
 - **P5（完成，DEVELOPMENT DIAGNOSTIC / WAITING EXTERNAL AUDIT）：** CAPACITY / CAPITAL-LOCK DIAGNOSTIC（prereg `e007979`，A0 parity PASS，结果 commit 见本表下方）。**K=3 槽位是主导容量瓶颈（63.4% 候选、55.1% 交易日 K 满），现金从不阻塞（0），K 同时是保护性 admission constraint（R0.2）**；Top10% 持仓占 capital-days 37.8%；layer2+ 占投入资本 50.9%（matched-share 平均正）；blocked_K 独立质量无显著差异（CI 跨 0）；虚拟队列 336 全部可释放、median 11 天、16.3% 已过期。Q7 登记 NEXT = D QUEUE/DEFERRED ADMISSION（仅登记不执行，**P5.1 后撤销**）。分类 **C**（R1.1 修正：bottleneck exists but economic relevance unclear——coverage 36.6%、CI 跨 0，无法证明可实现经济增益）。未外审。
 - **P6（ACCEPTED / D — HARMFUL，R1.3）：** ADD-BUDGET SEPARATION（prereg `407335e`，A0 parity PASS）。**预算隔离全面有害**：A1 +11.04% / A2 +10.27% / A3 −7.76% vs A0 +30.30%；A1 NO_NEW_BUDGET=0（新仓池从不缺钱，A1_ONLY=1）、NO_ADD_BUDGET=85、COMMON 74 信号 PnL −163,660（切掉 P5 已证明为正的 layer2/3）。分类 **D HARMFUL**；20/40/60% 仅探针、无正价值证据。核心：共享池的时间弹性是 A0 的组成部分，瓶颈是 K 不是钱。canonical: `research/portfolio/PORTFOLIO_ARCHITECTURE_P6.md` + `results/evidence/p6/`。

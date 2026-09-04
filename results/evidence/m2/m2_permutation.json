@@ -1,0 +1,10 @@
+{
+ "observed_mean_pct": -0.0683,
+ "null_mean": -0.3917,
+ "null_p2_5": -0.9715,
+ "null_p97_5": 0.3083,
+ "empirical_p": 0.1586,
+ "b": 5000,
+ "seed": 0,
+ "n_actual_trades": 78
+}

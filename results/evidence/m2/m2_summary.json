@@ -1,0 +1,97 @@
+{
+ "registry_sha": "7ff3333e6ea5897bc4c9bdecacdaf8914d3b1ce4d2a7e72902a5f70790f08e8b",
+ "carrier": "510300.SH",
+ "panic_signals": 188,
+ "trades": 78,
+ "primary_metrics": {
+  "total_return_pct": -5.309,
+  "cagr_pct": -1.1269,
+  "max_dd_pct": -23.2467,
+  "sharpe": -0.0593,
+  "sortino": -0.0522,
+  "calmar": -0.0485,
+  "time_in_market_pct": 32.18,
+  "n_trades": 78,
+  "worst_trade_pct": -5.3955,
+  "best_trade_pct": 6.8276,
+  "worst_5d_account_move_pct": -6.1731,
+  "max_consecutive_losses": 4,
+  "total_pnl": -5309.04,
+  "gross_total_pct": -1.4317,
+  "total_cost": 3891.51
+ },
+ "benchmark": {
+  "start": "2021-01-04",
+  "end": "2024-12-31",
+  "qty": 18900,
+  "gross_return_pct": -23.8258,
+  "net_pnl": -23995.97,
+  "net_return_pct": -24.016
+ },
+ "yearly": [
+  {
+   "year": 2021,
+   "trade_count": 20,
+   "net_pnl": 8770.2,
+   "net_return_pct": 8.7807,
+   "mean_trade_pct": 0.439,
+   "win_pct": 65.0
+  },
+  {
+   "year": 2022,
+   "trade_count": 20,
+   "net_pnl": -3464.13,
+   "net_return_pct": -3.4741,
+   "mean_trade_pct": -0.1737,
+   "win_pct": 35.0
+  },
+  {
+   "year": 2023,
+   "trade_count": 19,
+   "net_pnl": -17319.56,
+   "net_return_pct": -17.3523,
+   "mean_trade_pct": -0.9133,
+   "win_pct": 47.37
+  },
+  {
+   "year": 2024,
+   "trade_count": 19,
+   "net_pnl": 6704.45,
+   "net_return_pct": 6.7159,
+   "mean_trade_pct": 0.3535,
+   "win_pct": 47.37
+  }
+ ],
+ "positive_years": [
+  2,
+  4
+ ],
+ "bootstrap": {
+  "mean": -0.0741,
+  "p2_5": -0.6067,
+  "p97_5": 0.4569,
+  "b": 5000,
+  "seed": 0
+ },
+ "permutation": {
+  "observed_mean_pct": -0.0683,
+  "null_mean": -0.3917,
+  "null_p2_5": -0.9715,
+  "null_p97_5": 0.3083,
+  "empirical_p": 0.1586,
+  "b": 5000,
+  "seed": 0,
+  "n_actual_trades": 78
+ },
+ "matched_null": {
+  "observed_mean_pct": -0.0683,
+  "matched_nonpanic_mean_pct": -0.5827,
+  "delta_pp": 0.5144,
+  "n": 77
+ },
+ "concentration": {
+  "top1_trade_pnl_share": -1.2861,
+  "n_trades": 78
+ },
+ "classification": "D_HARMFUL"
+}

@@ -1,0 +1,10 @@
+{
+ "cluster_day_distribution": {
+  "1": 67,
+  "2": 9,
+  "3": 1,
+  "6": 1
+ },
+ "n_entries_in_panic": 78,
+ "note": "diagnostic only; no day-based selection"
+}

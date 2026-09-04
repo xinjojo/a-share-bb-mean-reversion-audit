@@ -1,0 +1,2 @@
+commission_rate,min_commission,slippage_oneway,stamp_duty,n_buys,n_sells,total_buy_fee,total_sell_fee,total_slippage_est_pp
+0.00025,5.0,0.001,0.0,78,78,1945.93,1945.58,3.8981

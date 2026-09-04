@@ -1,0 +1,17 @@
+{
+ "I1_m12_accepted_B": true,
+ "I2_only_one_carrier": true,
+ "I3_carrier_before_outcome": true,
+ "I4_panic80_unchanged": true,
+ "I5_t_plus1_open": true,
+ "I6_5d_hold_exact": true,
+ "I7_one_active_position": true,
+ "I8_new_signals_ignored": true,
+ "I9_no_extension": true,
+ "I10_100k_unlevered": true,
+ "I11_real_fund_daily_ohlc": true,
+ "I12_cost_frozen": true,
+ "I13_matched_null_present": true,
+ "I14_no_scan": true,
+ "I15_no_2025_2026": true
+}

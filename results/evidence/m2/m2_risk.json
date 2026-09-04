@@ -1,0 +1,17 @@
+{
+ "total_return_pct": -5.309,
+ "cagr_pct": -1.1269,
+ "max_dd_pct": -23.2467,
+ "sharpe": -0.0593,
+ "sortino": -0.0522,
+ "calmar": -0.0485,
+ "time_in_market_pct": 32.18,
+ "n_trades": 78,
+ "worst_trade_pct": -5.3955,
+ "best_trade_pct": 6.8276,
+ "worst_5d_account_move_pct": -6.1731,
+ "max_consecutive_losses": 4,
+ "total_pnl": -5309.04,
+ "gross_total_pct": -1.4317,
+ "total_cost": 3891.51
+}

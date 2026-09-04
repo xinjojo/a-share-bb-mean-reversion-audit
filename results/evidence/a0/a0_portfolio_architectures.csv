@@ -1,0 +1,11 @@
+architecture,return_pct,mdd_pct,sharpe,after_cost,realistic_execution,status,failure_mechanism
+First-gen K3,354.9,,,False,False,INVALID,same-bar close-close lookahead
+STRICT_C / A0 K3 baseline,30.2951,-30.7897,0.3468,True,True,DEVELOPMENT-ONLY BASELINE,not a proven alpha carrier; development-comparison architecture; Sharpe weak
+K999 (no K ceiling),,,,True,True,FAILED (P4 ablation),de-constraining K destroys shared-capital path
+ML1 (max_layers=1),,,,True,True,FAILED (P4/P6 tested),removing add-layers hurts path economics
+Fixed stop variants,,,,True,True,FAILED (S0 audit robust),stops do not improve outcomes
+Capital wallet separation (P6),10.27,,,True,True,D HARMFUL,"split NEW/ADD wallets cut layer2/3 positive PnL (-163,660 on COMMON)"
+Deferred queue (P5.1),,,,True,True,C STALE — not backtested,release-day eligibility only 2.68%; 88.99% no longer oversold
+Panic K6 (P7 A1),-20.81,-46.94,-0.047,True,True,D HARMFUL,"capacity expansion dilutes COMMON path (-183,557), cash exhaustion (77 no-cash blocks)"
+Panic Top20/K6 (P7 A2),-22.79,-44.57,-0.094,True,True,D HARMFUL,wider admission worsens candidate quality (A2_ONLY MAE30 20%)
+ETF carrier 510300 (M2/M2.1),-7.2514,-24.13,-0.064,True,True,D HARMFUL,gross +12.05% eaten by ~19.3pp costs (slip 15.4pp + fee 3.9pp); p=0.145; 2023 -17.35%

@@ -1,0 +1,49 @@
+{
+ "governance": "A0-G: close M2 ETF branch, open project alpha inventory gate",
+ "decision": "DECISION B — DO NOT OPEN BLIND TEST",
+ "signal_alpha_exists": true,
+ "deployable_portfolio_alpha_exists": false,
+ "robust_signal_alpha": [
+  "Independent BB lower-band episode edge (replay V2A + full-market replay)",
+  "B1.1 date-level breadth edge (A FINAL, corrected inference)"
+ ],
+ "failed_architectures": [
+  "first-gen (+354.9% INVALID lookahead)",
+  "K999",
+  "ML1",
+  "fixed stops (S0)",
+  "wallet separation (P6 D)",
+  "deferred queue (P5.1 C)",
+  "panic K6 (P7 A1 -20.81%)",
+  "panic Top20/K6 (P7 A2 -22.79%)",
+  "ETF carrier 510300 (M2 D, net -7.25% corrected)"
+ ],
+ "current_best_portfolio": {
+  "name": "STRICT_C / A0 K3 baseline",
+  "return_pct": 30.2951,
+  "mdd_pct": -30.7897,
+  "sharpe": 0.3468,
+  "trades": 76,
+  "after_cost": true,
+  "realistic_execution": true,
+  "status": "development-only baseline, NOT proven alpha carrier"
+ },
+ "gate_pass_count": "6/10 full YES (2 PARTIAL, 2 NO)",
+ "gate_failures": [
+  "#7 risk acceptable (Sharpe 0.347, MaxDD -30.79%)",
+  "#10 not a tuned unconfirmed architecture"
+ ],
+ "gate_partials": [
+  "#3 PIT data fully frozen (D1 HOLD)",
+  "#8 development robustness (conversion mechanism unestablished)"
+ ],
+ "core_reason_no_blind": "A0 is a development-comparison baseline, not a pre-registered frozen deployment architecture; risk profile weak; every signal-to-portfolio conversion attempt (P3/P6/P7/M2) failed; therefore no deployable portfolio alpha exists to blind-test.",
+ "scientific_conclusions": [
+  "Signal alpha exists: BB lower-band episode edge and breadth date-level edge are robust facts.",
+  "Portfolio alpha does not exist: K3 constraint is protective; expansion/wallet/queue/ETF conversions all fail.",
+  "Why more positive-expectancy trades reduce portfolio return: shared capital + path dilution + slot displacement (P4.1/P5/P7).",
+  "Costs dominate thin edges: M2 gross +12.05% -> net -7.25% under ~19.3pp costs.",
+  "Theory signals are not tradeable returns: first-gen +354.9% was same-bar lookahead."
+ ],
+ "no_2025_2026_read": true
+}

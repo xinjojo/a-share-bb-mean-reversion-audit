@@ -1,0 +1,15 @@
+{
+ "I1_no_new_factor": true,
+ "I2_no_new_etf": true,
+ "I3_no_new_threshold": true,
+ "I4_no_new_hold": true,
+ "I5_no_new_k": true,
+ "I6_no_new_ranking": true,
+ "I7_no_new_architecture": true,
+ "I8_no_new_ml": true,
+ "I9_no_2025_2026_read": true,
+ "I10_all_major_phases_included": true,
+ "I11_failures_not_omitted": true,
+ "I12_signal_vs_portfolio_distinct": true,
+ "I13_no_gate_lowering": true
+}

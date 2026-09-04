@@ -1,0 +1,16 @@
+branch,status,blind_candidate
+STRICT_C daily B20 signal layer,VALIDATED (signal-level),False
+B1.1 breadth date-level edge,VALIDATED (signal-level),False
+T2/T2-R market-state reverse context,VALIDATED (context only),False
+BB threshold / RSI / sector (S1),CLOSED,False
+Contemporaneous depth ranking (S1.1),CLOSED,False
+Weekly BB resonance (W1),CLOSED,False
+Fundamental distress (S3),HOLD (D1.2 C),False
+ATR ranking (P3),CLOSED,False
+Failure-state predictor (F3),CLOSED,False
+Queue / deferred admission (P5.1),CLOSED,False
+Add-budget separation (P6),CLOSED,False
+Panic capacity expansion (P7),CLOSED,False
+Panic-breadth market rebound (M1.2),"NARROW INDICATION (ETF gate consumed, failed)",False
+Broad-market ETF carrier (M2),CLOSED,False
+A0 K3 baseline portfolio,DEVELOPMENT-ONLY BASELINE,False

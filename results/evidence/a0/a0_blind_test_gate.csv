@@ -1,0 +1,11 @@
+no,criterion,verdict,note
+1,complete frozen rules,YES,"A0 rules exact: B20 T+1 open entry, STRICT_C exit, amount Top10, K3, max_layers 5, 200k/layer, 1M shared, A-share costs"
+2,no lookahead,YES,"Independent replay verified; signal at T close, entry T+1 open"
+3,PIT universe/data acceptable,PARTIAL,B20 PIT tradeable pool OK; fundamental PIT HOLD (D1.2 C) -> context layer not fully frozen
+4,realistic A-share execution,YES,"T+1, lot, PIT ST/liquidity exclusions, CSI300 breadth"
+5,real costs,YES,commission + 10bp slippage included
+6,portfolio-level net return positive,YES,+30.2951% after-cost 2020-2024
+7,risk acceptable,NO,Sharpe 0.347 weak; MaxDD -30.79%; deep-MAE episodes persist
+8,development robustness sufficient,PARTIAL,"signal layer robust; portfolio layer: 4 conversion attempts all failed -> conversion mechanism not established; A0 kept by comparison, not pre-registered deployment"
+9,no unresolved P0/P1 materially changing outcome,YES,"No known P0 for A0 core; D1.2 ambiguity affects fundamental branch, not A0"
+10,not a repeatedly-tuned unconfirmed architecture,NO,"K3/Top10/layers/200k are development-comparison survivors, never pre-registered as deployable config"

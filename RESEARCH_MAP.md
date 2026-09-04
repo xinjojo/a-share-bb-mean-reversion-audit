@@ -93,7 +93,7 @@ W1 Multi-Timeframe BB ──► D HARMFUL (ACCEPTED; W2 NOT START)
 B1 / B1.1 Signal Breadth ──► A STRONG BREADTH VALUE (B1.1 corrected inference ACCEPTED)
    │
    ▼
-★ CURRENT: P7 PANIC-BREADTH CAPACITY ARCHITECTURE（panic-day K6 / Top20 结构探针；530-vs-527 bridge 前置；2025–26 CLOSED）★
+★ CURRENT: M1 PANIC-BREADTH → MARKET REBOUND TRANSLATION（纯 market-level diagnostic：B1.1 breadth alpha 是否转译为 A 股整体 forward rebound；YES 才允许 future broad-market ETF/basket carrier；NO 则不做 ETF architecture；2025–26 CLOSED）★
 ```
 
 ---

@@ -1,0 +1,9 @@
+{
+ "primary_carrier": "510300.SH",
+ "name": "\u534e\u6cf0\u67cf\u745e\u6caa\u6df1300ETF",
+ "underlying_index": "000300.SH \u6caa\u6df1300",
+ "list_date": "2012-05-28",
+ "reason": "(1) CSI300 is the standard full-market representative broad index, best matches all-market B20 breadth source; (2) full 2020-2024 coverage with zero missing days and zero open/amount missing; (3) inception 2012 covers full dev period; (4) most liquid A-share broad ETF; (5) long-standing CSI300 tracking with high reliability",
+ "audit_file": "m2_carrier_audit.csv",
+ "note": "selection based on NON-OUTCOME metadata only; no signal-conditioned return computed"
+}

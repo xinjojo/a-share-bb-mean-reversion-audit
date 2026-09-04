@@ -1,0 +1,27 @@
+item,specification,frozen_value
+phase,PHASE W1 - MULTI-TIMEFRAME BOLLINGER DIAGNOSTIC,weekly context diagnostic only
+governance,D1.2 accepted as C SEMANTICS AMBIGUOUS (external audit); D1 overall HOLD; S3 FUNDAMENTAL DISTRESS NOT START; no hybrid small/large-delta visibility rule invented post-hoc; fundamental branch PAUSED; open multi-timeframe Bollinger research,"R1.6"
+question,at each frozen daily B20 signal does the stock's REAL-TIME weekly Bollinger state (close position + low touch) explain future return/win/MAE/hold/long-term-lockup risk? Diagnostic only: daily B20 entry unchanged, STRICT_C daily exit unchanged, no portfolio run,"frozen"
+weekly_as_of,for any trading day T weekly features may only use completed weeks before T plus current week's data up to T; NEVER read T+1..week-end prices; Friday-final-weekly-close must NOT be used Mon-Thu (P0),no lookahead
+week_definition,natural Mon-Fri trading weeks per trading calendar; holiday-shortened weeks count as one completed week; completed week = week ending before T; current week uses data up to T only,"frozen"
+weekly_bar,weekly_close_adj = last known trading-day close_adj of the week (completed weeks use the real week-end close; current partial week at T uses close_adj(T)),"frozen"
+weekly_bb20,for day T: use previous 19 completed weekly closes + current partial-week close at T = 20 points; MA20 mean; SD20 ddof=1 sample std; k=2; W_MA20_ASOF / W_SD20_ASOF / W_LOWER20_ASOF / W_UPPER20_ASOF / W_BB_Z_ASOF=(close_adj_T-W_MA20_ASOF)/W_SD20_ASOF,"frozen"
+low_touch,W_LOW_TOUCH: day-by-day replay of current week days d<=T: compute W_LOWER20_ASOF(d) as-of d, check low_adj(d)<=W_LOWER20_ASOF(d); true if any day holds; NO hindsight use of week-end weekly low or later band,"P0 replay"
+adjusted_prices,low_adj=low*adj_factor; close_adj=close*adj_factor; strict adjusted-space consistency; never mix raw low with adjusted weekly BB,"frozen"
+warmup,weekly BB20 needs 19 completed weeks + current partial week; repo has 2018-2019 warmup; verify 2020 first signals have enough weekly history; else weekly fields=NA (no future fill),"frozen"
+baseline,frozen S1/S1.1 B20 2020-2024 n=63,785 signal universe; exact parity; do NOT regenerate another daily B20 universe,"n=63785"
+primary_feature,W_CLOSE_Z = W_BB_Z_ASOF at signal date (continuous),primary
+bins,frozen bins: WZ_A < -2.0; WZ_B [-2.0,-1.5); WZ_C [-1.5,-1.0); WZ_D [-1.0,0); WZ_E >=0; no re-cutting after results,"frozen"
+primary_diag2,W_LOW_TOUCH=1 vs 0 across all daily B20 signals on independent outcomes,"frozen"
+inference,primary unit signal-day equal weight; paired daily delta only on days where both groups present; HAC maxlags=10; full 2020-2024 trading-calendar moving block bootstrap L=21 B=2000 seed=0,"frozen"
+between_within,report BOTH between-day effect (days with lower overall weekly state vs higher) AND within-day effect (same-day lower-weekly vs higher-weekly candidates),"both required"
+same_day_rank,secondary: within each day rank B20 candidates by W_CLOSE_Z low->high; frozen LOW30/MID40/HIGH30; LOW30-HIGH30 signal-day equal weight + HAC + calendar bootstrap; secondary only,"frozen"
+outcome,frozen independent natural episode outcome from S1 B20: return(simple_return_pct), win, PF, MAE_intraday_pct, MFE_intraday_pct, hold_days, max_underwater_duration_days; tail MAE<=-10/<=-20/<=-30, hold>60/>90,"frozen"
+slot_efficiency,normalized PnL per 1000 holding-days; winning episodes per 1000 holding-days,"frozen"
+yearly,2020/2021/2022/2023/2024 separately: W_LOW_TOUCH vs NO_TOUCH and lower vs higher weekly state; no aggregate-only reporting,"frozen"
+market_confounding,secondary diagnostic only: distribution of market-day variables (all-A equal-weight daily return, RET20 proxy) on touch vs no-touch days; NO market gate fit; NO combined filter,"diagnostic only"
+monotonicity,pooled Spearman + signal-day clustered/day-level Spearman of W_CLOSE_Z vs independent return; also frozen-bin monotonic check; no parameter scan,"frozen"
+classification,A STRONG WEEKLY CONTEXT: paired day delta>0 AND HAC lower>0 AND calendar lower>0 AND >=3/5 years positive AND tail not worse AND continuous W_CLOSE_Z direction consistent AND within-day not conflicting; B NARROW: point positive + >=3/5 years but one CI crosses 0 or within-day weak; C NO STABLE VALUE; D HARMFUL (lower/touch consistently worse or tail worse),"frozen"
+next_gate,only W1=A or B allows W2 (structural test: filter-only / weekly-trigger+daily-exit / weekly-trigger+weekly-exit are separate W2 questions, never mixed in one strategy),"frozen"
+no_go,no real portfolio; no daily entry change; no STRICT_C exit change; no weekly entry strategy; no weekly upper exit; no weekly parameter scan (BB10/15/30, k1.5/2.5/3); no RSI/MACD; no sector; no fundamental; no multi-factor combination,"frozen"
+invariants,I1 B20 n=63785 exact parity; I2 weekly features use dates <= signal_date only; I3 no Friday/future-week info Mon-Thu; I4 W_LOW_TOUCH day-by-day not hindsight; I5 daily entry unchanged; I6 daily exit unchanged; I7 no real portfolio; I8 no parameter scan; I9 no combinations; I10 no fundamental data; I11 no 2025-2026; I12 prior Registry SHA unchanged (D1 6168e104...; D1.1 414a1816...; D1.2 f4be40f9...),"frozen"

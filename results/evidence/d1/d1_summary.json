@@ -1,0 +1,39 @@
+{
+ "n_signals": 63785,
+ "n_stocks": 5147,
+ "sector": {
+  "source": "Tushare index_classify(SW2021 L1) + index_member(in/out dates)",
+  "n_industries": 31,
+  "n_membership_rows": 7740,
+  "n_industry_change_stocks": 3214,
+  "coverage_pct": 94.555,
+  "spotcheck_pass": true,
+  "classification": "B"
+ },
+ "fundamental": {
+  "sources": [
+   "fina_indicator",
+   "income",
+   "cashflow",
+   "express",
+   "forecast"
+  ],
+  "has_ann_date": true,
+  "revision_asof": "PASS (income/cashflow update_flag tie-break; fina duplicates same-ann removed)",
+  "n_revision_periods": 57680,
+  "financial_coverage_pct": 100.0,
+  "ttm_coverage_pct": 98.804,
+  "forecast_coverage_pct": 94.726,
+  "express_coverage_pct": 37.156,
+  "spotcheck_100_pass": true,
+  "n_fail": 0,
+  "classification": "A"
+ },
+ "news": "NOT_READY",
+ "next_gate": {
+  "sector_ok": true,
+  "fundamental_ok": true,
+  "next_phase": "S3 FUNDAMENTAL DISTRESS preferred if both ok"
+ },
+ "no_outcome_loaded": true
+}

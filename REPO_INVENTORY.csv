@@ -784,3 +784,19 @@ results/evidence/s11/s11_slot_efficiency.csv,csv,S1.1,signal,ACTIVE,s11_slot_eff
 results/evidence/s11/s11_inference.csv,csv,S1.1,signal,ACTIVE,s11_inference.csv,,EVIDENCE,results/evidence/s11/,
 results/evidence/s11/s11_summary.json,json,S1.1,signal,ACTIVE,s11_summary.json,,EVIDENCE,results/evidence/s11/,
 results/evidence/s11/s11_invariants.json,json,S1.1,signal,ACTIVE,s11_invariants.json,,EVIDENCE,results/evidence/s11/,
+research/context/pit_context_d1.py,py,D1,context,ACTIVE,pit_context_d1.py,,CODE,research/context/,PIT context data foundation script (download+build+checks)
+research/context/PIT_CONTEXT_D1.md,md,D1,context,ACTIVE,PIT_CONTEXT_D1.md,,REPORT,research/context/,CANONICAL D1; sector B / fundamental A; data foundation only
+research/context/registries/PIT_CONTEXT_D1_REGISTRY.csv,csv,D1,context,REGISTRY,PIT_CONTEXT_D1_REGISTRY.csv,,REGISTRY,research/context/registries/,preregistered before construction
+research/context/registries/PIT_CONTEXT_D1_REGISTRY.sha256,file,D1,context,REGISTRY,PIT_CONTEXT_D1_REGISTRY.sha256,,REGISTRY,research/context/registries/,SHA 6168e104505ea230eb5291a88885d3e4eaed3ad08f2975fbcda2cea0072fca24
+results/evidence/d1/d1_source_audit.csv,csv,D1,context,ACTIVE,d1_source_audit.csv,,EVIDENCE,results/evidence/d1/,
+results/evidence/d1/d1_sector_membership.csv,csv,D1,context,ACTIVE,d1_sector_membership.csv,,EVIDENCE,results/evidence/d1/,SW2021 L1 membership with in/out dates
+results/evidence/d1/d1_financial_asof.csv,csv,D1,context,ACTIVE,d1_financial_asof.csv,,EVIDENCE,results/evidence/d1/,income versions with ann_date/update_flag
+results/evidence/d1/d1_signal_context.csv,csv,D1,context,ACTIVE,d1_signal_context.csv,,EVIDENCE,results/evidence/d1/,63785 B20 signal-date PIT context rows
+results/evidence/d1/d1_coverage.csv,csv,D1,context,ACTIVE,d1_coverage.csv,,EVIDENCE,results/evidence/d1/,
+results/evidence/d1/d1_sector_spotcheck.csv,csv,D1,context,ACTIVE,d1_sector_spotcheck.csv,,EVIDENCE,results/evidence/d1/,
+results/evidence/d1/d1_financial_spotcheck.csv,csv,D1,context,ACTIVE,d1_financial_spotcheck.csv,,EVIDENCE,results/evidence/d1/,100 events 0 fail
+results/evidence/d1/d1_revision_audit.csv,csv,D1,context,ACTIVE,d1_revision_audit.csv,,EVIDENCE,results/evidence/d1/,57680 multi-version periods
+results/evidence/d1/d1_news_readiness.csv,csv,D1,context,ACTIVE,d1_news_readiness.csv,,EVIDENCE,results/evidence/d1/,
+results/evidence/d1/d1_redteam.json,json,D1,context,ACTIVE,d1_redteam.json,,EVIDENCE,results/evidence/d1/,
+results/evidence/d1/d1_summary.json,json,D1,context,ACTIVE,d1_summary.json,,EVIDENCE,results/evidence/d1/,
+results/evidence/d1/d1_invariants.json,json,D1,context,ACTIVE,d1_invariants.json,,EVIDENCE,results/evidence/d1/,

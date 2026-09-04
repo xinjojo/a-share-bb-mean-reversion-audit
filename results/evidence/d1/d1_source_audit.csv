@@ -1,0 +1,10 @@
+source,kind,detail,usable_for_pit,status
+stock_basic.parquet (local),sector,"industry column = CURRENT SNAPSHOT, not PIT; list_date/delist_date available",list_date/delist_date only,CURRENT_SNAPSHOT
+Tushare index_classify src=SW2021,sector,31 L1 industries (申万2021),industry codes/names,AVAILABLE
+Tushare index_member,sector,per-industry constituents with in_date/out_date (history back to 1990s),YES - rebuilds historical membership,AVAILABLE
+Tushare fina_indicator,fundamental,per-stock ratios/indicators; ann_date present; same-ann_date duplicates (no revision flags),ratios as-of ann_date,AVAILABLE
+Tushare income,fundamental,cumulative revenue/n_income_attr_p with ann_date/f_ann_date/update_flag; revision history present,YES - cumulative + as-of selector,AVAILABLE
+Tushare cashflow,fundamental,cumulative n_cashflow_act with ann_date/update_flag; revision history present,YES - cumulative + as-of selector,AVAILABLE
+Tushare express,fundamental,"业绩快报 by period (ann_date, end_date)",YES - ann_date<=T flag,AVAILABLE
+Tushare forecast,fundamental,业绩预告 per-stock with ann_date/type/p_change/update_flag,YES - ann_date<=T,AVAILABLE
+news corpus,news,no timestamped announcement/news corpus in local data; Tushare news interface not historical/not available at current tier,NO,NOT_READY

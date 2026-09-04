@@ -1,0 +1,15 @@
+{
+ "I1_s1_b20_keys_only": true,
+ "I2_no_future_return_loaded": true,
+ "I3_sector_current_snapshot_not_backfilled": true,
+ "I4_ann_date_le_signal_date": true,
+ "I5_revision_visible_after_own_ann_date": true,
+ "I6_ttm_announced_periods_only": true,
+ "I7_missing_stays_missing": true,
+ "I8_no_feature_threshold_testing": true,
+ "I9_no_rsi_macd_bb_new_test": true,
+ "I10_no_portfolio_run": true,
+ "I11_no_news_search_backfill": true,
+ "I12_no_2025_read": true,
+ "I13_prior_registry_sha_unchanged": true
+}

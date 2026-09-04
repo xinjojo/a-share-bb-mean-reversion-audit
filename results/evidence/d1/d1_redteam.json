@@ -1,0 +1,30 @@
+{
+ "rt1_end_date_merge": {
+  "status": "CLEAN",
+  "detail": "all joins use ann_date<=T; report_period only used to index versions"
+ },
+ "rt2_update_flag_backfill": {
+  "status": "CLEAN",
+  "detail": "update_flag only a tie-break within same ann_date; latest_leq enforces ann_date<=T"
+ },
+ "rt3_forward_fill_across_announcements": {
+  "status": "CLEAN",
+  "detail": "no ffill across announcement dates; each signal date re-selects as-of version"
+ },
+ "rt4_current_sector_backfill": {
+  "status": "CLEAN",
+  "detail": "sector built from index_member in/out dates only; stock_basic.industry never used for membership"
+ },
+ "rt5_future_delist_st_industry": {
+  "status": "CLEAN",
+  "detail": "no future delist/ST/industry-change info used; membership intervals only from historical in/out"
+ },
+ "rt6_ttm_future_quarters": {
+  "status": "CLEAN",
+  "detail": "TTM uses cum(P,Y), cum(P,Y-1), cum(Q4,Y-1) each selected with ann_date<=T"
+ },
+ "rt7_forecast_express_post_pub": {
+  "status": "CLEAN",
+  "detail": "forecast selected with ann_date<=T; express flag requires ann_date<=T and end_date<=T"
+ }
+}

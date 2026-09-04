@@ -1,0 +1,2 @@
+status,reason
+NOT_READY,no timestamped announcement/news corpus in local data; Tushare news interface not historical and not available at current tier; search-engine retrieval of historical news forbidden by Registry I11

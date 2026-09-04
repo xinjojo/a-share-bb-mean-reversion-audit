@@ -1,0 +1,2 @@
+deep_mid_shallow,day_mean_DEEP30,day_mean_MID40,day_mean_SHALLOW30,monotonic_deep_gt_mid_gt_shallow
+"{'day_level_fisher_mean_spearman': 0.00300369036734704, 'n_days_used': 1001, 'pooled_spearman': -0.019801275343891544, 'n': 63785}",3.5841906507355112,4.0685651436331565,3.902201960460517,False

@@ -1,0 +1,23 @@
+{
+ "I1_b20_exact_s1_parity": {
+  "b20_n": 63785,
+  "s1_b20_n": 63785,
+  "signal_key_set_identical": true,
+  "entry_date_match_ratio": 1.0,
+  "n_diff": 0,
+  "s1_parity_verdict": "EXPLAINED_HORIZON_SEMANTICS (S1: 287=283+4)",
+  "note": "S1.1 reruns the same engine with same horizon; exact parity with S1 B20 episodes"
+ },
+ "I2_no_entry_threshold_change": true,
+ "I3_no_delayed_entry": true,
+ "I4_no_exit_change": true,
+ "I5_signal_date_bbz_only": true,
+ "I6_same_day_ranking_only": true,
+ "I7_no_rsi_macd_gate": true,
+ "I8_no_sector_fundamental_news": true,
+ "I9_top3_diagnostic_no_portfolio_path_change": true,
+ "I10_no_parameter_scan": true,
+ "I11_no_combinations": true,
+ "I12_no_2025_read": true,
+ "I13_prior_registry_sha_unchanged": true
+}

@@ -767,3 +767,20 @@ results/evidence/s1/s1_prior_research_audit.csv,csv,S1,signal,ACTIVE,s1_prior_re
 results/evidence/s1/s1_pit_data_readiness.csv,csv,S1,signal,ACTIVE,s1_pit_data_readiness.csv,EVIDENCE,results/evidence/s1/,
 results/evidence/s1/s1_summary.json,json,S1,signal,ACTIVE,s1_summary.json,EVIDENCE,results/evidence/s1/,
 results/evidence/s1/s1_invariants.json,json,S1,signal,ACTIVE,s1_invariants.json,EVIDENCE,results/evidence/s1/,
+research/signal/registries/SIGNAL_SELECTIVITY_S11_DEPTH_RANK_REGISTRY.csv,csv,S1.1,signal,ACTIVE,SIGNAL_SELECTIVITY_S11_DEPTH_RANK_REGISTRY.csv,,FROZEN,research/signal/registries/,prereg SHA256 a00c20d3... commit 7f0f936
+research/signal/registries/SIGNAL_SELECTIVITY_S11_DEPTH_RANK_REGISTRY.sha256,sha256,S1.1,signal,ACTIVE,SIGNAL_SELECTIVITY_S11_DEPTH_RANK_REGISTRY.sha256,,FROZEN,research/signal/registries/,
+research/signal/signal_selectivity_s11.py,py,S1.1,signal,ACTIVE,SIGNAL_SELECTIVITY_S11.md,,CODE,research/signal/,S1.1 main script
+research/signal/SIGNAL_SELECTIVITY_S11.md,md,S1.1,signal,ACTIVE,SIGNAL_SELECTIVITY_S11.md,,CANONICAL,research/signal/,classification C - NO STABLE RANKING VALUE
+results/evidence/s11/s11_depth_rank.csv,csv,S1.1,signal,ACTIVE,s11_depth_rank.csv,,EVIDENCE,results/evidence/s11/,
+results/evidence/s11/s11_absolute_bins.csv,csv,S1.1,signal,ACTIVE,s11_absolute_bins.csv,,EVIDENCE,results/evidence/s11/,
+results/evidence/s11/s11_first_hit.csv,csv,S1.1,signal,ACTIVE,s11_first_hit.csv,,EVIDENCE,results/evidence/s11/,
+results/evidence/s11/s11_first_hit_inference.csv,csv,S1.1,signal,ACTIVE,s11_first_hit_inference.csv,,EVIDENCE,results/evidence/s11/,
+results/evidence/s11/s11_collision_days.csv,csv,S1.1,signal,ACTIVE,s11_collision_days.csv,,EVIDENCE,results/evidence/s11/,
+results/evidence/s11/s11_top3_diagnostic.csv,csv,S1.1,signal,ACTIVE,s11_top3_diagnostic.csv,,EVIDENCE,results/evidence/s11/,
+results/evidence/s11/s11_yearly.csv,csv,S1.1,signal,ACTIVE,s11_yearly.csv,,EVIDENCE,results/evidence/s11/,
+results/evidence/s11/s11_monotonicity.csv,csv,S1.1,signal,ACTIVE,s11_monotonicity.csv,,EVIDENCE,results/evidence/s11/,
+results/evidence/s11/s11_tail.csv,csv,S1.1,signal,ACTIVE,s11_tail.csv,,EVIDENCE,results/evidence/s11/,
+results/evidence/s11/s11_slot_efficiency.csv,csv,S1.1,signal,ACTIVE,s11_slot_efficiency.csv,,EVIDENCE,results/evidence/s11/,
+results/evidence/s11/s11_inference.csv,csv,S1.1,signal,ACTIVE,s11_inference.csv,,EVIDENCE,results/evidence/s11/,
+results/evidence/s11/s11_summary.json,json,S1.1,signal,ACTIVE,s11_summary.json,,EVIDENCE,results/evidence/s11/,
+results/evidence/s11/s11_invariants.json,json,S1.1,signal,ACTIVE,s11_invariants.json,,EVIDENCE,results/evidence/s11/,

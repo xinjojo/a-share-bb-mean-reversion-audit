@@ -1,0 +1,5 @@
+path_class,count,mean_return,median_return,win_rate,mean_hold
+CLEAN_MEAN_REVERSION,42,8.93,7.08,100.0,24.79
+CRASH_CONTINUATION,12,-6.89,-5.46,16.67,62.17
+OTHER,6,-1.76,-1.04,16.67,45.0
+REBOUND_THEN_RELAPSE,6,-6.32,-5.0,0.0,63.83

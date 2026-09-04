@@ -1,0 +1,4 @@
+dispersion_tercile,count,mean_20d_pct,median_20d_pct,win_rate
+LOW,50073,3.518,1.089,53.9
+MID,50345,1.088,0.147,50.4
+HIGH,49561,3.579,2.296,60.1

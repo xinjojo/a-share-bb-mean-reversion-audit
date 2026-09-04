@@ -1,0 +1,2 @@
+total_trades,winner_count,loser_count,win_rate_pct,gross_profit,gross_loss,profit_factor,avg_winner_pnl,avg_loser_pnl,payoff_ratio,breakeven_win_rate_pct,mean_return_pct,median_return_pct,expectancy_per_trade
+74,51,23,68.9,1432152.0,1166570.0,1.228,28081.0,50720.0,0.554,64.4,3.35,4.82,3589.0

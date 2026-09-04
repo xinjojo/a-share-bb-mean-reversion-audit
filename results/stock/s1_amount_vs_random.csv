@@ -1,0 +1,5 @@
+horizon,all_signals_mean_pct,all_signals_n,topn_amount_mean_pct,topn_amount_n,nonselected_mean_pct,topn_minus_all_pct,topn_minus_nonselected_pct
+5d,1.13,149113,-0.139,9080,1.228,-1.269,-1.367
+10d,1.523,148068,0.004,9030,1.641,-1.518,-1.636
+20d,2.713,147745,0.041,9000,2.914,-2.672,-2.873
+40d,4.118,147155,0.827,8910,4.361,-3.291,-3.534

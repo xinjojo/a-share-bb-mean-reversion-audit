@@ -1,0 +1,25 @@
+key,value
+phase,S1
+title,Stock Signal Mechanism Validation
+research_status,MECHANISM AUDIT / ADAPTIVE HISTORICAL RESEARCH
+stock_commit,43e9e4a (master HEAD)
+stock_baseline,STRICT_C G0 (official): +30.30%, 76 trades, PF 1.304, WR 68.4%
+trade_log_source,results/evidence/strict_c/round5/strict_c_trades.csv (96 trades 2020-2026; filtered to 74 trades 2020-2024)
+stock_panel,E5.1 corrected: 2618 full-data stocks, ETF trading calendar, 2020-2024
+bb_params,BB(20,2), close_adj < bb_lower = signal
+ranking,amount descending, Top-N=10
+exit,STRICT_C dynamic intraday upper-band touch (Pstar)
+k_pyramid,K=3, max_levels=5, level_cash=200k
+position_sizing,initial 1M, level-based
+cost,commission 0.025% min 5, slippage 10bp, stamp tax historical
+forward_horizon,market trading day (shift(-h)), consistent stock/ETF
+breadth_bins,0-5%, 5-10%, 10-25%, 25%+
+dispersion_terciles,LOW/MID/HIGH by signal-day BB_Z std
+random_topn,per-day fixed candidate set, N=10, 1000 reps, seed 42
+path_classification,CLEAN_MEAN_REVERSION / IMMEDIATE_FAILURE / REBOUND_THEN_RELAPSE / SLOW_BLEED / CRASH_CONTINUATION / OTHER (preregistered rules)
+no_optimization,True — no parameter changes, no new strategies, only mechanism diagnostics
+primary_mechanism,MULTI-COMPONENT EDGE (signal drift + exit capture; amount ranking harmful; K=3 higher levels harmful)
+key_finding_breadth,Stock high-breadth signals OUTPERFORM low-breadth (OPPOSITE of ETF): 25%+ breadth 20d mean +6.09% vs 0-5% breadth -0.06%
+key_finding_amount,Amount Top-N 20d mean +0.04% vs all signals +2.71% vs non-selected +2.91%; daily percentile 43.1%
+key_finding_exit,98.5% trades hit upper band, 100% hit midline; winner median hold 23d, loser 50d
+key_finding_pyramid,Level 1 WR 85.7% +7.37%; Level 5 WR 0% -13.89%; higher pyramid levels unprofitable

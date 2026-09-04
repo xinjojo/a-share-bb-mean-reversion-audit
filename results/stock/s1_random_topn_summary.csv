@@ -1,0 +1,2 @@
+mean_daily_percentile,median_daily_percentile,pct_days_above_random_median,pooled_actual_mean_pct,pooled_random_expected_pct,diff_pct,n_days
+43.1,38.6,42.3,0.041,0.438,-0.397,900

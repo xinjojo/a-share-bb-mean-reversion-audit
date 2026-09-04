@@ -1,0 +1,37 @@
+{
+ "I1_b20_parity": {
+  "frozen_dev_n": 64072,
+  "b20_n": 63785,
+  "n_diff": 287,
+  "explained_by_last_day_signal": 283,
+  "horizon_censored_total": 102,
+  "explained_by_horizon_censored_with_frozen_counterpart": 4,
+  "explained_diff": 287,
+  "b20_tp": 61828,
+  "b20_fs": 1957,
+  "b20_censored": 102,
+  "frozen_dev_tp": 64072,
+  "frozen_dev_fs": 0,
+  "signal_key_set_match_after_removing_cens4": true,
+  "entry_date_match_ratio": 1.0,
+  "horizon_censored_with_counterpart_codes": [
+   "000777.SZ",
+   "002252.SZ",
+   "300807.SZ",
+   "002494.SZ"
+  ],
+  "parity_verdict": "EXPLAINED_HORIZON_SEMANTICS: engine signal logic consistent; difference = last-day T+1 signals (2025 execution) + horizon-suspended positions that resumed and naturally exited in 2025 (4)"
+ },
+ "I2_exit_k2_fixed": true,
+ "I3_only_entry_depth_changed": true,
+ "I4_rsi_signal_date_visible": true,
+ "I5_sector_pit_gate": "NOT RUN (data not ready)",
+ "I6_no_current_membership_backfill": true,
+ "I7_no_combinations": true,
+ "I8_macd_diagnostic_only": true,
+ "I9_fundamental_news_not_filters": true,
+ "I10_no_K3_portfolio_optimization": true,
+ "I11_no_threshold_scan": true,
+ "I12_no_2025_read": true,
+ "I13_prior_registry_sha_unchanged": true
+}

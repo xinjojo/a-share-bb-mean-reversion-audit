@@ -1,0 +1,4 @@
+domain,status,reason
+Sector/Industry membership,NOT_READY,stock_basic.industry is current snapshot only; no PIT historical membership (申万/中信 historical classification) available in repo; backfilling current membership would violate Registry I6
+Fundamental financials,NOT_READY,no verified PIT dataset with announcement_date-bounded disclosure; cannot guarantee signal-date only sees prior disclosures
+News / announcements,NOT_READY,no historical timestamped news/announcement corpus in repo; post-hoc retrieval of crash causes forbidden as backtest feature

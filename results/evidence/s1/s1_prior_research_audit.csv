@@ -1,0 +1,10 @@
+factor,previously_tested,phase,sample,method,result,accepted_rejected,portfolio_tested,notes
+BB multiplier entry k>2.0 (2.5/3.0),NO,S1 (this phase),2020-2024 fullmarket independent replay,entry k 2.5/3.0 rebuilt episodes; exit STRICT_C k=2 fixed,B25 vs B20_ONLY day-delta -2.12pp (HAC/calendar CI<0); B30 vs B25_ONLY -1.91pp (CI<0),REJECTED (D HARMFUL),NO,deeper entry threshold delays entry and lowers expectancy; tail slightly worse
+RSI14 (Wilder),NO,S1 (this phase),2020-2024 fullmarket independent replay,R30/R25 on B20 signal; matched BB-depth incremental day-mean + HAC + calendar bootstrap,R30 ep-mean +7.70% win 80.96%; matched-depth increments all CI cross 0 (2 of 4 bins negative); R30-B20 day-delta -0.02pp,C (no stable incremental evidence),NO,descriptive episode-level strength but not significant under signal-day equal weight; MAE deeper
+"MACD (12,26,9)",NO,"S1 (this phase, diagnostic only)",2020-2024 B20 episodes,hist>0 vs hist<=0 mean/win descriptive,hist>0 4.78% vs hist<=0 4.85%; no meaningful relation,diagnostic only / NOT a gate,NO,Registry: MACD not primary filter
+Sector / industry strength,NO,S1 (this phase),n/a,PIT sector membership gate,NOT RUN - PIT DATA NOT READY (stock_basic.industry is current snapshot; no 申万/中信 historical classification in repo),N/A PIT DATA NOT READY,NO,no current-snapshot backfill per Registry I6
+Fundamental (PIT financials),NO,S1 readiness audit,n/a,data-readiness check,NOT_READY: no verified PIT announcement-date-bounded fundamentals,NOT_READY,NO,
+News / announcements,NO,S1 readiness audit,n/a,data-readiness check,NOT_READY: no historical timestamped news corpus in repo,NOT_READY,NO,post-hoc news lookup forbidden
+Market regime / market gate,YES,T1/T2/T2-R/T3,2020-2024,frozen regime definitions,T2=A validated; T3=C,"mixed (T2 A, T3 C)",YES,closed; not re-opened in S1
+ATR20_PCT (volatility),YES,P2/P3,2020-2024,IC + full-pass gate,P2 sole full-pass IC +0.134; P3 C,P2 accepted diagnostic,YES,closed; not re-tested in S1
+Ranking / cross-section selection,YES,P1/P1.1/P2(B),2020-2024,Top-N ranking variants,P1/P1.1/P2(B) outcomes,closed,YES,

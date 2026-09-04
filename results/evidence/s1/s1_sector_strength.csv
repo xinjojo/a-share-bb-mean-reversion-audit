@@ -1,0 +1,2 @@
+status,reason,detail
+NOT RUN,PIT DATA NOT READY,no PIT historical sector/industry membership available; stock_basic.industry is current-snapshot only; no 申万/中信 historical classification in repo

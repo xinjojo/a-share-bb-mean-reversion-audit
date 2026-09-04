@@ -1,0 +1,34 @@
+key,value
+phase,S2
+title,Amount Selection Contribution Falsification — Neutral Random-Selection Portfolio Experiment
+research_status,ADAPTIVE HISTORICAL MECHANISM TEST / NOT CLEAN OUT-OF-SAMPLE / NOT RANKING OPTIMIZATION
+hypothesis,H8 — AMOUNT SELECTION HARM HYPOTHESIS: Among frozen eligible BB-oversold stock candidates, descending trading-amount selection reduces portfolio quality relative to ranking-neutral same-day candidate selection.
+control_selection,amount descending Top-10 (frozen official G0 baseline)
+treatment_selection,uniform random without replacement from same-day eligible candidates, min(K, M) selected
+k_concurrent_positions,3
+max_levels,5
+level_cash,200000
+initial_cash,1000000
+bb_window,20
+bb_sigma,2
+exit,STRICT_C dynamic intraday touch
+slippage_bp,10
+commission,0.025% min 5 RMB
+stamp_tax,historical mode
+t_plus_1,true
+lot_size,100
+tick,0.01 RMB
+base_seed,42
+n_simulations,200
+seed_formula,base_seed + simulation_id (0 to n_simulations-1)
+metrics,"total_return, CAGR, Sharpe, MaxDD, trade_count, win_rate, profit_factor, payoff_ratio, avg_holding_days, turnover, cost_drag, average_exposure"
+forward_horizons,"5d,10d,20d,40d"
+success_h8_strong,"Amount TR below random median AND Amount PF below random median AND >70% random outperform Amount on TR AND candidate-level amount Top-N underperforms random expectation AND not driven by one year"
+success_h8_partial,"candidate-quality harmful + portfolio Amount below random median, but random distribution wide or P(random>Amount) modestly >50%"
+success_h8_not_supported,"Amount approximately equals or beats random neutral selection"
+forbidden_ranking_alternatives,"BB_Z, small amount, market cap, RSI, ATR, momentum, volatility, industry, fundamentals, random forest, composite score"
+random_governance,"No selecting best seed as strategy; report P5/P25/P50/P75/P95 only; fixed seeds preregistered"
+add_semantics,"Random only replaces NEW POSITION candidate selection; ADD logic unchanged from frozen baseline"
+universe_note,"Uses official frozen baseline candidate universe via prepare_v51; S1.1 full-year 2618-stock panel is for raw-signal diagnostics only, not portfolio universe"
+baseline_reconciliation_note,"G0 official=76 trades, available 2020-2024 log=74 entries; 2-trade difference documented as KNOWN LIMITATION; control metrics must reproduce official baseline return/PF/MaxDD"
+registry_created_before_analysis,true

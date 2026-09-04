@@ -1,0 +1,4 @@
+metric,random_std,random_p5,random_p25,random_median,random_p75,random_p95,control
+total_return_pct,68.73,-51.97,-8.3,27.42,73.5,170.82,82.662
+profit_factor,0.5476,0.6574,0.9232,1.1599,1.5447,2.1855,1.3678
+sharpe,0.3283,-0.2837,0.087,0.2766,0.4776,0.8215,0.4994

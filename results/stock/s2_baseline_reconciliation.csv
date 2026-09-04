@@ -1,0 +1,6 @@
+metric,control_2020_2024,official_g0,diff,match
+total_return_pct,40.002,30.295,9.707,NO
+n_trades,75.0,76.0,-1.0,YES
+win_rate_pct,66.67,68.42,-1.75,YES
+profit_factor,1.1757,1.304,-0.1283,NO
+maxdd_pct,-34.458,-30.79,-3.668,NO

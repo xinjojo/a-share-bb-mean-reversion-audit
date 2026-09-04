@@ -1,0 +1,5 @@
+failure_class,count,model,pct_of_losers,mean_return_pct
+B_REBOUND_RELAPSE,41,Model1,95.3,-10.39
+D_CRASH_CONTINUATION,2,Model1,4.7,-22.52
+B_REBOUND_RELAPSE,31,Model2,93.9,-7.62
+D_CRASH_CONTINUATION,2,Model2,6.1,-17.27

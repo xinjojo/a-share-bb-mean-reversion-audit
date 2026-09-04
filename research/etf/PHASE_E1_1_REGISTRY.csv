@@ -1,0 +1,71 @@
+parameter,value,notes
+# === E1 FROZEN REFERENCE ===
+e1_commit,6789810,E1 official commit on etf-e0 branch
+e1_registry_sha256,6cb7e9ddaa8f35922a8790c687514618346d0c39da630fd626b218526b7667eb,PHASE_E1_REGISTRY.csv
+e1_model1_trade_log_sha256,bf19b49f233952abc3cc54149a2fb1462e54651bce7fe662fa7c723ba76a684a,
+e1_model1_equity_sha256,18f608a36678609fe13464332bb946f01d9e3c9a60454b92137959adec2852d5,
+e1_model1_summary_sha256,0e24713fe8131516e7fde79e973cd8a96c8b2a0cb0d7136cb474069c073bb90a,
+e1_model2_trade_log_sha256,a2283b198646fbc55010dd87c2248cf6dabc20246ad067450cc6bf7103138b2b,
+e1_model2_equity_sha256,93ece2c49c5b63303d4c88aaac7726c7a027f4791556cdff8cbee06c23fe3bc2,
+e1_model2_summary_sha256,99749560df26c4b3e4d0ed95b24d2f8a89436f20a06d5fd994df61abb525410a,
+e1_verdict,NO_REPLICATION,frozen; E1.1 diagnostics cannot redefine this
+
+# === NO OPTIMIZATION ===
+no_optimization,true,No BB window/sigma/Top-N/position/liquidity/exit changes allowed
+tail_removal_is_diagnostic_only,true,All exclude-worst-N results are POST-HOC DIAGNOSTIC ONLY, NOT tradable strategy
+
+# === TAIL ANALYSIS THRESHOLDS ===
+worst_n_autopsy,20,Worst 20 trades for detailed autopsy
+worst_n_paths,10,Worst 10 trades for path snapshots
+tail_removal_levels,"1,3,5,10,5pct,10pct",Counterfactual tail removal diagnostic levels
+tail_classification_threshold,TAIL-DOMINATED if worst10 contributes >50% of gross loss; BROAD NEGATIVE EXPECTANCY if <25%; MIXED otherwise,
+
+# === MAE/MFE DEFINITION ===
+mae_definition,Maximum adverse excursion = min((close - entry_price)/entry_price) over holding period,using daily close from actual execution day onward
+mfe_definition,Maximum favorable excursion = max((close - entry_price)/entry_price) over holding period,using daily close from actual execution day onward
+mae_mfe_price_source,etf_feat_long.close_adj,Model1=ETF close_adj; Model2 uses ETF close_adj for execution path
+mae_mfe_start,entry_date (actual fill date),not signal date
+
+# === BB MID/UPPER HIT DEFINITION ===
+bb_mid_definition,close_adj >= MA20 (bb_mid = rolling mean 20),hit if any day during holding
+bb_upper_definition,close_adj >= MA20 + 2*std20 (bb_upper),hit if any day during holding
+hit_mid_then_failed_definition,hit_mid==True AND final trade_return <= 0,explicit definition
+hit_mid_then_upper_definition,hit_mid==True AND hit_upper==True,
+
+# === FAILURE PATH CLASSIFICATION THRESHOLDS (frozen before analysis) ===
+class_A_immediate_failure,MFE < 0.02 AND MAE < -0.05 within first 5 trading days,entry then quick decline with almost no rebound
+class_B_rebound_relapse,MFE >= 0.05 (or hit_mid==True) AND final trade_return <= 0,rebounded but eventually lost
+class_C_slow_bleed,holding_days > 60 AND MFE < 0.05 AND not class_A/D,long slow decline without meaningful rebound
+class_D_crash_continuation,MAE < -0.15 within first 10 trading days,extreme continuation of selloff after entry
+class_E_other,none of the above,
+
+# === SIGNAL BREADTH BINS ===
+breadth_bin_1,0-5%,signal_ratio = n_signals / n_eligible
+breadth_bin_2,5-10%,
+breadth_bin_3,10-25%,
+breadth_bin_4,25-50%,
+breadth_bin_5,50%+,
+low_breadth_threshold,signal_ratio < 10%,frozen definition for low vs high breadth
+high_breadth_threshold,signal_ratio >= 25%,frozen definition
+
+# === CLUSTER CONCENTRATION BINS ===
+cluster_low,largest_cluster_weight < 0.33,
+cluster_medium,0.33 <= largest_cluster_weight <= 0.66,
+cluster_high,largest_cluster_weight > 0.66,
+
+# === FIXED FORWARD HORIZONS (for Top-N info content only) ===
+forward_horizons,"1d,3d,5d,10d,20d",uniform horizons, not actual exit
+topn_info_selected,Top-10 by amount ranking,
+topn_info_nonselected,all other signals on same day,
+
+# === REGIME DEFINITION (based on CSI300 drawdown) ===
+regime_uptrend,CSI300 drawdown > -5%,
+regime_sideways,-5% >= CSI300 drawdown > -15%,
+regime_downtrend,-15% >= CSI300 drawdown > -25%,
+regime_stress,CSI300 drawdown <= -25%,
+
+# === DATA SOURCES ===
+price_data,etf_feat_long.parquet,48MB, 1129917 rows, close_adj/bb_lower/adv60/pstar/price_limit_pit
+cluster_data,e0_cluster_assignments.csv,49 clusters, index_key -> cluster
+master_mapping,master_mapping_full.parquet,index names/categories
+index_daily,data/raw/etf/index_daily/,70 indexes with daily data

@@ -1,0 +1,3 @@
+model,all_mean_holding,all_median_holding,all_P75_holding,all_P90_holding,all_max_holding,winners_mean_holding,winners_median_holding,losers_mean_holding,losers_median_holding,corr_holding_return,longest10_mean_return_pct,longest10_pct_negative,longest10_hit_upper_pct
+Model1,166.5,49.0,93.0,162.0,5274,37.2,30.5,340.8,94.0,-0.0667,-22.37,100.0,60.0
+Model2,211.7,51.0,89.0,170.6,5274,78.8,37.5,372.8,69.0,0.1127,-2.92,80.0,80.0

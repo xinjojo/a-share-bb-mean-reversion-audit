@@ -1,0 +1,3 @@
+model,gross_profit,gross_loss,profit_factor,winner_count,loser_count,avg_winner_pnl,avg_loser_pnl,median_winner_pnl,median_loser_pnl,payoff_ratio,breakeven_win_rate_pct,actual_win_rate_pct,expectancy_per_trade,failure_due_to
+Model1,691195.8,1298856.63,0.5322,58,43,11917.17,30205.97,7954.33,-11896.82,0.3945,71.71,57.43,-6016.44,payoff_ratio
+Model2,623559.33,1057997.19,0.5894,40,33,15588.98,32060.52,7875.69,-10188.96,0.4862,67.28,54.79,-5951.2,payoff_ratio

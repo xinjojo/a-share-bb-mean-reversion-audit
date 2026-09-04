@@ -1,0 +1,5 @@
+model,cluster_concentration,trade_count,mean_return_pct,win_rate_pct,profit_factor
+Model1,medium(33-66%),23,-3.97,65.2,0.3057
+Model1,high(>66%),78,-0.99,55.1,0.8216
+Model2,medium(33-66%),4,16.59,75.0,8.7209
+Model2,high(>66%),69,-1.32,53.6,0.4607

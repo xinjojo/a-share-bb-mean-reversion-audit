@@ -1,0 +1,14 @@
+metric,model1,model2
+total_trades,101.0,73.0
+win_rate_pct,57.4,54.8
+mean_return_pct,-1.67,-0.34
+median_return_pct,0.96,1.2
+profit_factor,0.5322,0.5894
+mean_MAE_pct,2.05,-3.97
+mean_MFE_pct,20.96,17.46
+pct_hit_mid,100.0,100.0
+pct_hit_upper,60.4,57.5
+mean_holding_days,166.5,211.7
+entry_overlap_count,18.0,18.0
+worst5_etf_overlap,1.0,1.0
+pct_hit_mid_then_failed,42.6,45.2

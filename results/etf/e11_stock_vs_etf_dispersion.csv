@@ -1,0 +1,2 @@
+item,status,note,etf_signal_ratio_mean
+stock_vs_etf_cross_sectional_dispersion,LIMITATION - stock signal daily detail not readily available in ETF worktree,Main repo stock pipeline not rebuilt per E1.1 rules. ETF signal dispersion available from E0/E1 daily panels.,

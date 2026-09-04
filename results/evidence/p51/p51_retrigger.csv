@@ -1,0 +1,8 @@
+metric,value
+retrigger_ge1_pct,65.17857142857143
+median_retrigger_count,1.0
+mean_retrigger_count,1.375
+median_days_to_first_retrigger,1.0
+natural_captured_pct_of_all,37.5
+natural_captured_pct_of_retriggered,57.534246575342465
+q1_exact_eligible_natural_captured_pct,100.0

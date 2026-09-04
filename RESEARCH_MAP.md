@@ -93,7 +93,7 @@ W1 Multi-Timeframe BB ──► D HARMFUL (ACCEPTED; W2 NOT START)
 B1 / B1.1 Signal Breadth ──► A STRONG BREADTH VALUE (B1.1 corrected inference ACCEPTED)
    │
    ▼
-★ CURRENT: M1.1 EXTERNAL-PROTOCOL RECONCILIATION（恢复外部冻结协议：PRIMARY FWD5、EXPANDING_BREADTH_RANK01、2021-2024 yearly 分母、cluster-first、5d tail、PIT equal-weight fallback；M1 exploratory/protocol-deviated 保留，ETF gate HOLD 至 M1.1；2025–26 CLOSED）★
+★ CURRENT: M1.2 CALENDAR/CLUSTER/TAIL REMEDIATION（只修 3 项统计口径：full 1212-day trading-calendar bootstrap、trading-day-adjacent cluster、DD5 与 primary 同 deployable 样本；M1.1 B 为 PROVISIONAL、ETF gate HOLD 至 M1.2；2025–26 CLOSED）★
 ```
 
 ---

@@ -1,0 +1,13 @@
+{
+  "common_n": 74,
+  "common_pnl_delta": -163659.96020437084,
+  "a0_only_pnl": -10342.697281329923,
+  "a1_only_pnl": -39188.32984637999,
+  "fees_a0": 40322.00600280038,
+  "fees_a1": 34568.04051310038,
+  "fees_delta": -5753.9654897,
+  "idle_cash_a0": 491830.6703110062,
+  "idle_cash_a1": 534439.0165004262,
+  "idle_cash_delta": 42608.34618942003,
+  "mechanism_note": "COMMON delta reflects path/capital differences on same signals; A1_ONLY reflects newly admitted signals; A0_ONLY reflects signals lost; idle delta reflects NEW-pool cash sitting uninvested"
+}

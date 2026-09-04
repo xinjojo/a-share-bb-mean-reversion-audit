@@ -1,0 +1,15 @@
+{
+  "I1_a0_parity": true,
+  "I2_k3": true,
+  "I3_maxlevels5": true,
+  "I4_level200k": true,
+  "I5_entry_unchanged": true,
+  "I6_exit_unchanged": true,
+  "I7_ranking_unchanged": true,
+  "I8_no_predictor": true,
+  "I9_no_queue": true,
+  "I10_no_stop_gate": true,
+  "I11_no_2025_read": true,
+  "I12_prior_registry_shas": true,
+  "registry_sha": "907df83d145b4e6918aa94c721c0da7ef34ab57be963c002687a88e1b62f1e51"
+}

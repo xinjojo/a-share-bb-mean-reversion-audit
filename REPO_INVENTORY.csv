@@ -731,3 +731,16 @@ results/evidence/p51/p51_retrigger.csv,csv,P5.1,portfolio,ACTIVE,results/evidenc
 results/evidence/p51/p51_independent_by_state.csv,csv,P5.1,portfolio,ACTIVE,results/evidence/p51/p51_independent_by_state.csv,,EVIDENCE,results/evidence/p51/,
 results/evidence/p51/p51_summary.json,json,P5.1,portfolio,ACTIVE,results/evidence/p51/p51_summary.json,,EVIDENCE,results/evidence/p51/,
 results/evidence/p51/p51_invariants.json,json,P5.1,portfolio,ACTIVE,results/evidence/p51/p51_invariants.json,,EVIDENCE,results/evidence/p51/,
+research/portfolio/registries/PORTFOLIO_ARCHITECTURE_P6_ADD_BUDGET_REGISTRY.csv,csv,P6,portfolio,ACCEPTED,research/portfolio/registries/PORTFOLIO_ARCHITECTURE_P6_ADD_BUDGET_REGISTRY.csv,,PREREGISTRATION,research/portfolio/registries/,SHA 907df83d... prereg 407335e
+research/portfolio/registries/PORTFOLIO_ARCHITECTURE_P6_ADD_BUDGET_REGISTRY.sha256,sha256,P6,portfolio,ACCEPTED,research/portfolio/registries/PORTFOLIO_ARCHITECTURE_P6_ADD_BUDGET_REGISTRY.sha256,,PREREGISTRATION,research/portfolio/registries/,
+research/portfolio/portfolio_architecture_p6.py,py,P6,portfolio,ACTIVE,research/portfolio/portfolio_architecture_p6.py,,CODE,research/portfolio/,"pool-budget engine (A0 mode == P4 engine, parity asserted)"
+research/portfolio/PORTFOLIO_ARCHITECTURE_P6.md,md,P6,portfolio,ACTIVE,research/portfolio/PORTFOLIO_ARCHITECTURE_P6.md,,CANONICAL REPORT,research/portfolio/,"development diagnostic, waiting external audit"
+results/evidence/p6/p6_metrics.csv,csv,P6,portfolio,ACTIVE,results/evidence/p6/p6_metrics.csv,,EVIDENCE,results/evidence/p6/,
+results/evidence/p6/p6_yearly.csv,csv,P6,portfolio,ACTIVE,results/evidence/p6/p6_yearly.csv,,EVIDENCE,results/evidence/p6/,
+results/evidence/p6/p6_pool_ledger.csv,csv,P6,portfolio,ACTIVE,results/evidence/p6/p6_pool_ledger.csv,,EVIDENCE,results/evidence/p6/,
+results/evidence/p6/p6_signal_bridge.csv,csv,P6,portfolio,ACTIVE,results/evidence/p6/p6_signal_bridge.csv,,EVIDENCE,results/evidence/p6/,
+results/evidence/p6/p6_add_bridge.csv,csv,P6,portfolio,ACTIVE,results/evidence/p6/p6_add_bridge.csv,,EVIDENCE,results/evidence/p6/,
+results/evidence/p6/p6_path_bridge.json,json,P6,portfolio,ACTIVE,results/evidence/p6/p6_path_bridge.json,,EVIDENCE,results/evidence/p6/,
+results/evidence/p6/p6_episode_concentration.json,json,P6,portfolio,ACTIVE,results/evidence/p6/p6_episode_concentration.json,,EVIDENCE,results/evidence/p6/,
+results/evidence/p6/p6_summary.json,json,P6,portfolio,ACTIVE,results/evidence/p6/p6_summary.json,,EVIDENCE,results/evidence/p6/,
+results/evidence/p6/p6_invariants.json,json,P6,portfolio,ACTIVE,results/evidence/p6/p6_invariants.json,,EVIDENCE,results/evidence/p6/,

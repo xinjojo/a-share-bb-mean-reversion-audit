@@ -1,0 +1,173 @@
+{
+  "a0": {
+    "total": 30.295093786122408,
+    "mdd": -30.78972881784398,
+    "sharpe": 0.3467648252149691,
+    "n": 76,
+    "pnl": 302950.9378612245
+  },
+  "a1": {
+    "total": 11.044534509180327,
+    "mdd": -32.37497590048132,
+    "sharpe": 0.20887194648189655,
+    "n": 75,
+    "pnl": 110445.3450918036,
+    "no_new_budget": 0,
+    "no_add_budget": 85
+  },
+  "deltas": {
+    "return_pp": -19.25055927694208,
+    "mdd_pp": -1.5852470826373377,
+    "sharpe": -0.13789287873307254
+  },
+  "yearly_better_years": 1,
+  "both_23_24_worse": false,
+  "top_episode_contribution_pct": 59.351917668507916,
+  "signal_bridge": [
+    {
+      "group": "COMMON",
+      "n": 74
+    },
+    {
+      "group": "A0_ONLY",
+      "n": 2
+    },
+    {
+      "group": "A1_ONLY",
+      "n": 1
+    },
+    {
+      "group": "A1_NO_NEW_BUDGET",
+      "n": 0
+    }
+  ],
+  "add_bridge": [
+    {
+      "arch": "A1",
+      "layer": 2,
+      "a0_adds": 49,
+      "ax_adds": 45,
+      "preserved": 42,
+      "lost": 7
+    },
+    {
+      "arch": "A1",
+      "layer": 3,
+      "a0_adds": 25,
+      "ax_adds": 15,
+      "preserved": 14,
+      "lost": 11
+    },
+    {
+      "arch": "A1",
+      "layer": 4,
+      "a0_adds": 5,
+      "ax_adds": 4,
+      "preserved": 3,
+      "lost": 2
+    },
+    {
+      "arch": "A1",
+      "layer": 5,
+      "a0_adds": 3,
+      "ax_adds": 1,
+      "preserved": 1,
+      "lost": 2
+    },
+    {
+      "arch": "A2",
+      "layer": 2,
+      "a0_adds": 49,
+      "ax_adds": 40,
+      "preserved": 39,
+      "lost": 10
+    },
+    {
+      "arch": "A2",
+      "layer": 3,
+      "a0_adds": 25,
+      "ax_adds": 9,
+      "preserved": 9,
+      "lost": 16
+    },
+    {
+      "arch": "A2",
+      "layer": 4,
+      "a0_adds": 5,
+      "ax_adds": 2,
+      "preserved": 2,
+      "lost": 3
+    },
+    {
+      "arch": "A2",
+      "layer": 5,
+      "a0_adds": 3,
+      "ax_adds": 1,
+      "preserved": 1,
+      "lost": 2
+    },
+    {
+      "arch": "A3",
+      "layer": 2,
+      "a0_adds": 49,
+      "ax_adds": 46,
+      "preserved": 40,
+      "lost": 9
+    },
+    {
+      "arch": "A3",
+      "layer": 3,
+      "a0_adds": 25,
+      "ax_adds": 21,
+      "preserved": 18,
+      "lost": 7
+    },
+    {
+      "arch": "A3",
+      "layer": 4,
+      "a0_adds": 5,
+      "ax_adds": 8,
+      "preserved": 3,
+      "lost": 2
+    },
+    {
+      "arch": "A3",
+      "layer": 5,
+      "a0_adds": 3,
+      "ax_adds": 3,
+      "preserved": 1,
+      "lost": 2
+    }
+  ],
+  "path_bridge": {
+    "common_n": 74,
+    "common_pnl_delta": -163659.96020437084,
+    "a0_only_pnl": -10342.697281329923,
+    "a1_only_pnl": -39188.32984637999,
+    "fees_a0": 40322.00600280038,
+    "fees_a1": 34568.04051310038,
+    "fees_delta": -5753.9654897,
+    "idle_cash_a0": 491830.6703110062,
+    "idle_cash_a1": 534439.0165004262,
+    "idle_cash_delta": 42608.34618942003,
+    "mechanism_note": "COMMON delta reflects path/capital differences on same signals; A1_ONLY reflects newly admitted signals; A0_ONLY reflects signals lost; idle delta reflects NEW-pool cash sitting uninvested"
+  },
+  "sensitivity": {
+    "A2": {
+      "total": 10.265208123460322,
+      "mdd": -25.557295915556892,
+      "sharpe": 0.2024882802275598,
+      "n": 75,
+      "pnl": 102652.08123460306
+    },
+    "A3": {
+      "total": -7.756955260396703,
+      "mdd": -38.032448290325874,
+      "sharpe": 0.060548938510930767,
+      "n": 71,
+      "pnl": -77569.55260396688
+    }
+  },
+  "classification": "D",
+  "registry_sha": "907df83d145b4e6918aa94c721c0da7ef34ab57be963c002687a88e1b62f1e51"
+}

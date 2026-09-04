@@ -1,0 +1,23 @@
+key,value
+phase,S2.1
+title,Baseline Reproduction & Portfolio Inversion Audit
+research_status,GOVERNANCE / REPRODUCTION / ATTRIBUTION AUDIT
+s2_commit,9ab294a
+s2_verdict_provisional,H8 NOT SUPPORTED (PENDING S2.1 GATE)
+root_cause_identified,etf_enabled=True in S2 engine vs etf_enabled=False in official G0
+official_g0_etf_enabled,false
+s2_engine_etf_enabled,true (default, BUG)
+impact,idle cash invested in ETF 513500 earns extra return ~+9.7pp over 2020-2024
+fix,set etf_enabled=False in S2 engine to match official G0
+reproduction_tolerance,total_return <=0.1pp, PF identical, trade count exact
+random_simulations,200 (frozen from S2 Registry)
+base_seed,42
+matched_entry_analysis,true
+upper_touch_horizons,"20d,40d,60d,120d"
+slot_metrics,"open_position_count,free_slots,cash,days_fully_occupied,missed_signals"
+cost_decomposition,"gross_pnl,commission,stamp_duty,slippage,net_pnl"
+attribution_2022,true
+verdict_rules,"S2 CONFIRMED / CONFIRMED WITH CORRECTIONS / MATERIALLY REVISED / INCONCLUSIVE"
+h8_verdict_rules,"H8 STRONGLY SUPPORTED / PARTIALLY SUPPORTED / NOT SUPPORTED / INCONCLUSIVE"
+forbidden,"ranking change, exit change, max_levels change, cost change, window change, parameter tuning, S3 run"
+registry_created_before_analysis,true

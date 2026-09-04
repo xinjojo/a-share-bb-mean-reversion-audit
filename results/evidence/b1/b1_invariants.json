@@ -1,0 +1,13 @@
+{
+ "I1_b20_n63785_parity": true,
+ "I2_breadth_signal_date_only": true,
+ "I3_pit_universe_denominator": true,
+ "I4_no_outcome_in_breadth": true,
+ "I5_date_level_primary": true,
+ "I6_no_portfolio_rerun": true,
+ "I7_no_dynamic_K": true,
+ "I8_no_threshold_optimization": true,
+ "I9_no_new_factor": true,
+ "I10_no_2025_2026": true,
+ "I11_prior_registry_sha_unchanged": true
+}

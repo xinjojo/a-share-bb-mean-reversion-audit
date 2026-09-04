@@ -1,0 +1,152 @@
+{
+ "n_signal_days": 1110,
+ "n_zero_signal_days": 102,
+ "n_calendar_days": 1212,
+ "count_distribution": {
+  "count_min": 1,
+  "count_p25": 7.0,
+  "count_median": 20.0,
+  "count_p75": 56.0,
+  "count_max": 873,
+  "breadth_min": 0.0002034174125305126,
+  "breadth_p25": 0.001631487763758575,
+  "breadth_median": 0.004833965772108688,
+  "breadth_p75": 0.012665702742428174,
+  "breadth_max": 0.21756262313537855
+ },
+ "quintiles": {
+  "Q1": {
+   "n_days": 222.0,
+   "mean_count": 2.788288,
+   "mean_breadth": 0.000643,
+   "DAY_MEAN_RETURN": 2.256914,
+   "DAY_WIN_RATE": 0.651502,
+   "DAY_MEAN_MAE": -13.702359,
+   "DAY_MAE20_RATE": 0.252778,
+   "DAY_MAE30_RATE": 0.1253,
+   "DAY_MEAN_HOLD": 33.099925,
+   "DAY_HOLD90_RATE": 0.049474,
+   "MKT_RET": 0.008003,
+   "MKT_RET5": 0.004911,
+   "MKT_RET20": 0.002181
+  },
+  "Q2": {
+   "n_days": 222.0,
+   "mean_count": 8.837838,
+   "mean_breadth": 0.002019,
+   "DAY_MEAN_RETURN": 3.484595,
+   "DAY_WIN_RATE": 0.709064,
+   "DAY_MEAN_MAE": -13.780498,
+   "DAY_MAE20_RATE": 0.248193,
+   "DAY_MAE30_RATE": 0.118165,
+   "DAY_MEAN_HOLD": 33.836934,
+   "DAY_HOLD90_RATE": 0.043699,
+   "MKT_RET": 0.007209,
+   "MKT_RET5": 0.002116,
+   "MKT_RET20": 0.001155
+  },
+  "Q3": {
+   "n_days": 222.0,
+   "mean_count": 20.77027,
+   "mean_breadth": 0.004781,
+   "DAY_MEAN_RETURN": 3.726455,
+   "DAY_WIN_RATE": 0.71437,
+   "DAY_MEAN_MAE": -13.777884,
+   "DAY_MAE20_RATE": 0.240126,
+   "DAY_MAE30_RATE": 0.119516,
+   "DAY_MEAN_HOLD": 33.239091,
+   "DAY_HOLD90_RATE": 0.035981,
+   "MKT_RET": 0.001882,
+   "MKT_RET5": 0.000915,
+   "MKT_RET20": 0.000538
+  },
+  "Q4": {
+   "n_days": 222.0,
+   "mean_count": 46.31982,
+   "mean_breadth": 0.010644,
+   "DAY_MEAN_RETURN": 4.375597,
+   "DAY_WIN_RATE": 0.736972,
+   "DAY_MEAN_MAE": -13.195695,
+   "DAY_MAE20_RATE": 0.223292,
+   "DAY_MAE30_RATE": 0.109597,
+   "DAY_MEAN_HOLD": 32.868457,
+   "DAY_HOLD90_RATE": 0.034077,
+   "MKT_RET": -0.002791,
+   "MKT_RET5": -0.001951,
+   "MKT_RET20": -0.000228
+  },
+  "Q5": {
+   "n_days": 222.0,
+   "mean_count": 208.603604,
+   "mean_breadth": 0.04743,
+   "DAY_MEAN_RETURN": 4.921205,
+   "DAY_WIN_RATE": 0.776874,
+   "DAY_MEAN_MAE": -11.905779,
+   "DAY_MAE20_RATE": 0.189483,
+   "DAY_MAE30_RATE": 0.090611,
+   "DAY_MEAN_HOLD": 31.524468,
+   "DAY_HOLD90_RATE": 0.031255,
+   "MKT_RET": -0.015134,
+   "MKT_RET5": -0.005457,
+   "MKT_RET20": -0.000585
+  }
+ },
+ "primary": {
+  "spearman_rho": 0.1602815353077433,
+  "rank_slope": 0.00296448407260499,
+  "rank_slope_hac_ci": [
+   -0.013071978293001227,
+   0.019000946438211208
+  ]
+ },
+ "q5_q1_point": 2.664291244840622,
+ "q5_q1_calendar_ci": [
+  0.3352108566578382,
+  2.3069443019112494
+ ],
+ "yearly": [
+  {
+   "year": 2020,
+   "n": 198,
+   "spearman": 0.1349452015568106,
+   "q5_q1": 2.3522105813915744
+  },
+  {
+   "year": 2021,
+   "n": 241,
+   "spearman": 0.26998651237666343,
+   "q5_q1": 3.414410052826754
+  },
+  {
+   "year": 2022,
+   "n": 227,
+   "spearman": 0.14031176630829148,
+   "q5_q1": 2.3699568737007133
+  },
+  {
+   "year": 2023,
+   "n": 238,
+   "spearman": 0.11228174337369078,
+   "q5_q1": 1.3628071500099967
+  },
+  {
+   "year": 2024,
+   "n": 206,
+   "spearman": 0.1770778888078238,
+   "q5_q1": 3.3694150597136305
+  }
+ ],
+ "conditional": {
+  "b1_rank01_breadth": 3.283183369858536,
+  "b2_market_ret": -0.2594623322586573
+ },
+ "capture_rate": {
+  "Q1": 0.01777,
+  "Q2": 0.00866,
+  "Q3": 0.00239,
+  "Q4": 0.00185,
+  "Q5": 0.00037
+ },
+ "tail_tradeoff": false,
+ "classification": "B_NARROW_BREADTH_VALUE"
+}

@@ -1,0 +1,2 @@
+metric,n_paired_days,coverage,point,hac_lo,hac_hi,boot_lo,boot_hi
+paired_touch_minus_notouch,648,99.083,-0.686057,-1.420659,0.048546,-1.441933,0.038748

@@ -1,0 +1,2 @@
+metric,n_paired_days,point,hac_lo,hac_hi,boot_lo,boot_hi
+same_day_LOW30_minus_HIGH30,958,-0.555085,-1.083734,-0.026436,-1.084259,-0.012668

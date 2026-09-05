@@ -1,0 +1,13 @@
+{
+ "I1_baseline_61828": true,
+ "I2_no_2025_2026": true,
+ "I3_regime_asof_signal_date": true,
+ "I4_no_parameter_search": true,
+ "I5_frozen_groups_5": true,
+ "I6_four_independent_vetoes": true,
+ "I7_no_combination_search": true,
+ "I8_all_groups_reported": true,
+ "I9_indicator_implementation_verified": true,
+ "I10_no_subgroup_after_results": true,
+ "I11_classification_semantics_direction_fixed": true
+}

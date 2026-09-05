@@ -136,9 +136,14 @@ td.l,th.l{text-align:left}
 tr:nth-child(even) td{background:#fafbfd}
 .twrap{max-height:560px;overflow:auto;border:1px solid var(--line);border-radius:8px}
 .tools{margin:8px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.tools input{padding:6px 10px;border:1px solid var(--line);border-radius:6px;font-size:13px;min-width:220px}
+.tools input[type=text],.tools input[type=number]{padding:6px 10px;border:1px solid var(--line);border-radius:6px;font-size:13px}
+.tools input[type=button]{padding:6px 12px;border:1px solid var(--line);border-radius:6px;background:#fff;cursor:pointer;font-size:13px}
+.tools input[type=button]:hover{background:var(--hdr)}
 .tools select{padding:6px 8px;border:1px solid var(--line);border-radius:6px;font-size:13px}
 .tools .cnt{color:var(--mut);font-size:12.5px}
+.frow input{width:100%;min-width:56px;padding:3px 5px;border:1px solid #d4dbe4;border-radius:4px;font-size:11.5px;background:#fbfcfe}
+.frow input:focus{outline:none;border-color:var(--acc);background:#fff}
+th .dir{color:var(--acc);font-size:11px;margin-left:2px}
 .badge{display:inline-block;padding:1px 8px;border-radius:20px;font-size:12px;font-weight:600}
 .b-ok{background:#e3f6ec;color:var(--good)}.b-no{background:#fdecec;color:var(--bad)}.b-wa{background:#fdf3e0;color:var(--warn)}
 .imgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
@@ -260,10 +265,14 @@ S1 frozen B20（close_adj &lt; MA20 − 2·SD20，ddof=1）全量信号路径事
 
 <section id="manual">
 <h2>明细浏览 — manual_review_index（157,469 条，全量）</h2>
-<div class="card note">每条 = 一个独立 signal（stock_name + stock_code + signal_date + entry_date 可直接打开 K 线核对）。支持搜索（代码/名称/日期/role/signal_id）、列排序、分页。此表为人工检查索引，完整 OHLC 见 wide/long 母表（本地 parquet/CSV）。</div>
+<div class="card note">每条 = 一个独立信号（股票名称 + 股票代码 + 信号日期 + 入场日期 可直接打开 K 线核对）。表头全部中文；<b>每一列</b>在列名下都有筛选框（文本列输入即筛，数字列支持 <code>&gt;=5</code>、<code>-3~1</code>、<code>3.5</code> 等写法）；点击列名排序（▲▼）；页码可输入跳转、每页条数可选；数值保留两位小数。此表为人工检查索引，完整 OHLC 见 wide/long 母表（本地 parquet/CSV）。</div>
 <div class="tools">
-<input id="m_q" placeholder="搜索 代码/名称/日期/role…"><select id="m_pg"></select>
 <span class="cnt" id="m_cnt"></span>
+每页 <select id="m_psize"><option>50</option><option>100</option><option selected>200</option><option>500</option></select> 条
+<input id="m_prev" type="button" value="◀ 上一页">
+第 <input id="m_cur" type="number" min="1" style="width:74px"> / <span id="m_total_pages"></span> 页
+<input id="m_next" type="button" value="下一页 ▶">
+<span class="note" style="margin-left:10px">提示：每列表头下一行可直接输入筛选条件；点击列名排序；数字列支持 <code>&gt;=5</code>、<code>-3~1</code>、<code>3.5</code> 等写法</span>
 </div>
 <div class="twrap" style="max-height:640px"><table id="m_tbl"></table></div>
 </section>
@@ -332,27 +341,104 @@ function filteredTable(rows,elId,inputId,varSelId,horSelId,cntId){
   if(hs)hs.onchange=q;
   q();
 }
-/* manual index browser */
+/* manual index browser — 中文表头 / 每列筛选 / 排序 / 页码输入 / 每页条数 / 两位小数 */
 (function(){
-  const hd=DATA.manualHeader, rows=DATA.manualRows, PER=200;
-  let cur=0, flt=[...rows];
-  const q=document.getElementById("m_q"),pg=document.getElementById("m_pg"),cnt=document.getElementById("m_cnt"),tbl=document.getElementById("m_tbl");
-  function render(){
-    const page=flt.slice(cur,cur+PER);
-    tbl.innerHTML="";
-    let tr=document.createElement("tr");
-    hd.forEach((h,i)=>{const th=document.createElement("th");th.className=isNaN(h)?'l':'r';th.textContent=h;th.style.cursor="pointer";th.onclick=()=>sortBy(i);tr.appendChild(th);});
-    tbl.appendChild(tr);
-    page.forEach(r=>{const tr2=document.createElement("tr");r.forEach((c,i)=>{const td=document.createElement("td");td.className=isNaN(hd[i])?'l':'r';td.textContent=c;td.title=c;tr2.appendChild(td);});tbl.appendChild(tr2);});
-    cnt.textContent="显示 "+(cur+1)+"–"+(cur+page.length)+" / "+flt.length+" 条（全量 "+rows.length+"）";
-    pg.innerHTML="";
-    const pages=Math.max(1,Math.ceil(flt.length/PER));
-    for(let i=0;i<pages;i++){const o=document.createElement("option");o.value=i;o.textContent="第 "+(i+1)+" / "+pages+" 页";if(i===Math.floor(cur/PER))o.selected=true;pg.appendChild(o);}
+  const COLS_ZH=["信号ID","股票代码","股票名称","信号日期","入场日期","入场角色","入场成本(元)","D5最大有利波动%","D5最大不利波动%","D10最大有利波动%","D10最大不利波动%","D20最大有利波动%","D20最大不利波动%","D20收盘收益%"];
+  const NUM_COLS=new Set([5,7,8,9,10,11,12,13]);
+  const ROLE_ZH={"NEW_ENTRY":"首次入场","ADD_ON_1":"加仓第1次","ADD_ON_2":"加仓第2次","ADD_ON_3":"加仓第3次","ADD_ON_4":"加仓第4次","ADD_ON_N":"加仓"};
+  const hd=DATA.manualHeader, rows=DATA.manualRows;
+  let cur=0, per=200, filters={}, sortKey=null, sortAsc={};
+  const tbl=document.getElementById("m_tbl"),cnt=document.getElementById("m_cnt"),
+        psize=document.getElementById("m_psize"),prevB=document.getElementById("m_prev"),
+        nextB=document.getElementById("m_next"),curI=document.getElementById("m_cur"),
+        totalP=document.getElementById("m_total_pages");
+  const roleZh=r=>ROLE_ZH[r]||r;
+  const fmt2=v=>v===""||v===null?"":Number(v).toFixed(2);
+  function textVal(r,i){return i===6?roleZh(r[i]):r[i];}
+  function numMatch(v,f){
+    if(v===""||v===null)return false;
+    const n=Number(v); f=f.trim().replace(/,/g,"");
+    if(!f)return true;
+    let m=f.match(/^(>=|<=|>|<|=)?\s*(-?[\d.]+)\s*(?:~|～|to|-)\s*(-?[\d.]+)?$/i);
+    if(m){
+      const op=m[1]||"", a=Number(m[2]), b=m[3]!==undefined?Number(m[3]):null;
+      if(op===">=")return n>=a; if(op==="<=")return n<=a; if(op===">")return n>a;
+      if(op==="<")return n<a;
+      if(op==="=")return Math.abs(n-a)<0.005;
+      if(b!==null)return n>=Math.min(a,b)&&n<=Math.max(a,b);
+      return Math.abs(n-a)<0.005;
+    }
+    return String(n).includes(f);
   }
-  let si=null;
-  function sortBy(i){si=i;render();}
-  q.oninput=()=>{const f=q.value.trim().toLowerCase();flt=rows.filter(r=>!f||r.join(" ").toLowerCase().includes(f));cur=0;render();};
-  pg.onchange=()=>{cur=Number(pg.value)*PER;render();};
+  function rowMatch(r){
+    for(const i in filters){
+      const f=filters[i]; if(!f)continue;
+      if(NUM_COLS.has(Number(i))){
+        if(!numMatch(r[i],f))return false;
+      }else{
+        if(!textVal(r,Number(i)).toLowerCase().includes(f.toLowerCase()))return false;
+      }
+    }
+    return true;
+  }
+  function render(){
+    let rs=rows.filter(rowMatch);
+    if(sortKey!==null){
+      const i=sortKey, asc=sortAsc[i];
+      rs=rs.slice().sort((a,b)=>{
+        if(NUM_COLS.has(i)){const x=Number(a[i]),y=Number(b[i]);
+          if(!isFinite(x)&&!isFinite(y))return 0; if(!isFinite(x))return 1; if(!isFinite(y))return -1;
+          return (x-y)*(asc?1:-1);}
+        return String(textVal(a,i)).localeCompare(String(textVal(b,i)),"zh-CN")*(asc?1:-1);
+      });
+    }
+    const pages=Math.max(1,Math.ceil(rs.length/per));
+    cur=Math.min(cur,pages-1); if(cur<0)cur=0;
+    const page=rs.slice(cur*per,cur*per+per);
+    tbl.innerHTML="";
+    const thead=document.createElement("thead");
+    let tr1=document.createElement("tr");
+    hd.forEach((h,i)=>{
+      const th=document.createElement("th");th.className=isNaN(h)?'l':'r';
+      th.textContent=COLS_ZH[i]||h;
+      th.style.cursor="pointer";th.style.whiteSpace="nowrap";
+      if(sortKey===i){const d=document.createElement("span");d.className="dir";d.textContent=sortAsc[i]?"▲":"▼";th.appendChild(d);}
+      th.onclick=()=>{if(sortKey===i)sortAsc[i]=!sortAsc[i];else{sortKey=i;sortAsc[i]=true;}render();};
+      tr1.appendChild(th);
+    });
+    thead.appendChild(tr1);
+    let tr2=document.createElement("tr");
+    hd.forEach((h,i)=>{
+      const th=document.createElement("th");th.className="frow";
+      const inp=document.createElement("input");
+      inp.placeholder=NUM_COLS.has(i)?"如 ≥-5":"筛选…";
+      inp.value=filters[i]||"";
+      inp.oninput=()=>{filters[i]=inp.value;cur=0;render();};
+      th.appendChild(inp);tr2.appendChild(th);
+    });
+    thead.appendChild(tr2);
+    tbl.appendChild(thead);
+    const tb=document.createElement("tbody");
+    page.forEach(r=>{
+      const tr=document.createElement("tr");
+      r.forEach((c,i)=>{
+        const td=document.createElement("td");
+        td.className=hd[i]&&isNaN(hd[i])?'l':'r';
+        td.textContent=NUM_COLS.has(i)?fmt2(c):(i===6?roleZh(c):c);
+        td.title=td.textContent;tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+    tbl.appendChild(tb);
+    cnt.textContent="显示 "+(cur*per+1)+"–"+(cur*per+page.length)+" / "+rs.length+" 条（全量 "+rows.length+"）";
+    totalP.textContent=pages;
+    curI.value=cur+1;
+    prevB.disabled=cur===0;nextB.disabled=cur>=pages-1;
+  }
+  psize.onchange=()=>{per=Number(psize.value);cur=0;render();};
+  prevB.onclick=()=>{if(cur>0){cur--;render();}};
+  nextB.onclick=()=>{cur++;render();};
+  curI.onchange=()=>{const v=Number(curI.value);if(v>=1){cur=v-1;render();}};
   render();
 })();
 /* kpis */

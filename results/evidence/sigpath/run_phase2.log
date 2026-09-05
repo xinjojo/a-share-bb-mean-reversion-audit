@@ -1,0 +1,11 @@
+[LOAD] wide (157469, 251) long (3149380, 22)
+[STATS] descriptive done
+[STATS] bins done
+[STATS] hit rates done
+[OUT] manual_review_index.csv rows 157469
+[SANITY] file written; ret_check=True, mono_check=True, groups=5
+[CHARTS] done
+[OUT] summary.json
+[OUT] invariants.json
+[OUT] README.md
+[DONE] 4s

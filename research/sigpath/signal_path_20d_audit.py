@@ -270,7 +270,8 @@ def build_stock_map():
 def extract_paths(layers, smap):
     t0 = time.time()
     n = len(layers)
-    D_DAYS = np.full((n, HORIZON), pd.NaT, dtype='datetime64[ns]')
+    NAT = np.datetime64('NaT')
+    D_DAYS = np.full((n, HORIZON), NAT, dtype='datetime64[ns]')
     D_O = np.full((n, HORIZON), np.nan); D_H = np.full((n, HORIZON), np.nan)
     D_L = np.full((n, HORIZON), np.nan); D_C = np.full((n, HORIZON), np.nan)
     avail = np.zeros(n, dtype=np.int32)
@@ -306,10 +307,12 @@ def build_long_wide(layers, D_DAYS, D_O, D_H, D_L, D_C, avail, meta):
         w_dates.append(D_DAYS[:, h]); w_o.append(od); w_h.append(oh); w_l.append(ol); w_c.append(oc)
         w_or.append(od / ec - 1.0); w_hr.append(oh / ec - 1.0)
         w_lr.append(ol / ec - 1.0); w_cr.append(oc / ec - 1.0)
-        hm = np.maximum.accumulate(np.where(np.isnan(w_hr[-1]), -np.inf, w_hr[-1]), axis=1)
-        lm = np.minimum.accumulate(np.where(np.isnan(w_lr[-1]), np.inf, w_lr[-1]), axis=1)
-        hm[hm == -np.inf] = np.nan; lm[lm == np.inf] = np.nan
-        w_mfe.append(hm); w_mae.append(lm)
+    HR = np.column_stack(w_hr); LR = np.column_stack(w_lr)
+    HR_ = np.where(np.isnan(HR), -np.inf, HR); LR_ = np.where(np.isnan(LR), np.inf, LR)
+    MFE = np.maximum.accumulate(HR_, axis=1); MAE = np.minimum.accumulate(LR_, axis=1)
+    MFE[MFE == -np.inf] = np.nan; MAE[MAE == np.inf] = np.nan
+    for h in range(HORIZON):
+        w_mfe.append(MFE[:, h]); w_mae.append(MAE[:, h])
     # 基础列重命名 + 派生
     base = layers.rename(columns={'sig_open': 'signal_day_open', 'sig_high': 'signal_day_high',
                                   'sig_low': 'signal_day_low', 'sig_close': 'signal_day_close',
@@ -328,41 +331,57 @@ def build_long_wide(layers, D_DAYS, D_O, D_H, D_L, D_C, avail, meta):
         wide[f'low_ret_D{hn}'] = w_lr[h]; wide[f'close_ret_D{hn}'] = w_cr[h]
         wide[f'MFE_D{hn}'] = w_mfe[h]; wide[f'MAE_D{hn}'] = w_mae[h]
     wide['available_future_days'] = avail
-    # long
+    # long (每 signal 固定 20 行; 缺失日 NaN 行保留, 与 wide 完全一致)
     sig_ids = wide['signal_id'].to_numpy()
+    tsc = wide['ts_code'].to_numpy()
+    sc = np.full(n, '', dtype=object)   # 占位, main 中 attach_meta 后回填
+    sn = np.full(n, '', dtype=object)
+    sgd = wide['signal_date'].to_numpy(); end = wide['entry_date'].to_numpy()
+    role = wide['entry_role'].to_numpy(); epi = wide['position_episode_id'].to_numpy()
+    flg = np.full(n, '', dtype=object)  # 占位, main 中 attach_meta 后统一赋值
     long_rows = []
     for h in range(HORIZON):
         hn = h + 1
-        keep = ~np.isnan(w_o[h])
-        if not keep.any():
-            continue
-        idx = np.where(keep)[0]
         long_rows.append(pd.DataFrame({
-            'signal_id': sig_ids[idx],
-            'ts_code': wide['ts_code'].to_numpy()[idx],
-            'signal_date': wide['signal_date'].to_numpy()[idx],
-            'entry_date': wide['entry_date'].to_numpy()[idx],
-            'entry_cost': ec[idx],
-            'entry_role': wide['entry_role'].to_numpy()[idx],
-            'position_episode_id': wide['position_episode_id'].to_numpy()[idx],
-            'horizon_day': np.full(len(idx), hn, dtype=np.int32),
-            'trade_date': w_dates[h][idx],
-            'open': w_o[h][idx], 'high': w_h[h][idx], 'low': w_l[h][idx], 'close': w_c[h][idx],
-            'open_ret': w_or[h][idx], 'high_ret': w_hr[h][idx], 'low_ret': w_lr[h][idx], 'close_ret': w_cr[h][idx],
-            'MFE': w_mfe[h][idx], 'MAE': w_mae[h][idx],
+            'signal_id': sig_ids, 'ts_code': tsc, 'stock_code': sc, 'stock_name': sn,
+            'signal_date': sgd, 'entry_date': end, 'entry_cost': ec, 'entry_role': role,
+            'position_episode_id': epi, 'horizon_day': np.full(n, hn, dtype=np.int32),
+            'trade_date': w_dates[h], 'open': w_o[h], 'high': w_h[h], 'low': w_l[h], 'close': w_c[h],
+            'open_ret': w_or[h], 'high_ret': w_hr[h], 'low_ret': w_lr[h], 'close_ret': w_cr[h],
+            'MFE': w_mfe[h], 'MAE': w_mae[h], 'data_quality_flag': flg,
         }))
     long = pd.concat(long_rows, ignore_index=True)
     print(f'[TABLES] wide {wide.shape}, long {long.shape} ({time.time()-t0:.0f}s)', flush=True)
     return wide, long
 
 def attach_meta(wide, layers, smap):
-    # stock_name / list_date / industry snapshot / exchange / sector_pit / signal vol
+    # stock_name (PIT: namechange_full 按 signal_date 取当时名称; fallback stock_basic 当前名; 无 -> UNKNOWN)
     sb = pd.read_csv(os.path.join(ROOT, 'data', 'raw', 'stock_basic.csv'))
     sb_map = {r.ts_code: r for r in sb.itertuples()}
+    sb_name = {t: (r.name if hasattr(r, 'name') else pd.NA) for t, r in sb_map.items()}
+    nc = pd.read_parquet(os.path.join(ROOT, 'data', 'raw', 'namechange_full.parquet'))
+    nc['start_date'] = pd.to_datetime(nc['start_date'])
+    nc['end_date'] = pd.to_datetime(nc['end_date'])
+    nc_map = {}
+    for tc, g in nc.groupby('ts_code'):
+        g = g.sort_values('start_date')
+        nc_map[tc] = (g['start_date'].to_numpy(), g['end_date'].to_numpy(), g['name'].to_numpy())
+    sd_arr = wide['signal_date'].to_numpy().astype('datetime64[ns]')
+    names = []
+    for tc, sd in zip(wide['ts_code'].to_numpy(), sd_arr):
+        v = nc_map.get(tc)
+        nm = None
+        if v is not None:
+            st, en, nmarr = v
+            pos = int(np.searchsorted(st, sd, side='right')) - 1
+            if pos >= 0 and (np.isnat(en[pos]) or en[pos] >= sd):
+                nm = nmarr[pos]
+        if nm is None:
+            nm = sb_name.get(tc, pd.NA)
+        names.append(nm if nm is not None else 'UNKNOWN')
     code = wide['ts_code'].str.split('.').str[0]
-    names = [sb_map.get(t, pd.NA).name for t in wide['ts_code']]
-    lds = [sb_map.get(t, pd.NA).list_date for t in wide['ts_code']]
-    inds = [sb_map.get(t, pd.NA).industry for t in wide['ts_code']]
+    lds = [sb_map.get(t).list_date if t in sb_map else pd.NA for t in wide['ts_code']]
+    inds = [sb_map.get(t).industry if t in sb_map else pd.NA for t in wide['ts_code']]
     exs = [str(t).split('.')[1] if '.' in str(t) else pd.NA for t in wide['ts_code']]
     wide.insert(0, 'stock_code', code.to_numpy())
     wide.insert(1, 'stock_name', names)
@@ -391,43 +410,49 @@ def attach_meta(wide, layers, smap):
 # ============================================================
 def main():
     t0 = time.time()
-    print('prepare_v51 ...', flush=True)
-    days, D, etf_idx, etf_px, etf_open, etf_nav, first_eligible_i, offset = prepare_v51()
-    N = next(i for i, d in enumerate(days) if d.date() == B2024) + 1
-    assert days[N - 1].date() == B2024
-    print(f'[DAYS] {len(days)} total, N(<=2024) = {N}', flush=True)
+    resume = os.environ.get('SIGPATH_RESUME') == '1'
+    layers_csv = os.path.join(OUT, 'sigpath_layers_raw.csv')
+    if resume and os.path.exists(layers_csv):
+        layers = pd.read_csv(layers_csv)
+        print(f'[RESUME] loaded {len(layers):,} layers from csv', flush=True)
+    else:
+        print('prepare_v51 ...', flush=True)
+        days, D, etf_idx, etf_px, etf_open, etf_nav, first_eligible_i, offset = prepare_v51()
+        N = next(i for i, d in enumerate(days) if d.date() == B2024) + 1
+        assert days[N - 1].date() == B2024
+        print(f'[DAYS] {len(days)} total, N(<=2024) = {N}', flush=True)
 
-    eps, cens, layers = replay_layers(days, D, first_eligible_i, offset, N)
+        eps, cens, layers = replay_layers(days, D, first_eligible_i, offset, N)
 
-    # ---- parity ----
-    n_tp = int((eps['exit_type'] == 'TAKE_PROFIT_DYN').sum())
-    n_fs = int((eps['exit_type'] == 'FINAL_SETTLE').sum())
-    n_cen = len(cens)
-    assert len(eps) == 63785, f'parity fail episodes: {len(eps)}'
-    assert n_tp == 61828, f'TP parity fail: {n_tp}'
-    assert n_fs == 1957, f'FS parity fail: {n_fs}'
-    assert n_cen == 102, f'censored parity fail: {n_cen}'
-    n_new = int((layers['entry_role'] == 'NEW_ENTRY').sum())
-    assert n_new == 63887, f'NEW_ENTRY parity fail: {n_new} (expect 63785+102 censored)'
-    sum_levels = int(eps['levels_used'].sum()) + int(cens['levels_used'].sum())
-    assert len(layers) == sum_levels, f'layer count {len(layers)} != sum levels {sum_levels}'
-    print(f'[PARITY] OK: episodes {len(eps)} (TP {n_tp} FS {n_fs}) censored {n_cen} '
-          f'NEW_ENTRY {n_new} layers {len(layers)} (sum levels {sum_levels})', flush=True)
+        # ---- parity ----
+        n_tp = int((eps['exit_type'] == 'TAKE_PROFIT_DYN').sum())
+        n_fs = int((eps['exit_type'] == 'FINAL_SETTLE').sum())
+        n_cen = len(cens)
+        assert len(eps) == 63785, f'parity fail episodes: {len(eps)}'
+        assert n_tp == 61828, f'TP parity fail: {n_tp}'
+        assert n_fs == 1957, f'FS parity fail: {n_fs}'
+        assert n_cen == 102, f'censored parity fail: {n_cen}'
+        n_new = int((layers['entry_role'] == 'NEW_ENTRY').sum())
+        assert n_new == 63887, f'NEW_ENTRY parity fail: {n_new} (expect 63785+102 censored)'
+        sum_levels = int(eps['levels_used'].sum()) + int(cens['levels_used'].sum())
+        assert len(layers) == sum_levels, f'layer count {len(layers)} != sum levels {sum_levels}'
+        print(f'[PARITY] OK: episodes {len(eps)} (TP {n_tp} FS {n_fs}) censored {n_cen} '
+              f'NEW_ENTRY {n_new} layers {len(layers)} (sum levels {sum_levels})', flush=True)
 
-    layers.to_csv(os.path.join(OUT, 'sigpath_layers_raw.csv'), index=False)
-    eps.to_csv(os.path.join(OUT, 'sigpath_episodes_parity.csv'), index=False)
+        layers.to_csv(os.path.join(OUT, 'sigpath_layers_raw.csv'), index=False)
+        eps.to_csv(os.path.join(OUT, 'sigpath_episodes_parity.csv'), index=False)
 
     smap = build_stock_map()
     D_DAYS, D_O, D_H, D_L, D_C, avail = extract_paths(layers, smap)
     wide, long = build_long_wide(layers, D_DAYS, D_O, D_H, D_L, D_C, avail, None)
 
-    # meta attach (name/list/exchange/industry/sector/vol)
+    # meta attach (name PIT/list/exchange/industry/sector/vol)
     wide = attach_meta(wide, layers, smap)
-    # 同步 long 的 ts_code 名称? long 由 wide 派生列组装, 只补 stock_name/stock_code
-    nmap = dict(zip(wide['ts_code'], wide['stock_name']))
+    # 回填 long 的 stock_code/stock_name
     cmap = dict(zip(wide['ts_code'], wide['stock_code']))
-    long.insert(1, 'stock_code', long['ts_code'].map(cmap).to_numpy())
-    long.insert(2, 'stock_name', long['ts_code'].map(nmap).to_numpy())
+    nmap = dict(zip(wide['ts_code'], wide['stock_name']))
+    long['stock_code'] = long['ts_code'].map(cmap).to_numpy()
+    long['stock_name'] = long['ts_code'].map(nmap).to_numpy()
     # data_quality_flag
     flags = []
     for h in range(HORIZON):

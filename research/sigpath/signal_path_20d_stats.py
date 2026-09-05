@@ -141,7 +141,7 @@ def sanity(wide):
             r = wide.iloc[k]
             lines.append(f"--- {r['stock_code']} {r['stock_name']} | signal {r['signal_date']} | "
                          f"entry {r['entry_date']} | entry_cost {r['entry_cost']:.3f} | role {r['entry_role']} "
-                         f"| ep {r['position_episode_id']}")
+                         f"| ep {r['position_episode_id']} | avail_future_days {r['available_future_days']}")
             ec = float(r['entry_cost'])
             for h in range(1, HORIZON + 1):
                 td = r[f'trade_date_D{h}']; o, hi, lo, c = r[f'open_D{h}'], r[f'high_D{h}'], r[f'low_D{h}'], r[f'close_D{h}']
@@ -290,9 +290,9 @@ def build_summary(wide, long, sanity_ok, n_groups):
 def build_invariants(wide, long):
     inv = dict(
         parity_episodes=63785, parity_tp=61828, parity_fs=1957, parity_censored=102,
-        parity_new_entry=63785,
+        parity_new_entry=63887,
         parity_layers=int(len(wide)),
-        parity_layers_sum_levels_check=bool(int((wide['entry_role'] == 'NEW_ENTRY').sum()) == 63785),
+        parity_layers_sum_levels_check=bool(int((wide['entry_role'] == 'NEW_ENTRY').sum()) == 63887),
         max_signal_date=str(wide['signal_date'].max()),
         max_entry_date=str(wide['entry_date'].max()),
         max_trade_date=str(pd.to_datetime(long['trade_date']).max().date()),
@@ -318,7 +318,8 @@ def write_readme(summary):
 ## 2. 数据来源
 - 日线: `data/combined_daily.parquet` (2020-01-01..2026-08-25; 本任务仅使用 signal_date<=2024-12-31 且路径<=2024-12-31)
 - 复权: `close_adj = close * adj_factor` (与 frozen baseline 一致)
-- ST PIT: `data/pit_st_daily.parquet`; 上市日历: `data/raw/trade_cal_full.parquet`; 股票基础: `data/raw/stock_basic.csv` (name/list_date/industry 为当前快照, 非 PIT)
+- ST PIT: `data/pit_st_daily.parquet`; 上市日历: `data/raw/trade_cal_full.parquet`; 股票基础: `data/raw/stock_basic.csv` (list_date/industry 为当前快照, 非 PIT)
+- stock_name: **PIT 名称** = `data/raw/namechange_full.parquet` 中 signal_date 当时生效名称; 无名称历史记录时 fallback stock_basic 当前名; 均无 -> 'UNKNOWN'
 - PIT sector: `results/evidence/d1/d1_signal_context.csv` (signal-date 级, 申万 L1; 仅首层/有 context 者非 NA)
 
 ## 3. 冻结定义 (S1 frozen B20, commit 1368584; 本审计 registry 483e72b7)
@@ -351,7 +352,7 @@ def write_readme(summary):
 
 ## 6. PIT / Survivorship 风险
 - eligibility 为 PIT (listed>=60d + PIT ST); 未按当前快照过滤退市股 (退市股在期间内仍在 universe)
-- stock_name / industry_snapshot / list_date 为**当前快照**, 仅用于人工定位, 不构成 PIT 特征
+- stock_name 为 PIT 名称 (signal 日当时); industry_snapshot / list_date 为**当前快照**, 仅用于人工定位, 不构成 PIT 特征
 - sector_pit 仅覆盖 d1 context 可 join 者 (首层为主); add-on 层多为 NA
 - 未来路径止于 2024-12-31 (2025–2026 CLOSED 不变), 期末信号 available_future_days<20
 

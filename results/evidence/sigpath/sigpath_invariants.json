@@ -1,0 +1,18 @@
+{
+ "parity_episodes": 63785,
+ "parity_tp": 61828,
+ "parity_fs": 1957,
+ "parity_censored": 102,
+ "parity_new_entry": 63887,
+ "parity_layers": 157469,
+ "parity_layers_sum_levels_check": true,
+ "max_signal_date": "2024-12-30",
+ "max_entry_date": "2024-12-31",
+ "max_trade_date": "2024-12-31",
+ "signal_2025_plus_count": 0,
+ "entry_2025_plus_count": 0,
+ "trade_2025_plus_count": 0,
+ "ret_formula_assert_pass": true,
+ "mfe_mae_monotonic_assert_pass": true,
+ "missing_horizon_kept": true
+}

@@ -1,0 +1,80 @@
+{
+ "n_signals_total": 157469,
+ "n_new_entry": 63887,
+ "n_add_on": 93582,
+ "n_add_on_1": 42105,
+ "n_add_on_2": 25652,
+ "n_add_on_3": 15828,
+ "n_add_on_4": 9997,
+ "n_stocks": 5166,
+ "n_episodes": 63887,
+ "signal_date_min": "2020-02-06",
+ "signal_date_max": "2024-12-30",
+ "entry_date_min": "2020-02-07",
+ "entry_date_max": "2024-12-31",
+ "trade_date_min": "2020-02-07",
+ "trade_date_max": "2024-12-31",
+ "long_rows": 3149380,
+ "wide_rows": 157469,
+ "long_missing_cells": 43031,
+ "n_short_history": 3135,
+ "n_jump_flag": 341,
+ "flag_distribution": {
+  "": 153992,
+  "SHORT_HISTORY": 3135,
+  "JUMP": 341,
+  "JUMP;SHORT_HISTORY": 1
+ },
+ "sanity_check_passed": true,
+ "sanity_groups": 5,
+ "close_ret_summary": {
+  "D1": {
+   "mean_pct": -0.21769104934628644,
+   "median_pct": -0.04424544814515263,
+   "std_pct": 2.9896172104835403
+  },
+  "D5": {
+   "mean_pct": 0.5181908127374923,
+   "median_pct": 0.2103486575536273,
+   "std_pct": 6.759303872679004
+  },
+  "D10": {
+   "mean_pct": 0.6781338634721493,
+   "median_pct": 0.12922856959555196,
+   "std_pct": 10.17048820152642
+  },
+  "D20": {
+   "mean_pct": 1.4857093325271917,
+   "median_pct": 0.24667440105430316,
+   "std_pct": 13.392378554426546
+  }
+ },
+ "files_bytes": {
+  "README.md": 4512,
+  "mae_hit_rate_matrix.csv": 5599,
+  "manual_review_index.csv": 34697869,
+  "mfe_hit_rate_matrix.csv": 5428,
+  "run_phase2.log": 232,
+  "sanity_check.txt": 74639,
+  "signal_path_20d_long.csv.part_001": 101986425,
+  "signal_path_20d_long.csv.part_002": 101078403,
+  "signal_path_20d_long.csv.part_003": 100556872,
+  "signal_path_20d_long.csv.part_004": 100149797,
+  "signal_path_20d_long.csv.part_005": 100406165,
+  "signal_path_20d_long.csv.part_006": 99905657,
+  "signal_path_20d_long.csv.part_007": 100205143,
+  "signal_path_20d_long.csv.part_008": 87045236,
+  "signal_path_20d_long.parquet": 198418960,
+  "signal_path_20d_wide.csv.part_001": 137769580,
+  "signal_path_20d_wide.csv.part_002": 137709705,
+  "signal_path_20d_wide.csv.part_003": 138323588,
+  "signal_path_20d_wide.csv.part_004": 124098793,
+  "signal_path_20d_wide.parquet": 177581344,
+  "signal_path_descriptive_statistics.csv": 36975,
+  "signal_path_distribution_bins.csv": 45669,
+  "sigpath_episodes_parity.csv": 7938367,
+  "sigpath_invariants.json": 483,
+  "sigpath_layers_raw.csv": 28605015,
+  "sigpath_summary.json": 2241
+ }
+}

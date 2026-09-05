@@ -22,3 +22,8 @@ results/_p3_cache/
 results/*.log
 results/replay_*.log
 results/independent_v2a_censored_raw.csv
+
+# SIGPATH 数据分片/中间产物（体积大不入库，本地 results/evidence/sigpath/ 保留完整）
+*.csv.part_*
+sigpath_layers_raw.csv
+sigpath_episodes_parity.csv

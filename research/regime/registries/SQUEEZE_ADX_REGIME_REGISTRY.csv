@@ -1,0 +1,36 @@
+phase,item,specification
+REG1,baseline,S1 frozen B20 independent signal framework (commit 1368584 result; episode file R0-B b343256)
+REG1,development_sample,signal_date<=2024-12-31 AND exit_date<=2024-12-31 (n=61828, F21 parity)
+REG1,parity_target,mean_return_pct=5.0993 win_pct=77.89 mean_hold=32.62
+REG1,price_data,combined_daily.parquet (2020-2024) + warmup_daily_2018_2019.parquet (adj_factor verified continuous)
+REG1,regime_asof,signal_date close (T); entry T+1 open; no date>T read
+REG1,dmi_length,14
+REG1,adx_smoothing,14 (Wilder)
+REG1,adx_level_bins,<15;[15,20);[20,25);[25,35);>=35
+REG1,adx_slopes,1/3/5 days
+REG1,adx_rising,ADX_slope_1>0
+REG1,di_bull_bear,+DI>-DI / -DI>+DI
+REG1,bb_params,period=20 k=2 ddof=1 (strategy-native)
+REG1,bb_width_pct_window,120 trading days (inclusive, date<=T)
+REG1,kc_params,EMA20(adjust=False) +- 1.5*ATR20 (Wilder ewm alpha=1/20)
+REG1,squeeze_on,BB_upper<KC_upper AND BB_lower>KC_lower
+REG1,squeeze_release,prev day ON and today NOT ON
+REG1,release_recent_bins,today;1-3d;4-10d;no recent
+REG1,recent_release_def,days_since_release<=3
+REG1,momentum,LazyBear SMI: (close_adj-close_adj[20])/(0.5*(max20(high_adj)-min20(low_adj)))*100
+REG1,mom_sign,positive if MOM>=0 else negative
+REG1,mom_slope,rising if MOM_t-MOM_{t-1}>0 else falling
+REG1,bearish_momentum,MOM<0 AND MOM slope<0
+REG1,group_g1,NOT(-DI>+DI AND adx_rising AND MOM<0)
+REG1,group_g2,-DI>+DI AND adx_rising
+REG1,group_g3,recent_release(0-3d) AND MOM<0
+REG1,group_g4,-DI>+DI AND adx_rising AND MOM<0 AND mom_falling
+REG1,group_g5,G4 AND recent_release(0-3d)
+REG1,inference,bootstrap B=5000 seed=0 (mean/win/tail-prob diff, percentile CI) + Mann-Whitney U + Hedges g
+REG1,tail_layers,worst 5%/10%/20% with enrichment ratio
+REG1,veto_modes,4 independent trade-level vetoes: G2;G3;G4;G5 (no combination)
+REG1,veto_report,removed n/pct; total return; MaxDD; Sharpe; win; avg trade; turnover; exposure; foregone profit; avoided loss; net effect; exposure-adjusted per 1000 hold-days
+REG1,pass_gate,CI_lower>0 AND veto net PnL improvement>=1.0% AND exposure-adjusted positive AND foregone<=30% of avoided AND top1 stock<30% of veto PnL
+REG1,classification,{PASS-CANDIDATE,WEAK,FAIL,HARMFUL}
+REG1,no_scan,ADX threshold / ATR multiplier / squeeze lookback / momentum length / combination search all forbidden
+REG1,no_blind,2025-2026 CLOSED/UNTOUCHED

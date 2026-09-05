@@ -1,0 +1,11 @@
+prepare_v51 ...
+[DAYS] 1611 total, N(<=2024) = 1212
+[REPLAY] episodes=63785 (TP=61828 FS=1957) censored=102 layers=157469 (18s)
+Traceback (most recent call last):
+  File "/Users/mouha/DoubaoWork/chats/2026-08-25/new-chat/audit_package/github_repo/research/sigpath/signal_path_20d_audit.py", line 470, in <module>
+    main()
+    ~~~~^^
+  File "/Users/mouha/DoubaoWork/chats/2026-08-25/new-chat/audit_package/github_repo/research/sigpath/signal_path_20d_audit.py", line 406, in main
+    assert len(eps) + n_cen == 63785, f'parity fail episodes: {len(eps)}+{n_cen}'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: parity fail episodes: 63785+102

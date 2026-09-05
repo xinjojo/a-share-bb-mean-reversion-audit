@@ -1,0 +1,5 @@
+template,upside_threshold,downside_threshold,count,pct,median_upside_hit_day,median_downside_hit_day,median_days_to_downside,P25_downside_days,P75_downside_days
+MFE>=+3_then_MAE<=-3,0.03,-0.03,55024,34.94275063663324,2.0,9.0,5.0,2.0,9.0
+MFE>=+5_then_MAE<=-5,0.05,-0.05,25773,16.36703097117528,3.0,12.0,7.0,4.0,11.0
+MFE>=+8_then_MAE<=-5,0.08,-0.05,12199,7.746921616318132,4.0,13.0,7.0,4.0,11.0
+MFE>=+10_then_MAE<=0,0.1,0.0,14880,9.449478945062202,6.0,13.0,5.0,3.0,8.0

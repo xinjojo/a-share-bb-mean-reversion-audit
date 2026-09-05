@@ -1,0 +1,7 @@
+template,downside_threshold,recovery_threshold,count,pct,median_downside_hit_day,median_recovery_hit_day,median_days_to_recovery,P25_recovery_days,P75_recovery_days
+MAE<=-3_then_MFE>=+3,-0.03,0.03,62301,39.56397767179572,2.0,8.0,4.0,2.0,8.0
+MAE<=-5_then_MFE>=+5,-0.05,0.05,30586,19.42350557887584,2.0,10.0,6.0,3.0,10.0
+MAE<=-8_then_MFE>=+5,-0.08,0.05,15399,9.77906762600893,3.0,12.0,6.0,4.0,10.0
+MAE<=-10_then_MFE>=0,-0.1,0.0,15987,10.152474455289614,5.0,12.0,5.0,3.0,9.0
+MAE<=-10_then_MFE>=+5,-0.1,0.05,9935,6.309178314461894,3.0,12.0,7.0,4.0,10.0
+MAE<=-15_then_MFE>=0,-0.15,0.0,6822,4.332281274409566,4.0,12.0,6.0,3.0,9.0

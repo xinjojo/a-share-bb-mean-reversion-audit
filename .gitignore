@@ -27,3 +27,4 @@ results/independent_v2a_censored_raw.csv
 *.csv.part_*
 sigpath_layers_raw.csv
 sigpath_episodes_parity.csv
+sigpath_interactive_report.html

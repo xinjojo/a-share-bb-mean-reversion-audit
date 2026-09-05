@@ -1,0 +1,134 @@
+{
+  "phase": "SIGPATH-C",
+  "scope": "bookkeeping_only_no_strategy_recalculation",
+  "checks": [
+    {
+      "name": "wide_rows",
+      "actual": 157469,
+      "expected": 157469,
+      "pass": true
+    },
+    {
+      "name": "wide_unique_signal_id",
+      "actual": 157469,
+      "expected": 157469,
+      "pass": true
+    },
+    {
+      "name": "long_rows",
+      "actual": 3149380,
+      "expected": 3149380,
+      "pass": true
+    },
+    {
+      "name": "long_unique_signal_id_horizon_day",
+      "actual": 3149380,
+      "expected": 3149380,
+      "pass": true
+    },
+    {
+      "name": "horizon_day_exactly_1_to_20_for_every_signal",
+      "actual": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "NEW_ENTRY",
+      "actual": 63887,
+      "expected": 63887,
+      "pass": true
+    },
+    {
+      "name": "ADD_ON_total",
+      "actual": 93582,
+      "expected": 93582,
+      "pass": true
+    },
+    {
+      "name": "role_count_NEW_ENTRY",
+      "actual": 63887,
+      "expected": 63887,
+      "pass": true
+    },
+    {
+      "name": "role_count_ADD_ON_1",
+      "actual": 42105,
+      "expected": 42105,
+      "pass": true
+    },
+    {
+      "name": "role_count_ADD_ON_2",
+      "actual": 25652,
+      "expected": 25652,
+      "pass": true
+    },
+    {
+      "name": "role_count_ADD_ON_3",
+      "actual": 15828,
+      "expected": 15828,
+      "pass": true
+    },
+    {
+      "name": "role_count_ADD_ON_4",
+      "actual": 9997,
+      "expected": 9997,
+      "pass": true
+    },
+    {
+      "name": "summary_wide_rows",
+      "actual": 157469,
+      "expected": 157469,
+      "pass": true
+    },
+    {
+      "name": "summary_long_rows",
+      "actual": 3149380,
+      "expected": 3149380,
+      "pass": true
+    },
+    {
+      "name": "summary_n_new_entry",
+      "actual": 63887,
+      "expected": 63887,
+      "pass": true
+    },
+    {
+      "name": "summary_n_add_on",
+      "actual": 93582,
+      "expected": 93582,
+      "pass": true
+    },
+    {
+      "name": "summary_n_add_on_1",
+      "actual": 42105,
+      "expected": 42105,
+      "pass": true
+    },
+    {
+      "name": "summary_n_add_on_2",
+      "actual": 25652,
+      "expected": 25652,
+      "pass": true
+    },
+    {
+      "name": "summary_n_add_on_3",
+      "actual": 15828,
+      "expected": 15828,
+      "pass": true
+    },
+    {
+      "name": "summary_n_add_on_4",
+      "actual": 9997,
+      "expected": 9997,
+      "pass": true
+    }
+  ],
+  "role_counts": {
+    "ADD_ON_1": 42105,
+    "ADD_ON_2": 25652,
+    "ADD_ON_3": 15828,
+    "ADD_ON_4": 9997,
+    "NEW_ENTRY": 63887
+  },
+  "pass": true
+}

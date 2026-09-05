@@ -1,0 +1,38 @@
+{
+  "phase": "SIGPATH-C",
+  "scope": "full_wide_long_value_parity_no_sampling",
+  "signals_checked": 157469,
+  "rows_checked": 3149380,
+  "cells_checked": 34643180,
+  "date_mismatch_count": 0,
+  "value_mismatch_count": 0,
+  "missing_long_rows_after_alignment": 0,
+  "mismatch_count_by_field": {
+    "trade_date": 0,
+    "open": 0,
+    "high": 0,
+    "low": 0,
+    "close": 0,
+    "open_ret": 0,
+    "high_ret": 0,
+    "low_ret": 0,
+    "close_ret": 0,
+    "MFE": 0,
+    "MAE": 0
+  },
+  "max_abs_diff_by_field": {
+    "open": 0.0,
+    "high": 0.0,
+    "low": 0.0,
+    "close": 0.0,
+    "open_ret": 0.0,
+    "high_ret": 0.0,
+    "low_ret": 0.0,
+    "close_ret": 0.0,
+    "MFE": 0.0,
+    "MAE": 0.0
+  },
+  "atol": 1e-10,
+  "rtol": 1e-10,
+  "PASS": true
+}

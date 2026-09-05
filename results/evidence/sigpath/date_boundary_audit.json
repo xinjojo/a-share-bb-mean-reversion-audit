@@ -1,0 +1,421 @@
+{
+  "boundary": "2024-12-31",
+  "scanned_tables": [
+    "wide",
+    "long",
+    "layers",
+    "episodes",
+    "manual_index"
+  ],
+  "date_like_fields": [
+    {
+      "table": "wide",
+      "column": "list_date",
+      "rows": 157469,
+      "parsed_non_null": 153982,
+      "null_or_unparseable": 3487,
+      "min": "1990-12-19",
+      "max": "2024-08-28",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "signal_date",
+      "rows": 157469,
+      "parsed_non_null": 157469,
+      "null_or_unparseable": 0,
+      "min": "2020-02-06",
+      "max": "2024-12-30",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "entry_date",
+      "rows": 157469,
+      "parsed_non_null": 157469,
+      "null_or_unparseable": 0,
+      "min": "2020-02-07",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D1",
+      "rows": 157469,
+      "parsed_non_null": 157469,
+      "null_or_unparseable": 0,
+      "min": "2020-02-07",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D2",
+      "rows": 157469,
+      "parsed_non_null": 157418,
+      "null_or_unparseable": 51,
+      "min": "2020-02-10",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D3",
+      "rows": 157469,
+      "parsed_non_null": 157393,
+      "null_or_unparseable": 76,
+      "min": "2020-02-11",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D4",
+      "rows": 157469,
+      "parsed_non_null": 157319,
+      "null_or_unparseable": 150,
+      "min": "2020-02-12",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D5",
+      "rows": 157469,
+      "parsed_non_null": 156376,
+      "null_or_unparseable": 1093,
+      "min": "2020-02-13",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D6",
+      "rows": 157469,
+      "parsed_non_null": 156257,
+      "null_or_unparseable": 1212,
+      "min": "2020-02-14",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D7",
+      "rows": 157469,
+      "parsed_non_null": 155211,
+      "null_or_unparseable": 2258,
+      "min": "2020-02-17",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D8",
+      "rows": 157469,
+      "parsed_non_null": 155152,
+      "null_or_unparseable": 2317,
+      "min": "2020-02-18",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D9",
+      "rows": 157469,
+      "parsed_non_null": 155022,
+      "null_or_unparseable": 2447,
+      "min": "2020-02-19",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D10",
+      "rows": 157469,
+      "parsed_non_null": 154952,
+      "null_or_unparseable": 2517,
+      "min": "2020-02-20",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D11",
+      "rows": 157469,
+      "parsed_non_null": 154539,
+      "null_or_unparseable": 2930,
+      "min": "2020-02-21",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D12",
+      "rows": 157469,
+      "parsed_non_null": 154443,
+      "null_or_unparseable": 3026,
+      "min": "2020-02-24",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D13",
+      "rows": 157469,
+      "parsed_non_null": 154403,
+      "null_or_unparseable": 3066,
+      "min": "2020-02-25",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D14",
+      "rows": 157469,
+      "parsed_non_null": 154351,
+      "null_or_unparseable": 3118,
+      "min": "2020-02-26",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D15",
+      "rows": 157469,
+      "parsed_non_null": 154347,
+      "null_or_unparseable": 3122,
+      "min": "2020-02-27",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D16",
+      "rows": 157469,
+      "parsed_non_null": 154344,
+      "null_or_unparseable": 3125,
+      "min": "2020-02-28",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D17",
+      "rows": 157469,
+      "parsed_non_null": 154342,
+      "null_or_unparseable": 3127,
+      "min": "2020-03-02",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D18",
+      "rows": 157469,
+      "parsed_non_null": 154341,
+      "null_or_unparseable": 3128,
+      "min": "2020-03-03",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D19",
+      "rows": 157469,
+      "parsed_non_null": 154337,
+      "null_or_unparseable": 3132,
+      "min": "2020-03-04",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "wide",
+      "column": "trade_date_D20",
+      "rows": 157469,
+      "parsed_non_null": 154333,
+      "null_or_unparseable": 3136,
+      "min": "2020-03-05",
+      "max": "2024-12-30",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "long",
+      "column": "signal_date",
+      "rows": 3149380,
+      "parsed_non_null": 3149380,
+      "null_or_unparseable": 0,
+      "min": "2020-02-06",
+      "max": "2024-12-30",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "long",
+      "column": "entry_date",
+      "rows": 3149380,
+      "parsed_non_null": 3149380,
+      "null_or_unparseable": 0,
+      "min": "2020-02-07",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "long",
+      "column": "trade_date",
+      "rows": 3149380,
+      "parsed_non_null": 3106349,
+      "null_or_unparseable": 43031,
+      "min": "2020-02-07",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "layers",
+      "column": "signal_date",
+      "rows": 157469,
+      "parsed_non_null": 157469,
+      "null_or_unparseable": 0,
+      "min": "2020-02-06",
+      "max": "2024-12-30",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "layers",
+      "column": "entry_date",
+      "rows": 157469,
+      "parsed_non_null": 157469,
+      "null_or_unparseable": 0,
+      "min": "2020-02-07",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "episodes",
+      "column": "signal_date",
+      "rows": 63785,
+      "parsed_non_null": 63785,
+      "null_or_unparseable": 0,
+      "min": "2020-02-06",
+      "max": "2024-12-30",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "episodes",
+      "column": "entry_date",
+      "rows": 63785,
+      "parsed_non_null": 63785,
+      "null_or_unparseable": 0,
+      "min": "2020-02-07",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "episodes",
+      "column": "exit_date",
+      "rows": 63785,
+      "parsed_non_null": 63785,
+      "null_or_unparseable": 0,
+      "min": "2020-02-11",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "manual_index",
+      "column": "signal_date",
+      "rows": 157469,
+      "parsed_non_null": 157469,
+      "null_or_unparseable": 0,
+      "min": "2020-02-06",
+      "max": "2024-12-30",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    },
+    {
+      "table": "manual_index",
+      "column": "entry_date",
+      "rows": 157469,
+      "parsed_non_null": 157469,
+      "null_or_unparseable": 0,
+      "min": "2020-02-07",
+      "max": "2024-12-31",
+      "gt_2024_12_31_count": 0,
+      "pass": true
+    }
+  ],
+  "gt_boundary_count": 0,
+  "pass": true,
+  "short_history_checks": [
+    {
+      "name": "SHORT_HISTORY_exact_flag_signals",
+      "actual": 3135,
+      "expected": 3135,
+      "pass": true
+    },
+    {
+      "name": "long_NaN_horizon_rows",
+      "actual": 43031,
+      "expected": 43031,
+      "pass": true
+    },
+    {
+      "name": "missing_rows_match_available_future_days",
+      "actual": 0,
+      "expected": 0,
+      "pass": true
+    },
+    {
+      "name": "non_missing_horizon_has_complete_ohlc",
+      "actual": 0,
+      "expected": 0,
+      "pass": true
+    },
+    {
+      "name": "missing_horizon_ohlc_all_null",
+      "actual": 0,
+      "expected": 0,
+      "pass": true
+    },
+    {
+      "name": "SHORT_HISTORY_any_flag_or_available_lt_20_signals",
+      "actual": 3136,
+      "expected": "informational: includes JUMP;SHORT_HISTORY overlap",
+      "pass": true
+    },
+    {
+      "name": "JUMP_SHORT_HISTORY_overlap_signals",
+      "actual": 1,
+      "expected": "informational",
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "phase": "SIGPATH-C",
+  "scope": "pit_name_audit_no_raw_modification",
+  "field_semantics": {
+    "stock_name": "PIT as-of signal_date only when signal_date matches a namechange_full.parquet effective interval; otherwise fallback stock_basic current name is not PIT and is manual-reference-only; UNKNOWN retained",
+    "industry_snapshot": "NON-PIT; current stock_basic field; manual-reference-only",
+    "list_date": "NON-PIT/current stock_basic metadata in this artifact; manual-reference-only"
+  },
+  "wide_rows": 157469,
+  "wide_UNKNOWN_stock_name_count": 876,
+  "wide_UNKNOWN_stock_name_pct": 0.5562999701528555,
+  "manual_rows": 157469,
+  "manual_UNKNOWN_stock_name_count": 876,
+  "manual_UNKNOWN_stock_name_pct": 0.5562999701528555,
+  "manual_wide_stock_name_mismatch_count": 0,
+  "namechange_rows": 8082,
+  "signals_with_namechange_history_checked": 131209,
+  "signals_with_interval_match": 127165,
+  "interval_missing_count": 4044,
+  "interval_missing_interpretation": "signal_date predates first available namechange_full interval for that ts_code; raw stock_name cannot be proven PIT for these rows and is treated as stock_basic fallback/manual-reference-only",
+  "multiple_interval_match_count": 0,
+  "name_mismatch_count": 0,
+  "mandatory_codes_checked": [
+    "300116.SZ",
+    "300156.SZ"
+  ],
+  "random_changed_codes_checked": [
+    "000710.SZ",
+    "000719.SZ",
+    "300066.SZ",
+    "300080.SZ",
+    "600145.SH",
+    "600300.SH",
+    "600640.SH",
+    "601216.SH"
+  ],
+  "sample_interval_checks": [
+    {
+      "ts_code": "000710.SZ",
+      "stock_name": "贝瑞基因",
+      "namechange_start_date": "2017-08-28",
+      "namechange_end_date": null,
+      "signal_count": 34,
+      "min_signal_date": "2020-02-28",
+      "max_signal_date": "2024-06-06",
+      "interval_pass": true
+    },
+    {
+      "ts_code": "000719.SZ",
+      "stock_name": "中原传媒",
+      "namechange_start_date": "2018-01-15",
+      "namechange_end_date": null,
+      "signal_count": 24,
+      "min_signal_date": "2020-03-13",
+      "max_signal_date": "2024-04-24",
+      "interval_pass": true
+    },
+    {
+      "ts_code": "300066.SZ",
+      "stock_name": "三川智慧",
+      "namechange_start_date": "2016-01-29",
+      "namechange_end_date": null,
+      "signal_count": 32,
+      "min_signal_date": "2020-03-16",
+      "max_signal_date": "2024-12-23",
+      "interval_pass": true
+    },
+    {
+      "ts_code": "300080.SZ",
+      "stock_name": "易成新能",
+      "namechange_start_date": "2015-11-27",
+      "namechange_end_date": null,
+      "signal_count": 36,
+      "min_signal_date": "2020-06-24",
+      "max_signal_date": "2024-08-28",
+      "interval_pass": true
+    },
+    {
+      "ts_code": "300116.SZ",
+      "stock_name": "保力新",
+      "namechange_start_date": "2020-09-28",
+      "namechange_end_date": "2024-04-29",
+      "signal_count": 29,
+      "min_signal_date": "2020-10-30",
+      "max_signal_date": "2024-04-10",
+      "interval_pass": true
+    },
+    {
+      "ts_code": "300116.SZ",
+      "stock_name": "坚瑞沃能",
+      "namechange_start_date": "2016-10-31",
+      "namechange_end_date": "2020-09-27",
+      "signal_count": 3,
+      "min_signal_date": "2020-06-12",
+      "max_signal_date": "2020-06-29",
+      "interval_pass": true
+    },
+    {
+      "ts_code": "300156.SZ",
+      "stock_name": "神雾环保",
+      "namechange_start_date": "2014-08-04",
+      "namechange_end_date": "2020-07-13",
+      "signal_count": 4,
+      "min_signal_date": "2020-04-16",
+      "max_signal_date": "2020-04-27",
+      "interval_pass": true
+    },
+    {
+      "ts_code": "600145.SH",
+      "stock_name": "退市新亿",
+      "namechange_start_date": "2022-03-30",
+      "namechange_end_date": null,
+      "signal_count": 1,
+      "min_signal_date": "2022-03-31",
+      "max_signal_date": "2022-03-31",
+      "interval_pass": true
+    },
+    {
+      "ts_code": "600300.SH",
+      "stock_name": "维维股份",
+      "namechange_start_date": "2022-04-12",
+      "namechange_end_date": null,
+      "signal_count": 25,
+      "min_signal_date": "2022-04-15",
+      "max_signal_date": "2024-07-24",
+      "interval_pass": true
+    },
+    {
+      "ts_code": "600640.SH",
+      "stock_name": "号百控股",
+      "namechange_start_date": "2012-09-03",
+      "namechange_end_date": "2021-09-08",
+      "signal_count": 13,
+      "min_signal_date": "2020-03-16",
+      "max_signal_date": "2021-08-30",
+      "interval_pass": true
+    },
+    {
+      "ts_code": "600640.SH",
+      "stock_name": "国脉文化",
+      "namechange_start_date": "2022-09-09",
+      "namechange_end_date": null,
+      "signal_count": 16,
+      "min_signal_date": "2022-09-09",
+      "max_signal_date": "2024-08-23",
+      "interval_pass": true
+    },
+    {
+      "ts_code": "600640.SH",
+      "stock_name": "新国脉",
+      "namechange_start_date": "2021-09-09",
+      "namechange_end_date": "2022-09-08",
+      "signal_count": 8,
+      "min_signal_date": "2021-10-27",
+      "max_signal_date": "2022-08-02",
+      "interval_pass": true
+    },
+    {
+      "ts_code": "601216.SH",
+      "stock_name": "君正集团",
+      "namechange_start_date": "2015-10-23",
+      "namechange_end_date": null,
+      "signal_count": 39,
+      "min_signal_date": "2020-03-16",
+      "max_signal_date": "2024-07-24",
+      "interval_pass": true
+    }
+  ],
+  "PASS": false
+}

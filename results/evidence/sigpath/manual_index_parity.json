@@ -1,0 +1,10 @@
+{
+  "phase": "SIGPATH-C",
+  "scope": "manual_index_signal_id_parity",
+  "rows": 157469,
+  "unique_signal_id": 157469,
+  "duplicate_signal_id": 0,
+  "missing_from_manual": 0,
+  "extra_in_manual": 0,
+  "PASS": true
+}

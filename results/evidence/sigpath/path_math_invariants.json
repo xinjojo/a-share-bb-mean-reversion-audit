@@ -1,0 +1,18 @@
+{
+  "phase": "SIGPATH-C",
+  "scope": "full_mfe_mae_math_invariants_no_sampling",
+  "signals_checked": 157469,
+  "cells_checked_per_array": 3149380,
+  "mfe_monotonic_violations": 0,
+  "mae_monotonic_violations": 0,
+  "mfe_monotonic_signal_violations": 0,
+  "mae_monotonic_signal_violations": 0,
+  "mfe_formula_violations": 0,
+  "mae_formula_violations": 0,
+  "mfe_formula_signal_violations": 0,
+  "mae_formula_signal_violations": 0,
+  "max_abs_formula_diff": 0.0,
+  "atol": 1e-10,
+  "rtol": 1e-10,
+  "PASS": true
+}

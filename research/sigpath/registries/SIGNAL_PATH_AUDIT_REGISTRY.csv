@@ -15,9 +15,9 @@ horizon,D1..D20,"D1 = entry_date; 每 Dn = 该股自身实际交易日 (停牌�
 ret_definition,price / entry_cost - 1,不做绝对值处理/不截断负值
 mfe,MFE_Dn = max(high_ret_D1..high_ret_Dn),随 horizon 扩张的累积最大有利波动
 mae,MAE_Dn = min(low_ret_D1..low_ret_Dn),随 horizon 扩张的累积最大不利波动
-signal_id,SIG{episode_id}_{layer_idx},全局唯一; episode_id = replay episode 序号 (与 s1_episodes_B20.csv 一致)
+signal_id,SIG{episode_id}_{layer_idx},全局唯一; episode_id = 本审计 replay 中 NEW_ENTRY 入场顺序 (1..63785)
 entry_role,NEW_ENTRY / ADD_ON_1 / ADD_ON_2 / ADD_ON_3 / ADD_ON_4,levels 语义 (ADD_ON_N = 该 episode 第 N 次加仓; MAX_LEVELS=5)
-position_episode_id,replay episode 序号,同一股票持仓期内多次 B20 触发归入同一 episode (与 frozen replay 完全一致)
+position_episode_id,replay episode 序号 (入场顺序),同一股票持仓期内多次 B20 触发归入同一 episode (与 frozen replay 持仓语义一致)
 sector_pit,join d1_signal_context (ts_code, signal_date),"PIT 申万 L1 (signal-date 级); add-on 层无 context -> NA (README 说明)"
 stock_name,data/raw/stock_basic.csv name,当前快照名称 (非 PIT; 仅用于人工核对 K 线定位)
 list_date,data/raw/stock_basic.csv list_date,上市日期

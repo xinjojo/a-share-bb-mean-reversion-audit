@@ -1,0 +1,30 @@
+field,value,note
+phase,SIGPATH,BB Mean Reversion 全量 Signal Forward Path Audit (post-A0, 数据事实层)
+frozen_baseline,S1 frozen B20 independent signal framework,"commit 1368584 (S1 result); episode universe n=63,785 = TP 61,828 + FS 1,957 + censored 102"
+baseline_engine,prepare_v51 (round51_audit.py),"bb_window=20, bb_std=2.0, min_listing_days=60, limit_down_mode=correct, st_mode=pit"
+price_source,data/combined_daily.parquet,"2020-01-01..2026-08-25 全表; 本任务只使用 signal_date<=2024-12-31 与未来路径<=2024-12-31 (2025-2026 CLOSED 不变)"
+adj_method,close_adj = close * adj_factor,raw OHLC 另存 (人工核对 K 线口径)
+bb_window,20,rolling(20) mean (min_periods=20)
+bb_std,2.0,MA20 - 2*SD20 / MA20 + 2*SD20
+bb_ddof,1,pandas rolling().std() 默认 ddof=1 (与 frozen baseline 一致)
+signal_definition,T 收盘 close_adj < MA20 - 2*SD20 且当日非涨停(is_limit=0),"is_st = PIT (pit_st_daily.parquet); eligible = listed>=60d (list_date + 全交易日历) 且 BB20 有值 且当日有行情"
+signal_universe,全部成功入场信号层,"NEW_ENTRY 首层 + ADD_ON_1..ADD_ON_4 加仓层 (levels 语义, MAX_LEVELS=5); 不因 TopN/K/cash/已持仓其他股票删除; 只保留 PIT/eligibility 资格"
+entry_timing,T+1 open,entry_date = T 后第一个该股有效交易日
+entry_cost,open * (1 + SLIP),SLIP=0.001 (10bp 滑点); 100 股 lot; LEVEL_CASH=200,000/层; T+1 涨停或停牌 -> CANCEL (与 frozen replay 一致, 不入 universe)
+horizon,D1..D20,"D1 = entry_date; 每 Dn = 该股自身实际交易日 (停牌不计入); 不足 20 -> available_future_days 截断 + NaN"
+ret_definition,price / entry_cost - 1,不做绝对值处理/不截断负值
+mfe,MFE_Dn = max(high_ret_D1..high_ret_Dn),随 horizon 扩张的累积最大有利波动
+mae,MAE_Dn = min(low_ret_D1..low_ret_Dn),随 horizon 扩张的累积最大不利波动
+signal_id,SIG{episode_id}_{layer_idx},全局唯一; episode_id = replay episode 序号 (与 s1_episodes_B20.csv 一致)
+entry_role,NEW_ENTRY / ADD_ON_1 / ADD_ON_2 / ADD_ON_3 / ADD_ON_4,levels 语义 (ADD_ON_N = 该 episode 第 N 次加仓; MAX_LEVELS=5)
+position_episode_id,replay episode 序号,同一股票持仓期内多次 B20 触发归入同一 episode (与 frozen replay 完全一致)
+sector_pit,join d1_signal_context (ts_code, signal_date),"PIT 申万 L1 (signal-date 级); add-on 层无 context -> NA (README 说明)"
+stock_name,data/raw/stock_basic.csv name,当前快照名称 (非 PIT; 仅用于人工核对 K 线定位)
+list_date,data/raw/stock_basic.csv list_date,上市日期
+exchange,ts_code 后缀,SH / SZ / BJ
+data_quality_flag,path_close_jump>=30% -> JUMP; available_future_days<20 -> SHORT_HISTORY; entry_cost<=0 -> INVALID_PRICE,"仅标记, 不删除; raw 表永不修改"
+sanity_check,随机 20 条 + 5 大涨 + 5 大跌 + 5 先跌后涨 + 5 先涨后跌,打印 20 日 OHLC 人工验证 (high_ret/low_ret/close_ret 相对 entry_cost)
+outputs,results/evidence/sigpath/,"signal_path_20d_long.{parquet,csv(分片)}, signal_path_20d_wide.{parquet,csv(分片)}, manual_review_index.csv, signal_path_descriptive_statistics.csv, signal_path_distribution_bins.csv, mfe_hit_rate_matrix.csv, mae_hit_rate_matrix.csv, charts/*.png, README.md"
+no_go,禁 BB 参数调整 / 禁 signal 修改 / 禁 ADX/DMI/Squeeze / 禁止盈止损修改 / 禁 permutation / 禁 ML / 禁按未来表现过滤 / 禁 2025-2026,数据事实层 only
+2025_2026,CLOSED,不读取 2025-2026 任何 episode/portfolio/feature 结果
+classification,不输出策略结论,仅数据审计 (策略解释由人工审阅)

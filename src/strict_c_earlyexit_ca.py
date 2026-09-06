@@ -4,15 +4,18 @@
   1. corp_map: {date_str: [dict(ts_code, song, zhuan, cash_div)]} — 真实送转/派息事件 (akshare fhps)
   2. 每日主循环开头 (挂单执行前) 处理公司行为:
        - 送转: shares += floor(shares*(song+zhuan)/10), 零股向下取整; 各层按比例, 末层吸收取整差
-       - 派息: 现金分红按登记日持股(事件前股数), 红利税按自然日持股期逐层: <=30d 20%, <=365d 10%, >365d 0%
-       - 税后分红真实进入账户 cash
-  3. pnl = 卖出净收入 - 总成本 + 累计税后分红 (div_income)
-  4. real-account event ledger: 每次 buy/add/sell/div/split 按日期顺序记录
+       - 派息: 现金分红按登记日持股(事件前股数) 税前全额入账, 逐批次(层)记入 div_hist
+  3. 卖出时按先进先出批次结算红利税 (settle_div_tax):
+       持股期限 = 该层买入日 -> 卖出交割日前一日, 按自然月对日边界:
+       <=1个自然月(含恰好) 20%, >1个月且<=1年 10%, >1年 0%; 税从 cash 扣除
+  4. pnl = 卖出净收入 - 总成本 + 累计税前分红 (div_income) - 结算红利税 (tax_due)
+  5. real-account event ledger: 每次 buy/add/sell/div/split/tax 按日期顺序记录
 本文件是实验副本, 不修改冻结引擎.
 """
 import sys, os
+import calendar
 import numpy as np, pandas as pd
-from datetime import date as _date
+from datetime import date as _date, timedelta as _td
 
 ROOT = '/Users/mouha/DoubaoWork/chats/2026-08-25/new-chat'
 sys.path.insert(0, ROOT)
@@ -24,12 +27,28 @@ from run_strict_c_math import analytic_Pstar
 OPEN_FILL_DEFAULT = 'limit_conservative'
 
 
-def div_tax_rate(hold_nat_days):
-    if hold_nat_days <= 30:
+def holding_tax_rate(buy_dt, sell_excl_dt):
+    """A股差别化股息红利税 — 按自然月对日边界(不是简单30天)。
+
+    持股期限 = 买入日 -> 卖出交割日前一日。
+    <=1个自然月(含恰好1个月) -> 20%; >1个月且<=1年(12个自然月) -> 10%; >1年 -> 0%。
+    对日不存在时取目标月最后一天 (如1/31买入, 2/28满1个月)。
+    """
+    y1, m1, d1 = buy_dt.year, buy_dt.month, buy_dt.day
+    y2, m2, d2 = sell_excl_dt.year, sell_excl_dt.month, sell_excl_dt.day
+    months_raw = (y2 - y1) * 12 + (m2 - m1)
+    d1_cap = min(d1, calendar.monthrange(y2, m2)[1])
+    if d2 < d1_cap:
+        months_raw -= 1
+    if months_raw <= 0:
         return 0.20
-    if hold_nat_days <= 365:
+    if months_raw == 1 and d2 == d1_cap:
+        return 0.20  # 恰好满1个自然月 -> "1个月以内(含1个月)" -> 20%
+    if months_raw < 12:
         return 0.10
-    return 0.00
+    if months_raw == 12 and d2 == d1_cap:
+        return 0.10  # 恰好满1年 -> "1年以上至1年(含1年)" -> 10%
+    return 0.00  # 超过1年 -> 0%
 
 
 def run_fast_multi_strict_c_ee_ca(days, D, etf_idx, etf_px, etf_open, etf_nav, first_eligible_i, offset,
@@ -43,7 +62,7 @@ def run_fast_multi_strict_c_ee_ca(days, D, etf_idx, etf_px, etf_open, etf_nav, f
                                   etf_enabled=True, etf_min_cash=5_000,
                                   add_gap_days=1, day_range=None, record_actions=False,
                                   flow_sink=None, early_exit_pct=0.0, collect_daily_pstar=False,
-                                  corp_map=None, ledger_sink=None):
+                                  corp_map=None, ledger_sink=None, tax_sink=None):
     slip = slippage_bp / 10000.0
     X = early_exit_pct
     cash = initial_cash
@@ -133,28 +152,61 @@ def run_fast_multi_strict_c_ee_ca(days, D, etf_idx, etf_px, etf_open, etf_nav, f
             hold_days=hold_days, ret_pct=round(ret, 2) if ret is not None else np.nan,
             tp_price=round(tp, 3) if tp else np.nan))
 
+    def settle_div_tax(pos, d, cb_in):
+        """卖出时按 FIFO 批次结算红利税: 每层买入日 -> 卖出交割日前一日, 自然月边界税率。
+        返回 (tax_due, cash_after); 写 tax_sink。"""
+        nonlocal cash
+        div_hist = pos.get('div_hist', [])
+        if not div_hist:
+            return 0.0, cash
+        sell_dt = d.date() if hasattr(d, 'date') else d
+        sell_excl = sell_dt - _td(days=1)
+        layers_map = {li: q for (li, q) in (pos.get('layers') or [])}
+        tax_due = 0.0
+        for (li, div_dt, gross) in div_hist:
+            buy_dt = days[li].date()
+            rate = holding_tax_rate(buy_dt, sell_excl)
+            t = round(gross * rate, 2)
+            tax_due += t
+            if tax_sink is not None:
+                tax_sink.append(dict(
+                    ts_code=pos['ts_code'], name=pos.get('name'), buy_date=str(buy_dt),
+                    sell_date=str(sell_dt), shares_sold=layers_map.get(li, 0),
+                    dividend_date=str(div_dt), dividend_gross=round(gross, 2),
+                    holding_days=int((sell_excl - buy_dt).days),
+                    tax_rate=rate, tax_due=t,
+                    cash_before=round(cb_in, 2), cash_after=round(cb_in - tax_due, 2)))
+        tax_due = round(tax_due, 2)
+        cash -= tax_due
+        if tax_due > 0 and ledger_sink is not None:
+            led(str(sell_dt), pos['ts_code'], pos.get('name'), 'TAX_SETTLE',
+                pos['shares'], 0, pos['shares'], cb_in, -tax_due, cash, np.nan, 0.0,
+                f'div tax settlement FIFO rate={round(tax_due,2)}')
+        return tax_due, cash
+
     def sell_pos(pos, d, j, price, exit_type):
         nonlocal cash, round_no
         amt = price * pos['shares']
         sr = stamp_rate(d, stamp_tax_mode)
         fee = max(amt * COMMISSION_RATE, MIN_COMMISSION) + amt * sr + amt * TRANSFER_FEE_RATE
         proceeds = amt - fee
-        div_inc = pos.get('div_income', 0.0)
-        pnl = proceeds + div_inc - pos['total_cost']
-        hold_days = i - pos['entry_day_idx']
+        div_gross = pos.get('div_income', 0.0)
         cb = cash
+        tax_due, cash = settle_div_tax(pos, d, cb)
+        pnl = proceeds + div_gross - pos['total_cost'] - tax_due
+        hold_days = i - pos['entry_day_idx']
         trades.append({'round': round_no, 'ts_code': pos['ts_code'], 'name': pos.get('name'),
                        'entry_date': pos['entry_date'], 'exit_date': str(d.date()),
                        'exit_type': exit_type, 'levels_used': pos['levels'],
                        'shares': pos['shares'], 'pnl': pnl,
-                       'div_income': round(div_inc, 2),
+                       'div_income': round(div_gross, 2), 'tax_due': round(tax_due, 2),
                        'return_pct': round(pnl / pos['total_cost'] * 100, 2),
                        'hold_days': hold_days})
         rec_action(d, j, exit_type, pos['levels'], price, pos['shares'], amt, pos['avg_cost'], hold_days,
                    ret=pnl / pos['total_cost'] * 100, tc=pos['ts_code'])
         cash += proceeds
         led(str(d.date()), pos['ts_code'], pos.get('name'), 'SELL', pos['shares'], -pos['shares'], 0,
-            cb, proceeds, cash, price, fee, exit_type)
+            cb, proceeds - tax_due, cash, price, fee, exit_type)
         positions.remove(pos)
         round_no += 1
         if flow_sink is not None:
@@ -196,26 +248,19 @@ def run_fast_multi_strict_c_ee_ca(days, D, etf_idx, etf_px, etf_open, etf_nav, f
                     sh_before = pos['shares']
                     cb = cash
                     r_total = (ev.get('song', 0.0) + ev.get('zhuan', 0.0)) / 10.0
-                    # ---- 现金分红: 先处理 (按股权登记日持股=事件前股数, 逐层持股期税率) ----
+                    # ---- 现金分红: 先处理 (按股权登记日持股=事件前股数, 税前全额入账, 税在卖出时结算) ----
                     if ev.get('cash_div', 0.0) > 0:
-                        div_net = 0.0
+                        div_gross = 0.0
                         cash_per_sh = ev['cash_div'] / 10.0
-                        ex_dt = d.date() if hasattr(d, 'date') else d
-                        if pos.get('layers') is not None:
-                            for (li, q) in pos['layers']:
-                                buy_dt = days[li].date()
-                                hold_nat = (ex_dt - buy_dt).days
-                                rate = div_tax_rate(hold_nat)
-                                div_net += q * cash_per_sh * (1.0 - rate)
-                        else:
-                            hold_nat = (ex_dt - _date.fromisoformat(str(pos['entry_date']))).days
-                            rate = div_tax_rate(hold_nat)
-                            div_net = sh_before * cash_per_sh * (1.0 - rate)
-                        pos['div_income'] = pos.get('div_income', 0.0) + div_net
-                        cash += div_net
+                        for (li, q) in (pos.get('layers') or []):
+                            g = round(q * cash_per_sh, 4)
+                            div_gross += g
+                            pos.setdefault('div_hist', []).append((li, d.date(), g))
+                        pos['div_income'] = pos.get('div_income', 0.0) + div_gross
+                        cash += div_gross
                         led(str(d.date()), pos['ts_code'], pos.get('name'), 'DIVIDEND',
-                            sh_before, 0, sh_before, cb, div_net, cash, np.nan, 0.0,
-                            f"cash_div={ev['cash_div']}/10 pretax={round(sh_before*cash_per_sh,2)}")
+                            sh_before, 0, sh_before, cb, round(div_gross, 2), cash, np.nan, 0.0,
+                            f"cash_div={ev['cash_div']}/10 gross={round(sh_before*cash_per_sh,2)} (tax settled at sell)")
                     # ---- 送转: 真实股数变化 (登记日持股按比例) ----
                     if r_total > 0:
                         new_total = sh_before + int(sh_before * r_total)
@@ -312,7 +357,7 @@ def run_fast_multi_strict_c_ee_ca(days, D, etf_idx, etf_px, etf_open, etf_nav, f
                                 'l1_cost': (amt + fee) / qty,
                                 'entry_date': str(d.date()), 'levels': 1,
                                 'total_cost': amt + fee, 'entry_day_idx': i, 'last_add_i': i,
-                                'div_income': 0.0, 'layers': [(i, qty)]}
+                                'div_income': 0.0, 'layers': [(i, qty)], 'div_hist': []}
                         positions.append(npos)
                         init_raw_hist(pb['ts_code'], i)
                         rec_action(d, j, 'INITIAL_ENTRY', 1, buy_price, qty, amt, npos['avg_cost'], 0, tc=npos['ts_code'])
@@ -469,20 +514,21 @@ def run_fast_multi_strict_c_ee_ca(days, D, etf_idx, etf_px, etf_open, etf_nav, f
             sr = stamp_rate(d, stamp_tax_mode)
             fee = max(amt * COMMISSION_RATE, MIN_COMMISSION) + amt * sr + amt * TRANSFER_FEE_RATE
             proceeds = amt - fee
-            div_inc = pos.get('div_income', 0.0)
-            pnl = proceeds + div_inc - pos['total_cost']
-            hold_days = (day_range[1] - 1 if day_range else len(days) - 1) - pos['entry_day_idx']
+            div_gross = pos.get('div_income', 0.0)
             cb = cash
+            tax_due, cash = settle_div_tax(pos, d, cb)
+            pnl = proceeds + div_gross - pos['total_cost'] - tax_due
+            hold_days = (day_range[1] - 1 if day_range else len(days) - 1) - pos['entry_day_idx']
             trades.append({'round': round_no, 'ts_code': pos['ts_code'], 'name': pos.get('name'),
                            'entry_date': pos['entry_date'], 'exit_date': str(d.date()),
                            'exit_type': 'FINAL_SETTLE', 'levels_used': pos['levels'],
                            'shares': pos['shares'], 'pnl': pnl,
-                           'div_income': round(div_inc, 2),
+                           'div_income': round(div_gross, 2), 'tax_due': round(tax_due, 2),
                            'return_pct': round(pnl / pos['total_cost'] * 100, 2),
                            'hold_days': hold_days})
             cash += proceeds
             led(str(d.date()), pos['ts_code'], pos.get('name'), 'FINAL_SETTLE', pos['shares'], -pos['shares'], 0,
-                cb, proceeds, cash, sell_price, fee, 'end of data')
+                cb, proceeds - tax_due, cash, sell_price, fee, 'end of data')
             positions.remove(pos)
             round_no += 1
             if flow_sink is not None:

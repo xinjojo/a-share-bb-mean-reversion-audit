@@ -1,0 +1,26 @@
+{
+ "first_divergence_date": "2020-06-18",
+ "n_divergence_dates": 16,
+ "levels_mismatch": [
+  {
+   "episode": "600519.SH|2022-10-13",
+   "frozen_levels": 3,
+   "replay_levels": 2
+  },
+  {
+   "episode": "300418.SZ|2023-06-27",
+   "frozen_levels": 2,
+   "replay_levels": 1
+  },
+  {
+   "episode": "601012.SH|2024-01-30",
+   "frozen_levels": 2,
+   "replay_levels": 1
+  },
+  {
+   "episode": "601919.SH|2024-07-15",
+   "frozen_levels": 3,
+   "replay_levels": 2
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+{
+ "n_holding_days": 1172,
+ "n_episodes": 20,
+ "named_dates": 13,
+ "named_trig_current_data": 2,
+ "named_notrig": 11,
+ "analytic_vs_numerical_all_ok": true,
+ "bruteforce_100pct": true,
+ "monotonicity_unique_root": true,
+ "first_trigger_eq_recorded": 17,
+ "earlier_trigger": 2,
+ "final_settle": 1,
+ "first_divergence_date": "2020-06-18",
+ "data_basis": "CURRENT_DATA_CALCULATION (combined_daily.parquet mtime 2026-09-01 23:15)",
+ "frozen_historical_input": "HISTORICAL_INPUT_UNAVAILABLE (未保留 9/2 冻结时行情快照, 无法独立复算旧数据 P*)"
+}

@@ -1,0 +1,21 @@
+{
+ "n_frozen_trades": 96,
+ "n_replay_trades": 97,
+ "n_frozen_replay_overlap": 95,
+ "exit_date_diff": 5,
+ "entry_diff_replay_extra": [
+  "300750.SZ|2022-10-31",
+  "002230.SZ|2024-01-04"
+ ],
+ "entry_diff_frozen_only": [
+  "000858.SZ|2022-10-28"
+ ],
+ "levels_mismatch": 4,
+ "frozen_first_legal_parity": 91,
+ "data_last_modified": "2026-09-01 23:15",
+ "engine_last_commit": "8ec0810 (2026-09-03 PATH DEPENDENCE)",
+ "frozen_table_origin": "9/2 STRICT_C 早期版本产物 (strict_c_trades.csv, 后迁移 evidence)",
+ "primary_exit_rule": "动态盘中上轨 touch: Upper(P)=mean(x1..x19,P)+2*sd(x1..x19,P); P*=解析根; thr=ceil(Pstar_raw/0.01)*0.01; high>=thr 触发",
+ "t_plus_1": "设计: T收盘信号->T+1 open 买入(含10bp滑点)",
+ "uses_2025_2026": "仅核对用户点名已暴露案例(D佰维/J阳光/G亨通/M中兴等), 未扩展读取其他holdout"
+}

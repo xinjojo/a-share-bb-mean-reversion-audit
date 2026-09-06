@@ -1,0 +1,22 @@
+{
+ "n_cases": 20,
+ "verdicts": {
+  "亿纬锂能": "VISUAL_FP_X2",
+  "牧原股份": "CA_ACCOUNTING|EXIT_DATE_DATA_DIFF|VISUAL_FP_X1",
+  "高新发展": "NONE",
+  "佰维存储": "NONE",
+  "宁德时代": "NONE",
+  "立讯精密": "NONE",
+  "亨通光电": "NONE",
+  "比亚迪": "NONE",
+  "五粮液": "VISUAL_FP_X2",
+  "阳光电源": "NONE",
+  "昆仑万维": "NONE",
+  "工业富联": "CA_ACCOUNTING",
+  "中兴通讯": "CA_ACCOUNTING",
+  "闻泰科技": "NONE",
+  "东方财富": "NONE",
+  "中国平安": "VISUAL_FP_X1",
+  "贵州茅台": "CA_ACCOUNTING|EXIT_DATE_DATA_DIFF"
+ }
+}

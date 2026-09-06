@@ -1,0 +1,108 @@
+{
+  "method": "adj_ret = (1+raw_ret/100)*(F_exit/F_entry)-1; F = tushare 后复权因子 (close*adj_factor)",
+  "frozen_data_unchanged": true,
+  "episodes": {
+    "n": 63785,
+    "crossed_episodes": 8717,
+    "crossed_pct": 13.67,
+    "raw_mean_ret": 4.8491,
+    "adj_mean_ret": 5.3007,
+    "raw_winrate": 75.98,
+    "adj_winrate": 77.48,
+    "raw_total_pnl": 679227693.91,
+    "adj_total_pnl": 856864345.73,
+    "delta_pp": {
+      "min": -2.7,
+      "p25": -0.0,
+      "median": 0.0,
+      "p75": 0.0,
+      "max": 71.31
+    },
+    "yearly": {
+      "2020": {
+        "n": 8958,
+        "raw_mean": 4.39,
+        "adj_mean": 4.65,
+        "raw_pnl": 64518602.75,
+        "adj_pnl": 73438786.68
+      },
+      "2021": {
+        "n": 10533,
+        "raw_mean": 5.83,
+        "adj_mean": 6.16,
+        "raw_pnl": 152115555.82,
+        "adj_pnl": 173629849.73
+      },
+      "2022": {
+        "n": 15510,
+        "raw_mean": 5.82,
+        "adj_mean": 6.26,
+        "raw_pnl": 227328986.47,
+        "adj_pnl": 264693004.67
+      },
+      "2023": {
+        "n": 15487,
+        "raw_mean": 3.18,
+        "adj_mean": 3.71,
+        "raw_pnl": 41684273.31,
+        "adj_pnl": 96056262.86
+      },
+      "2024": {
+        "n": 13297,
+        "raw_mean": 5.19,
+        "adj_mean": 5.79,
+        "raw_pnl": 193580275.56,
+        "adj_pnl": 249046441.79
+      }
+    }
+  },
+  "portfolio_96": {
+    "n": 96,
+    "crossed": 20,
+    "raw_total_return_pct": 54.57,
+    "adj_total_return_pct": 77.18,
+    "raw_winrate": 68.75,
+    "adj_winrate": 70.83,
+    "dev2020_2024_raw": 26.56,
+    "dev2020_2024_adj": 48.21,
+    "yearly": {
+      "2020": {
+        "n": 14,
+        "raw_pnl": 129647.17,
+        "adj_pnl": 239263.37
+      },
+      "2021": {
+        "n": 23,
+        "raw_pnl": 211460.91,
+        "adj_pnl": 227854.65
+      },
+      "2022": {
+        "n": 13,
+        "raw_pnl": 242148.55,
+        "adj_pnl": 285624.64
+      },
+      "2023": {
+        "n": 13,
+        "raw_pnl": -327644.03,
+        "adj_pnl": -311439.43
+      },
+      "2024": {
+        "n": 11,
+        "raw_pnl": 9969.66,
+        "adj_pnl": 40769.74
+      },
+      "2025": {
+        "n": 12,
+        "raw_pnl": 297907.71,
+        "adj_pnl": 304326.0
+      },
+      "2026": {
+        "n": 10,
+        "raw_pnl": -17759.71,
+        "adj_pnl": -14620.67
+      }
+    }
+  },
+  "muyuan_verify": "002714.SZ entry 2020-05-12: episode(06-18 exit) raw -37.35% -> adj +6.99%; 组合(07-06 exit) raw -25.08% -> adj +27.93%",
+  "note": "因子比≠1 即入场/出场日复权因子不同（跨分红/送转/配股）；delta 中位数为 0，未跨复权事件的交易不受影响"
+}

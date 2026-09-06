@@ -1,0 +1,5 @@
+ts_code,entry_date,frozen_levels,current_levels,frozen_add_dates,current_add_dates,first_different_add,classification,mechanism
+601919.SH,2024-07-15,3,2,2024-08-09;2024-09-06,2024-08-09,2024-09-06,PORTFOLIO_PATH_PROPAGATION,cash path: current lost 09-06 ADD (茅台61 early-exit 12-29 changed cash timing)
+600519.SH,2022-10-13,3,2,2022-10-20;2022-10-28,2022-10-20,2022-10-28,PORTFOLIO_PATH_PROPAGATION,cash path: current 10-28 no cash (601899 exit delayed to 10-28) -> no ADD lv3
+601012.SH,2024-01-30,2,1,2024-02-01,,2024-02-01,PORTFOLIO_PATH_PROPAGATION,cash path: current 02-01 no cash (002230 bought 01-04 with 茅台61 early-exit cash)
+300418.SZ,2023-06-27,2,1,2023-06-29,,2023-06-29,PORTFOLIO_PATH_PROPAGATION,"cash path: current 06-29 cash=466 (no ETF to sell) vs frozen 5,006+ETF 93,900 -> ADD lv2 unfunded"

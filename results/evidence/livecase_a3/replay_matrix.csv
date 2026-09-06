@@ -1,0 +1,5 @@
+engine,data,trade_count,stock_pnl,vs_frozen96,first_divergence,note,vs_8c479f6,vs_run_fast_multi_strict_c
+"566db88 (historical, P0-pre-fix)",current combined_daily.parquet,96,545730.26,BYTE-IDENTICAL (SHA256 match),n/a (reproduces frozen),engine frozen96 was built from,,
+8c479f6 (P0/P1 corrected),current,97,477061.82,5 exit + 2 entry -1 + 4 levels diffs,2020-06-18,strict_c_corr_trades.csv = 97 rows,,
+current HEAD (=8ec0810 post-migration),current,97,477061.82,,2020-06-18,current replay tr.csv,97/97 IDENTICAL (exit/levels/return zero diff),
+V2A_FROZEN_STRICT (d65ea83),current,299 independent episodes,n/a,,n/a,"independent-event layer, no K/cash path",,299/299 parity (d65ea83 report)

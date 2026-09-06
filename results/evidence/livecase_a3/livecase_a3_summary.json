@@ -1,0 +1,39 @@
+{
+ "first_commit": "566db88d84022b02b7f8d19990a5bccd9b9fa011",
+ "blob_sha": "d98549cbac7c83dea7991002c0f14a0c044721dc",
+ "content_sha256": "76f401fd67710d7cb15ba20db9107b719b40aa0176ce0d27c1f8198ab91bde55",
+ "generation_engine": "566db88 run_strict_c.py + run_strict_c_math.py",
+ "frozen_vs_current": "frozen96 (566 engine) vs current97 (8c479f6+ engine); both on SAME data",
+ "first_divergence_date": "2020-06-18",
+ "first_divergence_type": "EXIT (002714 TAKE_PROFIT_DYN lv1)",
+ "first_divergence_root": "P0 adj-factor fix: 566 x=raw19*adj[T] -> Pstar_raw=151.44 (no trigger); corrected per-day close_adj -> Pstar_raw=72.62, high 73.18 triggers",
+ "exit_mismatches": 5,
+ "all_code_version_proven": true,
+ "p0_changed_days": 5,
+ "entry_diffs": {
+  "frozen_only": [
+   "000858.SZ|2022-10-28"
+  ],
+  "current_only": [
+   "002230.SZ|2024-01-04",
+   "300750.SZ|2022-10-31"
+  ]
+ },
+ "levels_mismatches": 4,
+ "all_path_propagation": true,
+ "data_drift_proven": false,
+ "historical_data_identity": "PROVEN = CURRENT DATA",
+ "mtime_correction": "9/1 23:15 < 9/2 20:42 (frozen generation); mtime supports SAME data, not different data",
+ "muyuan_2020_06_18_historical_engine": "NOT triggered (566 P0-pre-fix Pstar_raw=151.44 > high 73.18); triggered only under corrected engine (72.62)",
+ "moutai_2023_12_29_historical_engine": "NOT triggered (566 Pstar_raw=1751.89 > high 1749.58); triggered under corrected engine (1737.93, gap +11.65)",
+ "d65ea83_299_parity": "proves V2A == corrected engine at independent-event layer; does NOT cover frozen96 (566 pre-fix portfolio artifact); no contradiction",
+ "frozen96_reproducible": true,
+ "frozen96_canonical_status": "historically valid, exactly reproducible as 566-semantics artifact; current canonical = corrected engine (97 trades)",
+ "old_results": {
+  "combo_82.66pct": "UNCHANGED (current engine reproduces 8c479f6 output 97/97 zero diff)",
+  "pure_58.20pct": "UNCHANGED",
+  "p4_a0_30.2951pct": "UNCHANGED (P4 chain, untouched this phase)",
+  "frozen96_ranked_list": "UNCHANGED as 566-semantics artifact (P0-pre-fix) but superseded for P* correctness by 8c479f6"
+ },
+ "final_classification": "A — frozen96 exact reproducibility restored"
+}

@@ -1,0 +1,10 @@
+{
+ "historical_data_identity": "PROVEN = CURRENT DATA (same file)",
+ "evidence": [
+  "combined_daily.parquet mtime 2026-09-01 23:15 EARLIER than frozen96 generation commit 566db88 (2026-09-02 20:42) -> frozen was built FROM the current file",
+  "566db88 engine + current data rebuilds frozen96 byte-identical (content SHA256 76f401fd... match) -> any different-data hypothesis excluded",
+  "data files are NOT in git (0 tracked combined_daily) -> no archived snapshot hash exists, but none needed: exact reproduction already proves data identity"
+ ],
+ "archived_snapshot_hash": "NOT APPLICABLE (reproduction proved identity)",
+ "previous_claim_corrected": "mtime 9/1 is EARLIER than 9/2: mtime cannot prove a different data version; it actually proves SAME data. Prior \"data version drift\" wording formally withdrawn."
+}

@@ -1,0 +1,11 @@
+component,historical,current,same,commit,impact
+P* input series (P0),x = 19 prior raw close x adj[T] (all 19 days multiplied by T-day factor),x = per-day close_adj[k] = close_raw x adj_factor[k],DIFFERENT,8c479f6 (STRICT_C_CORRECTED),CHANGED 5 TRIGGER DAYS -> 5 exit mismatches; root cause of all downstream diffs
+P* raw/tick (P1),compare high_adj >= Pstar_adj directly; no tick floor,Pstar_raw = Pstar_adj/adjT; executable = ceil(Pstar_raw/0.01)x0.01; high_adj >= threshold x adjT,DIFFERENT,8c479f6,conservative tick; secondary
+limit-down sell order (FIX2),slip_first: multiply slippage then check limit-down,ref_first: check ref<=limit_down (unsellable) then slippage,DIFFERENT,1a0b1f7 (FIX2 in corrected chain),order of checks; secondary
+entry signal,"T close close_adj < bb_lower, not limit-one-word -> T+1 open x 1.001",same,SAME,n/a,none
+ADD_ON,"<=5 layers, 200k/layer, >=1 trading day apart, cash check",same,SAME,n/a,none
+K / TopN,"K=3, amount Top10",same,SAME,n/a,none
+exit method,STRICT_C dynamic intraday touch (upper moves with price),same (math verified A2),SAME,n/a,none
+fees,"commission 0.025% min5 + transfer 0.001%, stamp historical, slip 10bp, 100-share lots",same,SAME,n/a,none
+FINAL_SETTLE / ETF,final close settle; event-driven ETF leg (etf_enabled=True),same,SAME,n/a,none
+data,combined_daily.parquet (mtime 2026-09-01 23:15),same file (proven byte-identical rebuild),SAME,n/a,none — data drift EXCLUDED

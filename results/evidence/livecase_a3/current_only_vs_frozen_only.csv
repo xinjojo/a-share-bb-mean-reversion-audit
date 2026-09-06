@@ -1,0 +1,4 @@
+ts_code,entry_date,side,frozen_exit,current_status,cause,frozen_status,current_exit
+000858.SZ,2022-10-28,FROZEN_ONLY,2022-11-30,absent (no cash: 601899 exit T+1 delayed),"PATH_PROPAGATION: 601899 exit moved 10-27->10-28 (P0 fix), cash arrived 10-28, Top10 entry 000858 not funded",,
+002230.SZ,2024-01-04,CURRENT_ONLY,,,PATH_PROPAGATION: 600519|2023-10-16 exit moved 02-06->12-29 (P0 fix) freed cash -> 002230 admitted 01-04,absent,2024-02-08
+300750.SZ,2022-10-31,CURRENT_ONLY,,,PATH_PROPAGATION: frozen bought 000858 on 10-28 (occupied slot+cash); current did not -> cash available 10-31 -> 300750 admitted,absent,2022-12-07

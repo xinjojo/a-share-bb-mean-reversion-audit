@@ -1,0 +1,12 @@
+{
+ "I1": "frozen96=566db88 engine artifact (blob proven)",
+ "I2": "generated from CURRENT data (mtime+byte-identical rebuild)",
+ "I3": "97vs96 = engine code version (P0 adj fix), NOT data",
+ "I4": "5 exit mismatches = p0_audit 5 changed days, CODE_VERSION_PROVEN",
+ "I5": "4 levels mismatches = PATH_PROPAGATION",
+ "I6": "3 entry diffs = PATH_PROPAGATION",
+ "I7": "no 2025-26 expansion beyond frozen",
+ "I8": "no frozen artifact modified",
+ "I9": "frozen96 byte-identical reproduced",
+ "I10": "no strategy/parameter research"
+}

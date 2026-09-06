@@ -1,0 +1,2 @@
+date,ts_code,name,event_type,shares_before,shares_change,shares_after,cash_before,cash_change,cash_after,price,fee,reason,ex_date,song,zhuan,cash_div,计算依据
+2020-06-04,002714.SZ,,SPLIT,1700,1190,2890,5143.38,0.0,5143.38,,0.0,song=0.0/10 zhuan=7.0/10,2020-06-04,,7.0,5.5,song=0.0/10 zhuan=7.0/10

@@ -1,0 +1,5 @@
+date,event_type,shares_before,shares_change,shares_after,cash_before,cash_change,cash_after,price,fee,reason
+2020-05-12,BUY,0,1700,1700,205129.69,-196597.45,8532.24,115.61549999999998,51.1,initial entry
+2020-06-04,DIVIDEND,1700,0,1700,5143.38,748.0,5891.38,,0.0,cash_div=5.5/10 pretax=935.0
+2020-06-04,SPLIT,1700,1190,2890,5143.38,0.0,5143.38,,0.0,song=0.0/10 zhuan=7.0/10
+2020-06-18,SELL,2890,-2890,0,5057.55,209397.75,214455.31,72.54738,264.17,TAKE_PROFIT_DYN

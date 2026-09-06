@@ -62,7 +62,8 @@ def run_fast_multi_strict_c_ee_ca(days, D, etf_idx, etf_px, etf_open, etf_nav, f
                                   etf_enabled=True, etf_min_cash=5_000,
                                   add_gap_days=1, day_range=None, record_actions=False,
                                   flow_sink=None, early_exit_pct=0.0, collect_daily_pstar=False,
-                                  corp_map=None, ledger_sink=None, tax_sink=None):
+                                  corp_map=None, ledger_sink=None, tax_sink=None,
+                                  ctl_final_rate_map=None):
     slip = slippage_bp / 10000.0
     X = early_exit_pct
     cash = initial_cash
@@ -153,9 +154,10 @@ def run_fast_multi_strict_c_ee_ca(days, D, etf_idx, etf_px, etf_open, etf_nav, f
             tp_price=round(tp, 3) if tp else np.nan))
 
     def settle_div_tax(pos, d, cb_in):
-        """卖出时按 FIFO 批次结算红利税: 每层买入日 -> 卖出交割日前一日, 自然月边界税率。
-        返回 (tax_due, cash_after); 写 tax_sink。"""
+        """控制实验C: 分红日已按最终税率净额入账, 卖出时不结算。"""
         nonlocal cash
+        if ctl_final_rate_map is not None:
+            return 0.0, cash
         div_hist = pos.get('div_hist', [])
         if not div_hist:
             return 0.0, cash
@@ -251,16 +253,28 @@ def run_fast_multi_strict_c_ee_ca(days, D, etf_idx, etf_px, etf_open, etf_nav, f
                     # ---- 现金分红: 先处理 (按股权登记日持股=事件前股数, 税前全额入账, 税在卖出时结算) ----
                     if ev.get('cash_div', 0.0) > 0:
                         div_gross = 0.0
+                        div_net = 0.0
                         cash_per_sh = ev['cash_div'] / 10.0
                         for (li, q) in (pos.get('layers') or []):
                             g = round(q * cash_per_sh, 4)
                             div_gross += g
-                            pos.setdefault('div_hist', []).append((li, d.date(), g))
+                            if ctl_final_rate_map is not None:
+                                bd = str(days[li].date())
+                                rate = ctl_final_rate_map.get((pos['ts_code'], bd), 0.0)
+                                div_net += round(g * (1.0 - rate), 4)
+                            else:
+                                pos.setdefault('div_hist', []).append((li, d.date(), g))
+                                div_net += g
                         pos['div_income'] = pos.get('div_income', 0.0) + div_gross
-                        cash += div_gross
-                        led(str(d.date()), pos['ts_code'], pos.get('name'), 'DIVIDEND',
-                            sh_before, 0, sh_before, cb, round(div_gross, 2), cash, np.nan, 0.0,
-                            f"cash_div={ev['cash_div']}/10 gross={round(sh_before*cash_per_sh,2)} (tax settled at sell)")
+                        cash += div_net
+                        if ctl_final_rate_map is not None:
+                            led(str(d.date()), pos['ts_code'], pos.get('name'), 'DIVIDEND',
+                                sh_before, 0, sh_before, cb, round(div_net, 2), cash, np.nan, 0.0,
+                                f"CTL: cash_div={ev['cash_div']}/10 net={round(div_net,2)} (final-rate settled at div date)")
+                        else:
+                            led(str(d.date()), pos['ts_code'], pos.get('name'), 'DIVIDEND',
+                                sh_before, 0, sh_before, cb, round(div_gross, 2), cash, np.nan, 0.0,
+                                f"cash_div={ev['cash_div']}/10 gross={round(sh_before*cash_per_sh,2)} (tax settled at sell)")
                     # ---- 送转: 真实股数变化 (登记日持股按比例) ----
                     if r_total > 0:
                         new_total = sh_before + int(sh_before * r_total)

@@ -57,6 +57,8 @@
 > **EE15 前瞻观察期（2026-09-06 起）：候选系统（动态上轨提前 1.5% 退出）已冻结，进入前瞻观察期。**
 > 当前问题：B 是否相对 A（基线 exact P\*）提供稳定改善（≥6 个月 且 ≥15 笔独立交易后第一次正式评价）。
 > 2026-09-07 及以后首次出现的合法新信号才计入前瞻成绩；2026-09-01~06 属冻结前不纳入；台账每日更新、不得回填/修改历史行。
+>
+> **前瞻基础设施已重建为真正逐日状态机（2026-09）：** 旧 `605ab92` 的 forward_update 属伪前瞻（事后跑全量回测再筛 entry≥09-07 的 completed trades），外部审计判定不能作为前瞻证据，已重写为 `src/forward_engine.py`（ForwardAccount 逐日状态机，与冻结引擎 1610 日 equity 逐字段 bit 级对齐）+ `src/forward_update.py`（每日只推进新增日期、信号/订单/成交/P\*/权益/输入 hash 当天写死、A/B 共用 signal_id、订单创建即记录、BACKFILLED 标记、冻结前机器级禁止、A/B 唯一差异 exit_multiplier）。硬性测试 `tests/forward_infra_tests.py` T1~T9 **29/29 PASS**。启动账户回放至 2026-08-25（含 PRE_EXISTING 持仓，带入但不计入新信号统计）。详细状态见 `research/forward/FORWARD_STATUS.md`。
 
 > **The primary bottleneck now appears to be portfolio architecture:**
 > finite K=3 slots + long holding periods + multi-layer occupancy / path dependence,

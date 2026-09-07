@@ -21,21 +21,39 @@
 
 ## 前瞻基础设施（2026-09 重建为真正逐日状态机）
 
-旧版 `605ab92` 的 forward_update 属于「伪前瞻」：每次重跑全量回测再筛 `entry_date >= 2026-09-07` 的已完成 trades。外部审计判定该方式不能作为真正前瞻证据，本轮重写：
+旧版 `605ab92` 的 forward_update 属于「伪前瞻」：每次重跑全量回测再筛 `entry_date >= 2026-09-07` 的已完成 trades。外部审计判定该方式不能作为真正前瞻证据，已重写：
 
 - **`src/forward_engine.py`**：`ForwardAccount` 逐日状态机（每日单日推进），与冻结引擎 `strict_c_earlyexit_ca.py` 在 1610 个交易日的 cash/stock_val/etf_sh/etf_val/equity 逐字段 bit 级对齐（max_abs_diff=0）；`snapshot/load` 持久化 A/B 账户状态；`build_input_hash` 记录每日输入数据指纹。
 - **`src/forward_update.py`**：每日只推进新增日期（从 `state.last_processed_date` 续跑），当日生成信号/订单/P\*/权益并永久追加写入；冻结前（<2026-09-07）只静默推进状态、**不写任何前瞻台账**；信号当天写死、A/B 共用 signal_id；订单创建即记录（CREATED → FILLED/REJECTED/DEFERRED）；每日输入 hash 落盘 `forward_input_manifest.csv`；补录数据必须 `backfilled=1`，当天实时生成 `backfilled=0`。
 - **启动状态**：回放到冻结引擎数据末日 2026-08-25 得到 A/B 启动账户（含 PRE_EXISTING 持仓，见 `forward_pre_existing_A.csv` / `_B.csv`），此后逐日推进。冻结日前遗留持仓带入前瞻状态，但不计入「09-07 以后新独立信号」统计。
-- **机器级禁止**：测试断言前瞻台账内无任何 < 2026-09-07 的日期；A/B 信号集合每处理日完全一致；A/B 唯一规则差异 = exit_multiplier。
-- **硬性测试**：`tests/forward_infra_tests.py` T1~T9，**29/29 PASS**（含 T1 与冻结引擎 equity 逐日精确对齐、T2 合成 max_date≥09-07 真实调用引擎分支、T3/T4 幂等与顺序推进字节不变、T5 BACKFILLED 规则、T6 冻结前禁止、T7 A/B 唯一差异、T8 未平仓信号/订单/状态已存在、T9 实时首日 backfilled=0）。
+- **机器级禁止**：测试断言前瞻台账内无任何 < 2026-09-07 的日期；A/B raw candidate 集合每处理日一致（同源只算一次）；A/B 唯一规则差异 = exit_multiplier。
 
-## 当前进度（截至 2026-09-06）
+## P0 修复（2026-09，commit 见 git log）
 
-- 行情数据末日：2026-08-25（data/raw/daily 主流分片；prepare_v51 硬编码上限 2026-08-25，真实 09-07+ 数据到位前由扩展路径注入）
+**P0-1：A/B 信号两层拆分（市场层 vs 账户层）**
+- 永久 `sigA == sigB` invariant 已删除（逻辑错误：B 提前退出后 K 槽/现金/ETF 合法分叉，之后 A/B 能接纳的新入场天然不同）。
+- **第一层 市场层 raw candidate**（`compute_raw_candidates`）：只依赖市场数据与冻结选股规则（上市合格、非 ST、amount top10、close_adj<bb_lower、非跌停），不含任何账户状态 → **每日只算一次，A/B 同源共用**，机器断言 A/B 集合一致。
+- **第二层 账户层 admission**（`admit_new_entries`）：由账户自身状态决定（K 槽满否、是否已持有、是否 pending），允许合法分叉，原因分类：`ADMITTED / K_FULL / ALREADY_HELD / PENDING_EXISTS`。
+- **台账**：`forward_signal_ledger.csv` 一条市场信号一行（raw_candidate=1），A/B admission/订单/拒绝原因分别记录（`A_admission_status / B_admission_status / A_order_created / B_order_created / A_reject_reason / B_reject_reason`）。ADD_ON 为持仓侧信号，A/B 各自（signal_id 带 -A/-B 后缀），B 提前退出后无持仓则无 ADD——合法分叉。
+
+**P0-2：生产环境真正读取 09-07+ 行情（数据扩展加载层）**
+- 新增 `src/forward_ext_data.py`：冻结段（≤2026-08-25）`prepare_v51` 原样不变；扩展段（>2026-08-25）从 `combined_daily.parquet` 真实新增行按与 prepare_v51 **完全相同的字段语义**重建 D（close_adj=close×adj_factor、BB(20,2)、PIT ST、分板涨跌停价、上市天数、bb_upper_prev、ETF 序列续接）。
+- **历史重叠 parity**：对 2026-07~08 随机 24 个交易日，扩展层代码路径重建 vs prepare_v51 原样，19 个字段（含 ts 顺序）**max_abs_diff=0.0，全部机器断言通过**（`tests/forward_ext_parity_test.py` 11/11 PASS）。
+- **真实冒烟**：当前数据源真实含有 2026-08-26~08-31（4 个交易日，combined_daily/pit_st/ETF 均真实存在）→ 生产 `main()` 已真实推进 A/B 状态至 2026-08-31（静默，不写前瞻台账）。**尚无 2026-09-07 及以后真实行情 → PRODUCTION NOT STARTED**，状态 = `FROZEN / FORWARD INFRA READY / NOT YET LIVE`。
+
+## 当前进度（截至 2026-09-07）
+
+- 行情数据末日：2026-08-31（combined_daily/pit_st_daily/etf_513500_merged 真实含 08-26~08-31；daily 分片仍止 08-25，09-07+ 待数据到位后经扩展层接入）
 - 前瞻信号数：0（首个前瞻交易日 2026-09-07 尚未有真实行情数据）
 - 前瞻交易数：0（A/B 各 0）
-- 启动账户（2026-08-25 收盘，合成回放验证）：A 现金 5,253.54 / ETF 361,900 份；B 现金 5,200.00 / ETF 967,900 份；各 3 笔 PRE_EXISTING 持仓（688525.SH、600276.SH、688256.SH，以实际运行 `forward_pre_existing_*.csv` 为准）
+- 启动账户（2026-08-25 收盘，真实回放）：A 现金 5,253.54 / ETF 361,900 份；B 现金 5,200.00 / ETF 967,900 份；A/B 各 3 笔 PRE_EXISTING（688525.SH 佰维存储 2 层、600276.SH 恒瑞医药 2 层、688256.SH 寒武纪 1 层，以 `forward_pre_existing_*.csv` 为准）
+- 状态：**FROZEN / FORWARD INFRA READY / NOT YET LIVE**（首条真实 backfilled=0 记录落盘后才升级 FORWARD OBSERVATION LIVE）
 - 数据完整性提示：个别股票分片数据下限仅 2020-01-06（非完整覆盖），前瞻期该股票自身交易日不足时按「无信号」处理，不额外删除其他股票。
+
+## 硬性测试
+
+- `tests/forward_infra_tests.py` T1~T10，**39/39 PASS**（T1 冻结引擎逐日精确对齐、T2 真实调用引擎分支、T3/T4 幂等与顺序推进字节不变、T5 BACKFILLED、T6 冻结前禁止、T7 A/B 唯一差异、T8 未平仓状态存在、T9 实时首日 backfilled=0、**T10 admission 合法分叉：A K=3 满 → 全 K_FULL 不下单；B 空 1 槽 → 恰好 1 个 ADMITTED 创建 BUY 订单，不 crash**）。
+- `tests/forward_ext_parity_test.py` **11/11 PASS**（扩展层 vs prepare_v51 逐字段 0 差异；扩展段真实 4 交易日字段齐全；合并后冻结段原样）。
 
 ## 每日更新流程
 
@@ -46,7 +64,7 @@
 
 ## 台账文件（results/evidence/forward/）
 
-- `forward_signal_ledger.csv`：信号级（signal_id/股票/信号日/生成时间/可用数据截止/排名/类型/P\* 与 A/B 退出线/当日 High/A/B 持有与订单标记/backfilled）。NEW_ENTRY 当日无持仓，P\* 三列显式写 `NA`（入场后见 `forward_pstar_daily.csv`）。
+- `forward_signal_ledger.csv`：信号级，**一条市场信号一行（P0-1 分层）**。NEW_ENTRY 行 raw_candidate=1，A/B admission/订单/拒绝原因分列（`A_admission_status/B_admission_status/A_order_created/B_order_created/A_reject_reason/B_reject_reason`），P\* 三列显式写 `NA`（入场后见 `forward_pstar_daily.csv`）；ADD_ON 为持仓侧信号（signal_id 带 -A/-B 后缀，A/B 各自，合法分叉）。
 - `forward_order_ledger.csv`：订单生命周期（CREATED 于信号日/创建日 → FILLED/REJECTED/DEFERRED，含 intended_execution_date）。
 - `forward_trade_ledger.csv`：成交/公司行为事件级（含费用、滑点、印花税、红利税 FIFO 结算、分红、送转、现金变化、股数）。
 - `forward_daily_equity.csv`：A/B 每日权益（只 append，不覆盖历史）。

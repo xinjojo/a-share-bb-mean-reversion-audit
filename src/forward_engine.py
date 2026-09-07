@@ -22,6 +22,62 @@ from run_strict_c_math import analytic_Pstar
 OPEN_FILL_DEFAULT = 'limit_conservative'
 
 
+def compute_raw_candidates(d, dd, gi, first_eligible_i, top_n):
+    """市场层原始候选（P0-1 第一层）：只依赖市场数据与冻结选股规则，
+    不含账户 K 槽位 / 持仓 / 现金 / pending 判断。A/B 共用，每日只算一次。
+    与冻结引擎 CLOSE 段候选扫描同公式（valid=上市合格&非ST → amount top_n → close_adj<bb_lower 且非跌停）。
+    """
+    li = gi - np.array([first_eligible_i.get(tc, 0) for tc in dd['ts']])
+    valid = (li >= 0) & ~dd['is_st']
+    raw = []
+    if valid.any():
+        cand_idx = np.where(valid)[0]
+        amt = dd['amount'][cand_idx]
+        order = np.argsort(-amt)[:top_n]
+        amt_ranks = np.argsort(np.argsort(-amt)) + 1  # 候选在 amount 全排序中的名次
+        for k in order:
+            j = cand_idx[k]
+            tc = dd['ts'][j]
+            if (not np.isnan(dd['bb_lower'][j]) and dd['close_adj'][j] < dd['bb_lower'][j]
+                    and not dd['is_limit'][j]):
+                bb_mid = dd['bb_mid'][j]; bb_up = dd['bb_upper'][j]; bb_lo = dd['bb_lower'][j]
+                sigma = (bb_up - bb_lo) / 4.0 if np.isfinite(bb_up - bb_lo) and bb_up > bb_lo else np.nan
+                bb_z = (dd['close_adj'][j] - bb_mid) / sigma if sigma and not np.isnan(sigma) else np.nan
+                raw.append(dict(signal_date=str(d.date()), ts_code=tc,
+                                candidate_rank=int(k) + 1,
+                                amount_rank=int(amt_ranks[k]),
+                                close=float(dd['close'][j]),
+                                bb_lower=float(bb_lo / dd['adj'][j]) if not np.isnan(bb_lo) else np.nan,
+                                bb_z=float(bb_z) if np.isfinite(bb_z) else np.nan,
+                                bb_width_pct=float((bb_up - bb_lo) / bb_mid * 100)
+                                if np.isfinite(bb_up - bb_lo) and bb_mid > 0 else np.nan,
+                                daily_high=float(dd['high'][j]),
+                                note='new-entry candidate (T+1 open fill)'))
+    return raw
+
+
+def admit_new_entries(acct, d, dd, raw_candidates):
+    """账户层接纳判定（P0-1 第二层）：由账户自身状态决定是否创建 BUY 订单。
+    返回每候选 (ts_code, status, reason)。status ∈ {ADMITTED, K_FULL, ALREADY_HELD, PENDING_EXISTS}。
+    A/B 允许合法分叉；raw candidate 本身必须 A/B 一致（由调用方保证同源）。
+    """
+    held = {p['ts_code'] for p in acct.positions} | acct.pending_sell
+    pending_set = {x['ts_code'] for x in acct.pending_buy}
+    out = []
+    for rc in raw_candidates:
+        tc = rc['ts_code']
+        if len(acct.positions) + len(acct.pending_buy) >= acct.K:
+            out.append((tc, 'REJECTED', 'K_FULL'))
+        elif tc in held:
+            out.append((tc, 'REJECTED', 'ALREADY_HELD'))
+        elif tc in pending_set:
+            out.append((tc, 'REJECTED', 'PENDING_EXISTS'))
+        else:
+            acct.pending_buy.append({'ts_code': tc, 'signal_date': str(d.date())})
+            out.append((tc, 'ADMITTED', ''))
+    return out
+
+
 def holding_tax_rate(buy_dt, sell_excl_dt):
     y1, m1, d1 = buy_dt.year, buy_dt.month, buy_dt.day
     y2, m2, d2 = sell_excl_dt.year, sell_excl_dt.month, sell_excl_dt.day
@@ -214,8 +270,12 @@ class ForwardAccount:
 
     # ---------- 单日推进 ----------
     def process_day(self, i, d, dd, ei, epx, eopx, corp_evts, days, D, etf_idx, etf_px, etf_open,
-                    first_eligible_i, offset, gi=None):
-        """处理一个交易日。返回 dict(signals, orders, trades, pstars, equity, note)。"""
+                    first_eligible_i, offset, gi=None, raw_candidates=None):
+        """处理一个交易日。返回 dict(signals, orders, trades, pstars, equity, note)。
+
+        raw_candidates：市场层原始候选（compute_raw_candidates 一次计算，A/B 共用）。
+        None 时内部自算（play_to / 独立运行路径），行为与冻结引擎等价。
+        """
         gi = offset + i if gi is None else gi
         events = []   # 全部账户事件（trades 等）
         signals = []  # 新信号（候选/加仓，T日close生成）
@@ -480,39 +540,21 @@ class ForwardAccount:
                                         note='add-on candidate (T+1 open fill)'))
             stock_val += pos['shares'] * close
 
-        cand_ranks = {}
-        if len(self.positions) < self.K:
-            li = gi - np.array([first_eligible_i.get(tc, 0) for tc in dd['ts']])
-            valid = (li >= 0) & ~dd['is_st']
-            if valid.any():
-                cand_idx = np.where(valid)[0]
-                amt = dd['amount'][cand_idx]
-                order = np.argsort(-amt)[:self.top_n]
-                held = {p['ts_code'] for p in self.positions} | self.pending_sell
-                for k in order:
-                    if len(self.positions) + len(self.pending_buy) >= self.K:
-                        break
-                    j = cand_idx[k]
-                    tc = dd['ts'][j]
-                    if tc in held or any(x['ts_code'] == tc for x in self.pending_buy):
-                        continue
-                    if (not np.isnan(dd['bb_lower'][j]) and dd['close_adj'][j] < dd['bb_lower'][j]
-                            and not dd['is_limit'][j]):
-                        cand_ranks[tc] = dict(candidate_rank=int(k) + 1, amount_rank=int(np.where(np.argsort(-amt) == k)[0][0]) + 1)
-                        self.pending_buy.append({'ts_code': tc, 'signal_date': str(d.date())})
-                        bb_mid = dd['bb_mid'][j]; bb_up = dd['bb_upper'][j]; bb_lo = dd['bb_lower'][j]
-                        sigma = (bb_up - bb_lo) / 4.0 if np.isfinite(bb_up - bb_lo) and bb_up > bb_lo else np.nan
-                        bb_z = (dd['close_adj'][j] - bb_mid) / sigma if sigma and not np.isnan(sigma) else np.nan
-                        signals.append(dict(signal_date=str(d.date()), ts_code=tc, name=None,
-                                            signal_type='NEW_ENTRY', level_target=1,
-                                            entry_target_date='', close=float(dd['close'][j]),
-                                            bb_lower=float(bb_lo / dd['adj'][j]) if not np.isnan(bb_lo) else np.nan,
-                                            bb_z=float(bb_z) if np.isfinite(bb_z) else np.nan,
-                                            bb_width_pct=float((bb_up - bb_lo) / bb_mid * 100) if np.isfinite(bb_up - bb_lo) and bb_mid > 0 else np.nan,
-                                            daily_high=float(dd['high'][j]),
-                                            candidate_rank=cand_ranks[tc]['candidate_rank'],
-                                            amount_rank=cand_ranks[tc]['amount_rank'],
-                                            note='new-entry candidate (T+1 open fill)'))
+        # ---- NEW_ENTRY 候选（P0-1 分层）：市场层 raw（A/B 共用，只算一次）→ 账户层 admission ----
+        if raw_candidates is None:
+            raw_candidates = compute_raw_candidates(d, dd, gi, first_eligible_i, self.top_n)
+        for tc, status, reason in admit_new_entries(self, d, dd, raw_candidates):
+            rc = next((x for x in raw_candidates if x['ts_code'] == tc), None)
+            if rc is None:
+                continue
+            signals.append(dict(signal_date=rc['signal_date'], ts_code=tc, name=None,
+                                signal_type='NEW_ENTRY', level_target=1,
+                                entry_target_date='', close=rc['close'],
+                                bb_lower=rc['bb_lower'], bb_z=rc['bb_z'],
+                                bb_width_pct=rc['bb_width_pct'], daily_high=rc['daily_high'],
+                                candidate_rank=rc['candidate_rank'], amount_rank=rc['amount_rank'],
+                                admission_status=status, reject_reason=reason,
+                                note='new-entry candidate (T+1 open fill)'))
 
         self._rebalance_close(d, ei, epx, events)
 
@@ -520,7 +562,8 @@ class ForwardAccount:
         eq = dict(date=str(d.date()), cash=float(self.cash), stock_val=float(stock_val),
                   etf_sh=self.etf_sh, etf_val=float(etf_val), equity=float(self.cash + stock_val + etf_val))
         self.last_processed_date = d
-        return dict(signals=signals, orders=orders, trades=events, pstars=pstars, equity=eq)
+        return dict(signals=signals, orders=orders, trades=events, pstars=pstars, equity=eq,
+                    raw_candidates=raw_candidates)
 
     # ---------- 初始化回放 ----------
     def play_to(self, days, D, etf_idx, etf_px, etf_open, first_eligible_i, offset, target_date,

@@ -58,7 +58,11 @@
 > 当前问题：B 是否相对 A（基线 exact P\*）提供稳定改善（≥6 个月 且 ≥15 笔独立交易后第一次正式评价）。
 > 2026-09-07 及以后首次出现的合法新信号才计入前瞻成绩；2026-09-01~06 属冻结前不纳入；台账每日更新、不得回填/修改历史行。
 >
-> **前瞻基础设施已重建为真正逐日状态机（2026-09）：** 旧 `605ab92` 的 forward_update 属伪前瞻（事后跑全量回测再筛 entry≥09-07 的 completed trades），外部审计判定不能作为前瞻证据，已重写为 `src/forward_engine.py`（ForwardAccount 逐日状态机，与冻结引擎 1610 日 equity 逐字段 bit 级对齐）+ `src/forward_update.py`（每日只推进新增日期、信号/订单/成交/P\*/权益/输入 hash 当天写死、A/B 共用 signal_id、订单创建即记录、BACKFILLED 标记、冻结前机器级禁止、A/B 唯一差异 exit_multiplier）。硬性测试 `tests/forward_infra_tests.py` T1~T9 **29/29 PASS**。启动账户回放至 2026-08-25（含 PRE_EXISTING 持仓，带入但不计入新信号统计）。详细状态见 `research/forward/FORWARD_STATUS.md`。
+> **前瞻基础设施已重建为真正逐日状态机（2026-09）：** 旧 `605ab92` 的 forward_update 属伪前瞻（事后跑全量回测再筛 entry≥09-07 的 completed trades），外部审计判定不能作为前瞻证据，已重写为 `src/forward_engine.py`（ForwardAccount 逐日状态机，与冻结引擎 1610 日 equity 逐字段 bit 级对齐）+ `src/forward_update.py`（每日只推进新增日期、信号/订单/成交/P\*/权益/输入 hash 当天写死、A/B 共用 signal_id、订单创建即记录、BACKFILLED 标记、冻结前机器级禁止、A/B 唯一差异 exit_multiplier）。硬性测试 `tests/forward_infra_tests.py` T1~T10 **39/39 PASS**。启动账户回放至 2026-08-25（含 PRE_EXISTING 持仓，带入但不计入新信号统计）。详细状态见 `research/forward/FORWARD_STATUS.md`。
+>
+> **P0-1（信号两层拆分）：** 永久 sigA==sigB invariant 已删除——B 提前退出后 K 槽/现金/ETF 合法分叉。市场层 raw candidate（`compute_raw_candidates`，仅依赖市场数据+冻结选股规则）每日只算一次、A/B 同源；账户层 admission（`admit_new_entries`）允许分叉，原因分类 ADMITTED/K_FULL/ALREADY_HELD/PENDING_EXISTS，信号台账 A/B 分列记录。T10 验证：A K=3 满 → 全 K_FULL 不下单；B 空 1 槽 → 恰好 1 个 ADMITTED 建 BUY 订单，不 crash。
+>
+> **P0-2（真实读取 09-07+ 行情）：** 新增 `src/forward_ext_data.py` 扩展加载层——冻结段（≤2026-08-25）prepare_v51 原样不变，扩展段（>08-25）按相同字段语义重建（close_adj/BB/PIT ST/涨跌停/上市天数/bb_upper_prev/ETF 续接）。历史重叠 parity：24 个 2026-07~08 交易日 19 字段 max_abs_diff=0.0（`tests/forward_ext_parity_test.py` 11/11 PASS）。真实数据已含 08-26~08-31 → 生产 main() 真实推进 A/B 状态至 08-31（静默）。**尚无 09-07 真实行情 → PRODUCTION NOT STARTED，状态 FROZEN / FORWARD INFRA READY / NOT YET LIVE**。
 
 > **The primary bottleneck now appears to be portfolio architecture:**
 > finite K=3 slots + long holding periods + multi-layer occupancy / path dependence,

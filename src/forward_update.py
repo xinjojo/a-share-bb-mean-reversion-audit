@@ -17,10 +17,11 @@ NEWCHAT = os.path.dirname(os.path.dirname(GITHUB))                     # .../new
 sys.path.insert(0, GITHUB)
 sys.path.insert(0, NEWCHAT)
 from round51_audit import prepare_v51
-from forward_engine import ForwardAccount, build_input_hash
+from forward_engine import ForwardAccount, build_input_hash, compute_raw_candidates
+from forward_ext_data import merge_extended, build_ext_days, FROZEN_END
 
 FORWARD_START = pd.Timestamp('2026-09-07')   # 前瞻起点（冻结指令：只统计 09-07 及以后首次出现的合法新信号）
-SEED_END = pd.Timestamp('2026-08-25')        # 冻结引擎数据末日（启动回放终点）
+SEED_END = FROZEN_END                         # 冻结引擎数据末日（启动回放终点）
 A_MULT = 1.000
 B_MULT = 0.985
 
@@ -134,7 +135,9 @@ def run_forward(days, D, etf_idx, etf_px, etf_open, first_eligible_i, offset, co
     sig_cols = ['signal_id', 'ts_code', 'stock_name', 'signal_date', 'generated_at', 'data_available_through',
                 'candidate_rank', 'amount_rank', 'signal_type', 'level_target', 'entry_target_date',
                 'close', 'bb_lower', 'BB_z', 'bb_width_pct', 'dynamic_Pstar', 'base_exit_line',
-                'ee15_exit_line', 'daily_high', 'A_held', 'B_held', 'A_order', 'B_order', 'backfilled']
+                'ee15_exit_line', 'daily_high', 'raw_candidate', 'A_held', 'B_held',
+                'A_admission_status', 'B_admission_status', 'A_order_created', 'B_order_created',
+                'A_reject_reason', 'B_reject_reason', 'backfilled']
     ord_cols = ['order_id', 'system', 'signal_id', 'created_date', 'intended_execution_date',
                 'action', 'ts_code', 'target_price', 'target_shares', 'reason', 'status',
                 'filled_date', 'filled_price', 'filled_shares', 'created_at', 'data_available_through', 'backfilled']
@@ -163,61 +166,93 @@ def run_forward(days, D, etf_idx, etf_px, etf_open, first_eligible_i, offset, co
         backfilled = 0 if (d == today and d == data_through) else 1
         h = build_input_hash(d, dd, ei, epx, eopx, corp)
 
+        # P0-1 第一层：市场层 raw candidate 只算一次，A/B 同源共用（不含账户 K/持仓/现金）
+        gi = offset + i
+        raw = compute_raw_candidates(d, dd, gi, first_eligible_i, acctA.top_n)
         resA = acctA.process_day(i, d, dd, ei, epx, eopx, corp, days, D, etf_idx, etf_px, etf_open,
-                                 first_eligible_i, offset)
+                                 first_eligible_i, offset, gi=gi, raw_candidates=raw)
         resB = acctB.process_day(i, d, dd, ei, epx, eopx, corp, days, D, etf_idx, etf_px, etf_open,
-                                 first_eligible_i, offset)
-
-        # 机器 invariant: A/B 唯一差异 = exit_multiplier（信号/候选逻辑同路径）
-        sigA = {(s['ts_code'], s['signal_type'], s['signal_date']) for s in resA['signals']}
-        sigB = {(s['ts_code'], s['signal_type'], s['signal_date']) for s in resB['signals']}
-        assert sigA == sigB, f'{d.date()}: A/B 信号集合不一致'
+                                 first_eligible_i, offset, gi=gi, raw_candidates=raw)
+        # 机器 invariant（P0-1）：市场层 raw candidate 集合 A/B 必须一致（同源，天然成立）。
+        # 禁止 invariant：admitted/order 集合永远相同——账户层允许合法分叉（K 槽/现金/持仓不同）。
+        assert [r['ts_code'] for r in resA['raw_candidates']] == [r['ts_code'] for r in resB['raw_candidates']], \
+            f'{d.date()}: raw candidate 不一致'
 
         if not silent:
             n_days += 1
-            # ---- 信号台账（A/B 共用 signal_id）----
-            for s in resA['signals']:
-                seq = signal_seq_no(sig_path, s['ts_code'], s['signal_date']) + 1
-                sid = f"FWD-{s['ts_code']}-{s['signal_date']}-{seq}"
+            # ---- 信号台账（P0-1 分层）----
+            # NEW_ENTRY：市场层 raw candidate 一行（A/B 同源），A/B admission/订单/拒绝原因分别记录。
+            # ADD_ON：持仓侧信号（A/B 各自），B 提前退出后无持仓则无 ADD——合法分叉。
+            a_new = {s['ts_code']: s for s in resA['signals'] if s['signal_type'] == 'NEW_ENTRY'}
+            b_new = {s['ts_code']: s for s in resB['signals'] if s['signal_type'] == 'NEW_ENTRY'}
+            # 同 raw 源 → key 集合必须相等（机器 invariant）
+            assert set(a_new) == set(b_new), f"{d.date()}: NEW_ENTRY raw 集合 A/B 不一致"
+            for tc in sorted(set(a_new)):
+                sA, sB = a_new[tc], b_new[tc]
+                seq = signal_seq_no(sig_path, tc, str(d.date())) + 1
+                sid = f"FWD-{tc}-{str(d.date())}-{seq}"
                 entry_target = days[i + 1] if i + 1 < len(days) else None
-                # 持仓侧 P*（ADD_ON 当日已持仓；NEW_ENTRY 入场后见 pstar_daily）
-                dyn_p, base_ln, ee15_ln = np.nan, np.nan, np.nan
-                if s['signal_type'] == 'ADD_ON':
-                    for p in resA['pstars']:
-                        if p['ts_code'] == s['ts_code'] and p['date'] == s['signal_date']:
-                            dyn_p = p['pstar_raw']
-                            base_ln = p['threshold']
-                            ee15_ln = p['eff_threshold']
-                            break
-                a_held = s['ts_code'] in {p['ts_code'] for p in acctA.positions}
-                b_held = s['ts_code'] in {p['ts_code'] for p in acctB.positions}
-                # NEW_ENTRY 当日无持仓，动态 P* 无定义 → 显式 NA（非空占位）；ADD_ON 当日已持仓 → 写当日 P*
-                if s['signal_type'] == 'NEW_ENTRY':
-                    dyn_p, base_ln, ee15_ln = 'NA', 'NA', 'NA'
-                row = [sid, s['ts_code'], name_map.get(s['ts_code'], '') or '', s['signal_date'],
+                a_held = tc in {p['ts_code'] for p in acctA.positions}
+                b_held = tc in {p['ts_code'] for p in acctB.positions}
+                row = [sid, tc, name_map.get(tc, '') or '', str(d.date()),
                        pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S'), str(data_through.date()),
-                       s['candidate_rank'] if np.isfinite(s['candidate_rank']) else '',
-                       s['amount_rank'] if np.isfinite(s['amount_rank']) else '',
-                       s['signal_type'], s['level_target'],
+                       sA['candidate_rank'] if np.isfinite(sA['candidate_rank']) else '',
+                       sA['amount_rank'] if np.isfinite(sA['amount_rank']) else '',
+                       'NEW_ENTRY', 1,
                        str(entry_target.date()) if entry_target is not None else '',
-                       round(s['close'], 4) if np.isfinite(s['close']) else '',
-                       round(s['bb_lower'], 4) if np.isfinite(s['bb_lower']) else '',
-                       round(s['bb_z'], 4) if np.isfinite(s['bb_z']) else '',
-                       round(s['bb_width_pct'], 4) if np.isfinite(s['bb_width_pct']) else '',
-                       round(dyn_p, 4) if isinstance(dyn_p, float) and np.isfinite(dyn_p) else dyn_p,
-                       round(base_ln, 4) if isinstance(base_ln, float) and np.isfinite(base_ln) else base_ln,
-                       round(ee15_ln, 4) if isinstance(ee15_ln, float) and np.isfinite(ee15_ln) else ee15_ln,
-                       round(s['daily_high'], 4), int(a_held), int(b_held),
-                       int(a_held), int(b_held), backfilled]
+                       round(sA['close'], 4) if np.isfinite(sA['close']) else '',
+                       round(sA['bb_lower'], 4) if np.isfinite(sA['bb_lower']) else '',
+                       round(sA['bb_z'], 4) if np.isfinite(sA['bb_z']) else '',
+                       round(sA['bb_width_pct'], 4) if np.isfinite(sA['bb_width_pct']) else '',
+                       'NA', 'NA', 'NA',
+                       round(sA['daily_high'], 4), 1, int(a_held), int(b_held),
+                       sA['admission_status'], sB['admission_status'],
+                       1 if sA['admission_status'] == 'ADMITTED' else 0,
+                       1 if sB['admission_status'] == 'ADMITTED' else 0,
+                       sA['reject_reason'], sB['reject_reason'], backfilled]
                 df_append(sig_path, [row], sig_cols, drop_dups='signal_id')
                 n_sig += 1
-                # 回填 pending_buy 的 signal_id（供次日 BUY 成交追溯）
+                # 回填 pending_buy 的 signal_id（供次日 BUY 成交追溯；A/B 各自）
                 for pb in acctA.pending_buy:
-                    if pb['ts_code'] == s['ts_code'] and pb.get('signal_date') == s['signal_date']:
+                    if pb['ts_code'] == tc and pb.get('signal_date') == str(d.date()):
                         pb['signal_id'] = sid
                 for pb in acctB.pending_buy:
-                    if pb['ts_code'] == s['ts_code'] and pb.get('signal_date') == s['signal_date']:
+                    if pb['ts_code'] == tc and pb.get('signal_date') == str(d.date()):
                         pb['signal_id'] = sid
+            # ADD_ON（A/B 各自持仓侧信号，带系统后缀避免同 day 同股去重冲突）
+            for tag, res, acct in (('A', resA, acctA), ('B', resB, acctB)):
+                for s in res['signals']:
+                    if s['signal_type'] != 'ADD_ON':
+                        continue
+                    seq = signal_seq_no(sig_path, s['ts_code'], s['signal_date']) + 1
+                    sid = f"FWD-{s['ts_code']}-{s['signal_date']}-{seq}-{tag}"
+                    entry_target = days[i + 1] if i + 1 < len(days) else None
+                    dyn_p, base_ln, ee15_ln = np.nan, np.nan, np.nan
+                    for p in res['pstars']:
+                        if p['ts_code'] == s['ts_code'] and p['date'] == s['signal_date']:
+                            dyn_p = p['pstar_raw']; base_ln = p['threshold']; ee15_ln = p['eff_threshold']
+                            break
+                    other_tag = 'B' if tag == 'A' else 'A'
+                    other_acct = acctB if tag == 'A' else acctA
+                    other_held = s['ts_code'] in {p['ts_code'] for p in other_acct.positions}
+                    row = [sid, s['ts_code'], name_map.get(s['ts_code'], '') or '', s['signal_date'],
+                           pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S'), str(data_through.date()),
+                           '', '', 'ADD_ON', s['level_target'],
+                           str(entry_target.date()) if entry_target is not None else '',
+                           round(s['close'], 4) if np.isfinite(s['close']) else '',
+                           round(s['bb_lower'], 4) if np.isfinite(s['bb_lower']) else '',
+                           round(s['bb_z'], 4) if np.isfinite(s['bb_z']) else '',
+                           round(s['bb_width_pct'], 4) if np.isfinite(s['bb_width_pct']) else '',
+                           round(dyn_p, 4) if isinstance(dyn_p, float) and np.isfinite(dyn_p) else dyn_p,
+                           round(base_ln, 4) if isinstance(base_ln, float) and np.isfinite(base_ln) else base_ln,
+                           round(ee15_ln, 4) if isinstance(ee15_ln, float) and np.isfinite(ee15_ln) else ee15_ln,
+                           round(s['daily_high'], 4), 0,
+                           int(tag == 'A' or other_held), int(tag == 'B' or other_held),
+                           'ADMITTED' if tag == 'A' else '', 'ADMITTED' if tag == 'B' else '',
+                           1 if tag == 'A' else 0, 1 if tag == 'B' else 0,
+                           '', '', backfilled]
+                    df_append(sig_path, [row], sig_cols, drop_dups='signal_id')
+                    n_sig += 1
             # ---- 订单台账 ----
             # 创建即记录：当日新生成的 pending_buy / pending_add 立即写 CREATED 行（不得等成交/取消才出现）
             for tag, acct in (('A', acctA), ('B', acctB)):
@@ -329,16 +364,16 @@ def main():
     os.makedirs(OUT, exist_ok=True)
 
     today = pd.Timestamp(pd.Timestamp.now().date())
-    data_through, data_min = scan_daily_max_dates()
-    print(f'  data range = {data_min.date()} .. {data_through.date()}')
-    if data_through < FORWARD_START:
-        print(f'  数据仍止于 {data_through.date()}（早于前瞻起点 {FORWARD_START.date()}）：'
-              f'无可处理前瞻日，STATE 保持，不产生任何前瞻记录。')
-        return
 
-    print('  加载引擎数据 (prepare_v51) ...')
-    days, D, etf_idx, etf_px, etf_open, etf_nav, first_eligible_i, offset = prepare_v51(
-        limit_down_mode='correct', st_mode='pit')
+    print('  加载引擎数据：冻结段 prepare_v51（≤2026-08-25 原样）+ 扩展层（>2026-08-25 真实新增行情）...')
+    pret = prepare_v51(limit_down_mode='correct', st_mode='pit')
+    days, D, etf_idx, etf_px, etf_open, etf_nav, first_eligible_i, offset = merge_extended(pret)
+    ext_days, ext_D, *_ = build_ext_days()
+    data_through = max(days)
+    print(f'  冻结段末日 = {SEED_END.date()}')
+    print(f'  扩展段真实新增交易日 = {len(ext_days)} 个（{ext_days[0].date() if ext_days else "-"} .. {ext_days[-1].date() if ext_days else "-"}）')
+    print(f'  data_available_through = {data_through.date()}')
+
     corp_map = load_corp_map()
     name_map = {}
     try:
@@ -346,8 +381,19 @@ def main():
         name_map = dict(zip(sb['ts_code'].astype(str), sb['name'].astype(str)))
     except Exception as exc:
         print(f'  [warn] stock_basic 读取失败，signal 表 stock_name 留空: {exc}')
+
     run_forward(days, D, etf_idx, etf_px, etf_open, first_eligible_i, offset, corp_map,
                 OUT, data_through, today, name_map=name_map)
+
+    # 状态判定（P0-2）：只有真实 2026-09-07+ 数据落盘后才可进入 LIVE
+    if data_through < FORWARD_START:
+        print(f'\n== PRODUCTION NOT STARTED ==')
+        print(f'  尚无 2026-09-07 及以后的真实行情（当前数据止于 {data_through.date()}）。')
+        print(f'  已用真实扩展数据（08-26 起）推进 A/B 状态至 {data_through.date()}，未产生任何前瞻台账。')
+        print(f'  状态：FROZEN / FORWARD INFRA READY / NOT YET LIVE')
+    else:
+        print(f'\n== 已读取真实 {FORWARD_START.date()}+ 数据并落盘 ==')
+        print(f'  状态：FORWARD OBSERVATION LIVE（首条 backfilled=0 记录已产生）')
 
 
 if __name__ == '__main__':

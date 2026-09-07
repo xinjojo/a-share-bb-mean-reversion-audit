@@ -281,7 +281,7 @@ def t6_frozen_gap(out):
 
 
 def t7_ab_only_diff(out):
-    print('\n== T7: A/B 唯一差异 = exit_multiplier (配置字段对比) ==')
+    print('\n== T7: A/B 唯一差异 = exit_multiplier (配置字段对比)；raw candidate 同源一致 ==')
     stA = json.load(open(os.path.join(out, 'forward_state_A.json')))
     stB = json.load(open(os.path.join(out, 'forward_state_B.json')))
     # 配置字段（与资金/持仓/路径状态无关）
@@ -291,8 +291,67 @@ def t7_ab_only_diff(out):
     diff_cfg = [k for k in cfg if stA.get(k) != stB.get(k) and k != 'exit_multiplier']
     check('T7 全部配置字段一致 (除 exit_multiplier)', len(diff_cfg) == 0, f'diff={diff_cfg}')
     check('T7 exit_multiplier 唯一差异', stA['exit_multiplier'] == 1.0 and stB['exit_multiplier'] == 0.985)
-    # 信号集合: run_forward 内机器断言每处理日 A/B 信号完全一致
-    print('  [info] run_forward 内机器断言: 每处理日 A/B 信号集合完全一致')
+    print('  [info] run_forward 内机器断言: 每处理日市场层 raw candidate 集合 A/B 一致（同源只算一次）')
+    print('  [info] 禁止 invariant: admitted/order 集合永远相同——账户层允许合法分叉（见 T10）')
+
+
+def t10_admission_split(base):
+    print('\n== T10: P0-1 账户层 admission 合法分叉（T0 同 K=3 → T1 B 提前退出空 1 槽 → T2 新信号） ==')
+    from forward_engine import compute_raw_candidates, admit_new_entries, ForwardAccount
+    days, D, etf_idx, etf_px, etf_open, first_eligible_i, offset, corp_map = base
+    target = None
+    for k in range(len(days) - 1, -1, -1):
+        d = days[k]
+        if d.year != 2024:
+            continue
+        gi = offset + k
+        raw = compute_raw_candidates(d, D[d], gi, first_eligible_i, 10)
+        if len(raw) >= 3:
+            target = (k, d, raw)
+            break
+    check('T10 找到含 >=3 raw candidate 的真实交易日 (2024)', target is not None)
+    if target is None:
+        return
+    k, d, raw = target
+    dd = D[d]
+    raw_set = [r['ts_code'] for r in raw]
+    acctA = ForwardAccount(exit_multiplier=1.0)   # T0: A 满仓 3 只
+    acctB = ForwardAccount(exit_multiplier=0.985) # T1: B 提前退出 1 只 → 空 1 槽（2 只）
+    others = [tc for tc in dd['ts'] if tc not in set(raw_set)][:3]
+    for tc in others[:3]:
+        acctA.positions.append(dict(ts_code=tc, name='', entry_date='2024-01-02', entry_day_idx=k - 30,
+                                    levels=1, shares=100, total_cost=100000.0, last_add_i=k - 30,
+                                    signal_id=f'FWD-{tc}-X-1', div_hist=[], div_income=0.0, avg_cost=1000.0))
+    for tc in others[:2]:
+        acctB.positions.append(dict(ts_code=tc, name='', entry_date='2024-01-02', entry_day_idx=k - 30,
+                                    levels=1, shares=100, total_cost=100000.0, last_add_i=k - 30,
+                                    signal_id=f'FWD-{tc}-X-1', div_hist=[], div_income=0.0, avg_cost=1000.0))
+    # T2: 同一天出现同一批 raw candidate（市场层，A/B 同源）
+    resA = admit_new_entries(acctA, d, dd, raw)
+    resB = admit_new_entries(acctB, d, dd, raw)
+    stA = {tc: s for tc, s, _ in resA}
+    stB = {tc: s for tc, s, _ in resB}
+    check('T10 raw candidate A/B 一致（同源只算一次）', [r['ts_code'] for r in raw] == raw_set)
+    check('T10 A 全部 REJECTED (K_FULL)', all(stA[tc] == 'REJECTED' for tc in raw_set) and
+          all(r == 'K_FULL' for _, _, r in resA),
+          f"{[(tc, stA[tc]) for tc in raw_set]}")
+    n_adm_b = sum(1 for tc, s, _ in resB if s == 'ADMITTED')
+    check('T10 B 恰好 1 个 ADMITTED（K=3 空 1 槽，其余 K_FULL）', n_adm_b == 1, f'n_adm_b={n_adm_b}')
+    check('T10 B 其余 REJECTED/K_FULL', all(s == 'REJECTED' for tc, s, _ in resB if s != 'ADMITTED'))
+    check('T10 B pending_buy 已 append 1 个', len(acctB.pending_buy) == 1, f'pb={len(acctB.pending_buy)}')
+    check('T10 A pending_buy 未 append（保持 0）', len(acctA.pending_buy) == 0)
+    check('T10 未 crash（分叉合法，不 assert）', True)
+    # 端到端台账结构（T2 flow）：NEW_ENTRY 行含 A/B admission 列
+    sig = read_csv(os.path.join(OUT, 'flow', 'forward_signal_ledger.csv'))
+    if len(sig) > 0:
+        new = sig[sig['signal_type'] == 'NEW_ENTRY']
+        check('T10 信号表含 A/B admission/order/reject 列',
+              all(c in sig.columns for c in ('A_admission_status', 'B_admission_status',
+                                             'A_order_created', 'B_order_created',
+                                             'A_reject_reason', 'B_reject_reason', 'raw_candidate')))
+        check('T10 NEW_ENTRY 行 raw_candidate=1 且 A/B admission 均填（无分叉场景一致）',
+              len(new) > 0 and (new['raw_candidate'] == '1').all() and
+              (new['A_admission_status'] == new['B_admission_status']).all(), f'rows={len(new)}')
 
 
 def t9_realtime_first(out, days, D, etf_idx, etf_px, etf_open, first_eligible_i, offset, corp_map):
@@ -324,6 +383,7 @@ if __name__ == '__main__':
     t5_backfill_flag(out)
     t6_frozen_gap(out)
     t7_ab_only_diff(out)
+    t10_admission_split(base)
     t9_realtime_first(out, days, D, etf_idx, etf_px, etf_open, first_eligible_i, offset, corp_map)
     print(f'\n== RESULT: PASS={PASS} FAIL={FAIL} ==')
     sys.exit(0 if FAIL == 0 else 1)

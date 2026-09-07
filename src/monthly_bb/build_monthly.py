@@ -23,11 +23,12 @@ EXPOSED_START = pd.Timestamp('2025-01-01')  # 已暴露段（仅展示）
 
 
 def load_all_daily():
-    """从 data/monthly_bb/daily/*.parquet 拼接全 A 日线（按 trade_date 分片）。"""
+    """从 data/monthly_bb/daily/*.parquet 拼接全 A 日线（按 trade_date 分片），只保留必要列。"""
     files = sorted(glob.glob(os.path.join(DATA_DIR, 'daily', 'daily_*.parquet')))
+    cols = ['ts_code', 'trade_date', 'open', 'high', 'low', 'close', 'vol', 'amount']
     parts = []
     for f in files:
-        parts.append(pd.read_parquet(f))
+        parts.append(pd.read_parquet(f, columns=cols))
     df = pd.concat(parts, ignore_index=True)
     df['date'] = pd.to_datetime(df['trade_date'])
     df = df.sort_values(['ts_code', 'date']).reset_index(drop=True)
@@ -36,7 +37,7 @@ def load_all_daily():
 
 def load_all_adj():
     files = sorted(glob.glob(os.path.join(DATA_DIR, 'adj', 'adj_*.parquet')))
-    parts = [pd.read_parquet(f) for f in files]
+    parts = [pd.read_parquet(f, columns=['ts_code', 'trade_date', 'adj_factor']) for f in files]
     df = pd.concat(parts, ignore_index=True)
     df['date'] = pd.to_datetime(df['trade_date'])
     return df[['ts_code', 'date', 'adj_factor']]
@@ -174,12 +175,12 @@ def add_forward(sig, m, horizons=HORIZONS):
 
 
 def add_market_relative(sig, idx_m):
-    """沪深300 同期（按 pm 对齐）收益，计算 excess。"""
-    idx = idx_m[['pm', 'close_adj']].rename(columns={'close_adj': 'idx_close'})
-    idx_sorted = idx.sort_values('pm')
+    """沪深300 同期（按 pm 对齐）收益，计算 excess。只用 000300 一根序列。"""
+    idx = idx_m[idx_m['ts_code'] == '000300'][['pm', 'close_adj']].rename(columns={'close_adj': 'idx_close'})
+    idx = idx.drop_duplicates('pm').sort_values('pm')
     for h in HORIZONS:
-        idx_sorted[f'idx_fclose_{h}'] = idx_sorted['idx_close'].shift(-h)
-    sig = sig.merge(idx_sorted, on='pm', how='left')
+        idx[f'idx_fclose_{h}'] = idx['idx_close'].shift(-h)
+    sig = sig.merge(idx, on='pm', how='left')
     for h in HORIZONS:
         sig[f'idx_ret_{h}m'] = sig[f'idx_fclose_{h}'] / sig['idx_close'] - 1.0
         sig[f'excess_cc_{h}m'] = sig[f'ret_cc_{h}m'] - sig[f'idx_ret_{h}m']
@@ -245,7 +246,8 @@ def main():
     nc = pd.concat([
         pd.read_parquet(os.path.join(DATA_DIR, 'namechange_2004_2009.parquet')) if
         os.path.exists(os.path.join(DATA_DIR, 'namechange_2004_2009.parquet')) else pd.DataFrame(),
-        pd.read_parquet(os.path.join('data', 'raw', 'namechange_full.parquet')),
+        pd.read_parquet(os.path.join(DATA_DIR, 'namechange_full.parquet')) if
+        os.path.exists(os.path.join(DATA_DIR, 'namechange_full.parquet')) else pd.DataFrame(),
     ], ignore_index=True)
     sig = build_signal_table(m, nc)
     print(f'  信号(ALL): {len(sig)}, NEW_EPISODE: {sig["NEW_EPISODE"].sum()}')

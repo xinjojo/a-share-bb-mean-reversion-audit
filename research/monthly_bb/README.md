@@ -13,12 +13,17 @@
 - `results/evidence/monthly_bb/`：小型结果 CSV、图（Git 入库）
 - `data/monthly_bb/`：大文件本地缓存（**gitignore**）：daily 分片、adj 分片、月末市值、月线 panel、信号全量 parquet
 
-## 大文件本地记录（Commit B 时更新 hash / 行数 / schema）
-| 文件（本地 data/monthly_bb/） | sha256 | 行数 | 说明 |
+## 大文件本地记录（2026-09-07 Commit B）
+| 文件（本地 data/monthly_bb/） | sha256 | 行数/规模 | 说明 |
 |---|---|---|---|
-| monthly_panel.parquet | （Commit B 填） | （Commit B 填） | 全 A 月线（后复权）+ BB |
-| monthly_signals.parquet | （Commit B 填） | （Commit B 填） | 全部信号 + forward/MFE/MAE |
-| daily/*.parquet | （Commit B 填） | （Commit B 填） | 全 A 日线按交易日分片 |
+| monthly_panel.parquet | 2b31a83222bb6607dea1ce6366cbfee46d6c2923137cfc698d4faa257a5db613 | 829,535 行 × 77.6MB | 全 A 月线（后复权）+ BB |
+| monthly_signals.parquet | 82eefb796bd3e905d46a769b21412404aca1caf14f2f62066dd51cbce62ffc9b | 14,708 行 × 8.0MB | 全部信号 + forward/MFE/MAE/超额 |
+| index_signals.parquet | e528d9197dca8b422d208062d97564748b41fda0ea68f457a781d230c9cb0289 | 35 行 | 指数信号 |
+| daily/*.parquet（5586 片） | 见 wide_manifest（分片未逐片列） | 5586 交易日 × 16,327,635 日线行 | 全 A 日线（2004-01-02~2026-09-07） |
+| adj/*.parquet（5586 片） | 同上 | 17,119,651 行 | 复权因子 |
+| mcap/*.parquet（276 片） | 同上 | 276 个月末 | PIT 市值 daily_basic |
+
+Git 中保存：生成代码、全部小型结果 CSV、图、wide 表（含 sha256 manifest `results/evidence/monthly_bb/wide_manifest.json`）、报告。任何 downstream 研究须先核对 parquet sha256 与上表一致。
 
 ## 关键口径（详见 Registry）
 - BB(20, 2σ, ddof=1)，与日线冻结策略一致。

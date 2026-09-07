@@ -2,6 +2,7 @@
 辅助理解，不替代 CSV。中文字体回退英文。
 """
 import os
+import sys
 import numpy as np
 import pandas as pd
 import matplotlib
@@ -15,7 +16,7 @@ OUT = os.path.abspath(OUT)
 os.makedirs(OUT, exist_ok=True)
 
 HORIZONS = [1, 3, 6, 12]
-DEV_END = pd.Timestamp('2024-12-31')
+DEV_END = pd.Period("2024-12", freq="M")
 
 plt.rcParams['font.sans-serif'] = ['Arial Unicode MS', 'PingFang SC', 'Heiti SC', 'STHeiti', 'DejaVu Sans']
 plt.rcParams['axes.unicode_minus'] = False
@@ -204,8 +205,11 @@ def fig_index_cases(sig_idx):
 
 def main():
     print('== load ==')
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from analyze_monthly import load_mcap_map, add_universe
     sig = pd.read_parquet(os.path.join(DATA_DIR, 'monthly_signals.parquet'))
     sig['pm'] = sig['pm'].astype('period[M]')
+    sig = add_universe(sig, load_mcap_map())
     b1 = pd.read_csv(os.path.join(OUT, '..', 'benchmark_same_stock_random.csv'))
     fig_hist(sig)
     fig_median_path(sig)

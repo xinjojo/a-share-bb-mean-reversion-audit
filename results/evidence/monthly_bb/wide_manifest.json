@@ -1,0 +1,40 @@
+{
+  "wide_parquet": {
+    "path": "/Users/mouha/DoubaoWork/chats/2026-08-25/new-chat/audit_package/github_repo/results/evidence/monthly_bb/monthly_signal_wide.parquet",
+    "sha256": "7af0670ba9583f674858647a288c23b3a033b4ead2393f5a5e668d5fc553cb7d",
+    "bytes": 3916242,
+    "rows": 14708
+  },
+  "csv_parts": [
+    {
+      "path": "/Users/mouha/DoubaoWork/chats/2026-08-25/new-chat/audit_package/github_repo/results/evidence/monthly_bb/monthly_signal_wide_part_001.csv",
+      "sha256": "f427b93606a532722bce8994d2d74b9b7186b67309d973e50a68ec4a07343eea",
+      "bytes": 2034699,
+      "rows": 3000
+    },
+    {
+      "path": "/Users/mouha/DoubaoWork/chats/2026-08-25/new-chat/audit_package/github_repo/results/evidence/monthly_bb/monthly_signal_wide_part_002.csv",
+      "sha256": "ebc0ff40dca15c070c80f98869e8abeb2fe8e049e5955b2566555162dbd389d5",
+      "bytes": 2049144,
+      "rows": 3000
+    },
+    {
+      "path": "/Users/mouha/DoubaoWork/chats/2026-08-25/new-chat/audit_package/github_repo/results/evidence/monthly_bb/monthly_signal_wide_part_003.csv",
+      "sha256": "34a8d795cabf6b3ce4acbe9a7cead8b22bb0515f3356ddfb246dd6b623c25a09",
+      "bytes": 2017679,
+      "rows": 3000
+    },
+    {
+      "path": "/Users/mouha/DoubaoWork/chats/2026-08-25/new-chat/audit_package/github_repo/results/evidence/monthly_bb/monthly_signal_wide_part_004.csv",
+      "sha256": "ac88ec0d0a8f555560a4638ae2ef55b821b5618328219739ab53985ecad9cf75",
+      "bytes": 2023735,
+      "rows": 3000
+    },
+    {
+      "path": "/Users/mouha/DoubaoWork/chats/2026-08-25/new-chat/audit_package/github_repo/results/evidence/monthly_bb/monthly_signal_wide_part_005.csv",
+      "sha256": "7d6abe1be086792763ff793affc9cd5317a96c0fba8accc9a6a6e175fd575da5",
+      "bytes": 1586353,
+      "rows": 2708
+    }
+  ]
+}

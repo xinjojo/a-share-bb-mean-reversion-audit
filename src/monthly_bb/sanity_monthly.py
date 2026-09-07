@@ -84,7 +84,7 @@ def recompute_signal(ts_code, pm, sig):
 def main():
     sig = pd.read_parquet(os.path.join(DATA_DIR, 'monthly_signals.parquet'))
     sig['pm'] = sig['pm'].astype('period[M]')
-    dev = sig[sig['pm'] <= pd.Timestamp('2024-12-31')]
+    dev = sig[sig['pm'] <= pd.Period('2024-12', freq='M')]
 
     rows = []
     # 1) 随机 20

@@ -15,7 +15,7 @@ OUT = os.path.abspath(OUT)
 os.makedirs(OUT, exist_ok=True)
 
 HORIZONS = [1, 3, 6, 12]
-DEV_END = pd.Timestamp('2024-12-31')
+DEV_END = pd.Period("2024-12", freq="M")
 EXPOSED_START = pd.Timestamp('2025-01-01')
 TOP_N = [100, 300, 500]
 NB = 1000
@@ -75,13 +75,20 @@ def desc_stats(df, col):
 
 
 def build_desc(sig, key_cols):
+    """按行级 dev（信号月 <= 2024-12）拆分，dev 与 post-dev 各自统计。"""
     rows = []
+    sig = sig.copy()
+    sig['_dev'] = sig['pm'] <= DEV_END
     for (univ, role), g in sig.groupby(['universe_clean', 'episode_role']):
-        for h in HORIZONS:
-            for tag, col in [(f'CC{h}M', f'ret_cc_{h}m'), (f'EC{h}M', f'ret_ec_{h}m')]:
-                d = desc_stats(g, col)
-                d.update(universe=univ, role=role, horizon=tag, dev=(g['pm'].max().end_time <= DEV_END))
-                rows.append(d)
+        for dev_flag in [True, False]:
+            gg = g[g['_dev'] == dev_flag]
+            if gg.empty:
+                continue
+            for h in HORIZONS:
+                for tag, col in [(f'CC{h}M', f'ret_cc_{h}m'), (f'EC{h}M', f'ret_ec_{h}m')]:
+                    d = desc_stats(gg, col)
+                    d.update(universe=univ, role=role, horizon=tag, dev=dev_flag)
+                    rows.append(d)
     return pd.DataFrame(rows)
 
 
@@ -101,7 +108,7 @@ def benchmark_same_stock_random(sig, m, n_boot=NB):
     for h in HORIZONS:
         col = f'rc_{h}'
         sig_ = sig[sig['pm'] <= DEV_END]
-        obs = sig_[f'ret_cc_{h}m'].dropna()
+        obs = sig_[f'ret_cc_{h}m'].values  # 与 sig_ 全行对齐，dropna 在 both 阶段同步进行
         m_no = m[(m['signal'] == 0) & m[col].notna()].copy()
         matches = []
         for (tc, yr), gs in sig_.groupby(['ts_code', 'year']):
@@ -111,7 +118,7 @@ def benchmark_same_stock_random(sig, m, n_boot=NB):
             else:
                 matches.extend(RNG.choice(pool, size=len(gs), replace=True))
         null = np.array(matches, dtype=float)
-        both = pd.DataFrame({'obs': obs.values, 'null': null}).dropna()
+        both = pd.DataFrame({'obs': obs, 'null': null}).dropna()
         if len(both) < 30:
             continue
         diff_mean = both['obs'].mean() - both['null'].mean()
@@ -221,7 +228,8 @@ def worst_cases(sig):
     w = sig[(sig['pm'] <= DEV_END) & sig[col12].notna()].copy()
     w = w[w[col12] < -0.20]
     w['worst'] = w[col12]
-    return w[['ts_code', 'pm', 'month_end_date', 'ret_cc_12m', 'mae_12m', 'universe_clean']].sort_values('worst')
+    w = w.sort_values('worst')
+    return w[['ts_code', 'pm', 'month_end_date', 'ret_cc_12m', 'mae_12m', 'universe_clean']]
 
 
 def decade_table(sig):

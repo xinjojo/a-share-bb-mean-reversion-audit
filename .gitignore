@@ -17,6 +17,14 @@ __pycache__/
 # 敏感
 download.txt
 results/_p3_cache/
+.env
+.env.*
+!.env.example
+.token
+credentials
+secrets*
+local_config*
+*.token
 
 # 阶段遗留运行日志 / 临时产物（勿提交）
 results/*.log

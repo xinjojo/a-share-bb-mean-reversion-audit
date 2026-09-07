@@ -41,6 +41,33 @@
 - **历史重叠 parity**：对 2026-07~08 随机 24 个交易日，扩展层代码路径重建 vs prepare_v51 原样，19 个字段（含 ts 顺序）**max_abs_diff=0.0，全部机器断言通过**（`tests/forward_ext_parity_test.py` 11/11 PASS）。
 - **真实冒烟**：当前数据源真实含有 2026-08-26~08-31（4 个交易日，combined_daily/pit_st/ETF 均真实存在）→ 生产 `main()` 已真实推进 A/B 状态至 2026-08-31（静默，不写前瞻台账）。**尚无 2026-09-07 及以后真实行情 → PRODUCTION NOT STARTED**，状态 = `FROZEN / FORWARD INFRA READY / NOT YET LIVE`。
 
+## Tushare 增量接入（本轮）
+
+**`src/update_forward_tushare.py`**（Tushare 增量更新器）：
+- token 只从环境变量 `TUSHARE_TOKEN` 读取，不写入任何文件（与 data/raw/download_dividend.py 同约定）。
+- 只拉 2026-08-26 及以后（前瞻增量区）；≤2026-08-25 = 冻结历史，默认不覆盖；Tushare 返回值与本地已有值不同 → 写 `data/forward_incremental/forward_data_revision_alert.csv`（不自动覆盖）。
+- 每次运行自动判断本地数据最新日期，只拉缺失交易日；输出到 `data/forward_incremental/`（不动冻结历史数据）。
+- 覆盖：A股 daily、adj_factor、stock_basic（上市/退市）、namechange（PIT ST/名称）、trade_cal、ETF 513500 fund_daily+nav、dividend（每股口径自动转每10股并入 corp_map）。
+
+**`src/prepare_forward_data.py`**（前瞻专用数据准备层）：
+- 冻结段（≤2026-08-25）`prepare_v51` 原样不变；增量段（>08-25）优先读 Tushare 增量文件，无则回退 combined_daily 真实新增行；字段语义与 prepare_v51 完全一致（close_adj=close×adj、BB(20,2)、PIT ST、分板涨跌停、上市天数、bb_upper_prev、ETF 续接）。
+- 历史重叠 parity：24 个 2026-07~08 交易日逐字段 max_abs_diff=0.0（机器断言，通过后才允许使用扩展层）。
+
+**`src/run_forward_daily.py`**（一键每日流程，用户每天只跑这个）：
+`python src/run_forward_daily.py`
+1. 有 TUSHARE_TOKEN → 自动拉最新增量；无 → 明确警告并本地数据兜底
+2. parity 校验 → prepare_forward_data → 逐日推进 A/B state → 写 signal/order/trade/P*/equity/hash
+3. 输出人话摘要（最新数据日期 / raw candidate / A/B 持仓现金ETF / 分叉 / BACKFILLED / 修订告警）
+4. 无新交易日 → 安全退出，不产生重复行
+
+**本轮真实运行**（2026-09-07，本地无 TUSHARE_TOKEN）：
+- Tushare 拉取：**未执行**（token 缺失，环境变量未设置——用户提供 token 后 `export TUSHARE_TOKEN=<token>` 再跑即可自动拉取）
+- 数据末日：2026-08-31（本地 combined/pit_st/ETF 真实末日；**09-01~09-06 真实行情尚未取得**）
+- parity：PASS（max_abs_diff=0.0, 24 样本日）
+- 推进：0 个新交易日（state 已在 08-31）→ 安全退出
+- 状态：FROZEN / FORWARD INFRA READY / NOT YET LIVE
+- 8/26~8/31 已用真实数据推进；**9/1~9/6 推进与 9/6 收盘真实遗留持仓需 token 拉取后完成**
+
 ## 当前进度（截至 2026-09-07）
 
 - 行情数据末日：2026-08-31（combined_daily/pit_st_daily/etf_513500_merged 真实含 08-26~08-31；daily 分片仍止 08-25，09-07+ 待数据到位后经扩展层接入）
@@ -54,13 +81,18 @@
 
 - `tests/forward_infra_tests.py` T1~T10，**39/39 PASS**（T1 冻结引擎逐日精确对齐、T2 真实调用引擎分支、T3/T4 幂等与顺序推进字节不变、T5 BACKFILLED、T6 冻结前禁止、T7 A/B 唯一差异、T8 未平仓状态存在、T9 实时首日 backfilled=0、**T10 admission 合法分叉：A K=3 满 → 全 K_FULL 不下单；B 空 1 槽 → 恰好 1 个 ADMITTED 创建 BUY 订单，不 crash**）。
 - `tests/forward_ext_parity_test.py` **11/11 PASS**（扩展层 vs prepare_v51 逐字段 0 差异；扩展段真实 4 交易日字段齐全；合并后冻结段原样）。
+- `tests/forward_tushare_unit_test.py` **11/11 PASS**（T11a 无 token 处理、T11b dividend 每股→每10股映射且不覆盖冻结、T11c daily+adj 拼接列语义、T11d namechange→PIT ST、T11e 修订告警 CSV）。
 
-## 每日更新流程
+## 每日更新流程（一键）
 
-1. 每日收盘后取得新行情数据（daily 分片更新至当日，或经扩展路径注入）；
-2. 运行 `python src/forward_update.py`（自动从 state.last_processed_date 续跑，只推进新增日期）；
-3. 当日生成并永久写入：信号（`forward_signal_ledger.csv`）、订单生命周期（`forward_order_ledger.csv`，创建即记录）、成交/公司行为（`forward_trade_ledger.csv`）、每日 P\*（`forward_pstar_daily.csv`）、A/B 每日权益（`forward_daily_equity.csv`）、输入 hash（`forward_input_manifest.csv`）；
-4. 事后补数据必须 `backfilled=1`，不得伪装实时生成；历史行只读，不得重算覆盖。
+```bash
+# 首次/需要自动拉取时设置 token（不写入任何文件）
+export TUSHARE_TOKEN=<你的tushare token>
+# 每日收盘后运行一次：
+python src/run_forward_daily.py
+```
+
+脚本自动：Tushare 增量拉取（有 token）→ parity 校验 → 数据准备（冻结段原样+增量段）→ 从 state 续跑推进新增日期 → 写信号/订单/成交/P\*/权益/输入 hash → 输出人话摘要 → 更新状态。无新交易日时安全退出；补录数据必须 `backfilled=1`，历史行只读不得重算覆盖。
 
 ## 台账文件（results/evidence/forward/）
 

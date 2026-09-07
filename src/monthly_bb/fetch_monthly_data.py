@@ -73,6 +73,7 @@ def fetch_daily_by_trade_date(pro, cal_days):
             print(f'  [WARN] {ds} 拉取失败，跳过')
             continue
         os.makedirs(os.path.dirname(f1), exist_ok=True)
+        os.makedirs(os.path.dirname(f2), exist_ok=True)
         df.to_parquet(f1, index=False)
         ad.to_parquet(f2, index=False)
         n_ok += 1

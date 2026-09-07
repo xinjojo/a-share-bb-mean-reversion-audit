@@ -96,43 +96,46 @@ def eligibility(m, basic):
 
 
 def build_signal_table(m, namechange):
-    """信号：月末 close_adj < 当月 bb_lower；NEW_EPISODE / ALL_SIGNAL_MONTHS。"""
+    """信号：月末 close_adj < 当月 bb_lower；NEW_EPISODE / ALL_SIGNAL_MONTHS。
+    关键：signal / prev_signal / NEW_EPISODE 在【完整月序列】上计算（ST/eligible 只决定该月是否入表，
+    不参与 shift，避免跨月错位）。"""
     m = m.sort_values(['ts_code', 'pm']).copy()
+    # 完整序列信号标记（含不 eligible / ST 月，用于连续跌破判定）
+    g = m.groupby('ts_code', group_keys=False)
+    m['signal_full'] = (m['close_adj'] < m['bb_lower']).astype(int)
+    m['prev_signal_full'] = g['signal_full'].shift(1).fillna(0)
+    m['NEW_EPISODE_full'] = ((m['signal_full'] == 1) & (m['prev_signal_full'] == 0)).astype(int)
+    m['next_open_adj'] = g['open_adj'].shift(-1)
+    m['next_pm'] = g['pm'].shift(-1)
+    m['next_month_end_date'] = g['month_end_date'].shift(-1)
+
     # PIT ST：namechange start_date <= 当月月末 < end_date(或空) → ST
     st = namechange.copy()
     st['start_ts'] = pd.to_datetime(st['start_date'], format='%Y%m%d', errors='coerce')
     st['end_ts'] = pd.to_datetime(st['end_date'], format='%Y%m%d', errors='coerce')
     st['is_st'] = st['name'].str.contains('ST', na=False)
 
-    # 逐月标记 ST（向量化：merge_asof 按月）
-    m2 = m[m['eligible']].copy()
+    m2 = m.copy()
     m2['month_end_ts'] = m2['month_end_date']
     st_on = st[st['is_st']].copy()
-    # 对每个 ts_code 用 merge_asof
     st_on = st_on.sort_values(['ts_code', 'start_ts'])
     m2 = m2.sort_values(['ts_code', 'month_end_ts'])
     m2['st_flag'] = 0
-    # 为效率：只对出现过 ST 的股票 merge_asof
     st_codes = set(st_on['ts_code'])
     mask = m2['ts_code'].isin(st_codes)
-    sub = m2[mask].copy()
-    merged = pd.merge_asof(sub.sort_values('month_end_ts'), st_on[['ts_code', 'start_ts', 'end_ts']].sort_values('start_ts'),
-                           left_on='month_end_ts', right_on='start_ts', by='ts_code', direction='backward')
-    merged['st_flag'] = ((merged['start_ts'] <= merged['month_end_ts']) &
-                         ((merged['end_ts'].isna()) | (merged['month_end_ts'] < merged['end_ts']))).astype(int)
-    m2.loc[mask, 'st_flag'] = merged.set_index(m2[mask].index)['st_flag'].values
-    m2 = m2[m2['st_flag'] == 0].copy()
+    if mask.sum():
+        sub = m2[mask].copy()
+        merged = pd.merge_asof(sub.sort_values('month_end_ts'),
+                               st_on[['ts_code', 'start_ts', 'end_ts']].sort_values('start_ts'),
+                               left_on='month_end_ts', right_on='start_ts', by='ts_code', direction='backward')
+        merged['st_flag'] = ((merged['start_ts'] <= merged['month_end_ts']) &
+                             ((merged['end_ts'].isna()) | (merged['month_end_ts'] < merged['end_ts']))).astype(int)
+        m2.loc[mask, 'st_flag'] = merged['st_flag'].values
 
-    # 信号
-    m2['signal'] = (m2['close_adj'] < m2['bb_lower']).astype(int)
-    m2['prev_signal'] = m2.groupby('ts_code')['signal'].shift(1).fillna(0)
-    m2['NEW_EPISODE'] = ((m2['signal'] == 1) & (m2['prev_signal'] == 0)).astype(int)
-
-    # entry：下一月第一个交易日 open_adj（即下一个月线 open_adj）
-    m2['next_open_adj'] = m2.groupby('ts_code')['open_adj'].shift(-1)
-    m2['next_pm'] = m2.groupby('ts_code')['pm'].shift(-1)
-    m2['next_month_end_date'] = m2.groupby('ts_code')['month_end_date'].shift(-1)
-
+    m2['signal'] = m2['signal_full']
+    m2['prev_signal'] = m2['prev_signal_full']
+    m2['NEW_EPISODE'] = m2['NEW_EPISODE_full']
+    m2 = m2[(m2['eligible']) & (m2['st_flag'] == 0)].copy()
     sig = m2[m2['signal'] == 1].copy()
     return sig
 

@@ -50,7 +50,8 @@ def add_universe(sig, mcap_map):
         sig.loc[mask, 'total_mv'] = mv
     def assign(u):
         sig.loc[(sig['mv_rank'] <= u) & (sig['mv_rank'].notna()), 'universe'] = f'TOP{u}'
-    for u in TOP_N:
+    # 必须从大到小覆盖：先 TOP500，再 TOP300（覆盖 rank<=300），最后 TOP100
+    for u in sorted(TOP_N, reverse=True):
         assign(u)
     sig['universe_clean'] = sig['universe']
     # 无市值数据（早期缺 daily_basic）保持 ALL_A（README 声明）

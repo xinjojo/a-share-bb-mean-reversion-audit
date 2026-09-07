@@ -68,9 +68,9 @@ def _tushare_ext_df():
         df['date'] = pd.to_datetime(df['trade_date'])
         adf = os.path.join(INC, 'adj_' + os.path.basename(f)[6:])
         if os.path.exists(adf):
-            adj = pd.read_parquet(adf)[['ts_code', 'date', 'adj_factor']]
-            adj['date'] = pd.to_datetime(adj['date'])
-            df = df.merge(adj, on=['ts_code', 'date'], how='left')
+            adj = pd.read_parquet(adf)[['ts_code', 'trade_date', 'adj_factor']]
+            adj['date'] = pd.to_datetime(adj['trade_date'])
+            df = df.merge(adj[['ts_code', 'date', 'adj_factor']], on=['ts_code', 'date'], how='left')
         else:
             df['adj_factor'] = np.nan
         frames.append(df[['ts_code', 'date', 'open', 'high', 'low', 'close', 'pre_close',

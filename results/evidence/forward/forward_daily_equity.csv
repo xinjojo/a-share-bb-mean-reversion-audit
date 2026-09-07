@@ -1,1 +1,3 @@
-date,system,cash,stock_value,etf_shares,etf_value,equity,daily_return,data_available_through,backfilled
+date,system,cash,stock_market_value,ETF_market_value,dividend_cash_today,tax_paid_today,fees_today,total_equity,open_positions,ETF_shares,generated_at,data_available_through,backfilled
+2026-09-07,A,5253.54,889916.0,974234.8,0,0,0,1869404.34,3,361900,2026-09-07 19:24:38,2026-09-07,0
+2026-09-07,B,5200.0,889916.0,2605586.8,0,0,0,3500702.8,3,967900,2026-09-07 19:24:38,2026-09-07,0

@@ -108,6 +108,30 @@ def fetch_dividend_by_exdate(pro, ex_date):
         return pd.DataFrame()
 
 
+def detect_latest_trade_date(pro, cal=None, today=None, max_probe=3):
+    """真实最新交易日：
+    1) 先探测今天（now.date()）——若 Tushare 已出当日行情则返回今天；
+    2) 否则取今天之前最近的计划交易日（历史交易日默认有数据；拉取时若空会 skip，有保护）。
+    只做少量 daily 探测，避免被未来计划日（is_open=1 但无行情）和限流干扰。"""
+    today = today if today is not None else pd.Timestamp(pd.Timestamp.now().date())
+    if cal is None:
+        cal = fetch_trade_cal(pro)
+    # 1) 今天
+    for k in range(max_probe):
+        try:
+            df = pro.daily(trade_date=today.strftime('%Y%m%d'))
+            if df is not None and len(df) > 0:
+                return today
+            break
+        except Exception:
+            time.sleep(1.5)
+    # 2) 今天之前最近计划交易日（trust + skip 保护）
+    prev = [d for d in cal['date'] if FROZEN_END_TS < d < today]
+    if not prev:
+        return None
+    return max(prev)
+
+
 def update_all(pro, force_from=None):
     """主流程。force_from: 强制从某日期开始（默认自动取本地最新+1 交易日）。返回 (拉取交易日数, 最新交易日)。"""
     os.makedirs(INC, exist_ok=True)
@@ -121,24 +145,22 @@ def update_all(pro, force_from=None):
     have = set()
     for f in glob.glob(os.path.join(INC, 'daily_*.parquet')):
         have.add(os.path.basename(f)[6:14])
-    # 起点：force_from 或 本地已有最大+1 交易日，或 2026-08-26
-    start = None
+    # 终点：真实最新交易日（探测，避免把未来计划日当拉取目标）
+    latest_real = detect_latest_trade_date(pro, cal=cal)
+    if latest_real is None:
+        print('  [ERR] 无法探测到真实最新交易日（daily 全空）')
+        return 0, None
+    print(f'  真实最新交易日 = {latest_real.date()}（daily 探测确认）')
+    # 起点：force_from 或 前瞻增量区内（>08-25 且 ≤latest_real）第一个缺失日
+    pend = [d for d in cal['date'] if FROZEN_END_TS < d <= latest_real]
     if force_from:
         start = force_from
     else:
-        pend = [d for d in cal['date'] if d > FROZEN_END_TS]
-        for d in pend:
-            ds = d.strftime('%Y%m%d')
-            if ds not in have:
-                start = ds
-                break
+        start = next((d.strftime('%Y%m%d') for d in pend if d.strftime('%Y%m%d') not in have), None)
     if start is None:
-        latest = cal[cal['date'] > FROZEN_END_TS]
-        if latest.empty:
-            return 0, FROZEN_END_TS
-        return 0, latest['date'].max()
-    pending = [d for d in cal['date'] if FROZEN_END_TS < d <= pd.Timestamp('2026-12-31') and
-               d.strftime('%Y%m%d') >= start]
+        return 0, latest_real
+    pending = [d for d in pend if d.strftime('%Y%m%d') >= start]
+    print(f'  真实最新交易日 = {latest_real.date()}（daily 探测确认）')
     print(f'  待拉交易日: {len(pending)} 个（{pending[0].date()} .. {pending[-1].date()}）')
 
     local_inc = load_local_combined_incremental()
@@ -161,8 +183,10 @@ def update_all(pro, force_from=None):
         if local_inc is not None and not local_inc.empty:
             loc = local_inc[local_inc['date'] == d]
             if not loc.empty:
-                rv = daily.merge(loc, left_on=['ts_code', 'trade_date'], right_on=['ts_code', 'date'],
-                                 suffixes=('_new', '_old'), how='inner')
+                daily_cmp = daily.copy()
+                daily_cmp['trade_date'] = pd.to_datetime(daily_cmp['trade_date'])
+                rv = daily_cmp.merge(loc, left_on=['ts_code', 'trade_date'], right_on=['ts_code', 'date'],
+                                     suffixes=('_new', '_old'), how='inner')
                 if len(rv):
                     for f in ('open', 'high', 'low', 'close', 'pre_close', 'amount'):
                         if f'_new' in rv.columns and f'_old' in rv.columns:

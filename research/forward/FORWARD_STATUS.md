@@ -41,6 +41,15 @@
 - **历史重叠 parity**：对 2026-07~08 随机 24 个交易日，扩展层代码路径重建 vs prepare_v51 原样，19 个字段（含 ts 顺序）**max_abs_diff=0.0，全部机器断言通过**（`tests/forward_ext_parity_test.py` 11/11 PASS）。
 - **真实冒烟**：当前数据源真实含有 2026-08-26~08-31（4 个交易日，combined_daily/pit_st/ETF 均真实存在）→ 生产 `main()` 已真实推进 A/B 状态至 2026-08-31（静默，不写前瞻台账）。**尚无 2026-09-07 及以后真实行情 → PRODUCTION NOT STARTED**，状态 = `FROZEN / FORWARD INFRA READY / NOT YET LIVE`。
 
+## 首条真实前瞻记录（2026-09-07，LIVE）
+
+- **Tushare 真实拉取成功**：token 由用户提供（仅命令环境变量，不写文件、不进 git）。探测确认真实最新交易日 = 2026-09-07。
+- **增量补齐**：08-26~09-07 共 9 个交易日 daily/adj_factor 全部拉取（08-26 由首轮拉取写入，08-27~09-07 本轮补齐）；stock_basic 5558 只、namechange 10000 条、ETF 513500 fund_daily 至 09-07、Tushare dividend 73 条新事件并入（每股→每10股，不覆盖冻结 50 只）。
+- **修订告警**：无（Tushare 08-26~08-31 返回值与本地 combined 一致，未发生数据修订）。
+- **9/6 收盘真实遗留持仓（冻结前推进确认）**：A/B 各 3 笔 —— 688525.SH 佰维存储（2 层 1300 股）、600276.SH 恒瑞医药（2 层 8300 股）、688256.SH 寒武纪（1 层 200 股）；A 现金 5,253.54、B 现金 5,200.00；A ETF 361,900 份、B ETF 967,900 份。**9/1~9/6 冻结前推进无退出/加仓/新入场事件**（静默推进，不写前瞻台账）。
+- **09-07 实时落盘（backfilled=0）**：2026-09-07 处理 1 个前瞻交易日，当日无新信号（raw candidate 0）、无成交；权益行 A/B 各 1 条（A 总权益 1,869,404.34 / B 3,500,702.80，data_available_through=2026-09-07 == today）；输入 hash 落盘 `60f51dd1...`。
+- **状态：FORWARD OBSERVATION LIVE**（首条真实 backfilled=0 记录已产生）。
+
 ## Tushare 增量接入（本轮）
 
 **`src/update_forward_tushare.py`**（Tushare 增量更新器）：
@@ -60,21 +69,23 @@
 3. 输出人话摘要（最新数据日期 / raw candidate / A/B 持仓现金ETF / 分叉 / BACKFILLED / 修订告警）
 4. 无新交易日 → 安全退出，不产生重复行
 
-**本轮真实运行**（2026-09-07，本地无 TUSHARE_TOKEN）：
-- Tushare 拉取：**未执行**（token 缺失，环境变量未设置——用户提供 token 后 `export TUSHARE_TOKEN=<token>` 再跑即可自动拉取）
-- 数据末日：2026-08-31（本地 combined/pit_st/ETF 真实末日；**09-01~09-06 真实行情尚未取得**）
+**本轮真实运行记录**（2026-09-07，用户提供 TUSHARE_TOKEN 后）：
+- Tushare 拉取：**执行成功**，真实最新交易日 = 2026-09-07（daily 探测确认，规避未来计划日）
+- 增量补齐：08-26~09-07 共 9 个交易日 daily/adj_factor 全齐（含 09-01~09-06 此前缺失段）
+- 数据末日：2026-09-07
 - parity：PASS（max_abs_diff=0.0, 24 样本日）
-- 推进：0 个新交易日（state 已在 08-31）→ 安全退出
-- 状态：FROZEN / FORWARD INFRA READY / NOT YET LIVE
-- 8/26~8/31 已用真实数据推进；**9/1~9/6 推进与 9/6 收盘真实遗留持仓需 token 拉取后完成**
+- 增量数据源：tushare_incremental；Tushare dividend 73 条并入；修订告警 0 条
+- 9/6 收盘真实遗留持仓：3 笔（688525/600276/688256），9/1~9/6 冻结前推进无事件
+- 09-07 实时落盘：权益 A/B 各 1 行 + 输入 hash（backfilled=0，data_available_through==today）
+- 状态：**FORWARD OBSERVATION LIVE**
 
 ## 当前进度（截至 2026-09-07）
 
-- 行情数据末日：2026-08-31（combined_daily/pit_st_daily/etf_513500_merged 真实含 08-26~08-31；daily 分片仍止 08-25，09-07+ 待数据到位后经扩展层接入）
-- 前瞻信号数：0（首个前瞻交易日 2026-09-07 尚未有真实行情数据）
+- 行情数据末日：**2026-09-07**（Tushare 真实拉取：08-26~09-07 全齐，含 daily/adj_factor/stock_basic/namechange/ETF/dividend）
+- 前瞻信号数：0（09-07 首个前瞻交易日无新信号）
 - 前瞻交易数：0（A/B 各 0）
-- 启动账户（2026-08-25 收盘，真实回放）：A 现金 5,253.54 / ETF 361,900 份；B 现金 5,200.00 / ETF 967,900 份；A/B 各 3 笔 PRE_EXISTING（688525.SH 佰维存储 2 层、600276.SH 恒瑞医药 2 层、688256.SH 寒武纪 1 层，以 `forward_pre_existing_*.csv` 为准）
-- 状态：**FROZEN / FORWARD INFRA READY / NOT YET LIVE**（首条真实 backfilled=0 记录落盘后才升级 FORWARD OBSERVATION LIVE）
+- 启动账户（2026-08-25 收盘，真实回放）：A 现金 5,253.54 / ETF 361,900 份；B 现金 5,200.00 / ETF 967,900 份；A/B 各 3 笔 PRE_EXISTING（688525.SH 佰维存储 2 层、600276.SH 恒瑞医药 2 层、688256.SH 寒武纪 1 层，以 `forward_pre_existing_*.csv` 为准）；**冻结前真实推进至 09-06 收盘无事件，9/6 遗留持仓同上**
+- 状态：**FORWARD OBSERVATION LIVE**（2026-09-07 首条真实 backfilled=0 权益/输入 hash 记录已落盘）
 - 数据完整性提示：个别股票分片数据下限仅 2020-01-06（非完整覆盖），前瞻期该股票自身交易日不足时按「无信号」处理，不额外删除其他股票。
 
 ## 硬性测试

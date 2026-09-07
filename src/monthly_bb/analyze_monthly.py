@@ -298,9 +298,14 @@ def main():
     dc.to_csv(os.path.join(OUT, 'decade_stability.csv'), index=False)
 
     print('== index detail ==')
-    idx_sig = sig[sig['ts_code'].str.match(r'^(000300|000905|000852|399006|000688|000016)') & (sig['NEW_EPISODE'] == 1)]
-    idx_sig.to_csv(os.path.join(OUT, 'manual_review_index.csv'), index=False)
-    print(f'  指数信号 {len(idx_sig)} 条')
+    idx_path = os.path.join(DATA_DIR, 'index_signals.parquet')
+    if os.path.exists(idx_path):
+        idx_sig = pd.read_parquet(idx_path)
+        idx_sig = idx_sig[idx_sig['pm'] <= DEV_END] if 'pm' in idx_sig.columns else idx_sig
+        idx_sig.to_csv(os.path.join(OUT, 'manual_review_index.csv'), index=False)
+        print(f'  指数信号 {len(idx_sig)} 条')
+    else:
+        print('  [WARN] index_signals.parquet 不存在')
 
     print('DONE ->', OUT)
 

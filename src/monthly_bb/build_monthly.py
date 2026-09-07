@@ -186,6 +186,49 @@ def add_market_relative(sig, idx_m):
     return sig
 
 
+def build_index_signals():
+    """6 只宽基指数月线 BB(20,2) + 信号 + forward/MFE/MAE（独立表，指数不复权）。"""
+    out = []
+    for code in ['000300', '000905', '000852', '399006', '000688', '000016']:
+        f = os.path.join(DATA_DIR, f'idx_{code}.parquet')
+        if not os.path.exists(f):
+            continue
+        ix = pd.read_parquet(f)
+        ix['date'] = pd.to_datetime(ix['trade_date'])
+        ix = ix.sort_values('date').reset_index(drop=True)
+        ix['pm'] = ix['date'].dt.to_period('M')
+        g = ix.groupby('pm')
+        im = g.agg(open=('open', 'first'), high=('high', 'max'), low=('low', 'min'),
+                   close=('close', 'last'), month_end_date=('date', 'max'),
+                   n_days=('date', 'count')).reset_index()
+        im['ts_code'] = code
+        im = im.sort_values('pm')
+        im['bb_mid'] = im['close'].rolling(BB_WINDOW, min_periods=BB_WINDOW).mean()
+        im['bb_sd'] = im['close'].rolling(BB_WINDOW, min_periods=BB_WINDOW).std(ddof=DDOF)
+        im['bb_lower'] = im['bb_mid'] - BB_STD * im['bb_sd']
+        im['bb_upper'] = im['bb_mid'] + BB_STD * im['bb_sd']
+        im['bb_z'] = (im['close'] - im['bb_mid']) / im['bb_sd']
+        im['signal'] = (im['close'] < im['bb_lower']).astype(int)
+        im['prev_signal'] = im['signal'].shift(1).fillna(0)
+        im['NEW_EPISODE'] = ((im['signal'] == 1) & (im['prev_signal'] == 0)).astype(int)
+        im['next_open'] = im['open'].shift(-1)
+        for h in HORIZONS:
+            im[f'f_close_{h}'] = im['close'].shift(-h)
+            im[f'f_maxhigh_{h}'] = im['high'].shift(-1).rolling(h, min_periods=1).max()
+            im[f'f_minlow_{h}'] = im['low'].shift(-1).rolling(h, min_periods=1).min()
+            im[f'ret_cc_{h}m'] = im[f'f_close_{h}'] / im['close'] - 1.0
+            im[f'ret_ec_{h}m'] = im[f'f_close_{h}'] / im['next_open'] - 1.0
+            im[f'mfe_{h}m'] = im[f'f_maxhigh_{h}'] / im['close'] - 1.0
+            im[f'mae_{h}m'] = im[f'f_minlow_{h}'] / im['close'] - 1.0
+            im[f'censored_{h}m'] = im[f'f_close_{h}'].isna().astype(int)
+        out.append(im)
+    idx_sig = pd.concat(out, ignore_index=True)
+    idx_sig = idx_sig[idx_sig['signal'] == 1].reset_index(drop=True)
+    idx_sig.to_parquet(os.path.join(DATA_DIR, 'index_signals.parquet'), index=False)
+    print(f'  指数信号: {len(idx_sig)} 条')
+    return idx_sig
+
+
 def main():
     print('== load daily/adj ==')
     daily = load_all_daily()
@@ -208,7 +251,7 @@ def main():
     print(f'  信号(ALL): {len(sig)}, NEW_EPISODE: {sig["NEW_EPISODE"].sum()}')
     print('== add forward ==')
     sig = add_forward(sig, m)
-    # 指数月线
+    # 指数月线（用于 market-relative）
     idx_parts = []
     for code in ['000300', '000905', '000852', '399006', '000688', '000016']:
         f = os.path.join(DATA_DIR, f'idx_{code}.parquet')
@@ -223,6 +266,8 @@ def main():
     sig = add_market_relative(sig, idx_m)
     sig.to_parquet(os.path.join(DATA_DIR, 'monthly_signals.parquet'), index=False)
     print(f'  信号表: {len(sig)} 行 -> {DATA_DIR}/monthly_signals.parquet')
+    print('== index signals ==')
+    build_index_signals()
     print('DONE')
 
 

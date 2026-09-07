@@ -177,12 +177,14 @@ def fig_index_cases(sig_idx):
     for code, name in [('000300', 'HS300'), ('000905', 'CSI500'), ('000852', 'CSI1000'),
                        ('399006', 'CYB'), ('000688', 'STAR50'), ('000016', 'SSE50')]:
         ix = pd.read_parquet(os.path.join(DATA_DIR, f'idx_{code}.parquet'))
-        ix['date'] = pd.to_datetime(ix['trade_date'])
+        ix['trade_date'] = pd.to_datetime(ix['trade_date'])
+        ix['date'] = ix['trade_date']
         ix = ix.sort_values('date')
         ix['close'] = ix['close'].astype(float)
         # 月线 + BB
         ix['pm'] = ix['date'].dt.to_period('M')
-        m = ix.groupby('pm').agg(close=('close', 'last'), month_end_date=('trade_date', 'max')).reset_index()
+        m = ix.groupby('pm').agg(close=('close', 'last'),
+                                 month_end_date=('date', 'max')).reset_index()
         m['close'] = m['close'].astype(float)
         m['ma'] = m['close'].rolling(20, min_periods=20).mean()
         m['sd'] = m['close'].rolling(20, min_periods=20).std(ddof=1)

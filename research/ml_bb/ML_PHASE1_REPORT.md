@@ -129,3 +129,9 @@
 | results/evidence/ml_bb/walk_forward_predictions_NEW_ENTRY.csv | — | 3d4ff0d4caf4fd7718b931ec47bc80df5595fbd85042285168f875a4d145569e |
 
 > 约定：下游任何复算必须先验证上述 SHA256 与本地文件一致；预测明细不入 GitHub。
+
+## 10. 特征替代说明（透明披露）
+
+- Registry（ML_FEATURE_REGISTRY.csv）冻结 38 个特征，其中 `bb_width_pctile`（个股 BB 宽度前 250 日滚动百分位）因 770 万行×250 日滚动计算的实现复杂度与成本过高，**未入模**；正式训练使用其余 37 个特征。Registry 该行保留作为定义记录。
+- Top-K 的 random baseline 为单次抽样（同一信号日期组内一次打乱），未做多次平均。
+

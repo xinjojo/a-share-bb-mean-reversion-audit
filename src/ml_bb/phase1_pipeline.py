@@ -167,8 +167,8 @@ def run_group(grp_name: str, grp: pd.DataFrame) -> None:
         return pd.DataFrame(sc.transform(df[FEATURE_COLS].fillna(train[FEATURE_COLS].median())), columns=FEATURE_COLS)
     Xtr, Xva, Xte = _X(train), _X(val), _X(test)
 
-    # 目标
-    Y1 = "close_ret_D20"; Y6 = "Y6_BAD"
+    # 目标（列名来自 phase1_labels.py：Y1=close_ret_D20, Y6_BAD=MAE<=-20%）
+    Y1 = "Y1"; Y6 = "Y6_BAD"
     y1_tr, y1_va, y1_te = train[Y1], val[Y1], test[Y1]
     y6_tr, y6_va, y6_te = train[Y6], val[Y6], test[Y6]
 

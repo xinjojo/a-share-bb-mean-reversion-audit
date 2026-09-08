@@ -25,9 +25,9 @@ def build_labels_full() -> pd.DataFrame:
     lab["Y1"] = w["close_ret_D20"].astype(float)
     lab["Y2"] = w["MFE_D20"].astype(float)
     lab["Y3"] = w["MAE_D20"].astype(float)
-    lab["Y4_GOOD"] = (w["close_ret_D20"] > 0).astype(int)
-    lab["Y5_STRONG_RECOVERY"] = (w["MFE_D20"] >= 5.0).astype(int)
-    lab["Y6_BAD"] = (w["MAE_D20"] <= -20.0).astype(int)
+    lab["Y4_GOOD"] = (w["close_ret_D20"] > 0).astype(int)          # close_ret 为 pct 数值
+    lab["Y5_STRONG_RECOVERY"] = (w["MFE_D20"] >= 0.05).astype(int)  # MFE 为小数（0.05=+5%）
+    lab["Y6_BAD"] = (w["MAE_D20"] <= -0.20).astype(int)             # MAE 为小数（-0.20=-20%）
     lab["available_future_days"] = w["available_future_days"].astype(int)
     lab["censored"] = (w["available_future_days"] < 20).astype(int)
     return lab

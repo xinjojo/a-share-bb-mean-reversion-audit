@@ -20,15 +20,18 @@ rng = np.random.default_rng(SEED)
 
 
 def cluster_bootstrap_ci(df, score_col, y_col, date_col, stat_fn, n=1000, alpha=0.05):
-    """按 signal_date 聚类 bootstrap。返回 (lo, hi)。"""
-    dates = df[date_col].unique()
-    lo_hi = []
+    """按 signal_date 聚类 bootstrap（对 D20 mean；组内均值 + 组权重加权，向量化）。"""
+    darr = df[date_col].values
+    y = df[y_col].values.astype(float)
+    dates, counts = np.unique(darr, return_counts=True)
+    gmeans = np.array([y[darr == d].mean() for d in dates])
+    gcounts = counts.astype(float)
+    stats = []
     for _ in range(n):
-        d_sample = rng.choice(dates, size=len(dates), replace=True)
-        sdf = pd.concat([df[df[date_col] == d] for d in d_sample])
-        lo_hi.append(stat_fn(sdf))
-    lo_hi = np.array(lo_hi)
-    return np.percentile(lo_hi, 100 * alpha / 2), np.percentile(lo_hi, 100 * (1 - alpha / 2))
+        idx = rng.integers(0, len(dates), size=len(dates))
+        stats.append(np.average(gmeans[idx], weights=gcounts[idx]))
+    stats = np.array(stats)
+    return np.percentile(stats, 100 * alpha / 2), np.percentile(stats, 100 * (1 - alpha / 2))
 
 
 def _bucket_stats(df):
@@ -41,6 +44,8 @@ def _bucket_stats(df):
 
 def main() -> None:
     pdf = pd.read_csv(os.path.join(ML_OUT, "walk_forward_predictions.csv"), parse_dates=["signal_date"])
+    pdf["y"] = pd.to_numeric(pdf["y"], errors="coerce")
+    pdf["score"] = pd.to_numeric(pdf["score"], errors="coerce")
 
     # ---- 1. quintile stats（Y1, 每年每模型）----
     qrows = []
@@ -59,7 +64,7 @@ def main() -> None:
     for (grp, model, year), g in pdf[pdf["task"] == "Y1"].groupby(["group", "model", "year"]):
         g = g.copy()
         g["q"] = pd.qcut(g["score"].rank(method="first"), 5, labels=[1, 2, 3, 4, 5])
-        q5 = g[g["q"] == 5]["y"]; q1 = g[g["q"] == 1]
+        q5 = g[g["q"] == 5]["y"]; q1 = g[g["q"] == 1]["y"]
         overall = g["y"].median()
         stab.append({"group": grp, "model": model, "year": year,
                      "Q5_median": q5.median(), "Q1_median": q1.median(),
@@ -73,7 +78,7 @@ def main() -> None:
     print("yearly stability 已输出:", sdf.shape)
 
     # ---- 3. Top-K comparison（2024 NEW_ENTRY, 按 signal_date 分组）----
-    y1_2024 = pdf[(pdf["task"] == "Y1") & (pdf["year"] == "2024") & (pdf["group"] == "NEW_ENTRY")]
+    y1_2024 = pdf[(pdf["task"] == "Y1") & (pdf["year"] == 2024) & (pdf["group"] == "NEW_ENTRY")]
     # baselines 用已落盘特征（避免重跑全量特征构建）
     feat = pd.read_parquet(os.path.join(ML_OUT, "ml_features_full.parquet"),
                            columns=["signal_id", "atr14_pct"])
@@ -123,7 +128,7 @@ def main() -> None:
     print("model agreement 已输出:", adf.shape)
 
     # ---- 5. BAD (Y6) quintile bad-rate 梯度（2024）----
-    y6_2024 = pdf[(pdf["task"] == "Y6") & (pdf["year"] == "2024")]
+    y6_2024 = pdf[(pdf["task"] == "Y6") & (pdf["year"] == 2024)]
     bq = []
     for (grp, model), g in y6_2024.groupby(["group", "model"]):
         g = g.copy()

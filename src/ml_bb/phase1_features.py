@@ -196,6 +196,7 @@ def build_full_features(
     # 指数收益
     for path, p5, p20 in [(IDX300, "csi300_ret_5", "csi300_ret_20"), (IDX1000, "csi1000_ret_5", "csi1000_ret_20")]:
         idx = pd.read_parquet(path)
+        idx = idx.rename(columns={"trade_date": "date"})
         idx["date"] = pd.to_datetime(idx["date"])
         idx = idx.sort_values("date").reset_index(drop=True)
         idx["_r5"] = idx["close"].pct_change(5) * 100
@@ -222,6 +223,7 @@ def _market_daily_stats(hist: pd.DataFrame) -> pd.DataFrame:
         d.groupby("date")["amount"].rank(pct=True) * 100
     ).groupby(d["date"]).mean().rename("amount_percentile")
     out = pd.DataFrame({"market_up_ratio": up, "market_down_ratio": down, "amount_percentile": amt_pct}).reset_index()
+    out = out.rename(columns={"date": "signal_date"})
     return out
 
 

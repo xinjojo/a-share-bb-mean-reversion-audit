@@ -119,3 +119,13 @@
 - [x] Leakage Audit PASS（tests 4/4 + 100 条抽查）
 - [x] EE15 forward 文件 0 change（git status 验证）
 - [x] 未修改任何冻结策略参数
+
+## 9. 大文件本地路径与哈希（不入 git）
+
+| 文件 | 行数 | SHA256 |
+|---|---|---|
+| results/evidence/ml_bb/walk_forward_predictions.csv | 5,879,356 | 9e55995e772e75c090605fa885dab4e810f9b34182a57460a4a27096fe700779 |
+| results/evidence/ml_bb/walk_forward_predictions_ADD_ON.csv | — | c533784bcc52001370e25337b2f02c065987534cc8405768c98f67e9d10ae9be |
+| results/evidence/ml_bb/walk_forward_predictions_NEW_ENTRY.csv | — | 3d4ff0d4caf4fd7718b931ec47bc80df5595fbd85042285168f875a4d145569e |
+
+> 约定：下游任何复算必须先验证上述 SHA256 与本地文件一致；预测明细不入 GitHub。

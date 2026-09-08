@@ -36,3 +36,11 @@ results/independent_v2a_censored_raw.csv
 sigpath_layers_raw.csv
 sigpath_episodes_parity.csv
 sigpath_interactive_report.html
+
+# ML 独立环境与缓存（ML-BB Phase 0）
+.venv-ml/
+.venv/
+ml_models/
+results/evidence/ml_bb/*.parquet
+results/evidence/ml_bb/*.pkl
+results/evidence/ml_bb/*.joblib

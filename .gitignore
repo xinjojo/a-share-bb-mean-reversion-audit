@@ -44,3 +44,6 @@ ml_models/
 results/evidence/ml_bb/*.parquet
 results/evidence/ml_bb/*.pkl
 results/evidence/ml_bb/*.joblib
+
+# ML Phase 1 大预测明细（本地，hash 记录于报告）
+results/evidence/ml_bb/walk_forward_predictions*.csv

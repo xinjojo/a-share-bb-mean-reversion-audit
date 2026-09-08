@@ -1,0 +1,7 @@
+label_name,definition,source_col,type,source_date_rule,missing_policy
+Y1,D20_close_return,close_ret_D20 (pct),regression,>=signal_date,无缺失(剔除censored)
+Y2,D20_MFE,MFE_D20 (pct),regression,>=signal_date,无缺失(剔除censored)
+Y3,D20_MAE,MAE_D20 (pct),regression,>=signal_date,无缺失(剔除censored)
+Y4_GOOD,D20_close_return>0,close_ret_D20>0,binary,>=signal_date,无缺失(剔除censored)
+Y5_STRONG_RECOVERY,D20_MFE>=+5%,MFE_D20>=5,binary,>=signal_date,无缺失(剔除censored)
+Y6_BAD,D20_MAE<=-20%,MAE_D20<=-20,binary,>=signal_date,无缺失(剔除censored)

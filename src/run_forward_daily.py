@@ -151,7 +151,9 @@ def main():
     if not p['pass_']:
         print('  [FATAL] parity 未通过，拒绝使用扩展层。')
         sys.exit(1)
-    data, src, ext_days = prepare_forward_data(prefer_tushare=bool(tok))
+    # 读本地 Tushare 增量（INC）不需要 token：token 只用于"拉取"。
+    # 无 token 时也必须读到已拉好的本地增量，否则数据末日 < state 进度会触发保护性报错。
+    data, src, ext_days = prepare_forward_data(prefer_tushare=True)
     days, D, etf_idx, etf_px, etf_open, etf_nav, first_eligible_i, offset = data
     data_through = max(days)
     print(f'  增量数据源: {src}')

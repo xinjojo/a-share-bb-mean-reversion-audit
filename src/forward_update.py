@@ -122,7 +122,12 @@ def run_forward(days, D, etf_idx, etf_px, etf_open, first_eligible_i, offset, co
     acctB = ForwardAccount.load(json.load(open(os.path.join(out_dir, 'forward_state_B.json'))))
     last_proc = acctA.last_processed_date
     assert acctB.last_processed_date == last_proc, 'A/B last_processed_date 不一致'
-    start_i = day_idx[last_proc] + 1 if last_proc in day_idx else 0
+    if last_proc not in day_idx:
+        raise SystemExit(
+            f'[FATAL] state.last_processed_date={last_proc.date()} 不在当前数据 days 中'
+            f'（数据末日={data_through.date()}）。数据缺失/回退时禁止从头重放覆盖 state：'
+            f'请先补齐数据或恢复 state 后再运行。')
+    start_i = day_idx[last_proc] + 1
     end_i = day_idx.get(data_through, len(days) - 1)
 
     sig_path = os.path.join(out_dir, 'forward_signal_ledger.csv')

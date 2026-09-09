@@ -26,6 +26,11 @@ secrets*
 local_config*
 *.token
 
+# 虚拟环境
+.venv/
+.venv-ml/
+venv/
+
 # 阶段遗留运行日志 / 临时产物（勿提交）
 results/*.log
 results/replay_*.log

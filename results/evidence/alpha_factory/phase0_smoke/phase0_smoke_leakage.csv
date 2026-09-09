@@ -1,0 +1,15 @@
+factor_id,expression,inputs,source_date_le_signal_date,contains_future_keyword
+AF_000014,ret_5,ret_5,True,False
+AF_000015,ret_20,ret_20,True,False
+AF_000009,atr14_pct,atr14_pct,True,False
+AF_000016,"ratio(ret_5,atr14_pct)",ret_5;atr14_pct,True,False
+AF_000017,cs_rank(signal_day_amount),signal_day_amount,True,False
+AF_000018,amount_ratio_5_20,amount_ratio_5_20,True,False
+AF_000019,drawdown_20,drawdown_20,True,False
+AF_000020,distance_52w_high,distance_52w_high,True,False
+AF_000021,daily_bb_signal_count,daily_bb_signal_count,True,False
+AF_000022,daily_bb_up_ratio,daily_bb_up_ratio,True,False
+AF_000023,"interaction(bb_z,cs_rank(signal_day_amount))",signal_day_amount;bb_z,True,False
+AF_000024,"diff(drawdown_20,ret_20)",ret_20;drawdown_20,True,False
+AF_000025,"min(ret_5,ret_20)",ret_5;ret_20,True,False
+AF_000026,sign(gap_pct),gap_pct,True,False

@@ -1,0 +1,12 @@
+,value
+rows,157469
+dates,1137
+factors_measured,14
+sec_compute,0.052
+sec_screen,12.693
+sec_per_factor,0.9103
+est_100_factors_min,1.52
+est_1000_factors_min,15.17
+est_ram_100_factors_mb,126.0
+est_ram_1000_factors_mb,1259.8
+note,外推假设：同数据集、单进程、向量化实现；未来可并行/多进程线性扩展

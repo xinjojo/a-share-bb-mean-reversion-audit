@@ -1,0 +1,125 @@
+{
+  "status": "SMOKE_ONLY",
+  "universe": "A (BB conditional, SIGPATH)",
+  "n_signals": 157469,
+  "n_dates": 1137,
+  "factors": {
+    "proposed": 0,
+    "tested": 14,
+    "duplicate": 0,
+    "leakage": 0,
+    "fdr_passed": 0,
+    "oos_passed": 0,
+    "keep": 0,
+    "fail": 0,
+    "archived": 0,
+    "total_attempts_this_experiment": 14,
+    "total_hypothesis_attempts_all_time": 42
+  },
+  "top_by_rank_ic": [
+    {
+      "factor_id": "AF_000009",
+      "factor_name": "SMOKE_atr14_pct",
+      "label": "STRONG",
+      "ic_mean": 0.15945271342912987,
+      "rank_ic_mean": 0.16784959202565922,
+      "icir": 0.6947675867124837
+    },
+    {
+      "factor_id": "AF_000009",
+      "factor_name": "SMOKE_atr14_pct",
+      "label": "BAD",
+      "ic_mean": 0.17273970293126745,
+      "rank_ic_mean": 0.15774149145250915,
+      "icir": 0.8236962299822091
+    },
+    {
+      "factor_id": "AF_000017",
+      "factor_name": "SMOKE_amount_cs",
+      "label": "BAD",
+      "ic_mean": 0.05381598179204169,
+      "rank_ic_mean": 0.05381598179204168,
+      "icir": 0.27869648546506315
+    },
+    {
+      "factor_id": "AF_000023",
+      "factor_name": "SMOKE_bbz_x_amount",
+      "label": "fwd_ret_20",
+      "ic_mean": 0.03065866577083852,
+      "rank_ic_mean": 0.04577406671029294,
+      "icir": 0.12752140522734326
+    },
+    {
+      "factor_id": "AF_000014",
+      "factor_name": "SMOKE_ret_5",
+      "label": "fwd_ret_20",
+      "ic_mean": 0.025483669095901756,
+      "rank_ic_mean": 0.04165108892605306,
+      "icir": 0.1021826127929455
+    },
+    {
+      "factor_id": "AF_000019",
+      "factor_name": "SMOKE_drawdown_20",
+      "label": "fwd_ret_20",
+      "ic_mean": 0.023674814334172362,
+      "rank_ic_mean": 0.041555369881050894,
+      "icir": 0.09186718167885535
+    },
+    {
+      "factor_id": "AF_000024",
+      "factor_name": "SMOKE_drawdown_minus_ret",
+      "label": "fwd_ret_20",
+      "ic_mean": 0.025829882655832567,
+      "rank_ic_mean": 0.03351273358144388,
+      "icir": 0.11569907708853151
+    },
+    {
+      "factor_id": "AF_000025",
+      "factor_name": "SMOKE_min_ret5_ret20",
+      "label": "fwd_ret_20",
+      "ic_mean": 0.018489682567283946,
+      "rank_ic_mean": 0.03180360077249039,
+      "icir": 0.07362271213773657
+    },
+    {
+      "factor_id": "AF_000016",
+      "factor_name": "SMOKE_ret5_div_atr",
+      "label": "STRONG",
+      "ic_mean": 0.018342676147409427,
+      "rank_ic_mean": 0.018470726335927154,
+      "icir": 0.08632666108805798
+    },
+    {
+      "factor_id": "AF_000015",
+      "factor_name": "SMOKE_ret_20",
+      "label": "fwd_ret_20",
+      "ic_mean": 0.006839402486446291,
+      "rank_ic_mean": 0.015163727967647892,
+      "icir": 0.027022942012400745
+    }
+  ],
+  "fdr_survived": 0,
+  "duplicates": [
+    {
+      "factor_id": "drawdown_20",
+      "duplicate_of": "ret_5",
+      "rho": 0.8666408097530153
+    },
+    {
+      "factor_id": "interaction(bb_z,cs_rank(signal_day_amount))",
+      "duplicate_of": "cs_rank(signal_day_amount)",
+      "rho": -0.9689363431859324
+    },
+    {
+      "factor_id": "min(ret_5,ret_20)",
+      "duplicate_of": "ret_5",
+      "rho": 0.8332228643138717
+    }
+  ],
+  "incremental": {
+    "base_r2": 0.0006969564378872528,
+    "new_r2": 0.022579213550848354,
+    "delta_r2": 0.0218822571129611
+  },
+  "note": "结果仅供流水线验证，不是 Alpha 结论。"
+}

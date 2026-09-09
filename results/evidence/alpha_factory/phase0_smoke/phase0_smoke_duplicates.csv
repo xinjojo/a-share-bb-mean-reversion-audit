@@ -1,0 +1,4 @@
+factor_id,duplicate_of,rho
+drawdown_20,ret_5,0.8666408097530153
+"interaction(bb_z,cs_rank(signal_day_amount))",cs_rank(signal_day_amount),-0.9689363431859324
+"min(ret_5,ret_20)",ret_5,0.8332228643138717

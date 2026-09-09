@@ -1,0 +1,14 @@
+factor_id,factor_name,formula,failure_stage,failure_reason,discovery_metric,validation_metric,test_metric,yearly_direction,correlation_with_existing,duplicate_of,leakage_detected,date_killed,notes
+AF_000005,rsi_filter,"ts_zscore(signal_day_close,20) /* RSI 代理 */",validation,NO_INCREMENTAL_ALPHA,,,,,,,False,,"LEGACY_RESEARCH; 原结论""固定止损、周线BB、RSI/MACD、Squeeze/ADX入场过滤等分支均已关闭""; source=commit 31f7266b9e978b031e0b685af4876312eb0090d3 (EE15 freeze)"
+AF_000006,macd_filter,"diff(signal_day_close,signal_day_close) /* MACD 代理 */",validation,NO_INCREMENTAL_ALPHA,,,,,,,False,,LEGACY_RESEARCH; source=commit 31f7266b9e978b031e0b685af4876312eb0090d3 (EE15 freeze)
+AF_000007,squeeze_adx_filter,"interaction(bb_z,bb_z) /* Squeeze/ADX 代理 */",validation,NO_INCREMENTAL_ALPHA,,,,,,,False,,LEGACY_RESEARCH; source=commit 31f7266b9e978b031e0b685af4876312eb0090d3 (EE15 freeze)
+AF_000008,regime_filter,sign(daily_bb_up_ratio) /* regime 代理 */,validation,REGIME_SPECIFIC,,,,,,,False,,LEGACY_RESEARCH; source=commit 31f7266b9e978b031e0b685af4876312eb0090d3 (EE15 freeze)
+AF_000009,atr_ranking,atr14_pct,screening,DUPLICATE,,,,,,,False,,"LEGACY_RESEARCH; source=commit 6296cd3 (ML-BB Phase 1, rating B)"
+AF_000010,bad_classifier,cs_rank(drawdown_20) /* BAD 模型代理 */,portfolio,NO_INCREMENTAL_ALPHA,,,,,,,False,,"LEGACY_RESEARCH; Phase 2 评级 C; source=commit cc20074 (ML-BB Phase 2, rating C)"
+AF_000011,addon_ranking,cs_rank(bb_z) /* ADD_ON 排序代理 */,portfolio,NO_INCREMENTAL_ALPHA,,,,,,,False,,"LEGACY_RESEARCH; Phase 2 评级 C; source=commit cc20074 (ML-BB Phase 2, rating C)"
+AF_000027,rsi_filter,"ts_zscore(signal_day_close,20) /* RSI 代理 */",validation,NO_INCREMENTAL_ALPHA,,,,,,,False,,"LEGACY_RESEARCH; 原结论""固定止损、周线BB、RSI/MACD、Squeeze/ADX入场过滤等分支均已关闭""; source=commit 31f7266b9e978b031e0b685af4876312eb0090d3 (EE15 freeze)"
+AF_000028,macd_filter,"diff(signal_day_close,signal_day_close) /* MACD 代理 */",validation,NO_INCREMENTAL_ALPHA,,,,,,,False,,LEGACY_RESEARCH; source=commit 31f7266b9e978b031e0b685af4876312eb0090d3 (EE15 freeze)
+AF_000029,squeeze_adx_filter,"interaction(bb_z,bb_z) /* Squeeze/ADX 代理 */",validation,NO_INCREMENTAL_ALPHA,,,,,,,False,,LEGACY_RESEARCH; source=commit 31f7266b9e978b031e0b685af4876312eb0090d3 (EE15 freeze)
+AF_000030,regime_filter,sign(daily_bb_up_ratio) /* regime 代理 */,validation,REGIME_SPECIFIC,,,,,,,False,,LEGACY_RESEARCH; source=commit 31f7266b9e978b031e0b685af4876312eb0090d3 (EE15 freeze)
+AF_000031,bad_classifier,cs_rank(drawdown_20) /* BAD 模型代理 */,portfolio,NO_INCREMENTAL_ALPHA,,,,,,,False,,"LEGACY_RESEARCH; Phase 2 评级 C; source=commit cc20074 (ML-BB Phase 2, rating C)"
+AF_000032,addon_ranking,cs_rank(bb_z) /* ADD_ON 排序代理 */,portfolio,NO_INCREMENTAL_ALPHA,,,,,,,False,,"LEGACY_RESEARCH; Phase 2 评级 C; source=commit cc20074 (ML-BB Phase 2, rating C)"

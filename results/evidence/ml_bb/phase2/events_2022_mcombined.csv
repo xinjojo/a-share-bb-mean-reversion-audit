@@ -1,0 +1,8 @@
+date,kind,order,n,action,ts_code
+2022-03-10,ADD_RANK,"['000858.SZ', '300014.SZ']",2.0,reordered,
+2022-04-14,BAD_VETO,,,vetoed,300122.SZ
+2022-04-26,ADD_RANK,"['601012.SH', '300014.SZ', '300274.SZ']",3.0,reordered,
+2022-06-23,BAD_VETO,,,vetoed,002241.SZ
+2022-07-12,BAD_VETO,,,vetoed,002594.SZ
+2022-08-31,BAD_VETO,,,vetoed,300274.SZ
+2022-12-30,BAD_VETO,,,vetoed,002709.SZ

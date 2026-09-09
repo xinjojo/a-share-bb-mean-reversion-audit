@@ -1,0 +1,4 @@
+date,kind,order,n,action
+2022-03-10,ADD_RANK,"['000858.SZ', '300014.SZ']",2,reordered
+2022-04-26,ADD_RANK,"['601012.SH', '300122.SZ', '300014.SZ']",3,reordered
+2022-10-28,ADD_RANK,"['000568.SZ', '600519.SH']",2,reordered

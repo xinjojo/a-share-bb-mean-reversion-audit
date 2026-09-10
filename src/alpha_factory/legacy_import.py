@@ -1,8 +1,14 @@
-"""A-Share Alpha Factory — legacy research import.
+"""A-Share Alpha Factory — legacy research import（Phase 0.1 幂等版）。
 
 把本项目已研究过的内容导入 Alpha Factory 历史知识库（不伪装成新发现）。
 统一标 LEGACY_RESEARCH，关联 source_commit / source_report。
-breadth 保留为已有有效描述性候选；其余失败项按原审计结论进入 Graveyard。
+
+幂等规则（Phase 0.1 修复）：
+- 以 (factor_name, universe) 为身份键：同名同 universe 已存在（含 INVALID 行）
+  则跳过，不再分配新 factor_id、不再重复 bury / approve / candidates。
+- 因此跑 1 / 2 / 10 次，Registry / Graveyard / Library / Candidates 的 canonical
+  行数完全一致。
+- breadth：VALIDATING 候选 → 进入 ALPHA_CANDIDATES（不再进正式 Library）。
 """
 from __future__ import annotations
 
@@ -35,16 +41,15 @@ LEGACY = [
          family='BB_CONDITIONAL', status='ARCHIVED',
          description='距下轨距离；信号深度描述字段',
          notes='LEGACY_RESEARCH signal definition'),
-    # --- breadth（有效描述性候选 → Library VALIDATING） ---
+    # --- breadth（有效描述性候选 → ALPHA_CANDIDATES，非正式 Library） ---
     dict(factor_name='market_breadth', formula='interaction(daily_bb_signal_count,daily_bb_up_ratio)',
          universe='A', family='BREADTH', status='VALIDATING',
          description='市场宽度：当日 BB 信号数量 + 信号日上涨比例；Phase 1 特征重要性名列前茅',
          notes='LEGACY_RESEARCH candidate; source=' + SOURCES['phase1'],
-         library=True, library_metrics=dict(IC_mean=None, RankIC_mean=None, ICIR=None,
-                                            Q5_Q1_mean=None, Q5_Q1_median=None,
-                                            positive_year_ratio=None, OOS_IC=None, OOS_RankIC=None,
-                                            robustness_grade='CANDIDATE',
-                                            notes='LEGACY_RESEARCH candidate; 待 Alpha Factory 独立验证')),
+         candidate=True,
+         candidate_reason='Phase 1 特征重要性前列；当前 status=VALIDATING，未通过 '
+                          'KEEP/multiple_testing/incremental/OOS/leakage 全门禁，故只入 '
+                          'ALPHA_CANDIDATES，不进 ALPHA_LIBRARY'),
     # --- 失败项（Graveyard） ---
     dict(factor_name='rsi_filter', formula='ts_zscore(signal_day_close,20) /* RSI 代理 */',
          universe='A', family='TREND', status='FAIL', failure_reason='NO_INCREMENTAL_ALPHA',
@@ -82,7 +87,7 @@ LEGACY = [
          notes='LEGACY_RESEARCH; Phase 2 评级 C; source=' + SOURCES['phase2']),
 ]
 
-# 保留但未验证的 HOLD 项（不进 Library/Graveyard，仅 Registry 记录）
+# 保留但未验证的 HOLD 项（不进 Library/Graveyard/Candidates，仅 Registry 记录）
 HOLD = [
     dict(factor_name='early_exit_1.5pct', formula='sign(distance_to_lower_band) /* 退出规则，非因子 */',
          universe='A', family='BB_CONDITIONAL', status='ARCHIVED',
@@ -95,83 +100,112 @@ HOLD = [
 ]
 
 
+def _exists(reg: R.Registry, factor_name: str, universe: str) -> bool:
+    m = reg.df[(reg.df['factor_name'] == factor_name) &
+               (reg.df['universe'] == universe)]
+    return bool(len(m))
+
+
 def import_legacy() -> dict:
-    """执行 legacy 导入。返回 {registered, graveyarded, library} 计数。"""
+    """执行幂等 legacy 导入。返回计数（含 skipped）。"""
     reg = R.Registry()
     gy = R.Graveyard()
-    lib = R.Library()
-    count = {'registered': 0, 'graveyarded': 0, 'library': 0}
+    cand = R.Candidates()
+    count = {'registered': 0, 'graveyarded': 0, 'candidates': 0, 'skipped': 0}
     for item in LEGACY:
+        item = dict(item)  # 不污染模块级定义（幂等需要可重复调用）
         formula = item.pop('formula')
         family = item.pop('family')
         universe = item.pop('universe')
         status = item.pop('status')
-        library = item.pop('library', False)
-        library_metrics = item.pop('library_metrics', None)
+        candidate = item.pop('candidate', False)
+        candidate_reason = item.pop('candidate_reason', None)
         desc = item.pop('description', '')
         notes = item.pop('notes', '')
-        # expression hash only for parseable formulas
+        fname = item['factor_name']
+        # 幂等：同名同 universe 已存在（含 INVALID 行）→ 跳过
+        if _exists(reg, fname, universe):
+            count['skipped'] += 1
+            continue
         eh = None
         try:
             eh = dsl.expression_hash(formula)
         except Exception:
             eh = None
         row = dict(
-            factor_name=item['factor_name'], factor_family=family, formula=formula,
+            factor_name=fname, factor_family=family, formula=formula,
             description=desc, economic_hypothesis=item.get('economic_hypothesis'),
             universe=universe, input_fields=None, lookback=None, operators=None,
-            PIT_status='LEGACY_PIT_REVIEWED', max_source_lag=None, missing_policy='dropna',
-            winsorization='none', normalization='none', expression_hash=eh,
-            complexity_depth=None, complexity_inputs=None, complexity_interactions=None,
-            created_date=date.today().isoformat(),
+            PIT_status='LEGACY_PIT_REVIEWED', max_source_lag=None,
+            missing_policy='dropna', winsorization='none', normalization='none',
+            expression_hash=eh, complexity_depth=None, complexity_inputs=None,
+            complexity_interactions=None, created_date=date.today().isoformat(),
             created_by='legacy_import', experiment_id='LEGACY_RESEARCH',
-            discovery_period='2020-2022', validation_period='2023', test_period='2024',
+            discovery_period='2020-2022', validation_period=2023, test_period=2024,
             status=status, notes=notes,
         )
-        # 避免重复导入
-        if eh and len(reg.df[(reg.df['expression_hash'] == eh) & (reg.df['universe'] == universe)]):
-            continue
         row['factor_id'] = R.next_factor_id(reg.df)
-        reg.add(**row)
+        _row, created = reg.add(force_distinct=True, **row)
+        if not created:
+            count['skipped'] += 1
+            continue
         count['registered'] += 1
         if status == 'FAIL':
-            gy.bury(factor_id=row['factor_id'], factor_name=row['factor_name'],
-                    formula=formula, failure_stage=item.get('failure_stage', 'validation'),
-                    failure_reason=item.get('failure_reason', 'NO_SIGNAL'),
-                    discovery_metric=None, validation_metric=None, test_metric=None,
-                    yearly_direction=None, correlation_with_existing=None,
-                    duplicate_of=item.get('duplicate_of'), leakage_detected=False,
-                    notes=notes)
-            count['graveyarded'] += 1
-        if library and library_metrics:
-            lib.approve(factor_id=row['factor_id'], factor_name=row['factor_name'],
-                        formula=formula, **library_metrics)
-            count['library'] += 1
+            ok = gy.bury(factor_id=row['factor_id'], factor_name=row['factor_name'],
+                         formula=formula, failure_stage=item.get('failure_stage', 'validation'),
+                         failure_reason=item.get('failure_reason', 'NO_SIGNAL'),
+                         discovery_metric=None, validation_metric=None,
+                         test_metric=None, yearly_direction=None,
+                         correlation_with_existing=None,
+                         duplicate_of=item.get('duplicate_of'), leakage_detected=False,
+                         notes=notes)
+            if ok:
+                count['graveyarded'] += 1
+        if candidate:
+            cand.add(factor_id=row['factor_id'], factor_name=row['factor_name'],
+                     formula=formula, status='VALIDATING',
+                     candidate_reason=candidate_reason, notes=notes)
+            count['candidates'] += 1
     for item in HOLD:
+        item = dict(item)  # 不污染模块级定义
         formula = item.pop('formula')
         family = item.pop('family')
         universe = item.pop('universe')
         status = item.pop('status')
         desc = item.pop('description', '')
         notes = item.pop('notes', '')
-        row = dict(factor_name=item['factor_name'], factor_family=family, formula=formula,
+        fname = item['factor_name']
+        if _exists(reg, fname, universe):
+            count['skipped'] += 1
+            continue
+        eh = None
+        try:
+            eh = dsl.expression_hash(formula)
+        except Exception:
+            eh = None
+        row = dict(factor_name=fname, factor_family=family, formula=formula,
                    description=desc, universe=universe, PIT_status='LEGACY_PIT_REVIEWED',
-                   created_by='legacy_import', experiment_id='LEGACY_RESEARCH',
-                   discovery_period='2020-2022', validation_period='2023', test_period='2024',
-                   status=status, notes=notes)
+                   expression_hash=eh, created_by='legacy_import',
+                   experiment_id='LEGACY_RESEARCH', discovery_period='2020-2022',
+                   validation_period=2023, test_period=2024, status=status,
+                   notes=notes)
         row['factor_id'] = R.next_factor_id(reg.df)
-        reg.add(**row)
-        count['registered'] += 1
+        _row, created = reg.add(force_distinct=True, **row)
+        if created:
+            count['registered'] += 1
+        else:
+            count['skipped'] += 1
     return count
 
 
-def write_legacy_mapping() -> str:
+def write_legacy_mapping(path: str | None = None) -> str:
     """Write a CSV mapping of legacy entries to factor_ids."""
     import pandas as pd
     reg = R.Registry()
     m = reg.df[reg.df['experiment_id'] == 'LEGACY_RESEARCH']
-    path = os.path.join(os.path.dirname(os.path.dirname(
-        os.path.dirname(os.path.abspath(__file__)))), 'research', 'alpha_factory',
-        'LEGACY_IMPORT.csv')
+    if path is None:
+        path = os.path.join(os.path.dirname(os.path.dirname(
+            os.path.dirname(os.path.abspath(__file__)))), 'research', 'alpha_factory',
+            'LEGACY_IMPORT.csv')
     m[['factor_id', 'factor_name', 'status', 'formula', 'notes']].to_csv(path, index=False)
     return path

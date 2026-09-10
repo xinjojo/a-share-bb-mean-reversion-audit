@@ -2,7 +2,12 @@
 
 每次 Experiment 必须同时报告：尝试数、通过数、失败数、重复数、leakage 数、
 FDR 通过数、OOS 通过数、KEEP 数、Top factors、Graveyard additions、
-以及累计 hypothesis attempts。禁止只展示赢家。
+以及累计 hypothesis attempts（多口径）。禁止只展示赢家。
+
+Phase 0.1 计数口径（与 registry.MultipleTestingLedger.summary 一致）：
+TOTAL_REQUEST_ATTEMPTS / TOTAL_UNIQUE_EXPRESSIONS / TOTAL_COMPUTED_HYPOTHESES /
+TOTAL_DUPLICATE_REQUESTS / TOTAL_REJECTED_COMPLEXITY / TOTAL_REJECTED_LEAKAGE /
+TOTAL_REJECTED_LOOKBACK / TOTAL_REJECTED_INPUT / TOTAL_REJECTED_SYNTAX。
 """
 from __future__ import annotations
 
@@ -36,9 +41,15 @@ def write_report(experiment_id: str, out_dir: str, sections: dict) -> str:
     return path_md
 
 
+def attempt_summary() -> dict:
+    """全库 hypothesis attempts 多口径汇总。"""
+    mt = R.MultipleTestingLedger()
+    return mt.summary()
+
+
 def tally(experiment_id: str, factor_ids: list[str],
           status_map: dict[str, str]) -> dict:
-    """Tally factor outcomes for a report."""
+    """Tally factor outcomes for a report + 全库 attempt 多口径。"""
     reg = R.Registry()
     counts = {'proposed': 0, 'tested': 0, 'duplicate': 0, 'leakage': 0,
               'fdr_passed': 0, 'oos_passed': 0, 'keep': 0, 'fail': 0, 'archived': 0}
@@ -62,5 +73,5 @@ def tally(experiment_id: str, factor_ids: list[str],
         elif st == 'ARCHIVED':
             counts['archived'] += 1
     counts['total_attempts_this_experiment'] = len(factor_ids)
-    counts['total_hypothesis_attempts_all_time'] = R.MultipleTestingLedger().count_attempts()
+    counts.update(attempt_summary())
     return counts

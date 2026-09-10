@@ -1,2 +1,1 @@
-factor_id,factor_name,formula,IC_mean,RankIC_mean,ICIR,Q5_Q1_mean,Q5_Q1_median,positive_year_ratio,turnover,coverage,OOS_IC,OOS_RankIC,bootstrap_CI,multiple_testing_status,incremental_alpha_status,max_corr_existing,robustness_grade,approved_date,notes
-AF_000004,market_breadth,"interaction(daily_bb_signal_count,daily_bb_up_ratio)",,,,,,,,,,,,,,,CANDIDATE,,LEGACY_RESEARCH candidate; 待 Alpha Factory 独立验证
+factor_id,factor_name,formula,IC_mean,RankIC_mean,ICIR,Q5_Q1_mean,Q5_Q1_median,positive_year_ratio,turnover,coverage,OOS_IC,OOS_RankIC,bootstrap_CI,multiple_testing_status,incremental_alpha_status,oos_audit,leakage,max_corr_existing,robustness_grade,approved_date,notes

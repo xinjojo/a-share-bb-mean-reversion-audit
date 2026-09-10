@@ -58,6 +58,19 @@ def main(max_signals: int | None = None):
     experiment_id = registry.next_experiment_id(exp.df)
     print(f'[*] experiment: {experiment_id}')
 
+    mt0 = registry.MultipleTestingLedger()
+    # ---- 非法候选留痕演示（每个 REJECTED_* 都进 attempt ledger）----
+    BAD_DEMO = [
+        'lead(close,5)',                       # REJECTED_LEAKAGE (forbidden future)
+        'lag(ret_5,17)',                       # REJECTED_LOOKBACK (lookback whitelist)
+        'interaction(interaction(ret_5,atr14_pct),interaction(bb_z,drawdown_20))',  # REJECTED_COMPLEXITY
+        'mystery_field',                       # REJECTED_INPUT (unknown field)
+        'ratio(ret_5',                         # REJECTED_SYNTAX (unbalanced)
+    ]
+    for bad in BAD_DEMO:
+        aid = mt0.record_rejected(experiment_id, bad, universe='A')
+        print(f'    [REJECTED] {bad} -> {aid}')
+
     print('[*] load Universe A...')
     from alpha_factory import data as data_mod
     df = data_mod.load_universe_a(max_signals=max_signals)
@@ -71,6 +84,7 @@ def main(max_signals: int | None = None):
 
     # ---- register all smoke factors (reuse existing factor_id if already registered) ----
     factor_ids = []
+    reused_fids = set()
     for name, expr, family, hyp in SMOKE_FACTORS:
         try:
             eh = dsl.expression_hash(expr)
@@ -82,8 +96,9 @@ def main(max_signals: int | None = None):
             row = existing.iloc[0]
             print(f'    {row["factor_id"]} {name} -> {expr} [REUSE {row["status"]}]')
             factor_ids.append(row['factor_id'])
+            reused_fids.add(row['factor_id'])
             continue
-        row = reg.add(
+        row, created = reg.add(
             factor_name=f'SMOKE_{name}', factor_family=family, formula=expr,
             description=hyp, economic_hypothesis=hyp, universe='A',
             input_fields=None, lookback=None, operators=None,
@@ -93,16 +108,19 @@ def main(max_signals: int | None = None):
             complexity_inputs=dsl.complexity(dsl.parse(expr))['unique_inputs'],
             complexity_interactions=dsl.complexity(dsl.parse(expr))['interactions'],
             created_by='phase0_smoke', experiment_id=experiment_id,
-            discovery_period='2020-2022', validation_period='2023', test_period='2024',
+            discovery_period='2020-2022', validation_period=2023, test_period=2024,
             status='SCREENING', notes='SMOKE_ONLY')
         factor_ids.append(row['factor_id'])
         print(f'    {row["factor_id"]} {name} -> {expr} [{row["status"]}]')
     # ---- attempts ledger ----
+    # 已存在（REUSE）的表达式 → DUPLICATE_REQUEST（计入 request attempts，
+    # 不计入 unique expressions / computed hypotheses）；新注册 → TESTED。
     for fid, (name, expr, family, hyp) in zip(factor_ids, SMOKE_FACTORS):
         for lab in LABELS_A:
             mt.add(experiment_id=experiment_id, factor_id=fid, expression=expr,
                    expression_hash=dsl.expression_hash(expr), horizon='D20',
-                   universe='A', label=lab, variant=1, status='TESTED')
+                   universe='A', label=lab, variant=1,
+                   status='DUPLICATE_REQUEST' if fid in reused_fids else 'TESTED')
 
     # ---- compute + screen ----
     exprs = [s[1] for s in SMOKE_FACTORS]
@@ -174,8 +192,8 @@ def main(max_signals: int | None = None):
                               {fid: 'SCREENING' for fid in factor_ids})
     exp.register(experiment_id, universe='A', factor_count_proposed=len(factor_ids),
                  factor_count_tested=len(factor_ids), factor_ids=','.join(factor_ids),
-                 discovery_period='2020-2022', validation_period='2023',
-                 test_period='2024', horizons='D20', metrics='IC,RankIC,ICIR,Q1Q5',
+                 discovery_period='2020-2022', validation_period=2023,
+                 test_period=2024, horizons='D20', metrics='IC,RankIC,ICIR,Q1Q5',
                  multiple_testing_method='BH-FDR(0.10 surrogate)', code_commit=None,
                  data_hash='sigpath-wide', seed=2026,
                  result_summary=f'SMOKE_ONLY; attempts={counts}')
@@ -203,7 +221,9 @@ def main(max_signals: int | None = None):
     print('[*] benchmark:', b)
 
     print(f'== DONE in {time.time()-t0:.1f}s ; experiment={experiment_id} ==')
-    print(f'== TOTAL HYPOTHESIS ATTEMPTS (all-time) = {mt.count_attempts()} ==')
+    print('== HYPOTHESIS ATTEMPTS (all-time, multi-metric) ==')
+    for k, v in mt.summary().items():
+        print(f'   {k} = {v}')
     return experiment_id
 
 

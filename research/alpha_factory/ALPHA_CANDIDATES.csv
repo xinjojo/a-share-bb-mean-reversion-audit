@@ -1,0 +1,2 @@
+factor_id,factor_name,formula,status,candidate_reason,added_date,notes
+AF_000004,market_breadth,"interaction(daily_bb_signal_count,daily_bb_up_ratio)",VALIDATING,"Phase 1 feature importance top; status=VALIDATING; not KEEP → ALPHA_CANDIDATES, not ALPHA_LIBRARY",2026-09-10,moved from ALPHA_LIBRARY in Phase 0.1 migration

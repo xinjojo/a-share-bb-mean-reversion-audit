@@ -1,0 +1,3 @@
+target,family,variant,disc_ic,val_ic,test_ic,note
+Y_RETURN,rf,SMALL,0.1192750739059897,0.0039592640944754,-0.0259098224288486,selected by 2023 validation; 2024 test opened once
+Y_RISK,ridge,REGULARIZED,0.2412753411185615,0.2197958150593289,0.2327066161748077,selected by 2023 validation; 2024 test opened once

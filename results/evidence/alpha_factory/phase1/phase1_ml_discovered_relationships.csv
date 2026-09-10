@@ -1,0 +1,24 @@
+relationship_id,model,features,rule_description,support,direction
+MLR_001,rf/SMALL,bb_z,ML top-bucket 信号在该特征中位数 <= 底部桶,18930,<=
+MLR_002,rf/SMALL,distance_to_lower_band,ML top-bucket 信号在该特征中位数 <= 底部桶,18930,<=
+MLR_003,rf/SMALL,distance_ma5,ML top-bucket 信号在该特征中位数 <= 底部桶,18930,<=
+MLR_004,rf/SMALL,distance_ma10,ML top-bucket 信号在该特征中位数 <= 底部桶,18930,<=
+MLR_005,rf/SMALL,distance_ma20,ML top-bucket 信号在该特征中位数 <= 底部桶,18930,<=
+MLR_006,rf/SMALL,distance_ma60,ML top-bucket 信号在该特征中位数 <= 底部桶,18930,<=
+MLR_007,rf/SMALL,ret_1d,ML top-bucket 信号在该特征中位数 <= 底部桶,18930,<=
+MLR_008,rf/SMALL,ret_3d,ML top-bucket 信号在该特征中位数 <= 底部桶,18930,<=
+MLR_009,rf/SMALL,ret_5d,ML top-bucket 信号在该特征中位数 <= 底部桶,18930,<=
+MLR_010,rf/SMALL,ret_10d,ML top-bucket 信号在该特征中位数 <= 底部桶,18930,<=
+MLR_011,rf/SMALL,ret_20d,ML top-bucket 信号在该特征中位数 <= 底部桶,18930,<=
+MLR_012,rf/SMALL,ret_60d,ML top-bucket 信号在该特征中位数 <= 底部桶,18930,<=
+MLR_013,rf/SMALL,drawdown_20,ML top-bucket 信号在该特征中位数 <= 底部桶,18930,<=
+MLR_014,rf/SMALL,drawdown_60,ML top-bucket 信号在该特征中位数 <= 底部桶,18930,<=
+MLR_015,rf/SMALL,distance_52w_high,ML top-bucket 信号在该特征中位数 <= 底部桶,18930,<=
+MLR_016,rf/SMALL,atr14_pct,ML top-bucket 信号在该特征中位数 >= 底部桶,18930,>=
+MLR_017,rf/SMALL,realized_vol_10,ML top-bucket 信号在该特征中位数 >= 底部桶,18930,>=
+MLR_018,rf/SMALL,realized_vol_20,ML top-bucket 信号在该特征中位数 >= 底部桶,18930,>=
+MLR_019,rf/SMALL,bb_width,ML top-bucket 信号在该特征中位数 >= 底部桶,18930,>=
+MLR_020,rf/SMALL,daily_range_pct,ML top-bucket 信号在该特征中位数 >= 底部桶,18930,>=
+MLR_021,rf/SMALL,gap_pct,ML top-bucket 信号在该特征中位数 <= 底部桶,18930,<=
+MLR_022,rf/SMALL,log_amount,ML top-bucket 信号在该特征中位数 >= 底部桶,18930,>=
+MLR_023,rf/SMALL,volume_ratio_5_20,ML top-bucket 信号在该特征中位数 >= 底部桶,18930,>=

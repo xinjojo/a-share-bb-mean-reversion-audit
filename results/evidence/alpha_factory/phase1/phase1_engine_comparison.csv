@@ -1,0 +1,12 @@
+engine,name,val_rankic,test_rankic,note
+BASELINE,baseline_bb_z,,,single-factor RankIC in phase1_symbolic_all (univ A)
+BASELINE,baseline_amount,,,single-factor RankIC in phase1_symbolic_all (univ A)
+BASELINE,baseline_atr14_pct,,,single-factor RankIC in phase1_symbolic_all (univ A)
+BASELINE,baseline_ret_5d,,,single-factor RankIC in phase1_symbolic_all (univ A)
+BASELINE,baseline_breadth,,,single-factor RankIC in phase1_symbolic_all (univ A)
+SYMBOLIC,"diff(distance_to_lower_band,log_amount)",0.1146111821723479,-0.0164397253648967,best by 2023 val among FDR-pass
+ML,rf/SMALL,0.0039592640944754,-0.0259098224288486,selected Y_RETURN model
+ML_INCR,baseline_linear:Y_RETURN,0.0537884727191962,-0.0172616187423399,incremental check
+ML_INCR,full_ml:Y_RETURN,0.0039592640944754,-0.0259098224288486,incremental check
+ML_INCR,baseline_linear:Y_RISK,0.2327755842591483,0.2625060581307221,incremental check
+ML_INCR,full_ml:Y_RISK,0.2197958150593289,0.2327066161748077,incremental check

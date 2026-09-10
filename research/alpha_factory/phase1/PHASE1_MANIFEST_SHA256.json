@@ -1,0 +1,6 @@
+{
+  "PHASE1_BASE_FEATURE_MANIFEST.csv": "0b29bf2d0c2c16ef21a04ccffc168d9c0518d387e3882fdf2e3bc64daa05c3e3",
+  "PHASE1_SYMBOLIC_MANIFEST.csv": "3841dedb94bf4cb0a3372864c9b7ee1a08f0f557538c734717928e00c4daf6d5",
+  "generated_at": "2026-09-10T22:40:00+08:00",
+  "note": "Commit A 冻结（输入池补齐指数 1/20 日 horizon 后重算）"
+}

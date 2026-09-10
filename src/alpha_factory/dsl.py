@@ -26,6 +26,20 @@ INPUT_FIELDS_A = {
     'vol_10', 'vol_20', 'atr14_pct', 'amount_ratio_5_20',
     'drawdown_20', 'drawdown_60', 'distance_52w_high',
     'gap_pct', 'daily_range_pct',
+    # ---- Alpha Factory Phase 1 扩展（Universe A 特征池，PIT 已审计）----
+    # 价格位置（带 d 后缀，与 Phase 1 特征列同名）
+    'distance_ma5', 'distance_ma10', 'distance_ma20', 'distance_ma60',
+    'ret_1d', 'ret_3d', 'ret_5d', 'ret_10d', 'ret_20d', 'ret_60d',
+    # 波动 / 流动性扩展
+    'bb_width', 'realized_vol_10', 'realized_vol_20', 'log_amount',
+    'amount_percentile', 'volume_ratio_5_20',
+    # 信号状态
+    'level_no', 'days_since_first_signal', 'signal_count_last_20d',
+    # 市场环境扩展
+    'daily_bb_down_ratio', 'market_up_ratio', 'market_down_ratio',
+    'csi300_ret_1', 'csi300_ret_5', 'csi300_ret_20',
+    'csi500_ret_1', 'csi500_ret_5', 'csi500_ret_20',
+    'csi1000_ret_1', 'csi1000_ret_5', 'csi1000_ret_20',
 }
 INPUT_FIELDS_B = {
     'open', 'high', 'low', 'close', 'volume', 'amount', 'adj_factor',

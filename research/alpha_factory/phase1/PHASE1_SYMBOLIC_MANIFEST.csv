@@ -1,0 +1,301 @@
+request_index,generator,formula,canonical_expression,expression_hash,family,expected_direction,lookback,status
+1,HUMAN,"ratio(ret_5d, atr14_pct)","ratio(ret_5d,atr14_pct)",0e3860c709db098c,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+2,HUMAN,"interaction(bb_z, daily_bb_signal_count)","interaction(bb_z,daily_bb_signal_count)",a6d54e1014d6c51d,BB_CONDITIONAL,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+3,HUMAN,"diff(ret_5d, csi300_ret_5)","diff(ret_5d,csi300_ret_5)",e5cae5fd4bba258e,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+4,HUMAN,"ratio(distance_to_lower_band, bb_width)","ratio(distance_to_lower_band,bb_width)",d2e2f5e890af43f3,BB_CONDITIONAL,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+5,HUMAN,"interaction(drawdown_20, daily_bb_up_ratio)","interaction(daily_bb_up_ratio,drawdown_20)",02d0649a4fc687b9,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+6,HUMAN,"diff(bb_z, cs_zscore(ret_5d))","diff(bb_z,(cs_zscore,ret_5d))",b128134943507e91,BB_CONDITIONAL,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+7,HUMAN,"ratio(ret_10d, realized_vol_20)","ratio(ret_10d,realized_vol_20)",0aa1e942e35b7de0,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+8,HUMAN,"interaction(distance_to_lower_band, amount_ratio_5_20)","interaction(amount_ratio_5_20,distance_to_lower_band)",34cbbd9ec3895dee,BB_CONDITIONAL,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+9,HUMAN,"diff(ret_20d, csi1000_ret_20)","diff(ret_20d,csi1000_ret_20)",0eb53521380355be,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+10,HUMAN,"ratio(drawdown_60, atr14_pct)","ratio(drawdown_60,atr14_pct)",6e041e67f0a326af,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+11,HUMAN,"interaction(bb_z, turnover_rank)","interaction(bb_z,turnover_rank)",cfbef2434d54d913,BB_CONDITIONAL,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+12,HUMAN,"diff(ret_5d, ret_20d)","diff(ret_5d,ret_20d)",750b8550c03eee27,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+13,HUMAN,"ratio(gap_pct, atr14_pct)","ratio(gap_pct,atr14_pct)",f26a3521c66da8a3,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+14,HUMAN,"interaction(daily_bb_signal_count, daily_bb_down_ratio)","interaction(daily_bb_down_ratio,daily_bb_signal_count)",7c05654c56b7c68f,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+15,HUMAN,"diff(csi500_ret_5, csi300_ret_5)","diff(csi500_ret_5,csi300_ret_5)",3b659665f42059e9,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+16,HUMAN,"ratio(log_amount, atr14_pct)","ratio(log_amount,atr14_pct)",a17266773794c175,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+17,HUMAN,"interaction(distance_52w_high, ret_20d)","interaction(distance_52w_high,ret_20d)",859a2bdc0acb5243,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+18,HUMAN,"diff(ret_3d, cs_zscore(ret_10d))","diff(ret_3d,(cs_zscore,ret_10d))",897fadb138dccf4b,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+19,HUMAN,"ratio(daily_range_pct, realized_vol_10)","ratio(daily_range_pct,realized_vol_10)",e78c2ff1d46da07f,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+20,HUMAN,"interaction(bb_width, daily_bb_signal_count)","interaction(bb_width,daily_bb_signal_count)",a77c360f69f30eed,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+21,HUMAN,"diff(drawdown_20, drawdown_60)","diff(drawdown_20,drawdown_60)",0ce7c003fc00a8d6,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+22,HUMAN,"ratio(ret_20d, bb_width)","ratio(ret_20d,bb_width)",f74fc28479901dab,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+23,HUMAN,"interaction(signal_count_last_20d, bb_z)","interaction(bb_z,signal_count_last_20d)",f4c68b6d7a39d2f7,BB_CONDITIONAL,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+24,HUMAN,"diff(ret_5d, csi500_ret_5)","diff(ret_5d,csi500_ret_5)",8ba6f3a958e263e6,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+25,HUMAN,"ratio(distance_ma20, atr14_pct)","ratio(distance_ma20,atr14_pct)",cd1978b65dbb1b43,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+26,HUMAN,"interaction(market_up_ratio, bb_z)","interaction(bb_z,market_up_ratio)",04d87a064742e6c9,BB_CONDITIONAL,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+27,HUMAN,"diff(log_amount, cs_zscore(amount_ratio_5_20))","diff(log_amount,(cs_zscore,amount_ratio_5_20))",2d5d573f54c83146,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+28,HUMAN,"ratio(ret_60d, realized_vol_20)","ratio(ret_60d,realized_vol_20)",27a39a07b5baeb75,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+29,HUMAN,"interaction(days_since_first_signal, bb_z)","interaction(bb_z,days_since_first_signal)",5469f24293f831dd,BB_CONDITIONAL,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+30,HUMAN,"diff(ret_1d, ret_5d)","diff(ret_1d,ret_5d)",44cecbf2898e7fb9,INTERACTION,负向（超跌越深/广度越大，D20 越高）,NA,PROPOSED
+31,TEMPLATE,"ratio(bb_z,distance_to_lower_band)","ratio(bb_z,distance_to_lower_band)",036921028205c5be,BB_CONDITIONAL,NA,NA,PROPOSED
+32,TEMPLATE,"diff(bb_z,distance_to_lower_band)","diff(bb_z,distance_to_lower_band)",2a6b0acdb8d90be2,BB_CONDITIONAL,NA,NA,PROPOSED
+33,TEMPLATE,"interaction(bb_z,distance_to_lower_band)","interaction(bb_z,distance_to_lower_band)",f7c56ac13becedde,BB_CONDITIONAL,NA,NA,PROPOSED
+34,TEMPLATE,"min(bb_z,distance_to_lower_band)","min(bb_z,distance_to_lower_band)",4e89bfeaa8fcf3a0,BB_CONDITIONAL,NA,NA,PROPOSED
+35,TEMPLATE,"max(bb_z,distance_to_lower_band)","max(bb_z,distance_to_lower_band)",8eb7971ced432b75,BB_CONDITIONAL,NA,NA,PROPOSED
+36,TEMPLATE,"ratio(bb_z,ret_5d)","ratio(bb_z,ret_5d)",71e700ef12c0028b,BB_CONDITIONAL,NA,NA,PROPOSED
+37,TEMPLATE,"diff(bb_z,ret_5d)","diff(bb_z,ret_5d)",4abf792fc2c89b6c,BB_CONDITIONAL,NA,NA,PROPOSED
+38,TEMPLATE,"interaction(bb_z,ret_5d)","interaction(bb_z,ret_5d)",5ab64b856e63c733,BB_CONDITIONAL,NA,NA,PROPOSED
+39,TEMPLATE,"min(bb_z,ret_5d)","min(bb_z,ret_5d)",1beeee70a44f02f6,BB_CONDITIONAL,NA,NA,PROPOSED
+40,TEMPLATE,"max(bb_z,ret_5d)","max(bb_z,ret_5d)",9847edea9806a398,BB_CONDITIONAL,NA,NA,PROPOSED
+41,TEMPLATE,"ratio(bb_z,ret_20d)","ratio(bb_z,ret_20d)",80326899f96563ed,BB_CONDITIONAL,NA,NA,PROPOSED
+42,TEMPLATE,"diff(bb_z,ret_20d)","diff(bb_z,ret_20d)",fbeecfd13407ccc5,BB_CONDITIONAL,NA,NA,PROPOSED
+43,TEMPLATE,"interaction(bb_z,ret_20d)","interaction(bb_z,ret_20d)",b1113c8ea2f6016d,BB_CONDITIONAL,NA,NA,PROPOSED
+44,TEMPLATE,"min(bb_z,ret_20d)","min(bb_z,ret_20d)",12bef38e549dcbdf,BB_CONDITIONAL,NA,NA,PROPOSED
+45,TEMPLATE,"max(bb_z,ret_20d)","max(bb_z,ret_20d)",63485569eb825bbe,BB_CONDITIONAL,NA,NA,PROPOSED
+46,TEMPLATE,"ratio(bb_z,atr14_pct)","ratio(bb_z,atr14_pct)",0ca98ffebec894a8,BB_CONDITIONAL,NA,NA,PROPOSED
+47,TEMPLATE,"diff(bb_z,atr14_pct)","diff(bb_z,atr14_pct)",b590911b886ee9b0,BB_CONDITIONAL,NA,NA,PROPOSED
+48,TEMPLATE,"interaction(bb_z,atr14_pct)","interaction(atr14_pct,bb_z)",6e9024020df09b51,BB_CONDITIONAL,NA,NA,PROPOSED
+49,TEMPLATE,"min(bb_z,atr14_pct)","min(atr14_pct,bb_z)",b900022887725736,BB_CONDITIONAL,NA,NA,PROPOSED
+50,TEMPLATE,"max(bb_z,atr14_pct)","max(atr14_pct,bb_z)",1e5d8fd920d14130,BB_CONDITIONAL,NA,NA,PROPOSED
+51,TEMPLATE,"ratio(bb_z,bb_width)","ratio(bb_z,bb_width)",46102eb043204664,BB_CONDITIONAL,NA,NA,PROPOSED
+52,TEMPLATE,"diff(bb_z,bb_width)","diff(bb_z,bb_width)",dfc68d361df1180a,BB_CONDITIONAL,NA,NA,PROPOSED
+53,TEMPLATE,"interaction(bb_z,bb_width)","interaction(bb_width,bb_z)",07f7cf2081696f06,BB_CONDITIONAL,NA,NA,PROPOSED
+54,TEMPLATE,"min(bb_z,bb_width)","min(bb_width,bb_z)",9f053a006a2e50bd,BB_CONDITIONAL,NA,NA,PROPOSED
+55,TEMPLATE,"max(bb_z,bb_width)","max(bb_width,bb_z)",8872efa89cb03bea,BB_CONDITIONAL,NA,NA,PROPOSED
+56,TEMPLATE,"ratio(bb_z,drawdown_20)","ratio(bb_z,drawdown_20)",67fe959681ac6d98,BB_CONDITIONAL,NA,NA,PROPOSED
+57,TEMPLATE,"diff(bb_z,drawdown_20)","diff(bb_z,drawdown_20)",2cccd2f68b337852,BB_CONDITIONAL,NA,NA,PROPOSED
+58,TEMPLATE,"interaction(bb_z,drawdown_20)","interaction(bb_z,drawdown_20)",b5d62832fc4cfbea,BB_CONDITIONAL,NA,NA,PROPOSED
+59,TEMPLATE,"min(bb_z,drawdown_20)","min(bb_z,drawdown_20)",185025e170f04daa,BB_CONDITIONAL,NA,NA,PROPOSED
+60,TEMPLATE,"max(bb_z,drawdown_20)","max(bb_z,drawdown_20)",f2435535512c0144,BB_CONDITIONAL,NA,NA,PROPOSED
+61,TEMPLATE,"ratio(bb_z,distance_52w_high)","ratio(bb_z,distance_52w_high)",996d44672700cd9b,BB_CONDITIONAL,NA,NA,PROPOSED
+62,TEMPLATE,"diff(bb_z,distance_52w_high)","diff(bb_z,distance_52w_high)",67a6b68c48632899,BB_CONDITIONAL,NA,NA,PROPOSED
+63,TEMPLATE,"interaction(bb_z,distance_52w_high)","interaction(bb_z,distance_52w_high)",87c7dfefbecc3532,BB_CONDITIONAL,NA,NA,PROPOSED
+64,TEMPLATE,"min(bb_z,distance_52w_high)","min(bb_z,distance_52w_high)",3aad502d63a969e3,BB_CONDITIONAL,NA,NA,PROPOSED
+65,TEMPLATE,"max(bb_z,distance_52w_high)","max(bb_z,distance_52w_high)",b8ea44b935608d01,BB_CONDITIONAL,NA,NA,PROPOSED
+66,TEMPLATE,"ratio(bb_z,log_amount)","ratio(bb_z,log_amount)",b696be5584408e84,BB_CONDITIONAL,NA,NA,PROPOSED
+67,TEMPLATE,"diff(bb_z,log_amount)","diff(bb_z,log_amount)",4f23a990fa8bb681,BB_CONDITIONAL,NA,NA,PROPOSED
+68,TEMPLATE,"interaction(bb_z,log_amount)","interaction(bb_z,log_amount)",26c07482aa185c9a,BB_CONDITIONAL,NA,NA,PROPOSED
+69,TEMPLATE,"min(bb_z,log_amount)","min(bb_z,log_amount)",461972531df201b8,BB_CONDITIONAL,NA,NA,PROPOSED
+70,TEMPLATE,"max(bb_z,log_amount)","max(bb_z,log_amount)",d5d09acb32197af7,BB_CONDITIONAL,NA,NA,PROPOSED
+71,TEMPLATE,"ratio(bb_z,amount_ratio_5_20)","ratio(bb_z,amount_ratio_5_20)",faedafdf093cb6ce,BB_CONDITIONAL,NA,NA,PROPOSED
+72,TEMPLATE,"diff(bb_z,amount_ratio_5_20)","diff(bb_z,amount_ratio_5_20)",38c9a1ecc3757fef,BB_CONDITIONAL,NA,NA,PROPOSED
+73,TEMPLATE,"interaction(bb_z,amount_ratio_5_20)","interaction(amount_ratio_5_20,bb_z)",0b7ce1c07d76071a,BB_CONDITIONAL,NA,NA,PROPOSED
+74,TEMPLATE,"min(bb_z,amount_ratio_5_20)","min(amount_ratio_5_20,bb_z)",99c7794528a006e1,BB_CONDITIONAL,NA,NA,PROPOSED
+75,TEMPLATE,"max(bb_z,amount_ratio_5_20)","max(amount_ratio_5_20,bb_z)",bffe50416fce2cf4,BB_CONDITIONAL,NA,NA,PROPOSED
+76,TEMPLATE,"ratio(bb_z,turnover_rank)","ratio(bb_z,turnover_rank)",c4c83c7dbc4ffeeb,BB_CONDITIONAL,NA,NA,PROPOSED
+77,TEMPLATE,"diff(bb_z,turnover_rank)","diff(bb_z,turnover_rank)",9a5fd9ca983eaf05,BB_CONDITIONAL,NA,NA,PROPOSED
+78,TEMPLATE,"min(bb_z,turnover_rank)","min(bb_z,turnover_rank)",178a50fc726cbf96,BB_CONDITIONAL,NA,NA,PROPOSED
+79,TEMPLATE,"max(bb_z,turnover_rank)","max(bb_z,turnover_rank)",78e2f0da2e46dfe5,BB_CONDITIONAL,NA,NA,PROPOSED
+80,TEMPLATE,"ratio(bb_z,daily_bb_signal_count)","ratio(bb_z,daily_bb_signal_count)",3cd229f8960795c2,BB_CONDITIONAL,NA,NA,PROPOSED
+81,TEMPLATE,"diff(bb_z,daily_bb_signal_count)","diff(bb_z,daily_bb_signal_count)",3783f5313d135588,BB_CONDITIONAL,NA,NA,PROPOSED
+82,TEMPLATE,"min(bb_z,daily_bb_signal_count)","min(bb_z,daily_bb_signal_count)",a52438a80130f2d4,BB_CONDITIONAL,NA,NA,PROPOSED
+83,TEMPLATE,"max(bb_z,daily_bb_signal_count)","max(bb_z,daily_bb_signal_count)",34ebbc1ff36af88a,BB_CONDITIONAL,NA,NA,PROPOSED
+84,TEMPLATE,"ratio(bb_z,market_up_ratio)","ratio(bb_z,market_up_ratio)",b393e0871713a4c8,BB_CONDITIONAL,NA,NA,PROPOSED
+85,TEMPLATE,"diff(bb_z,market_up_ratio)","diff(bb_z,market_up_ratio)",d34f1f28af9984f3,BB_CONDITIONAL,NA,NA,PROPOSED
+86,TEMPLATE,"min(bb_z,market_up_ratio)","min(bb_z,market_up_ratio)",897ad673e7ee07b5,BB_CONDITIONAL,NA,NA,PROPOSED
+87,TEMPLATE,"max(bb_z,market_up_ratio)","max(bb_z,market_up_ratio)",987a3680a90109fd,BB_CONDITIONAL,NA,NA,PROPOSED
+88,TEMPLATE,"ratio(bb_z,csi300_ret_5)","ratio(bb_z,csi300_ret_5)",0cb28f8f3998527d,BB_CONDITIONAL,NA,NA,PROPOSED
+89,TEMPLATE,"diff(bb_z,csi300_ret_5)","diff(bb_z,csi300_ret_5)",04486c089d5707b4,BB_CONDITIONAL,NA,NA,PROPOSED
+90,TEMPLATE,"interaction(bb_z,csi300_ret_5)","interaction(bb_z,csi300_ret_5)",26541dda28e68c63,BB_CONDITIONAL,NA,NA,PROPOSED
+91,TEMPLATE,"min(bb_z,csi300_ret_5)","min(bb_z,csi300_ret_5)",af42b231b26deedb,BB_CONDITIONAL,NA,NA,PROPOSED
+92,TEMPLATE,"max(bb_z,csi300_ret_5)","max(bb_z,csi300_ret_5)",5c44c4faaf98dee0,BB_CONDITIONAL,NA,NA,PROPOSED
+93,TEMPLATE,"ratio(bb_z,csi500_ret_5)","ratio(bb_z,csi500_ret_5)",d0b7e7b9ea04855b,BB_CONDITIONAL,NA,NA,PROPOSED
+94,TEMPLATE,"diff(bb_z,csi500_ret_5)","diff(bb_z,csi500_ret_5)",bb8ec0fa70df3d6f,BB_CONDITIONAL,NA,NA,PROPOSED
+95,TEMPLATE,"interaction(bb_z,csi500_ret_5)","interaction(bb_z,csi500_ret_5)",c08a5734eb156e9f,BB_CONDITIONAL,NA,NA,PROPOSED
+96,TEMPLATE,"min(bb_z,csi500_ret_5)","min(bb_z,csi500_ret_5)",b0667bef050e2a3c,BB_CONDITIONAL,NA,NA,PROPOSED
+97,TEMPLATE,"max(bb_z,csi500_ret_5)","max(bb_z,csi500_ret_5)",4041d353287acce3,BB_CONDITIONAL,NA,NA,PROPOSED
+98,TEMPLATE,"ratio(bb_z,gap_pct)","ratio(bb_z,gap_pct)",e6ac070ecbb4b10d,BB_CONDITIONAL,NA,NA,PROPOSED
+99,TEMPLATE,"diff(bb_z,gap_pct)","diff(bb_z,gap_pct)",f58e6e1e4c95e04b,BB_CONDITIONAL,NA,NA,PROPOSED
+100,TEMPLATE,"interaction(bb_z,gap_pct)","interaction(bb_z,gap_pct)",1bc17cc2614cbae4,BB_CONDITIONAL,NA,NA,PROPOSED
+101,TEMPLATE,"min(bb_z,gap_pct)","min(bb_z,gap_pct)",8c77077ca125c7fe,BB_CONDITIONAL,NA,NA,PROPOSED
+102,TEMPLATE,"max(bb_z,gap_pct)","max(bb_z,gap_pct)",76fc2c66dd45afdc,BB_CONDITIONAL,NA,NA,PROPOSED
+103,TEMPLATE,"ratio(distance_to_lower_band,ret_5d)","ratio(distance_to_lower_band,ret_5d)",e687f0ea03cdc974,BB_CONDITIONAL,NA,NA,PROPOSED
+104,TEMPLATE,"diff(distance_to_lower_band,ret_5d)","diff(distance_to_lower_band,ret_5d)",830866afb3a4fc13,BB_CONDITIONAL,NA,NA,PROPOSED
+105,TEMPLATE,"interaction(distance_to_lower_band,ret_5d)","interaction(distance_to_lower_band,ret_5d)",7c79f64451143b79,BB_CONDITIONAL,NA,NA,PROPOSED
+106,TEMPLATE,"min(distance_to_lower_band,ret_5d)","min(distance_to_lower_band,ret_5d)",27190575c437f65b,BB_CONDITIONAL,NA,NA,PROPOSED
+107,TEMPLATE,"max(distance_to_lower_band,ret_5d)","max(distance_to_lower_band,ret_5d)",1377cdf37b24562d,BB_CONDITIONAL,NA,NA,PROPOSED
+108,TEMPLATE,"ratio(distance_to_lower_band,ret_20d)","ratio(distance_to_lower_band,ret_20d)",4b3eef3225b8357b,BB_CONDITIONAL,NA,NA,PROPOSED
+109,TEMPLATE,"diff(distance_to_lower_band,ret_20d)","diff(distance_to_lower_band,ret_20d)",199f66874fe413bf,BB_CONDITIONAL,NA,NA,PROPOSED
+110,TEMPLATE,"interaction(distance_to_lower_band,ret_20d)","interaction(distance_to_lower_band,ret_20d)",2ee911f8008ec176,BB_CONDITIONAL,NA,NA,PROPOSED
+111,TEMPLATE,"min(distance_to_lower_band,ret_20d)","min(distance_to_lower_band,ret_20d)",38f2f95a445163f9,BB_CONDITIONAL,NA,NA,PROPOSED
+112,TEMPLATE,"max(distance_to_lower_band,ret_20d)","max(distance_to_lower_band,ret_20d)",a09becb2d9a5a9bf,BB_CONDITIONAL,NA,NA,PROPOSED
+113,TEMPLATE,"ratio(distance_to_lower_band,atr14_pct)","ratio(distance_to_lower_band,atr14_pct)",401c6baafd0dd07b,BB_CONDITIONAL,NA,NA,PROPOSED
+114,TEMPLATE,"diff(distance_to_lower_band,atr14_pct)","diff(distance_to_lower_band,atr14_pct)",71f03c22145cf43d,BB_CONDITIONAL,NA,NA,PROPOSED
+115,TEMPLATE,"interaction(distance_to_lower_band,atr14_pct)","interaction(atr14_pct,distance_to_lower_band)",1b28fe41b5a62c5d,BB_CONDITIONAL,NA,NA,PROPOSED
+116,TEMPLATE,"min(distance_to_lower_band,atr14_pct)","min(atr14_pct,distance_to_lower_band)",57506517aa0c5ad9,BB_CONDITIONAL,NA,NA,PROPOSED
+117,TEMPLATE,"max(distance_to_lower_band,atr14_pct)","max(atr14_pct,distance_to_lower_band)",b7680a340776f46a,BB_CONDITIONAL,NA,NA,PROPOSED
+118,TEMPLATE,"diff(distance_to_lower_band,bb_width)","diff(distance_to_lower_band,bb_width)",daac6d3c407525df,BB_CONDITIONAL,NA,NA,PROPOSED
+119,TEMPLATE,"interaction(distance_to_lower_band,bb_width)","interaction(bb_width,distance_to_lower_band)",174d3969130637de,BB_CONDITIONAL,NA,NA,PROPOSED
+120,TEMPLATE,"min(distance_to_lower_band,bb_width)","min(bb_width,distance_to_lower_band)",57a08c480c77b3dc,BB_CONDITIONAL,NA,NA,PROPOSED
+121,TEMPLATE,"max(distance_to_lower_band,bb_width)","max(bb_width,distance_to_lower_band)",7ac659370aca60d6,BB_CONDITIONAL,NA,NA,PROPOSED
+122,TEMPLATE,"ratio(distance_to_lower_band,drawdown_20)","ratio(distance_to_lower_band,drawdown_20)",549b391794456e14,BB_CONDITIONAL,NA,NA,PROPOSED
+123,TEMPLATE,"diff(distance_to_lower_band,drawdown_20)","diff(distance_to_lower_band,drawdown_20)",3915140489d033ab,BB_CONDITIONAL,NA,NA,PROPOSED
+124,TEMPLATE,"interaction(distance_to_lower_band,drawdown_20)","interaction(distance_to_lower_band,drawdown_20)",4676e0ee507e5aa9,BB_CONDITIONAL,NA,NA,PROPOSED
+125,TEMPLATE,"min(distance_to_lower_band,drawdown_20)","min(distance_to_lower_band,drawdown_20)",268c2f95c0dee7e0,BB_CONDITIONAL,NA,NA,PROPOSED
+126,TEMPLATE,"max(distance_to_lower_band,drawdown_20)","max(distance_to_lower_band,drawdown_20)",6ec8786a14bf1140,BB_CONDITIONAL,NA,NA,PROPOSED
+127,TEMPLATE,"ratio(distance_to_lower_band,distance_52w_high)","ratio(distance_to_lower_band,distance_52w_high)",23ec334756067f40,BB_CONDITIONAL,NA,NA,PROPOSED
+128,TEMPLATE,"diff(distance_to_lower_band,distance_52w_high)","diff(distance_to_lower_band,distance_52w_high)",739c630a31d3116f,BB_CONDITIONAL,NA,NA,PROPOSED
+129,TEMPLATE,"interaction(distance_to_lower_band,distance_52w_high)","interaction(distance_52w_high,distance_to_lower_band)",45576d3a41fd60ed,BB_CONDITIONAL,NA,NA,PROPOSED
+130,TEMPLATE,"min(distance_to_lower_band,distance_52w_high)","min(distance_52w_high,distance_to_lower_band)",18d763918a5e30f1,BB_CONDITIONAL,NA,NA,PROPOSED
+131,TEMPLATE,"max(distance_to_lower_band,distance_52w_high)","max(distance_52w_high,distance_to_lower_band)",11750d48335abd0f,BB_CONDITIONAL,NA,NA,PROPOSED
+132,TEMPLATE,"ratio(distance_to_lower_band,log_amount)","ratio(distance_to_lower_band,log_amount)",dcf55f69807340aa,BB_CONDITIONAL,NA,NA,PROPOSED
+133,TEMPLATE,"diff(distance_to_lower_band,log_amount)","diff(distance_to_lower_band,log_amount)",6e943fa7c7b09081,BB_CONDITIONAL,NA,NA,PROPOSED
+134,TEMPLATE,"interaction(distance_to_lower_band,log_amount)","interaction(distance_to_lower_band,log_amount)",4a8cbfadcadeb612,BB_CONDITIONAL,NA,NA,PROPOSED
+135,TEMPLATE,"min(distance_to_lower_band,log_amount)","min(distance_to_lower_band,log_amount)",e1bc2c3ddc1c5e9c,BB_CONDITIONAL,NA,NA,PROPOSED
+136,TEMPLATE,"max(distance_to_lower_band,log_amount)","max(distance_to_lower_band,log_amount)",7ca4e5389f92b98b,BB_CONDITIONAL,NA,NA,PROPOSED
+137,TEMPLATE,"ratio(distance_to_lower_band,amount_ratio_5_20)","ratio(distance_to_lower_band,amount_ratio_5_20)",0796bae587d90312,BB_CONDITIONAL,NA,NA,PROPOSED
+138,TEMPLATE,"diff(distance_to_lower_band,amount_ratio_5_20)","diff(distance_to_lower_band,amount_ratio_5_20)",3277b4bf4436c9c1,BB_CONDITIONAL,NA,NA,PROPOSED
+139,TEMPLATE,"min(distance_to_lower_band,amount_ratio_5_20)","min(amount_ratio_5_20,distance_to_lower_band)",5d31aa29ecfc2571,BB_CONDITIONAL,NA,NA,PROPOSED
+140,TEMPLATE,"max(distance_to_lower_band,amount_ratio_5_20)","max(amount_ratio_5_20,distance_to_lower_band)",1b80c047837b3b5d,BB_CONDITIONAL,NA,NA,PROPOSED
+141,TEMPLATE,"ratio(distance_to_lower_band,turnover_rank)","ratio(distance_to_lower_band,turnover_rank)",e731a35e5b6aea2f,BB_CONDITIONAL,NA,NA,PROPOSED
+142,TEMPLATE,"diff(distance_to_lower_band,turnover_rank)","diff(distance_to_lower_band,turnover_rank)",5118a9f1856a4c77,BB_CONDITIONAL,NA,NA,PROPOSED
+143,TEMPLATE,"interaction(distance_to_lower_band,turnover_rank)","interaction(distance_to_lower_band,turnover_rank)",bd166ec9aa048762,BB_CONDITIONAL,NA,NA,PROPOSED
+144,TEMPLATE,"min(distance_to_lower_band,turnover_rank)","min(distance_to_lower_band,turnover_rank)",cba5a704a16e2d23,BB_CONDITIONAL,NA,NA,PROPOSED
+145,TEMPLATE,"max(distance_to_lower_band,turnover_rank)","max(distance_to_lower_band,turnover_rank)",7983db15b800c0b0,BB_CONDITIONAL,NA,NA,PROPOSED
+146,TEMPLATE,"ratio(distance_to_lower_band,daily_bb_signal_count)","ratio(distance_to_lower_band,daily_bb_signal_count)",034b43efb401fd99,BB_CONDITIONAL,NA,NA,PROPOSED
+147,TEMPLATE,"diff(distance_to_lower_band,daily_bb_signal_count)","diff(distance_to_lower_band,daily_bb_signal_count)",f062c3af0e28ffe2,BB_CONDITIONAL,NA,NA,PROPOSED
+148,TEMPLATE,"interaction(distance_to_lower_band,daily_bb_signal_count)","interaction(daily_bb_signal_count,distance_to_lower_band)",9d6455af0ed6c78d,BB_CONDITIONAL,NA,NA,PROPOSED
+149,TEMPLATE,"min(distance_to_lower_band,daily_bb_signal_count)","min(daily_bb_signal_count,distance_to_lower_band)",d5b7cfb0437f7467,BB_CONDITIONAL,NA,NA,PROPOSED
+150,TEMPLATE,"max(distance_to_lower_band,daily_bb_signal_count)","max(daily_bb_signal_count,distance_to_lower_band)",3afefc6d7d4b91d5,BB_CONDITIONAL,NA,NA,PROPOSED
+151,TEMPLATE,"ratio(distance_to_lower_band,market_up_ratio)","ratio(distance_to_lower_band,market_up_ratio)",e1c3deb09351c99f,BB_CONDITIONAL,NA,NA,PROPOSED
+152,TEMPLATE,"diff(distance_to_lower_band,market_up_ratio)","diff(distance_to_lower_band,market_up_ratio)",03091a3e4f5c1195,BB_CONDITIONAL,NA,NA,PROPOSED
+153,TEMPLATE,"interaction(distance_to_lower_band,market_up_ratio)","interaction(distance_to_lower_band,market_up_ratio)",dd147769c5ba1d35,BB_CONDITIONAL,NA,NA,PROPOSED
+154,TEMPLATE,"min(distance_to_lower_band,market_up_ratio)","min(distance_to_lower_band,market_up_ratio)",2cfbfd3bc1362c41,BB_CONDITIONAL,NA,NA,PROPOSED
+155,TEMPLATE,"max(distance_to_lower_band,market_up_ratio)","max(distance_to_lower_band,market_up_ratio)",c36e67edd6748d05,BB_CONDITIONAL,NA,NA,PROPOSED
+156,TEMPLATE,"ratio(distance_to_lower_band,csi300_ret_5)","ratio(distance_to_lower_band,csi300_ret_5)",a5a327c8867cb4dc,BB_CONDITIONAL,NA,NA,PROPOSED
+157,TEMPLATE,"diff(distance_to_lower_band,csi300_ret_5)","diff(distance_to_lower_band,csi300_ret_5)",6fa37ddb179a1da0,BB_CONDITIONAL,NA,NA,PROPOSED
+158,TEMPLATE,"interaction(distance_to_lower_band,csi300_ret_5)","interaction(csi300_ret_5,distance_to_lower_band)",cbe9e3cbf6d00582,BB_CONDITIONAL,NA,NA,PROPOSED
+159,TEMPLATE,"min(distance_to_lower_band,csi300_ret_5)","min(csi300_ret_5,distance_to_lower_band)",31b5e298cf82eafd,BB_CONDITIONAL,NA,NA,PROPOSED
+160,TEMPLATE,"max(distance_to_lower_band,csi300_ret_5)","max(csi300_ret_5,distance_to_lower_band)",af69e31c5ff2d1ad,BB_CONDITIONAL,NA,NA,PROPOSED
+161,TEMPLATE,"ratio(distance_to_lower_band,csi500_ret_5)","ratio(distance_to_lower_band,csi500_ret_5)",6caca851e1543435,BB_CONDITIONAL,NA,NA,PROPOSED
+162,TEMPLATE,"diff(distance_to_lower_band,csi500_ret_5)","diff(distance_to_lower_band,csi500_ret_5)",6b3e3c83c9b6e0de,BB_CONDITIONAL,NA,NA,PROPOSED
+163,TEMPLATE,"interaction(distance_to_lower_band,csi500_ret_5)","interaction(csi500_ret_5,distance_to_lower_band)",da38192d98dd98fc,BB_CONDITIONAL,NA,NA,PROPOSED
+164,TEMPLATE,"min(distance_to_lower_band,csi500_ret_5)","min(csi500_ret_5,distance_to_lower_band)",f63197266d03e5e5,BB_CONDITIONAL,NA,NA,PROPOSED
+165,TEMPLATE,"max(distance_to_lower_band,csi500_ret_5)","max(csi500_ret_5,distance_to_lower_band)",fd45e01c5a2a4c69,BB_CONDITIONAL,NA,NA,PROPOSED
+166,TEMPLATE,"ratio(distance_to_lower_band,gap_pct)","ratio(distance_to_lower_band,gap_pct)",d3cbaf723f5f63e1,BB_CONDITIONAL,NA,NA,PROPOSED
+167,TEMPLATE,"diff(distance_to_lower_band,gap_pct)","diff(distance_to_lower_band,gap_pct)",35d442bc17deaef0,BB_CONDITIONAL,NA,NA,PROPOSED
+168,TEMPLATE,"interaction(distance_to_lower_band,gap_pct)","interaction(distance_to_lower_band,gap_pct)",363fdbcc012b4ef4,BB_CONDITIONAL,NA,NA,PROPOSED
+169,TEMPLATE,"min(distance_to_lower_band,gap_pct)","min(distance_to_lower_band,gap_pct)",b1876be80cb9df2c,BB_CONDITIONAL,NA,NA,PROPOSED
+170,TEMPLATE,"max(distance_to_lower_band,gap_pct)","max(distance_to_lower_band,gap_pct)",5e614ea169fbed17,BB_CONDITIONAL,NA,NA,PROPOSED
+171,TEMPLATE,"ratio(ret_5d,ret_20d)","ratio(ret_5d,ret_20d)",d85dc3273ff1303b,INTERACTION,NA,NA,PROPOSED
+172,TEMPLATE,"interaction(ret_5d,ret_20d)","interaction(ret_20d,ret_5d)",002da6c0146feeb2,INTERACTION,NA,NA,PROPOSED
+173,TEMPLATE,"min(ret_5d,ret_20d)","min(ret_20d,ret_5d)",1896e05800b5e92b,PRICE_REVERSAL,NA,NA,PROPOSED
+174,TEMPLATE,"max(ret_5d,ret_20d)","max(ret_20d,ret_5d)",ae3a4508a14e8f66,PRICE_REVERSAL,NA,NA,PROPOSED
+175,TEMPLATE,"diff(ret_5d,atr14_pct)","diff(ret_5d,atr14_pct)",8a9fe42d325aaf1b,INTERACTION,NA,NA,PROPOSED
+176,TEMPLATE,"interaction(ret_5d,atr14_pct)","interaction(atr14_pct,ret_5d)",3739b80a75658972,INTERACTION,NA,NA,PROPOSED
+177,TEMPLATE,"min(ret_5d,atr14_pct)","min(atr14_pct,ret_5d)",5ce1af0deaa835c4,PRICE_REVERSAL,NA,NA,PROPOSED
+178,TEMPLATE,"max(ret_5d,atr14_pct)","max(atr14_pct,ret_5d)",f33222aa4a668899,PRICE_REVERSAL,NA,NA,PROPOSED
+179,TEMPLATE,"ratio(ret_5d,bb_width)","ratio(ret_5d,bb_width)",911b231048f4f48b,INTERACTION,NA,NA,PROPOSED
+180,TEMPLATE,"diff(ret_5d,bb_width)","diff(ret_5d,bb_width)",52bf04cc3bd6051c,INTERACTION,NA,NA,PROPOSED
+181,TEMPLATE,"interaction(ret_5d,bb_width)","interaction(bb_width,ret_5d)",acab6df2bbdef4a6,INTERACTION,NA,NA,PROPOSED
+182,TEMPLATE,"min(ret_5d,bb_width)","min(bb_width,ret_5d)",4fc27f5ea7d73eac,PRICE_REVERSAL,NA,NA,PROPOSED
+183,TEMPLATE,"max(ret_5d,bb_width)","max(bb_width,ret_5d)",2eec9262ae8227f2,PRICE_REVERSAL,NA,NA,PROPOSED
+184,TEMPLATE,"ratio(ret_5d,drawdown_20)","ratio(ret_5d,drawdown_20)",097951e7ee293b89,INTERACTION,NA,NA,PROPOSED
+185,TEMPLATE,"diff(ret_5d,drawdown_20)","diff(ret_5d,drawdown_20)",d010d7fb7790652a,INTERACTION,NA,NA,PROPOSED
+186,TEMPLATE,"interaction(ret_5d,drawdown_20)","interaction(drawdown_20,ret_5d)",60a148d52a37e189,INTERACTION,NA,NA,PROPOSED
+187,TEMPLATE,"min(ret_5d,drawdown_20)","min(drawdown_20,ret_5d)",508cf0dfef15672f,PRICE_REVERSAL,NA,NA,PROPOSED
+188,TEMPLATE,"max(ret_5d,drawdown_20)","max(drawdown_20,ret_5d)",a136d5e5ec6fe8d5,PRICE_REVERSAL,NA,NA,PROPOSED
+189,TEMPLATE,"ratio(ret_5d,distance_52w_high)","ratio(ret_5d,distance_52w_high)",e4381ba45fa22f4a,INTERACTION,NA,NA,PROPOSED
+190,TEMPLATE,"diff(ret_5d,distance_52w_high)","diff(ret_5d,distance_52w_high)",45ef2a39a7ae1ef3,INTERACTION,NA,NA,PROPOSED
+191,TEMPLATE,"interaction(ret_5d,distance_52w_high)","interaction(distance_52w_high,ret_5d)",e2fda8f73ce99923,INTERACTION,NA,NA,PROPOSED
+192,TEMPLATE,"min(ret_5d,distance_52w_high)","min(distance_52w_high,ret_5d)",a1daa011852f12b8,PRICE_REVERSAL,NA,NA,PROPOSED
+193,TEMPLATE,"max(ret_5d,distance_52w_high)","max(distance_52w_high,ret_5d)",63e448220bcdb097,PRICE_REVERSAL,NA,NA,PROPOSED
+194,TEMPLATE,"ratio(ret_5d,log_amount)","ratio(ret_5d,log_amount)",90715867ff2e7a22,INTERACTION,NA,NA,PROPOSED
+195,TEMPLATE,"diff(ret_5d,log_amount)","diff(ret_5d,log_amount)",c1747f6ee7a270b2,INTERACTION,NA,NA,PROPOSED
+196,TEMPLATE,"interaction(ret_5d,log_amount)","interaction(log_amount,ret_5d)",ad30a2b95d64226a,INTERACTION,NA,NA,PROPOSED
+197,TEMPLATE,"min(ret_5d,log_amount)","min(log_amount,ret_5d)",a8dd5b663afeb27d,PRICE_REVERSAL,NA,NA,PROPOSED
+198,TEMPLATE,"max(ret_5d,log_amount)","max(log_amount,ret_5d)",c364bc691f5978da,PRICE_REVERSAL,NA,NA,PROPOSED
+199,TEMPLATE,"ratio(ret_5d,amount_ratio_5_20)","ratio(ret_5d,amount_ratio_5_20)",1c91de018c456568,INTERACTION,NA,NA,PROPOSED
+200,TEMPLATE,"diff(ret_5d,amount_ratio_5_20)","diff(ret_5d,amount_ratio_5_20)",61facc456b4637bb,INTERACTION,NA,NA,PROPOSED
+201,TEMPLATE,"interaction(ret_5d,amount_ratio_5_20)","interaction(amount_ratio_5_20,ret_5d)",91a6e02d7443b850,INTERACTION,NA,NA,PROPOSED
+202,TEMPLATE,"min(ret_5d,amount_ratio_5_20)","min(amount_ratio_5_20,ret_5d)",4f9e4a20b4055cf8,INTERACTION,NA,NA,PROPOSED
+203,TEMPLATE,"max(ret_5d,amount_ratio_5_20)","max(amount_ratio_5_20,ret_5d)",cfd7e82839d119d2,INTERACTION,NA,NA,PROPOSED
+204,TEMPLATE,"ratio(ret_5d,turnover_rank)","ratio(ret_5d,turnover_rank)",48664f2db7729f6c,INTERACTION,NA,NA,PROPOSED
+205,TEMPLATE,"diff(ret_5d,turnover_rank)","diff(ret_5d,turnover_rank)",4a6b7825dd3f5bd1,INTERACTION,NA,NA,PROPOSED
+206,TEMPLATE,"interaction(ret_5d,turnover_rank)","interaction(ret_5d,turnover_rank)",6fa341d8b61177c5,INTERACTION,NA,NA,PROPOSED
+207,TEMPLATE,"min(ret_5d,turnover_rank)","min(ret_5d,turnover_rank)",1f9e8058bca6caf6,CROSS_SECTIONAL,NA,NA,PROPOSED
+208,TEMPLATE,"max(ret_5d,turnover_rank)","max(ret_5d,turnover_rank)",d70ad1c882fea224,CROSS_SECTIONAL,NA,NA,PROPOSED
+209,TEMPLATE,"ratio(ret_5d,daily_bb_signal_count)","ratio(ret_5d,daily_bb_signal_count)",434e674c95629734,INTERACTION,NA,NA,PROPOSED
+210,TEMPLATE,"diff(ret_5d,daily_bb_signal_count)","diff(ret_5d,daily_bb_signal_count)",095cd8c9b7639843,INTERACTION,NA,NA,PROPOSED
+211,RANDOM,"diff(daily_range_pct,ret_1d)","diff(daily_range_pct,ret_1d)",b90421d3d842bdf5,INTERACTION,NA,NA,PROPOSED
+212,RANDOM,"max(daily_bb_up_ratio,daily_bb_signal_count)","max(daily_bb_signal_count,daily_bb_up_ratio)",8a4b19801707e6ef,INTERACTION,NA,NA,PROPOSED
+213,RANDOM,cs_rank(bb_z),cs_rank(bb_z),f4ce134c9037414a,BB_CONDITIONAL,NA,NA,PROPOSED
+214,RANDOM,sign(ret_20d),sign(ret_20d),64a7867abf5f3247,PRICE_REVERSAL,NA,NA,PROPOSED
+215,RANDOM,"max(csi1000_ret_5,daily_bb_up_ratio)","max(csi1000_ret_5,daily_bb_up_ratio)",b484086bd6a4031b,INTERACTION,NA,NA,PROPOSED
+216,RANDOM,abs(csi500_ret_5),abs(csi500_ret_5),3c4cab0a32f902b3,PRICE_REVERSAL,NA,NA,PROPOSED
+217,RANDOM,"diff(gap_pct,ret_10d)","diff(gap_pct,ret_10d)",0ea32ef8ddf812a3,INTERACTION,NA,NA,PROPOSED
+218,RANDOM,sign(atr14_pct),sign(atr14_pct),9993a3de5bf251fa,VOLATILITY,NA,NA,PROPOSED
+219,RANDOM,"max(csi500_ret_1,csi500_ret_20)","max(csi500_ret_1,csi500_ret_20)",b5b2f2de2fc12a0b,PRICE_REVERSAL,NA,NA,PROPOSED
+220,RANDOM,"interaction(csi300_ret_5,gap_pct)","interaction(csi300_ret_5,gap_pct)",38ad16c0f31d5131,INTERACTION,NA,NA,PROPOSED
+221,RANDOM,abs(daily_bb_down_ratio),abs(daily_bb_down_ratio),0cb627a1869d567f,INTERACTION,NA,NA,PROPOSED
+222,RANDOM,"diff(csi300_ret_1,atr14_pct)","diff(csi300_ret_1,atr14_pct)",39a163985ff8544a,INTERACTION,NA,NA,PROPOSED
+223,RANDOM,"diff(csi500_ret_20,turnover_rank)","diff(csi500_ret_20,turnover_rank)",4420ca79e491a8e9,INTERACTION,NA,NA,PROPOSED
+224,RANDOM,"max(csi500_ret_1,csi1000_ret_20)","max(csi1000_ret_20,csi500_ret_1)",382036a88cd91798,PRICE_REVERSAL,NA,NA,PROPOSED
+225,RANDOM,abs(csi1000_ret_20),abs(csi1000_ret_20),44271a5a00683985,PRICE_REVERSAL,NA,NA,PROPOSED
+226,RANDOM,cs_zscore(csi300_ret_1),cs_zscore(csi300_ret_1),7b83726dab9cbbd2,CROSS_SECTIONAL,NA,NA,PROPOSED
+227,RANDOM,"ratio(realized_vol_20,volume_ratio_5_20)","ratio(realized_vol_20,volume_ratio_5_20)",06d0b83a43fc0871,INTERACTION,NA,NA,PROPOSED
+228,RANDOM,"max(csi300_ret_5,csi1000_ret_1)","max(csi1000_ret_1,csi300_ret_5)",fca93c334e966609,PRICE_REVERSAL,NA,NA,PROPOSED
+229,RANDOM,"diff(volume_ratio_5_20,log_amount)","diff(volume_ratio_5_20,log_amount)",cc2d27a2c686e5a2,INTERACTION,NA,NA,PROPOSED
+230,RANDOM,abs(ret_20d),abs(ret_20d),1d709ffbcbbda311,PRICE_REVERSAL,NA,NA,PROPOSED
+231,RANDOM,abs(BB_width),abs(BB_width),895ce756c17eb5fa,VOLATILITY,NA,NA,PROPOSED
+232,RANDOM,cs_rank(turnover_rank),cs_rank(turnover_rank),dc661ef84d81d8a8,CROSS_SECTIONAL,NA,NA,PROPOSED
+233,RANDOM,"interaction(csi1000_ret_5,csi300_ret_20)","interaction(csi1000_ret_5,csi300_ret_20)",9e4f4c7d9ebd7006,INTERACTION,NA,NA,PROPOSED
+234,RANDOM,"ratio(drawdown_20,csi500_ret_5)","ratio(drawdown_20,csi500_ret_5)",fed3a5f966d26b2c,INTERACTION,NA,NA,PROPOSED
+235,RANDOM,"max(csi1000_ret_1,csi1000_ret_5)","max(csi1000_ret_1,csi1000_ret_5)",00a6c13f297a42fb,PRICE_REVERSAL,NA,NA,PROPOSED
+236,RANDOM,cs_zscore(daily_bb_up_ratio),cs_zscore(daily_bb_up_ratio),f2dc5fc3251718e9,INTERACTION,NA,NA,PROPOSED
+237,RANDOM,cs_zscore(csi500_ret_1),cs_zscore(csi500_ret_1),fb6d7857903efbee,CROSS_SECTIONAL,NA,NA,PROPOSED
+238,RANDOM,abs(realized_vol_20),abs(realized_vol_20),ce24dbccca225268,VOLATILITY,NA,NA,PROPOSED
+239,RANDOM,cs_zscore(realized_vol_20),cs_zscore(realized_vol_20),9c199edda9c03b6a,CROSS_SECTIONAL,NA,NA,PROPOSED
+240,RANDOM,sign(daily_bb_signal_count),sign(daily_bb_signal_count),c7a4f6baa71ff210,PRICE_REVERSAL,NA,NA,PROPOSED
+241,RANDOM,cs_rank(BB_width),cs_rank(BB_width),2bb1760d87cc5428,CROSS_SECTIONAL,NA,NA,PROPOSED
+242,RANDOM,"max(ret_1d,drawdown_20)","max(drawdown_20,ret_1d)",8201af4a7ae619e8,PRICE_REVERSAL,NA,NA,PROPOSED
+243,RANDOM,cs_zscore(csi300_ret_5),cs_zscore(csi300_ret_5),36169e64afac4260,CROSS_SECTIONAL,NA,NA,PROPOSED
+244,RANDOM,abs(gap_pct),abs(gap_pct),267826ac49e08d0b,GAP,NA,NA,PROPOSED
+245,RANDOM,cs_rank(amount_ratio_5_20),cs_rank(amount_ratio_5_20),e52d7dc087c758f7,INTERACTION,NA,NA,PROPOSED
+246,RANDOM,"ratio(amount_ratio_5_20,ret_10d)","ratio(amount_ratio_5_20,ret_10d)",da853101e8c086e7,INTERACTION,NA,NA,PROPOSED
+247,RANDOM,"min(volume_ratio_5_20,bb_z)","min(bb_z,volume_ratio_5_20)",678808b6c0a7cacd,BB_CONDITIONAL,NA,NA,PROPOSED
+248,RANDOM,cs_rank(drawdown_60),cs_rank(drawdown_60),b80cce104c384d6b,CROSS_SECTIONAL,NA,NA,PROPOSED
+249,RANDOM,sign(ret_3d),sign(ret_3d),889e5bed7f6fbaa8,PRICE_REVERSAL,NA,NA,PROPOSED
+250,RANDOM,"interaction(amount_ratio_5_20,ret_10d)","interaction(amount_ratio_5_20,ret_10d)",48df9cb0bfe959df,INTERACTION,NA,NA,PROPOSED
+251,RANDOM,"interaction(realized_vol_20,ret_20d)","interaction(realized_vol_20,ret_20d)",7c63fd6390869c70,INTERACTION,NA,NA,PROPOSED
+252,RANDOM,"min(turnover_rank,bb_width)","min(bb_width,turnover_rank)",3226c6e19953de85,CROSS_SECTIONAL,NA,NA,PROPOSED
+253,RANDOM,sign(signal_count_last_20d),sign(signal_count_last_20d),aae3cf561eb219c1,PRICE_REVERSAL,NA,NA,PROPOSED
+254,RANDOM,"diff(csi1000_ret_5,ret_60d)","diff(csi1000_ret_5,ret_60d)",d2109573420594d3,INTERACTION,NA,NA,PROPOSED
+255,RANDOM,"min(daily_bb_up_ratio,amount_ratio_5_20)","min(amount_ratio_5_20,daily_bb_up_ratio)",c8eb999bf4cc14f9,INTERACTION,NA,NA,PROPOSED
+256,RANDOM,"diff(daily_bb_signal_count,BB_width)","diff(daily_bb_signal_count,BB_width)",2f19b20addf7f9ed,INTERACTION,NA,NA,PROPOSED
+257,RANDOM,cs_zscore(turnover_rank),cs_zscore(turnover_rank),c9000e33dd272ba5,CROSS_SECTIONAL,NA,NA,PROPOSED
+258,RANDOM,sign(csi1000_ret_20),sign(csi1000_ret_20),5ffe42258e5838d0,PRICE_REVERSAL,NA,NA,PROPOSED
+259,RANDOM,sign(bb_width),sign(bb_width),c4fb060925b35c59,VOLATILITY,NA,NA,PROPOSED
+260,RANDOM,"max(bb_width,drawdown_20)","max(bb_width,drawdown_20)",9ad970afa0cabdb0,PRICE_REVERSAL,NA,NA,PROPOSED
+261,RANDOM,"diff(daily_range_pct,volume_ratio_5_20)","diff(daily_range_pct,volume_ratio_5_20)",cd2112c666fb6049,INTERACTION,NA,NA,PROPOSED
+262,RANDOM,abs(csi300_ret_1),abs(csi300_ret_1),ab7f106a5d1d6429,PRICE_REVERSAL,NA,NA,PROPOSED
+263,RANDOM,"min(days_since_first_signal,market_down_ratio)","min(days_since_first_signal,market_down_ratio)",4b15fa6669bd0bc1,INTERACTION,NA,NA,PROPOSED
+264,RANDOM,"interaction(ret_20d,turnover_rank)","interaction(ret_20d,turnover_rank)",5a4f8a0cd60f1131,INTERACTION,NA,NA,PROPOSED
+265,RANDOM,sign(log_amount),sign(log_amount),d6d57743f5bdec4b,LIQUIDITY,NA,NA,PROPOSED
+266,RANDOM,"min(csi1000_ret_5,daily_range_pct)","min(csi1000_ret_5,daily_range_pct)",8108de8645330bff,PRICE_REVERSAL,NA,NA,PROPOSED
+267,RANDOM,"ratio(ret_10d,BB_width)","ratio(ret_10d,BB_width)",04866032a498484d,INTERACTION,NA,NA,PROPOSED
+268,RANDOM,cs_zscore(drawdown_20),cs_zscore(drawdown_20),4e240fce59a247d7,CROSS_SECTIONAL,NA,NA,PROPOSED
+269,RANDOM,sign(turnover_rank),sign(turnover_rank),a4344e726e869364,CROSS_SECTIONAL,NA,NA,PROPOSED
+270,RANDOM,cs_zscore(BB_width),cs_zscore(BB_width),0b8e583684a2d349,CROSS_SECTIONAL,NA,NA,PROPOSED
+271,LLM,"ratio(bb_z, cs_zscore(atr14_pct))","ratio(bb_z,(cs_zscore,atr14_pct))",1f78752960cdbc8d,BB_CONDITIONAL,NA,NA,PROPOSED
+272,LLM,"interaction(distance_to_lower_band, market_down_ratio)","interaction(distance_to_lower_band,market_down_ratio)",a89154f87bb7f382,BB_CONDITIONAL,NA,NA,PROPOSED
+273,LLM,"diff(csi1000_ret_20, csi300_ret_20)","diff(csi1000_ret_20,csi300_ret_20)",fbc33a9988ddc7a5,INTERACTION,NA,NA,PROPOSED
+274,LLM,"ratio(ret_3d, daily_range_pct)","ratio(ret_3d,daily_range_pct)",8752aaf553dacaee,INTERACTION,NA,NA,PROPOSED
+275,LLM,"interaction(turnover_rank, amount_ratio_5_20)","interaction(amount_ratio_5_20,turnover_rank)",5ea6b211e67ecd2e,INTERACTION,NA,NA,PROPOSED
+276,LLM,"interaction(bb_z, csi500_ret_20)","interaction(bb_z,csi500_ret_20)",60d06edb38d787f2,BB_CONDITIONAL,NA,NA,PROPOSED
+277,LLM,"ratio(drawdown_60, realized_vol_20)","ratio(drawdown_60,realized_vol_20)",4e8fd74142939512,INTERACTION,NA,NA,PROPOSED
+278,LLM,"interaction(ret_10d, csi1000_ret_5)","interaction(csi1000_ret_5,ret_10d)",2e0b5c623105a41b,INTERACTION,NA,NA,PROPOSED
+279,LLM,"diff(amount_ratio_5_20, volume_ratio_5_20)","diff(amount_ratio_5_20,volume_ratio_5_20)",639362baa4592c15,INTERACTION,NA,NA,PROPOSED
+280,LLM,"ratio(daily_bb_up_ratio, daily_bb_down_ratio)","ratio(daily_bb_up_ratio,daily_bb_down_ratio)",d45978b7be6af504,INTERACTION,NA,NA,PROPOSED
+281,LLM,"interaction(distance_52w_high, drawdown_60)","interaction(distance_52w_high,drawdown_60)",a8eac0de41ef5c3b,INTERACTION,NA,NA,PROPOSED
+282,LLM,"diff(gap_pct, cs_zscore(gap_pct))","diff(gap_pct,(cs_zscore,gap_pct))",5ab2954ece057057,INTERACTION,NA,NA,PROPOSED
+283,LLM,"ratio(ret_20d, distance_ma60)","ratio(ret_20d,distance_ma60)",43050fb685d8b9c8,INTERACTION,NA,NA,PROPOSED
+284,LLM,"interaction(daily_bb_signal_count, market_down_ratio)","interaction(daily_bb_signal_count,market_down_ratio)",81354704db2289ce,INTERACTION,NA,NA,PROPOSED
+285,LLM,"diff(ret_60d, csi500_ret_20)","diff(ret_60d,csi500_ret_20)",b4ba0fc74ac5b75b,INTERACTION,NA,NA,PROPOSED
+286,LLM,"ratio(signal_count_last_20d, days_since_first_signal)","ratio(signal_count_last_20d,days_since_first_signal)",dd8e0651036bfad8,INTERACTION,NA,NA,PROPOSED
+287,LLM,"interaction(bb_width, atr14_pct)","interaction(atr14_pct,bb_width)",979be422a4e07a1c,INTERACTION,NA,NA,PROPOSED
+288,LLM,"diff(log_amount, cs_zscore(bb_z))","diff(log_amount,(cs_zscore,bb_z))",a033a60b84937236,BB_CONDITIONAL,NA,NA,PROPOSED
+289,LLM,"ratio(distance_ma5, realized_vol_10)","ratio(distance_ma5,realized_vol_10)",1baef0292fbecfb9,INTERACTION,NA,NA,PROPOSED
+290,LLM,"interaction(ret_1d, ret_20d)","interaction(ret_1d,ret_20d)",35ed56f2bcca4c25,INTERACTION,NA,NA,PROPOSED
+291,LLM,"diff(csi500_ret_1, csi300_ret_1)","diff(csi500_ret_1,csi300_ret_1)",d27f18c5a42632b0,INTERACTION,NA,NA,PROPOSED
+292,LLM,"ratio(market_up_ratio, atr14_pct)","ratio(market_up_ratio,atr14_pct)",ea68db19b8057955,INTERACTION,NA,NA,PROPOSED
+293,LLM,"interaction(drawdown_20, daily_bb_down_ratio)","interaction(daily_bb_down_ratio,drawdown_20)",539d2bbd2f8c7524,INTERACTION,NA,NA,PROPOSED
+294,LLM,"diff(realized_vol_20, realized_vol_10)","diff(realized_vol_20,realized_vol_10)",846badfae66b81d7,INTERACTION,NA,NA,PROPOSED
+295,LLM,"ratio(days_since_first_signal, signal_count_last_20d)","ratio(days_since_first_signal,signal_count_last_20d)",5373b21b0c76a48b,INTERACTION,NA,NA,PROPOSED
+296,LLM,"interaction(csi1000_ret_5, bb_width)","interaction(bb_width,csi1000_ret_5)",fdf3a0a35be0ed5d,INTERACTION,NA,NA,PROPOSED
+297,LLM,"diff(ret_5d, ret_1d)","diff(ret_5d,ret_1d)",dbcc82572d96e5ca,INTERACTION,NA,NA,PROPOSED
+298,LLM,"ratio(turnover_rank, bb_width)","ratio(turnover_rank,bb_width)",22677e6d826e0f84,INTERACTION,NA,NA,PROPOSED
+299,LLM,"interaction(gap_pct, daily_bb_signal_count)","interaction(daily_bb_signal_count,gap_pct)",a209b2305fa168af,INTERACTION,NA,NA,PROPOSED
+300,LLM,"diff(distance_52w_high, distance_ma20)","diff(distance_52w_high,distance_ma20)",fddb521b37c02edd,INTERACTION,NA,NA,PROPOSED

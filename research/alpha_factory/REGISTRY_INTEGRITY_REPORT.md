@@ -1,6 +1,6 @@
 # Alpha Factory — Registry Integrity Audit
 
-- 审计时间: 2026-09-10T12:28:03
+- 审计时间: 2026-09-10T22:00:55
 - 版本: alpha-factory phase 0.1 governance hardening
 
 ## 库规模

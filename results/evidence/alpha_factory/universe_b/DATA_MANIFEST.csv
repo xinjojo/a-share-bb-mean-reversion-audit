@@ -1,0 +1,16 @@
+part,file,rows,sha256
+panel,panel/year=2020/part.parquet,942308,1fe0beaeef04e333
+panel,panel/year=2021/part.parquet,1052221,c9ba5d0aa7e62c88
+panel,panel/year=2022/part.parquet,1138479,ac3ffe9215f3e79a
+panel,panel/year=2023/part.parquet,1200822,b2cc145aabf3dbf4
+panel,panel/year=2024/part.parquet,1224910,b848e5fece1e2cbc
+features,features/year=2020/part.parquet,936269,ad2a56598bb648c6
+features,features/year=2021/part.parquet,1048715,21fd4981e94ca348
+features,features/year=2022/part.parquet,1135498,d7b0efe22f2bc0a2
+features,features/year=2023/part.parquet,1198338,a394a3209ca872ed
+features,features/year=2024/part.parquet,1221793,f54a3133b5692b9e
+labels,labels/year=2020/part.parquet,936269,0e19f45fd06aa5ce
+labels,labels/year=2021/part.parquet,1048715,edc373014d67a41f
+labels,labels/year=2022/part.parquet,1135498,f677e23985187855
+labels,labels/year=2023/part.parquet,1198338,bb5787fb443bb113
+labels,labels/year=2024/part.parquet,1221793,35f9334cbbe4f07f

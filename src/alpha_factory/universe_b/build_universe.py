@@ -67,11 +67,16 @@ def load_daily_combined():
     missing = sorted(raw_codes - comb_codes)
     if missing:
         parts = []
+        gaps = []
         for tc in missing:
             d = pd.read_parquet(os.path.join(raw_dir, f'{tc}.parquet'))
             d['ts_code'] = tc
-            a = pd.read_parquet(os.path.join(DATA, 'raw/adj_factor', f'{tc}.parquet'))
-            d = d.merge(a[['date', 'adj_factor']], on='date', how='left')
+            try:
+                a = pd.read_parquet(os.path.join(DATA, 'raw/adj_factor', f'{tc}.parquet'))
+                d = d.merge(a[['date', 'adj_factor']], on='date', how='left')
+            except FileNotFoundError:
+                d['adj_factor'] = 1.0
+                gaps.append(tc)
             parts.append(d)
         extra = pd.concat(parts, ignore_index=True)
         extra['date'] = pd.to_datetime(extra['date'])
@@ -79,14 +84,21 @@ def load_daily_combined():
         for c in need:
             extra[c] = np.nan
         df = pd.concat([df, extra[df.columns]], ignore_index=True)
+        if gaps:
+            g = pd.DataFrame({'ts_code': gaps,
+                              'reason': 'adj_factor file missing; close_adj=close (adj 1.0 fallback)'})
+            gdir = os.path.join(REPO, 'results/evidence/alpha_factory/universe_b')
+            os.makedirs(gdir, exist_ok=True)
+            g.to_csv(os.path.join(gdir, 'ADJ_FACTOR_GAP.csv'), index=False)
+            print('ADJ_FACTOR_GAP:', len(gaps), gaps)
     df = df.sort_values(['ts_code', 'date']).reset_index(drop=True)
     return df
 
 
 def build_panel():
     sb = load_stock_basic()
-    tc = load_trade_cal()
-    dates = set(tc['date'])
+    cal_all = load_trade_cal()
+    dates = set(cal_all['date'])
     daily = load_daily_combined()
     daily = daily[(daily['date'] >= START) & (daily['date'] <= END)].copy()
 
@@ -97,17 +109,17 @@ def build_panel():
     # 停牌：对每只股票展开 (list..min(delist,END)) 交易日历，缺行情行 = 停牌
     sb_map = sb.set_index('ts_code')
     rows = []
-    for tc, g in daily.groupby('ts_code'):
-        meta = sb_map.loc[tc]
+    for code, g in daily.groupby('ts_code'):
+        meta = sb_map.loc[code]
         lo = max(meta['list_dt'], START) if pd.notna(meta['list_dt']) else START
         hi = meta['delist_dt'] if pd.notna(meta['delist_dt']) else END
         hi = min(hi, END)
-        cal = tc[tc['date'] >= lo]
+        cal = cal_all[cal_all['date'] >= lo]
         cal = cal[cal['date'] <= hi]
         if cal.empty:
             continue
         full = cal[['date']].merge(g, on='date', how='left')
-        full['ts_code'] = tc
+        full['ts_code'] = code
         full['is_suspended'] = full['close'].isna()
         rows.append(full)
     panel = pd.concat(rows, ignore_index=True)
@@ -125,8 +137,8 @@ def build_panel():
     panel['is_limit_down'] = np.where(panel['close'].isna(), False, dn)
 
     # 上市天数（交易日）
-    panel = panel.sort_values('date').groupby('ts_code', group_keys=False).apply(
-        lambda g: g.assign(listing_days=range(1, len(g) + 1))).reset_index(drop=True)
+    panel = panel.sort_values(['ts_code', 'date']).reset_index(drop=True)
+    panel['listing_days'] = panel.groupby('ts_code').cumcount() + 1
 
     # 基础复权价
     panel['close_adj'] = panel['close'] * panel['adj_factor']

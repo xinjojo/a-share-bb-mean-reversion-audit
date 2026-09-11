@@ -1,0 +1,6 @@
+part,scope,rows,cols,discover_s,read_s,peak_rss_mb
+panel,year=2020,942308,20,0.0,0.06,425872.0
+panel,all,5558740,20,0.0,0.22,1910208.0
+features,year=2020,936269,86,0.0,0.19,2775056.0
+features,all,5540613,86,0.0,3.81,5943056.0
+labels,all,5540613,18,0.0,0.56,5943056.0

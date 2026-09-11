@@ -122,7 +122,10 @@ def cross_section_rank(feats, p):
 
 def market_context(p, feats):
     """每日共享的市场特征。"""
-    d = p.groupby('date').agg(
+    work = p.copy()
+    for c in ['ret_1', 'ret_5', 'ret_20', 'ret_60', 'distance_52w_high', 'bb_z']:
+        work[c] = feats[c].values
+    d = work.groupby('date').agg(
         market_up_ratio=('ret_1', lambda s: (s > 0).mean()),
         market_down_ratio=('ret_1', lambda s: (s < 0).mean()),
         new_high_ratio=('distance_52w_high', lambda s: (s > -1e-9).mean()),
@@ -132,7 +135,7 @@ def market_context(p, feats):
         bb_signal_breadth=('bb_z', lambda s: (s < -2).mean()),
     )
     # market_vol_20 = 每日市场平均 ret_1 的 20 日滚动 std
-    mret = p.groupby('date')['ret_1'].mean().to_frame('mret')
+    mret = work.groupby('date')['ret_1'].mean().to_frame('mret')
     mret['market_vol_20'] = mret['mret'].rolling(20, min_periods=5).std()
     d = d.join(mret[['market_vol_20']])
     idx = load_index_returns().set_index('date')
@@ -145,17 +148,21 @@ def industry_features(p, feats):
     sm = load_industry()
     sm = sm.rename(columns={'con_code': 'ts_code'})
     # 每日股票-行业归属：按 in/out 窗口 merge_asof
-    p2 = p[['date', 'ts_code', 'ret_1', 'ret_5', 'ret_20', 'ret_60']].copy()
+    p2 = p[['date', 'ts_code']].copy()
+    for c in ['ret_1', 'ret_5', 'ret_20', 'ret_60']:
+        p2[c] = feats[c].values
     # 展开行业窗口为 long：行业成员按 (ts_code, in, out)；merge_asof 需同名列
     mem = sm[['ts_code', 'industry_name', 'in', 'out']].dropna(subset=['in'])
     mem = mem.rename(columns={'in': 'date'})
-    p2 = p2.sort_values('date')
-    asof_in = pd.merge_asof(p2.sort_values('date'),
+    p2s = p2.sort_values('date')
+    asof_in = pd.merge_asof(p2s,
                             mem.sort_values('date'),
                             on='date', by='ts_code', direction='backward',
                             suffixes=('', '_in'))
-    # 过滤 out < T 的行
-    asof_in = asof_in[(asof_in['out'].isna()) | (asof_in['out'] >= asof_in['date'])]
+    # 失效行业（out < T）置 NaN，不删行
+    bad = asof_in['industry_name'].notna() & asof_in['out'].notna() & (asof_in['out'] < asof_in['date'])
+    ind_cols = ['industry_name', 'out']
+    asof_in.loc[bad, ind_cols] = np.nan
     ind = asof_in.groupby(['industry_name', 'date']).agg(
         industry_ret_1=('ret_1', 'mean'),
         industry_breadth=('ret_1', lambda s: (s > 0).mean()),
@@ -166,7 +173,9 @@ def industry_features(p, feats):
     ind60 = asof_in.groupby(['industry_name', 'date'])['ret_60'].mean().rename('industry_ret_60')
     ind = ind.join(ind5).join(ind20).join(ind60).reset_index()
     merged = asof_in.merge(ind, on=['industry_name', 'date'], how='left')
-    merged = merged.sort_values(['ts_code', 'date']).set_index(p2.index)
+    # 恢复 p2 原行序（merge_asof 要求按 date 排序）
+    merged.index = p2s.index
+    merged = merged.sort_index()
     feats['industry_ret_5'] = merged['industry_ret_5']
     feats['industry_ret_20'] = merged['industry_ret_20']
     feats['industry_ret_60'] = merged['industry_ret_60']
@@ -182,7 +191,12 @@ def build():
     p = p[p['is_suspended'] == False].copy()  # 停牌行不参与特征
     feats = compute_time_series_features(p)
     feats = cross_section_rank(feats, p)
-    feats = market_context(p, feats)
+    mc = market_context(p, feats)
+    # 市场上下文按 date 合并回（每日共享值广播到当日所有股票）
+    mc_rows = mc.reset_index().rename(columns={'index': 'date'})
+    mj = pd.merge(p[['date']], mc_rows, on='date', how='left')
+    for c in mc.columns:
+        feats[c] = mj[c].values
     feats = industry_features(p, feats)
     # 状态变量
     for c in ['is_st_pit', 'is_limit_up', 'is_limit_down', 'listing_days']:

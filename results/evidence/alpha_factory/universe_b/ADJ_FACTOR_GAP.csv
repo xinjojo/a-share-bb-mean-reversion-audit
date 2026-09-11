@@ -1,0 +1,3 @@
+ts_code,reason
+000587.SZ,adj_factor file missing; close_adj=close (adj 1.0 fallback)
+600385.SH,adj_factor file missing; close_adj=close (adj 1.0 fallback)

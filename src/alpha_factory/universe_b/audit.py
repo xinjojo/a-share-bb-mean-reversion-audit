@@ -108,14 +108,14 @@ def adjustment_parity_audit(n=50):
           '结论：close_adj = close × adj_factor（后复权）。除权日 raw 价格跳变而 close_adj 连续；'
           'diff>5% 且非除权日的行 = 疑似异常。', '']
     md.append('## 异常检查')
-    md.append(f'- diff>5% 且非除权日行数：{int(suspicious.sum())}（应为 0）')
+    md.append(f'- diff>5% 且非除权日行数：{len(suspicious)}（应为 0）')
     md.append('')
     md.append('## 抽查事件')
     md.append(events.to_markdown(index=False))
     with open(os.path.join(UB, 'ADJUSTMENT_PARITY_AUDIT.md'), 'w') as f:
         f.write('\n'.join(md))
-    print('adjustment events:', len(ev), 'suspicious non-adj jumps:', int(suspicious.sum()))
-    return len(ev), int(suspicious.sum())
+    print('adjustment events:', len(ev), 'suspicious non-adj jumps:', len(suspicious))
+    return len(ev), len(suspicious)
 
 
 def leakage_audit(n=500, seed=7):
@@ -137,7 +137,7 @@ def leakage_audit(n=500, seed=7):
           + (str(leak_cols) if leak_cols else '无'), '']
     # label 侧：确认每行 label 与同一行特征时间对齐（date 相同），且 label 前缀白名单
     lab_cols = [c for c in labs.columns if c not in ('date', 'ts_code')]
-    bad_lab = [c for c in lab_cols if not c.startswith(('fwd_', 'MAE', 'MFE', 'exec_', 'TOP20', 'BOTTOM20', 'label_end'))]
+    bad_lab = [c for c in lab_cols if not c.startswith(('fwd_', 'fwd20', 'MAE', 'MFE', 'exec_', 'TOP20', 'BOTTOM20', 'label_end'))]
     md.append(f'- label 列数：{len(lab_cols)}；非白名单前缀列：{bad_lab or "无"}')
     md.append('- 结论：特征源日期 <= T（全部特征为 T 及以前数据构造）；标签源日期 > T '
               '（fwd/MAE/MFE/exec 均引用 T+1 及以后价格），横截面 rank 标签仅用当日合法股票。')

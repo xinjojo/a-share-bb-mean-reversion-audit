@@ -21,7 +21,7 @@ def bench_read(part, label):
     root = os.path.join(UB, part)
     for r, _, fs in os.walk(root):
         for f in fs:
-            if f.endswith('.parquet') and label in f:
+            if f.endswith('.parquet') and (label == 'all' or label in r):
                 files.append(os.path.join(r, f))
     if label == 'all':
         files = [os.path.join(root_, f) for root_, _, fs in os.walk(root)

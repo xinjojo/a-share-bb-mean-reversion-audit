@@ -97,6 +97,8 @@ def _p0s() -> tuple[list[str], list[str]]:
             if old is None or pd.isna(old):  # 初始事件（backfill/REGISTER）恒合法
                 prev = new
                 continue
+            if prev is None:  # 首事件无旧状态：以该事件 old 初始化隐含初始状态
+                prev = old
             legal = (new in R.LEGAL_TRANSITIONS.get(prev, set())
                      and prev not in R.TERMINAL_STATUSES)
             if not legal:

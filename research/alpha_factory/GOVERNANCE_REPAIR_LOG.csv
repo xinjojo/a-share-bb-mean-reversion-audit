@@ -1,13 +1,14 @@
-repair_id,date,kind,factor_id,factor_name,canonical_factor_id,mapping,detail
-RPR_001,2026-09-10,INVALID_DUPLICATE_IMPORT,AF_000027,rsi_filter,AF_000005,MERGED_TO_CANONICAL,Phase 0 repeated legacy import row marked INVALID; canonical retained
-RPR_002,2026-09-10,INVALID_DUPLICATE_IMPORT,AF_000028,macd_filter,AF_000006,MERGED_TO_CANONICAL,Phase 0 repeated legacy import row marked INVALID; canonical retained
-RPR_003,2026-09-10,INVALID_DUPLICATE_IMPORT,AF_000029,squeeze_adx_filter,AF_000007,MERGED_TO_CANONICAL,Phase 0 repeated legacy import row marked INVALID; canonical retained
-RPR_004,2026-09-10,INVALID_DUPLICATE_IMPORT,AF_000030,regime_filter,AF_000008,MERGED_TO_CANONICAL,Phase 0 repeated legacy import row marked INVALID; canonical retained
-RPR_005,2026-09-10,INVALID_DUPLICATE_IMPORT,AF_000031,bad_classifier,AF_000010,MERGED_TO_CANONICAL,Phase 0 repeated legacy import row marked INVALID; canonical retained
-RPR_006,2026-09-10,INVALID_DUPLICATE_IMPORT,AF_000032,addon_ranking,AF_000011,MERGED_TO_CANONICAL,Phase 0 repeated legacy import row marked INVALID; canonical retained
-RPR_007,2026-09-10,INVALID_DUPLICATE_IMPORT,AF_000033,early_exit_1.5pct,AF_000012,MERGED_TO_CANONICAL,Phase 0 repeated legacy import row marked INVALID; canonical retained
-RPR_008,2026-09-10,INVALID_DUPLICATE_IMPORT,AF_000034,monthly_bb,AF_000013,MERGED_TO_CANONICAL,Phase 0 repeated legacy import row marked INVALID; canonical retained
-RPR_009,2026-09-10,EXPERIMENT_TS_BACKFILL,,,,2026-09-10T12:23:40,backfilled 1 experiment timestamp
-RPR_010,2026-09-10,MT_DATE_BACKFILL,,,,2026-09-10,backfilled 42 MT ledger attempt date
-RPR_011,2026-09-10,CANONICAL_EXPRESSION_BACKFILL,,,,dsl.canonical_string(formula),backfilled 34 canonical_expression
-RPR_012,2026-09-10,CSV_MIRROR_REBUILT,,,,PARQUET_TO_CSV,"rebuilt mirrors: {'FACTOR_REGISTRY.parquet': 35, 'ALPHA_GRAVEYARD.parquet': 8, 'ALPHA_LIBRARY.parquet': 0, 'ALPHA_CANDIDATES.parquet': 1, 'EXPERIMENT_REGISTRY.parquet': 1, 'MULTIPLE_TESTING_LEDGER.parquet': 42, 'FACTOR_STATUS_HISTORY.parquet': 43, 'GOVERNANCE_EVENTS.parquet': 16}; fixes Phase 0 parquet/csv inconsistency (MT 42 vs 3)"
+repair_id,date,kind,factor_id,factor_name,canonical_factor_id,mapping,detail,event_id,timestamp
+RPR_001,2026-09-10,INVALID_DUPLICATE_IMPORT,AF_000027,rsi_filter,AF_000005,MERGED_TO_CANONICAL,Phase 0 repeated legacy import row marked INVALID; canonical retained,,
+RPR_002,2026-09-10,INVALID_DUPLICATE_IMPORT,AF_000028,macd_filter,AF_000006,MERGED_TO_CANONICAL,Phase 0 repeated legacy import row marked INVALID; canonical retained,,
+RPR_003,2026-09-10,INVALID_DUPLICATE_IMPORT,AF_000029,squeeze_adx_filter,AF_000007,MERGED_TO_CANONICAL,Phase 0 repeated legacy import row marked INVALID; canonical retained,,
+RPR_004,2026-09-10,INVALID_DUPLICATE_IMPORT,AF_000030,regime_filter,AF_000008,MERGED_TO_CANONICAL,Phase 0 repeated legacy import row marked INVALID; canonical retained,,
+RPR_005,2026-09-10,INVALID_DUPLICATE_IMPORT,AF_000031,bad_classifier,AF_000010,MERGED_TO_CANONICAL,Phase 0 repeated legacy import row marked INVALID; canonical retained,,
+RPR_006,2026-09-10,INVALID_DUPLICATE_IMPORT,AF_000032,addon_ranking,AF_000011,MERGED_TO_CANONICAL,Phase 0 repeated legacy import row marked INVALID; canonical retained,,
+RPR_007,2026-09-10,INVALID_DUPLICATE_IMPORT,AF_000033,early_exit_1.5pct,AF_000012,MERGED_TO_CANONICAL,Phase 0 repeated legacy import row marked INVALID; canonical retained,,
+RPR_008,2026-09-10,INVALID_DUPLICATE_IMPORT,AF_000034,monthly_bb,AF_000013,MERGED_TO_CANONICAL,Phase 0 repeated legacy import row marked INVALID; canonical retained,,
+RPR_009,2026-09-10,EXPERIMENT_TS_BACKFILL,,,,2026-09-10T12:23:40,backfilled 1 experiment timestamp,,
+RPR_010,2026-09-10,MT_DATE_BACKFILL,,,,2026-09-10,backfilled 42 MT ledger attempt date,,
+RPR_011,2026-09-10,CANONICAL_EXPRESSION_BACKFILL,,,,dsl.canonical_string(formula),backfilled 34 canonical_expression,,
+RPR_012,2026-09-10,CSV_MIRROR_REBUILT,,,,PARQUET_TO_CSV,"rebuilt mirrors: {'FACTOR_REGISTRY.parquet': 35, 'ALPHA_GRAVEYARD.parquet': 8, 'ALPHA_LIBRARY.parquet': 0, 'ALPHA_CANDIDATES.parquet': 1, 'EXPERIMENT_REGISTRY.parquet': 1, 'MULTIPLE_TESTING_LEDGER.parquet': 42, 'FACTOR_STATUS_HISTORY.parquet': 43, 'GOVERNANCE_EVENTS.parquet': 16}; fixes Phase 0 parquet/csv inconsistency (MT 42 vs 3)",,
+,,TEST_POLLUTION_CLEANUP,AFS_TEST_000001,,,,核查确认：test_status_replay_first_event_non_null_old 使用独立临时账本，不写正式 STATUS_HISTORY；全仓扫描无 AFS_TEST_ 残留，无需物理清理（记录留痕）,REP_0013,2026-09-11

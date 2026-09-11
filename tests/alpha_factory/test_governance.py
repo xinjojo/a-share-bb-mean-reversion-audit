@@ -278,3 +278,31 @@ def test_csv_parquet_parity(reg):
     # 审计不再报 parity P0
     p0, _ = audit_registry._p0s()
     assert not any('parity' in x for x in p0)
+
+
+# ---- 14. audit replay: first event with non-null old_status is legal ----
+def test_status_replay_first_event_non_null_old(reg, tmp_path, monkeypatch):
+    """audit 状态机重放：factor 首条事件 old_status 非 None（直接 PROPOSED->FAIL）
+    应视为隐含初始状态，不误报 P0。对应 audit_registry 修复（Universe B Phase 0
+    治理补齐 300 条 AFS symbolic trace 时暴露）。"""
+    from alpha_factory import audit_registry, registry as R
+    # 构造仅含一条事件（PROPOSED->FAIL）的临时 history，并令 audit 读取该文件
+    h = R.StatusHistory()
+    fid = 'AFS_TEST_000001'
+    h.append(fid, 'PROPOSED', 'FAIL', experiment_id='X', reason='NO_SIGNAL')
+    # 快照当前历史内容，避免污染正式账本：用临时文件模拟
+    import pandas as pd
+    saved = h.df
+    tmp = tmp_path / 'status_history.parquet'
+    saved.to_parquet(tmp, index=False)
+    orig = R.STATUS_HISTORY
+    R.STATUS_HISTORY = str(tmp)
+    R.STATUS_HISTORY_CSV = str(tmp_path / 'status_history.csv')
+    try:
+        p0, p1 = audit_registry._p0s()
+        # AFS_TEST 未注册进正式 registry -> orphan 属预期；只断言不误报非法状态迁移
+        assert not any('illegal status transition' in x and fid in x for x in p0), p0
+        assert not any('illegal status transition' in x and fid in x for x in p1), p1
+    finally:
+        R.STATUS_HISTORY = orig
+        R.STATUS_HISTORY_CSV = orig + '.__x__'

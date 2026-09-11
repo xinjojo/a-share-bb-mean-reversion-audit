@@ -1,0 +1,17 @@
+label_name,type,horizon,formula,source_date_rule
+fwd_ret_1,STATISTICAL,1,close_adj_T+1/close_adj_T-1,> T
+fwd_ret_5,STATISTICAL,5,close_adj_T+5/close_adj_T-1,> T
+fwd_ret_10,STATISTICAL,10,close_adj_T+10/close_adj_T-1,> T
+fwd_ret_20,STATISTICAL,20,close_adj_T+20/close_adj_T-1,> T
+fwd_ret_60,STATISTICAL,60,close_adj_T+60/close_adj_T-1,> T
+MAE_5,STATISTICAL,5,min(close_adj_T+1..T+5)/close_adj_T-1,> T
+MAE_20,STATISTICAL,20,min(close_adj_T+1..T+20)/close_adj_T-1,> T
+MFE_5,STATISTICAL,5,max(close_adj_T+1..T+5)/close_adj_T-1,> T
+MFE_20,STATISTICAL,20,max(close_adj_T+1..T+20)/close_adj_T-1,> T
+fwd20_rank01,CROSS_SECTIONAL,20,"daily cross-section rank(fwd_ret_20)/N in [0,1]",> T
+TOP20_FWD20,CROSS_SECTIONAL,20,fwd_ret_20 in top 20% that day,> T
+BOTTOM20_FWD20,CROSS_SECTIONAL,20,fwd_ret_20 in bottom 20% that day,> T
+exec_fwd_ret_20,EXECUTABLE,20,close_adj_T+1+20 / open_adj_T+1 - 1,> T+1
+exec_entry_possible,EXECUTABLE,1,T+1 not suspended and not limit-up open,> T
+exec_exit_possible,EXECUTABLE,60,T+h not suspended,> T
+label_end_date,META,0,signal_date + horizon (purge/embargo key),derived
